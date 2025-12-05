@@ -4,9 +4,9 @@ export default function Footer() {
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Next.js Headless</h3>
+            <h3 className="text-xl font-bold mb-4">Resplast</h3>
             <p className="text-gray-400">
-              A modern headless WordPress starter theme.
+              Leading manufacturer of plastic products
             </p>
           </div>
 
@@ -15,17 +15,17 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>
                 <a href="/about" className="hover:text-white transition">
-                  About
+                  About Us
                 </a>
               </li>
               <li>
-                <a href="/posts" className="hover:text-white transition">
-                  Blog
+                <a href="/products" className="hover:text-white transition">
+                  Products
                 </a>
               </li>
               <li>
-                <a href="/contact" className="hover:text-white transition">
-                  Contact
+                <a href="/news" className="hover:text-white transition">
+                  News
                 </a>
               </li>
             </ul>
@@ -34,7 +34,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: hello@example.com</li>
+              <li>Email: info@resplast.com</li>
               <li>Phone: +1 234 567 890</li>
             </ul>
           </div>
@@ -43,10 +43,10 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-4 text-gray-400">
               <a href="#" className="hover:text-white transition">
-                GitHub
+                Facebook
               </a>
               <a href="#" className="hover:text-white transition">
-                Twitter
+                LinkedIn
               </a>
             </div>
           </div>
@@ -54,8 +54,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>
-            &copy; {new Date().getFullYear()} Next.js WordPress Headless. All
-            rights reserved.
+            &copy; {new Date().getFullYear()} Resplast. All rights reserved.
           </p>
         </div>
       </div>

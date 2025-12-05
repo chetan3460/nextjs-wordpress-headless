@@ -1,12 +1,12 @@
-# Next.js WordPress Starter
+# Resplast Headless Website
 
-A modern headless WordPress starter theme built with Next.js 14, JavaScript, and Tailwind CSS.
+A modern headless WordPress website for Resplast built with Next.js 14, JavaScript, and Tailwind CSS.
 
 ## 🚀 Features
 
 - **Next.js 14** with App Router
 - **WordPress** as headless CMS via GraphQL
-- **Tailwind CSS** for styling
+- **Tailwind CSS** for styling (Resplast Brand Colors)
 - **ISR (Incremental Static Regeneration)** for optimal performance
 - **SEO Optimized** with Next.js metadata API
 
@@ -38,11 +38,11 @@ npm install
 Create `.env.local` file:
 
 ```env
-NEXT_PUBLIC_WORDPRESS_URL=http://localhost/resplast
-WORDPRESS_GRAPHQL_ENDPOINT=http://localhost/resplast/graphql
-WORDPRESS_REST_ENDPOINT=http://localhost/resplast/wp-json/wp/v2
+NEXT_PUBLIC_WORDPRESS_URL=http://localhost/nextjs-wp
+WORDPRESS_GRAPHQL_ENDPOINT=http://localhost/nextjs-wp/graphql
+WORDPRESS_REST_ENDPOINT=http://localhost/nextjs-wp/wp-json/wp/v2
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_SITE_NAME=Next.js WordPress Starter
+NEXT_PUBLIC_SITE_NAME=Resplast
 REVALIDATE_SECRET=your-secret-key
 ```
 

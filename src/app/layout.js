@@ -15,8 +15,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Next.js WordPress Headless",
-  description: "A modern headless WordPress site built with Next.js and Tailwind CSS",
+  title: "Resplast - Leading Plastic Manufacturer",
+  description: "Resplast is a leading manufacturer of high-quality plastic products",
 };
 
 export default function RootLayout({ children }) {

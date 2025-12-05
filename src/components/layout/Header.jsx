@@ -5,8 +5,8 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="container-custom py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            Next.js WordPress
+          <Link href="/" className="text-2xl font-bold text-red-600">
+            Resplast
           </Link>
 
           <ul className="flex gap-8">

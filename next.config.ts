@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: "/api/wordpress/:path*",
-        destination: "http://localhost/resplast/wp-json/:path*",
+        destination: "http://localhost/nextjs-wp/wp-json/:path*",
       },
     ];
   },
