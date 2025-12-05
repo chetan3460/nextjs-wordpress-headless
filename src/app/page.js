@@ -17,27 +17,27 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
         <div className="container-custom">
-          <h1 className="text-5xl font-bold mb-6">Welcome to Resplast</h1>
+          <h1 className="text-5xl font-bold mb-6">Next.js WordPress Starter</h1>
           <p className="text-xl mb-8 max-w-2xl">
-            Leading manufacturer of innovative plastic solutions for industries worldwide
+            A performant, SEO-friendly headless WordPress starter theme built with Next.js 14 and Tailwind CSS.
           </p>
           <div className="flex gap-4">
-            <Link href="/products" className="btn-primary bg-white text-red-600 hover:bg-gray-100">
-              View Products
+            <Link href="/posts" className="btn-primary bg-white text-blue-600 hover:bg-gray-100">
+              Read Blog
             </Link>
-            <Link href="/contact" className="btn-secondary border-2 border-white hover:bg-white hover:text-red-600">
-              Contact Us
+            <Link href="/contact" className="btn-secondary border-2 border-white hover:bg-white hover:text-blue-600">
+              Get Started
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Latest News */}
+      {/* Latest Posts */}
       <section className="py-16">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-8">Latest News</h2>
+          <h2 className="text-3xl font-bold mb-8">Latest Posts</h2>
 
           {posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -1,6 +1,6 @@
-# Headless WordPress with Next.js
+# Next.js WordPress Starter
 
-A modern headless WordPress website built with Next.js 14, JavaScript, and Tailwind CSS.
+A modern headless WordPress starter theme built with Next.js 14, JavaScript, and Tailwind CSS.
 
 ## 🚀 Features
 
@@ -8,7 +8,6 @@ A modern headless WordPress website built with Next.js 14, JavaScript, and Tailw
 - **WordPress** as headless CMS via GraphQL
 - **Tailwind CSS** for styling
 - **ISR (Incremental Static Regeneration)** for optimal performance
-- **Responsive Design** with mobile-first approach
 - **SEO Optimized** with Next.js metadata API
 
 ## 📋 Prerequisites
@@ -29,8 +28,8 @@ Install these WordPress plugins:
 ### 2. Clone and Install
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/headless-cms-nextjs.git
-cd headless-cms-nextjs
+git clone https://github.com/chetan3460/nextjs-wordpress-headless.git
+cd nextjs-wordpress-headless
 npm install
 ```
 
@@ -43,7 +42,7 @@ NEXT_PUBLIC_WORDPRESS_URL=http://localhost/resplast
 WORDPRESS_GRAPHQL_ENDPOINT=http://localhost/resplast/graphql
 WORDPRESS_REST_ENDPOINT=http://localhost/resplast/wp-json/wp/v2
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_SITE_NAME=Resplast
+NEXT_PUBLIC_SITE_NAME=Next.js WordPress Starter
 REVALIDATE_SECRET=your-secret-key
 ```
 
@@ -84,19 +83,6 @@ npm run start    # Start production server
 npm run lint     # Run ESLint
 ```
 
-## 🌐 Deployment
-
-### Deploy to Vercel
-
-1. Push code to GitHub
-2. Import repository in Vercel
-3. Add environment variables
-4. Deploy!
-
 ## 📝 License
 
 MIT
-
-## 🤝 Contributing
-
-Contributions welcome! Please open an issue or submit a pull request.
