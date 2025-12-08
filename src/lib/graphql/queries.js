@@ -22,6 +22,27 @@ export const GET_ALL_POSTS = `
   }
 `;
 
+// Query for News custom post type
+export const GET_ALL_NEWS = `
+  query GetAllNews($first: Int = 10) {
+    allNews(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        id
+        title
+        slug
+        excerpt
+        date
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: String!) {
     postBy(slug: $slug) {
@@ -81,6 +102,28 @@ export const GET_ALL_PRODUCTS = `
           node {
             sourceUrl
             altText
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_MENUS = `
+  query GetAllMenus {
+    menus {
+      nodes {
+        id
+        databaseId
+        name
+        slug
+        menuItems(first: 50) {
+          nodes {
+            id
+            label
+            url
+            parentId
+            cssClasses
           }
         }
       }

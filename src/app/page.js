@@ -1,91 +1,94 @@
-import { fetchGraphQL } from '@/lib/wordpress/client';
-import { GET_ALL_POSTS } from '@/lib/graphql/queries';
-import Image from 'next/image';
-import Link from 'next/link';
+import HeroBlock from '@/components/blocks/HeroBlock';
+import FeatureBlock from '@/components/blocks/FeatureBlock';
+import StatsBlock from '@/components/blocks/StatsBlock';
+import ClientBlock from '@/components/blocks/ClientBlock';
+import ProductListingBlock from '@/components/blocks/ProductListingBlock';
+import ImageSliderBlock from '@/components/blocks/ImageSliderBlock';
+import TabBlock from '@/components/blocks/TabBlock';
+import LatestNewsBlock from '@/components/blocks/LatestNewsBlock';
+import { fetchPageWithACF } from '@/lib/wordpress/client';
 
 export default async function HomePage() {
-  // Fetch latest posts from WordPress
-  let posts = [];
+  // Fetch home page with ACF fields
+  const pageData = await fetchPageWithACF('home');
 
-  try {
-    const data = await fetchGraphQL(GET_ALL_POSTS, { first: 3 });
-    posts = data.posts?.nodes || [];
-  } catch (error) {
-    console.error('Error fetching posts:', error);
+  if (!pageData) {
+    return (
+      <main className="container mx-auto px-4 py-20">
+        <h1 className="text-4xl font-bold text-center">Home page not found</h1>
+      </main>
+    );
   }
 
+  // Get home panels (flexible content blocks)
+  const homePanels = pageData.acf.home_panels || [];
+
+  // Organize blocks by type
+  const heroBlock = homePanels.find(panel => panel.acf_fc_layout === 'hero_block');
+  const statsBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_stats_block');
+  const tabBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_tab_block');
+  const featuresBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_features_block');
+  const imageSliderBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_image_slider_block');
+  const productListingBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_product_listing_block');
+  const clientBlock = homePanels.find(panel => panel.acf_fc_layout === 'home_client_block');
+  const latestNewsBlock = homePanels.find(panel => panel.acf_fc_layout === 'latest_news');
+
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="bg-linear-to-r from-red-600 to-red-700 text-white py-20">
-        <div className="container-custom">
-          <h1 className="text-5xl font-bold mb-6">Welcome to Resplast</h1>
-          <p className="text-xl mb-8 max-w-2xl">
-            Leading manufacturer of innovative plastic solutions for industries worldwide
-          </p>
-          <div className="flex gap-4">
-            <Link href="/products" className="btn-primary bg-white text-red-600 hover:bg-gray-100">
-              View Products
-            </Link>
-            <Link href="/contact" className="btn-secondary border-2 border-white hover:bg-white hover:text-red-600">
-              Contact Us
-            </Link>
-          </div>
+    <main>
+      {/* 1. Hero Block (Slider + Spotlight) */}
+      {heroBlock && !heroBlock.hide_block && (
+        <HeroBlock data={heroBlock} />
+      )}
+
+      {/* 2. Feature Block (Left Content + Right Grid) */}
+      {featuresBlock && !featuresBlock.hide_block && (
+        <FeatureBlock data={featuresBlock} />
+      )}
+
+      {/* 3. Stats Counter Block */}
+      {statsBlock && !statsBlock.hide_block && (
+        <StatsBlock data={statsBlock} />
+      )}
+
+      {/* 4. Client Testimonials Block */}
+      {clientBlock && !clientBlock.hide_block && (
+        <ClientBlock data={clientBlock} />
+      )}
+
+      {/* 5. Product Listing Block */}
+      {productListingBlock && !productListingBlock.hide_block && (
+        <ProductListingBlock data={productListingBlock} />
+      )}
+
+      {/* 6. Image Slider Block */}
+      {imageSliderBlock && !imageSliderBlock.hide_block && (
+        <ImageSliderBlock data={imageSliderBlock} />
+      )}
+
+      {/* 7. Tab Block (Industry Applications) */}
+      {tabBlock && !tabBlock.hide_block && (
+        <TabBlock data={tabBlock} />
+      )}
+
+      {/* 8. Latest News Block */}
+      {latestNewsBlock && !latestNewsBlock.hide_block && (
+        <LatestNewsBlock data={latestNewsBlock} />
+      )}
+
+      {/* Debug: Show all blocks */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="container mx-auto px-4 py-8 bg-gray-100 mt-8">
+          <h2 className="text-2xl font-bold mb-4">Debug: ACF Blocks</h2>
+          <pre className="bg-white p-4 rounded overflow-auto">
+            {JSON.stringify(homePanels.map(p => ({
+              type: p.acf_fc_layout,
+              hidden: p.hide_block
+            })), null, 2)}
+          </pre>
         </div>
-      </section>
-
-      {/* Latest Posts */}
-      <section className="py-16">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-8">Latest Posts</h2>
-
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-                  {post.featuredImage && (
-                    <div className="relative h-48 w-full">
-                      <Image
-                        src={post.featuredImage.node.sourceUrl}
-                        alt={post.featuredImage.node.altText || post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">
-                      <Link href={`/news/${post.slug}`} className="hover:text-red-600">
-                        {post.title}
-                      </Link>
-                    </h3>
-                    <div
-                      className="text-gray-600 line-clamp-3"
-                      dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                    />
-                    <Link
-                      href={`/news/${post.slug}`}
-                      className="text-red-600 font-semibold mt-4 inline-block hover:underline"
-                    >
-                      Read More →
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">
-                No news articles found. Make sure WordPress is running and has published posts.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+      )}
+    </main>
   );
 }
 
-// Revalidate every 60 seconds (ISR)
 export const revalidate = 60;

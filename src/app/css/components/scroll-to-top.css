@@ -1,0 +1,42 @@
+/* Scroll to Top Button Styles */
+
+.scrollToTop {
+  @apply fixed bottom-5 right-5 z-[999] flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-300;
+
+  &:hover {
+    @apply bg-[#ab000b] scale-110;
+  }
+
+  &.active-progress {
+    @apply opacity-100 visible;
+  }
+
+  &:not(.active-progress) {
+    @apply opacity-0 invisible;
+  }
+
+  .arrowUp {
+    @apply relative z-10;
+
+    svg {
+      @apply fill-current;
+    }
+  }
+
+  .water {
+    @apply absolute bottom-0 left-0 right-0 overflow-hidden rounded-full;
+    transition: transform 0.3s ease;
+  }
+
+  .water_wave {
+    @apply absolute bottom-0 left-0 w-full;
+  }
+
+  .water_wave_back {
+    @apply opacity-50;
+  }
+
+  .water_wave_front {
+    @apply opacity-100;
+  }
+}
