@@ -32,7 +32,7 @@ export default function HeroBlock({ data }) {
           effect="fade"
           loop={false}
           autoplay={{ delay: 6000 }}
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           className="hero-slider swiper w-full"
         >
           {banner_slider.map((slide, i) => {

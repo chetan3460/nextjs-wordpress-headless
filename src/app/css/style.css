@@ -29,8 +29,7 @@
 @import "./cookie-consent.css";
 
 /* // structure */
-@import "./custom/structure/_topnav.css";
-@import "./custom/structure/_footer.css";
+@import "./layout/_topnav.css";
 
 /* // pages */
 @import "./custom/pages/_helper.css";
@@ -40,19 +39,19 @@
 
 /* // blocks */
 /* Manual imports for existing blocks */
-@import "./custom/blocks/homeTabBlock.css";
-@import "./custom/blocks/distribution-map.css";
-@import "./custom/blocks/accordion_block.css";
+/* @import "./blocks/homeTabBlock.css";
+@import "./blocks/distribution-map.css";
+@import "./blocks/accordion_block.css";
 @import "./team-members-block.css";
-@import "./custom/blocks/certificate_block.css";
-@import "./custom/blocks/testimonials-block.css";
-@import "./custom/blocks/global-banner-block.css";
-@import "./custom/blocks/products.css";
-@import "./custom/blocks/privacy_accordion_block.css";
+@import "./blocks/certificate_block.css";
+@import "./blocks/testimonials-block.css";
+@import "./blocks/global-banner-block.css";
+@import "./blocks/products.css";
+@import "./blocks/privacy_accordion_block.css"; */
 /* @import './sustainability-impact-block.css'; */
 
 /* AUTO-GENERATED BLOCKS - Add new imports below */
-@import "./custom/blocks/service_block_css.css";
+/* @import "./blocks/service_block_css.css"; */
 /* END AUTO-GENERATED BLOCKS */
 
 /* // Plugins */
@@ -63,7 +62,7 @@
 /* // News Detail Page */
 @import "./news-detail.css";
 
-@import "./milestones-timeline.css";
+/* @import "./milestones-timeline.css"; */
 /* Custom Swiper Button Disabled States */
 .swiper-btn-prev-pagination.swiper-button-disabled,
 .swiper-btn-next-pagination.swiper-button-disabled {

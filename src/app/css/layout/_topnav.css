@@ -17,6 +17,9 @@
   }
   .has-submenu {
     @apply relative;
+    .sub-menu-item {
+      @apply flex items-center;
+    }
     &.active {
       .submenu {
         li {
@@ -149,7 +152,7 @@
     @apply ltr:float-right rtl:float-left;
   }
   &.nav-sticky {
-    @apply fixed bg-white shadow;
+    @apply fixed bg-white shadow dark:bg-slate-900 dark:shadow-gray-800;
   }
 }
 
@@ -355,7 +358,7 @@
       > li {
         .submenu {
           transition: all 0.2s ease;
-          @apply invisible absolute start-0 top-full z-[1000] mt-2 min-w-[180px] list-none rounded-md bg-white px-0 py-[15px] opacity-0 shadow;
+          @apply invisible absolute start-0 top-full z-[1000] mt-2 min-w-[180px] list-none rounded-md bg-white px-0 py-[15px] opacity-0 shadow dark:bg-slate-900 dark:shadow-gray-800;
           li {
             @apply relative border-b border-b-neutral-50 last:border-0;
             a {
