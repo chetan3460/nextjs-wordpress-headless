@@ -1,126 +1,99 @@
 "use client";
 
+import SafeImage from "@/components/common/SafeImage";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function FeatureBlock({ data }) {
-  const {
-    title = "Our Expertise",
-    description = "<p>Decades of engineering excellence in every mold.</p>",
-    feature_items = [
-      {
-        title: "Precision Molding",
-        description: "Micron-level accuracy for complex components.",
-        icon: {
-          url: "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
-        },
-      },
-      {
-        title: "Material Innovation",
-        description: "Developing lighter, stronger polymer blends.",
-        icon: {
-          url: "https://cdn-icons-png.flaticon.com/512/3063/3063823.png",
-        },
-      },
-      {
-        title: "Rapid Prototyping",
-        description: "From concept to physical model in 48 hours.",
-        icon: {
-          url: "https://cdn-icons-png.flaticon.com/512/3063/3063824.png",
-        },
-      },
-      {
-        title: "Global Logistics",
-        description: "Efficient supply chain solutions worldwide.",
-        icon: {
-          url: "https://cdn-icons-png.flaticon.com/512/3063/3063825.png",
-        },
-      },
-    ],
-    cta = { title: "Explore Services", url: "/services" },
-  } = data || {};
+  if (!data) return null;
 
-  if (!feature_items || feature_items.length === 0) return null;
+  const { title, description, feature_items, cta } = data;
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   return (
-    <section className="home-features-block py-16 md:py-24 relative overflow-hidden">
-      <div className="container-custom relative">
-        <div className="flex lg:flex-row flex-col gap-8 lg:gap-24">
-          {/* Left Column: Heading + CTA */}
-          <div className="w-full lg:w-5/12 relative">
-            <div className="section-heading text-center md:text-left">
-              {title && (
-                <h2 className="mb-4 text-3xl md:text-4xl font-bold text-gray-900">
-                  {title}
-                </h2>
-              )}
-              {description && (
-                <div
-                  className="prose text-gray-600 text-lg"
-                  dangerouslySetInnerHTML={{ __html: description }}
-                />
-              )}
-            </div>
-
-            {/* CTA (Desktop) */}
-            {cta && cta.url && (
-              <div className="hidden lg:block mt-8">
-                <Link href={cta.url} className="btn-primary inline-flex">
-                  {cta.title}
-                </Link>
-              </div>
+    <section
+      className="home_features_block py-12"
+      data-component="FeatureBlock"
+    >
+      <div className="container-fluid mx-auto">
+        {(title || description) && (
+          <div className="section-heading text-center">
+            {title && (
+              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <div
+                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             )}
           </div>
+        )}
 
-          {/* Right Column: Feature Grid */}
-          <div className="mt-8 md:mt-0 w-full lg:w-7/12">
-            <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-10">
-              {feature_items.map((item, index) => (
-                <div
-                  key={index}
-                  className="feature-item p-4 rounded-xl hover:bg-gray-50 transition-colors duration-300"
-                >
-                  {/* Icon */}
-                  {item.icon && item.icon.url && (
-                    <div className="feature-icon mb-4">
-                      <Image
-                        src={item.icon.url}
-                        alt={item.title || "Icon"}
-                        width={56}
-                        height={56}
-                        className="w-[56px] h-[56px] object-contain"
-                      />
-                    </div>
-                  )}
-
-                  {/* Content */}
-                  <div className="feature-content">
-                    {item.title && (
-                      <div className="h3 my-1 md:my-2 !font-semibold !text-gray-900 text-xl">
-                        {item.title}
-                      </div>
-                    )}
-                    {item.description && (
-                      <div
-                        className="text-sm md:text-base tracking-[0.32px] text-gray-600"
-                        dangerouslySetInnerHTML={{ __html: item.description }}
-                      />
-                    )}
+        {feature_items && feature_items.length > 0 && (
+          <div className="feature_items-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {feature_items.map((item, index) => (
+              <div
+                key={index}
+                className="feature_items-item p-6 rounded-2xl bg-white border border-gray-100 hover:shadow-lg transition-all duration-300"
+              >
+                {item.icon?.url && (
+                  <div className="mb-4">
+                    <SafeImage
+                      src={item.icon.url}
+                      alt={item.icon.alt || item.title || "Feature Icon"}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 object-contain"
+                    />
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                )}
 
-          {/* CTA (Mobile) */}
-          {cta && cta.url && (
-            <div className="block lg:hidden mt-8 mx-auto text-center w-full">
-              <Link href={cta.url} className="btn-primary inline-flex">
-                {cta.title}
-              </Link>
-            </div>
-          )}
-        </div>
+                {item.title && (
+                  <div className="title text-xl font-bold text-gray-900 mb-2">
+                    {item.title}
+                  </div>
+                )}
+
+                {item.description && (
+                  <div
+                    className="description text-gray-600 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {cta && cta.url && (
+          <div className="text-center mt-12">
+            <Link
+              href={cta.url}
+              target={cta.target || "_self"}
+              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
+            >
+              {cta.title || "Learn More"}
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

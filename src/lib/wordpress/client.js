@@ -130,6 +130,20 @@ async function processACFImages(acf) {
                     );
                 }
 
+                // Process select_news (hero_block spotlight)
+                if (panel.select_news && Array.isArray(panel.select_news)) {
+                    processedPanel.select_news = await Promise.all(
+                        panel.select_news.map(async (newsId) => {
+                            if (typeof newsId === 'number') {
+                                return await fetchPostById(newsId);
+                            }
+                            return newsId;
+                        })
+                    );
+                    // Filter out any null results
+                    processedPanel.select_news = processedPanel.select_news.filter(Boolean);
+                }
+
                 // Process other image fields as needed
                 // Add more image field processing here for other blocks
 
@@ -164,6 +178,73 @@ async function fetchMediaById(mediaId) {
         return null;
     }
 }
+
+/**
+ * Fetch post by ID (for news/posts)
+ * @param {number} postId - WordPress post ID
+ * @returns {Promise<object>} Post object with title, URL, categories, etc.
+ */
+async function fetchPostById(postId) {
+    try {
+        // Try fetching from posts endpoint first
+        let post;
+        try {
+            post = await fetchREST(`/wp/v2/posts/${postId}`);
+        } catch (postsError) {
+            // If posts fails, try news custom post type
+            try {
+                post = await fetchREST(`/wp/v2/news/${postId}`);
+            } catch (newsError) {
+                console.error(`Error fetching post ${postId} from both posts and news:`, newsError);
+                return null;
+            }
+        }
+
+        // Fetch categories if they exist
+        let categories = [];
+        if (post.categories && post.categories.length > 0) {
+            categories = await Promise.all(
+                post.categories.map(async (catId) => {
+                    try {
+                        const cat = await fetchREST(`/wp/v2/categories/${catId}`);
+                        return { id: cat.id, name: cat.name, slug: cat.slug };
+                    } catch {
+                        return null;
+                    }
+                })
+            );
+            categories = categories.filter(Boolean);
+        }
+
+        // Also try news_category taxonomy if categories is empty
+        if (categories.length === 0 && post.news_category && post.news_category.length > 0) {
+            categories = await Promise.all(
+                post.news_category.map(async (catId) => {
+                    try {
+                        const cat = await fetchREST(`/wp/v2/news_category/${catId}`);
+                        return { id: cat.id, name: cat.name, slug: cat.slug };
+                    } catch {
+                        return null;
+                    }
+                })
+            );
+            categories = categories.filter(Boolean);
+        }
+
+        return {
+            id: post.id,
+            title: post.title?.rendered || '',
+            url: post.link || '',
+            excerpt: post.excerpt?.rendered || '',
+            date: post.date,
+            categories: categories
+        };
+    } catch (error) {
+        console.error(`Error fetching post ${postId}:`, error);
+        return null;
+    }
+}
+
 
 /**
  * Fetch Primary Menu via REST API

@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import '@/app/globals.css';
+import '@/app/css/style.css';
 import { fetchHeaderData } from '@/lib/wordpress/client';
 
 export const metadata = {

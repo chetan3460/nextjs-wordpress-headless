@@ -168,9 +168,7 @@ export default function Header({ menuItems = [], siteLogo }) {
                 <img
                   src={logoSrc}
                   alt="Resins & Plastics Ltd"
-                  width={150}
-                  height={40}
-                  className="max-lg:w-[120px]"
+                  className="max-lg:w-[225px] w-[250px] h-[40px]"
                 />
               </Link>
             </div>
@@ -303,7 +301,7 @@ function DesktopMenuItem({ item }) {
           aria-expanded="false"
         >
           {item.label}
-          <span className="menu-arrow w-4 h-4 flex items-center justify-center inline-block ml-1">
+          <span className="menu-arrow w-4 h-4 flex items-center justify-center flex ml-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"

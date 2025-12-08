@@ -1,147 +1,126 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import Image from "next/image";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import Link from "next/link";
+import SafeImage from "@/components/common/SafeImage";
 
 export default function ImageSliderBlock({ data }) {
-  const {
-    title = "Innovation in Action",
-    description = "<p>See our advanced manufacturing facilities and processes.</p>",
-    slider_items = [
-      {
-        slider_title: "Automated Production",
-        slider_description:
-          "Robotic arms ensuring consistent quality and speed.",
-        images: {
-          url: "https://placehold.co/800x600/333333/ffffff?text=Automated+Production",
-        },
-      },
-      {
-        slider_title: "Quality Control",
-        slider_description: "Rigorous testing protocols for every batch.",
-        images: {
-          url: "https://placehold.co/800x600/444444/ffffff?text=Quality+Control",
-        },
-      },
-      {
-        slider_title: "Sustainable Materials",
-        slider_description:
-          "Processing recycled plastics for a greener future.",
-        images: {
-          url: "https://placehold.co/800x600/555555/ffffff?text=Sustainable+Materials",
-        },
-      },
-    ],
-    cta = { title: "View Gallery", url: "/gallery" },
-  } = data || {};
+  if (!data) return null;
+
+  const { title, description, slider_items, cta } = data;
 
   if (!slider_items || slider_items.length === 0) return null;
 
   return (
     <section
-      className="image-slider-block relative fade-in py-12 md:py-24 overflow-hidden"
+      className="home_image_slider_block py-12"
       data-component="ImageSliderBlock"
     >
-      <div className="container-fluid xl:px-24 relative">
-        {/* Header Section */}
+      <div className="container-fluid mx-auto">
         {(title || description) && (
-          <div className="section-heading text-center mb-8 md:mb-12">
+          <div className="section-heading text-center">
             {title && (
-              <h2 className="mb-2 text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
                 {title}
               </h2>
             )}
             {description && (
               <div
-                className="text-base leading-[21px] font-normal md:text-[18px] md:leading-[25px] text-gray-600"
+                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             )}
           </div>
         )}
 
-        {/* Slider Section */}
-        <div className="image-slider relative mb-8">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={16}
-            slidesPerView={1.2}
-            centeredSlides={true}
-            loop={true}
-            breakpoints={{
-              640: { slidesPerView: 2.2, centeredSlides: false },
-              1024: { slidesPerView: 3.2, centeredSlides: false },
-            }}
-            navigation={{
-              prevEl: ".swiper-btn-prev",
-              nextEl: ".swiper-btn-next",
-            }}
-            pagination={{
-              el: ".swiper-pagination",
-              clickable: true,
-            }}
-            className="!pb-12"
-          >
-            {slider_items.map((item, index) => (
-              <SwiperSlide key={index} className="relative group">
-                <div className="relative overflow-hidden aspect-[4/5] sm:aspect-[3/4] lg:aspect-[2/3] rounded-2xl md:rounded-[40px] cursor-pointer">
-                  {/* Image */}
-                  {item.images && item.images.url && (
-                    <Image
-                      src={item.images.url}
-                      alt={item.slider_title || "Slider Image"}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+        {slider_items && slider_items.length > 0 && (
+          <div className="slider_items-grid image-slider relative bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay, EffectFade]}
+              effect="fade"
+              speed={1000}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
+              pagination={{
+                clickable: true,
+                el: ".swiper-pagination",
+                type: "bullets",
+              }}
+              className="h-[500px] md:h-[600px] w-full"
+            >
+              {slider_items.map((item, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="slider_items-item relative w-full h-full"
+                >
+                  {/* Background Image */}
+                  {item.images && (
+                    <div className="absolute inset-0 w-full h-full">
+                      <SafeImage
+                        src={item.images.url}
+                        alt={
+                          item.images.alt || item.slider_title || "Slider Image"
+                        }
+                        fill
+                        className="object-cover"
+                        priority={index === 0}
+                      />
+                      {/* Dark Overlay gradient */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+                    </div>
                   )}
 
-                  {/* Overlay (Gradient) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 transition-opacity duration-300"></div>
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-16 z-10">
+                    <div className="max-w-3xl">
+                      {item.slider_title && (
+                        <div className="slider_title text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                          {item.slider_title}
+                        </div>
+                      )}
 
-                  {/* Slide Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-10 text-white z-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {item.slider_title && (
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
-                        {item.slider_title}
-                      </h3>
-                    )}
-                    {item.slider_description && (
-                      <div
-                        className="text-sm md:text-base text-gray-200 line-clamp-3 group-hover:line-clamp-none transition-all"
-                        dangerouslySetInnerHTML={{
-                          __html: item.slider_description,
-                        }}
-                      />
-                    )}
+                      {item.slider_description && (
+                        <div
+                          className="slider_description text-white text-lg md:text-xl leading-relaxed drop-shadow-md"
+                          dangerouslySetInnerHTML={{
+                            __html: item.slider_description,
+                          }}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
 
-          {/* Navigation Controls */}
-          <div className="swiper-navigation flex items-center justify-center mt-4 gap-6">
-            <button className="swiper-btn-prev w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-red-600 hover:text-red-600 transition-colors cursor-pointer text-gray-400">
-              ←
-            </button>
+              {/* Navigation Arrows */}
+              <div className="swiper-button-prev text-white! w-12! h-12! bg-white/10! hover:bg-primary! rounded-full backdrop-blur-sm transition-all after:text-xl!"></div>
+              <div className="swiper-button-next text-white! w-12! h-12! bg-white/10! hover:bg-primary! rounded-full backdrop-blur-sm transition-all after:text-xl!"></div>
 
-            <div className="swiper-pagination !w-auto !relative !bottom-0"></div>
-
-            <button className="swiper-btn-next w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-red-600 hover:text-red-600 transition-colors cursor-pointer text-gray-400">
-              →
-            </button>
+              {/* Pagination */}
+              <div className="swiper-pagination bottom-8! flex! justify-start! pl-8! md:pl-16!"></div>
+            </Swiper>
           </div>
-        </div>
+        )}
 
-        {/* CTA Button */}
         {cta && cta.url && (
-          <div className="text-center mt-8">
-            <Link href={cta.url} className="btn-primary inline-flex">
-              {cta.title}
+          <div className="text-center mt-12">
+            <Link
+              href={cta.url}
+              target={cta.target || "_self"}
+              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
+            >
+              {cta.title || "Learn More"}
             </Link>
           </div>
         )}

@@ -1,179 +1,120 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import SafeImage from "@/components/common/SafeImage";
 
 export default function TabBlock({ data }) {
-  const {
-    title = "Applications by Industry",
-    description = "<p>Tailored plastic solutions for diverse sectors.</p>",
-    tab_items = [
-      {
-        title: "Automotive",
-        description:
-          "Lightweight components improving fuel efficiency and safety standards.",
-        tab_image: {
-          url: "https://placehold.co/600x800/1e3a8a/ffffff?text=Automotive",
-        },
-      },
-      {
-        title: "Medical",
-        description:
-          "Precision-molded devices for critical healthcare applications.",
-        tab_image: {
-          url: "https://placehold.co/600x800/0ea5e9/ffffff?text=Medical",
-        },
-      },
-      {
-        title: "Construction",
-        description:
-          "Durable, weather-resistant materials for modern infrastructure.",
-        tab_image: {
-          url: "https://placehold.co/600x800/f59e0b/ffffff?text=Construction",
-        },
-      },
-      {
-        title: "Consumer Goods",
-        description:
-          "Aesthetically pleasing and functional parts for everyday products.",
-        tab_image: {
-          url: "https://placehold.co/600x800/10b981/ffffff?text=Consumer",
-        },
-      },
-    ],
-    cta = { title: "View Industries", url: "/industries" },
-  } = data || {};
+  const [activeTab, setActiveTab] = useState(0);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  if (!data) return null;
+  const { title, description, tabs_items } = data;
 
-  if (!tab_items || tab_items.length === 0) return null;
+  if (!tabs_items || tabs_items.length === 0) return null;
 
   return (
-    <section
-      className="home-tab-block py-16 md:py-24 bg-gray-50 overflow-hidden"
-      data-component="TabBlock"
-    >
-      <div className="container-fluid xl:px-24">
-        {/* Header (Mobile Only / Minimal on Desktop if needed) */}
+    <section className="home_tab_block py-12" data-component="TabBlock">
+      <div className="container-fluid mx-auto">
         {(title || description) && (
-          <div className="section-heading text-center mb-8 md:mb-12">
+          <div className="section-heading text-center">
             {title && (
-              <h2 className="mb-2 text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
                 {title}
               </h2>
             )}
             {description && (
               <div
-                className="text-gray-600"
+                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             )}
           </div>
         )}
 
-        {/* Tab Layout */}
-        <div className="flex flex-col lg:flex-row gap-6 h-[600px] lg:h-[500px]">
-          {tab_items.map((item, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <div
-                key={index}
-                className={`relative overflow-hidden rounded-[20px] transition-all duration-500 ease-out cursor-pointer group flex flex-col justify-end
-                     ${
-                       isActive
-                         ? "lg:flex-[3] flex-[3]"
-                         : "lg:flex-1 hidden lg:flex"
-                     }
-                     ${isActive ? "h-full" : "h-1/4 lg:h-full"}
-                   `}
-                onClick={() => setActiveIndex(index)}
-              >
-                {/* Background Image */}
-                {item.tab_image && item.tab_image.url && (
-                  <Image
-                    src={item.tab_image.url}
-                    alt={item.title || "Tab Image"}
-                    fill
-                    className={`object-cover transition-transform duration-700 ${
-                      isActive ? "scale-100" : "scale-105 group-hover:scale-110"
-                    }`}
-                  />
-                )}
+        {tabs_items && tabs_items.length > 0 && (
+          <div className="tabs_items-grid flex flex-col lg:flex-row gap-8 lg:gap-12">
+            {/* Tab Buttons / List */}
+            <div className="w-full lg:w-1/3 flex flex-col gap-4">
+              {tabs_items.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={`
+                    text-left p-4 rounded-xl transition-all duration-300
+                    ${
+                      activeTab === index
+                        ? "bg-primary text-white shadow-lg scale-[1.02]"
+                        : "bg-white text-gray-600 hover:bg-gray-50 hover:text-primary"
+                    }
+                  `}
+                >
+                  {item.title && (
+                    <div className="tabs_items-item font-bold text-lg mb-1">
+                      {item.title}
+                    </div>
+                  )}
+                  {/* Showing preview of description if needed, or just title */}
+                </button>
+              ))}
+            </div>
 
-                {/* Overlay */}
-                <div
-                  className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-                    isActive
-                      ? "opacity-20"
-                      : "opacity-50 group-hover:opacity-30"
-                  }`}
-                ></div>
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 w-full p-6 text-white z-10">
-                  <h3
-                    className={`text-xl font-bold mb-2 transition-all ${
-                      isActive ? "text-2xl md:text-3xl" : "text-lg"
-                    }`}
-                  >
-                    {item.title}
-                  </h3>
-
-                  <AnimatePresence>
-                    {isActive && (
+            {/* Tab Content */}
+            <div className="w-full lg:w-2/3 min-h-[400px] relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+              <AnimatePresence mode="wait">
+                {tabs_items.map(
+                  (item, index) =>
+                    activeTab === index && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="overflow-hidden"
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 flex flex-col md:flex-row"
                       >
-                        <div className="text-sm md:text-base text-gray-100 max-w-lg">
-                          {item.description}
-                        </div>
-                        <div className="mt-4">
-                          <span className="inline-block text-xs font-bold uppercase tracking-wider border-b border-white pb-1">
-                            Learn More
-                          </span>
+                        {/* Image Side */}
+                        {(item.tab_image || item.tab_inner_image) && (
+                          <div className="w-full md:w-1/2 relative h-64 md:h-full">
+                            <SafeImage
+                              src={
+                                item.tab_inner_image?.url || item.tab_image?.url
+                              }
+                              alt={item.title || "Tab Image"}
+                              fill
+                              className="object-cover"
+                            />
+                            {item.tab_mobile_image && (
+                              <div className="md:hidden absolute inset-0">
+                                <SafeImage
+                                  src={item.tab_mobile_image.url}
+                                  alt="Mobile View"
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Text Side */}
+                        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+                          <h3 className="text-2xl font-bold mb-4 text-gray-900">
+                            {item.title}
+                          </h3>
+                          {item.description && (
+                            <div
+                              className="text-gray-600 leading-relaxed"
+                              dangerouslySetInnerHTML={{
+                                __html: item.description,
+                              }}
+                            />
+                          )}
                         </div>
                       </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* Vertical Title for Inactive State (Desktop) */}
-                {!isActive && (
-                  <div className="hidden lg:flex absolute inset-0 items-center justify-center p-4">
-                    <span className="writing-vertical-rl rotate-180 text-white font-bold text-xl tracking-wider uppercase opacity-80 group-hover:opacity-100 transition-opacity">
-                      {item.title}
-                    </span>
-                  </div>
+                    )
                 )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Mobile Tab Helper (Dots) */}
-        <div className="flex lg:hidden justify-center gap-2 mt-4">
-          {tab_items.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                idx === activeIndex ? "bg-red-600 w-6" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* CTA */}
-        {cta && cta.url && (
-          <div className="text-center mt-12">
-            <Link href={cta.url} className="btn-primary inline-flex">
-              {cta.title}
-            </Link>
+              </AnimatePresence>
+            </div>
           </div>
         )}
       </div>

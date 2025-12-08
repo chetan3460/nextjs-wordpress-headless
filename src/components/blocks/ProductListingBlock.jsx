@@ -1,123 +1,73 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import SafeImage from "@/components/common/SafeImage";
 
 export default function ProductListingBlock({ data }) {
-  const {
-    title = "Our Product Range",
-    description = "<p>Discover our diverse portfolio of high-performance plastic solutions.</p>",
-    product_items = [
-      {
-        title: "Automotive Components",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Auto" },
-      },
-      {
-        title: "Medical Devices",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Med" },
-      },
-      {
-        title: "Consumer Electronics",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Elec" },
-      },
-      {
-        title: "Industrial Packaging",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Pack" },
-      },
-      {
-        title: "Construction Material",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Const" },
-      },
-      {
-        title: "Aerospace Parts",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Aero" },
-      },
-      {
-        title: "Telecommunications",
-        icon: {
-          url: "https://placehold.co/100x100/eeeeee/333333?text=Telecom",
-        },
-      },
-      {
-        title: "Renewable Energy",
-        icon: { url: "https://placehold.co/100x100/eeeeee/333333?text=Solar" },
-      },
-    ],
-    cta = { title: "View All Products", url: "/products" },
-  } = data || {};
+  if (!data) return null;
 
-  if (!product_items || product_items.length === 0) return null;
-
-  // Display first 8 items matching the PHP Logic
-  const display_items = product_items.slice(0, 8);
+  const { title, description, product_items, cta } = data;
 
   return (
-    <section className="home-product-listing-block py-16 md:py-24 relative overflow-hidden bg-white">
-      <div className="container-fluid xl:px-24">
-        {/* Section Heading */}
+    <section
+      className="home_product_listing_block py-12"
+      data-component="ProductListingBlock"
+    >
+      <div className="container-fluid mx-auto">
         {(title || description) && (
-          <div className="section-heading text-center max-w-[852px] mx-auto mb-12">
+          <div className="section-heading text-center">
             {title && (
-              <h2 className="mb-2 text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
                 {title}
               </h2>
             )}
             {description && (
               <div
-                className="text-base leading-[21px] font-normal md:text-[18px] md:leading-[25px] text-gray-600"
+                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             )}
           </div>
         )}
 
-        {/* Product Grid (Marquee Replacement/Simplification) */}
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 w-full my-6 md:my-12 justify-items-center">
-            {display_items.map((item, index) => (
+        {product_items && product_items.length > 0 && (
+          <div className="product_items-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+            {product_items.map((item, index) => (
               <div
                 key={index}
-                className="product-card group relative w-full aspect-square bg-gray-50 hover:bg-white rounded-2xl border border-transparent hover:border-gray-200 shadow-sm transition-all duration-300 flex flex-col items-center justify-center p-6 text-center cursor-pointer"
+                className="product_items-item flex flex-col items-center text-center p-6 bg-white border border-gray-100 rounded-xl hover:shadow-lg transition-all duration-300 group"
               >
-                {/* Icon */}
-                {item.icon && item.icon.url && (
-                  <div className="w-16 h-16 md:w-20 md:h-20 mb-4 relative transition-transform duration-300 group-hover:scale-110">
-                    <Image
+                {item.icon && (
+                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 relative w-16 h-16">
+                    <SafeImage
                       src={item.icon.url}
-                      alt={item.title || "Product Icon"}
+                      alt={item.icon.alt || item.title || "Product Icon"}
                       fill
                       className="object-contain"
                     />
                   </div>
                 )}
-
-                {/* Title */}
                 {item.title && (
-                  <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-red-600 transition-colors">
+                  <div className="title text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
                     {item.title}
-                  </h3>
+                  </div>
                 )}
-
-                {/* Hover Link Overlay */}
-                <div className="absolute inset-0 z-10"></div>
               </div>
             ))}
           </div>
-        </div>
+        )}
 
-        {/* CTA Button */}
         {cta && cta.url && (
-          <div className="text-center mt-8">
-            <Link href={cta.url} className="btn-primary inline-flex">
-              {cta.title}
+          <div className="text-center mt-12">
+            <Link
+              href={cta.url}
+              target={cta.target || "_self"}
+              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
+            >
+              {cta.title || "View All Products"}
             </Link>
           </div>
         )}
-
-        {/* Decorative Shape */}
-        <div className="absolute left-0 lg:-left-10 md:-bottom-10 bottom-0 -z-1 pointer-events-none w-[73px] lg:w-auto opacity-50">
-          <div className="w-24 h-24 bg-red-50 rounded-full blur-2xl"></div>
-        </div>
       </div>
     </section>
   );
