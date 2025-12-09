@@ -1,6 +1,7 @@
 "use client";
 
 import SafeImage from "@/components/common/SafeImage";
+import SafeHTML from "@/components/common/SafeHTML";
 import Link from "next/link";
 
 export default function FeatureBlock({ data }) {
@@ -36,10 +37,7 @@ export default function FeatureBlock({ data }) {
                 {title && <h2 className="mb-1 fade-text">{title}</h2>}
 
                 {description && (
-                  <div
-                    className="anim-uni-in-up"
-                    dangerouslySetInnerHTML={{ __html: description }}
-                  />
+                  <SafeHTML html={description} className="anim-uni-in-up" />
                 )}
               </div>
             )}

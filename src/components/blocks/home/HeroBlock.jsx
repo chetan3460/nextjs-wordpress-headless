@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import SafeImage from "@/components/common/SafeImage";
+import SafeHTML from "@/components/common/SafeHTML";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -82,11 +83,9 @@ export default function HeroBlock({ data }) {
                         )}
 
                         {slide_description && (
-                          <div
-                            className="hero-description prose prose-p:text-[14px] sm:prose-p:text-base prose-p:!text-white prose-p:leading-[22px] md:prose-p:text-[18px] max-w-[400px] lg:max-w-[490px] mt-2 md:mt-4"
-                            dangerouslySetInnerHTML={{
-                              __html: slide_description,
-                            }}
+                          <SafeHTML
+                            html={slide_description}
+                            className="hero-description prose prose-p:text-[14px] sm:prose-p:text-base prose-p:text-white! prose-p:leading-[22px] md:prose-p:text-[18px] max-w-[400px] lg:max-w-[490px] mt-2 md:mt-4"
                           />
                         )}
                       </div>

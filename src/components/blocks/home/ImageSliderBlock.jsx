@@ -28,18 +28,7 @@ export default function ImageSliderBlock({ data }) {
           <div className="section-heading text-center mb-4 md:mb-8">
             {title && <h2 className="mb-1 fade-text">{title}</h2>}
             {description && (
-              <div
-                className="anim-uni-in-up"
-                dangerouslySetInnerHTML={{
-                  __html: description.includes("<p>")
-                    ? description
-                    : description
-                        .split(/\r\n|\r|\n/g) // Split by any newline char
-                        .filter((line) => line.trim() !== "") // Remove empty lines
-                        .map((line) => `<p>${line}</p>`) // Wrap each line in <p>
-                        .join(""), // Join back together
-                }}
-              />
+              <SafeHTML html={description} className="anim-uni-in-up" />
             )}
           </div>
         )}

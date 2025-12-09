@@ -2,69 +2,73 @@
 
 import Link from "next/link";
 import SafeImage from "@/components/common/SafeImage";
+import SafeHTML from "@/components/common/SafeHTML";
 
 export default function ProductListingBlock({ data }) {
   if (!data) return null;
 
   const { title, description, product_items, cta } = data;
+  console.log("ProductListingBlock data:", data);
 
   return (
     <section
-      className="home_product_listing_block py-12"
+      className="home-product-listing-block gsap-ignore"
+      data-smooth="false"
       data-component="ProductListingBlock"
     >
-      <div className="container-fluid mx-auto">
+      <div className="container-fluid items-center gap-24 relative">
+        {/* Section Heading */}
         {(title || description) && (
-          <div className="section-heading text-center">
-            {title && (
-              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
-                {title}
-              </h2>
-            )}
+          <div className="section-heading text-center max-w-[852px] mx-auto">
+            {title && <h2 className="mb-1 fade-text">{title}</h2>}
             {description && (
-              <div
-                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <SafeHTML html={description} className="anim-uni-in-up" />
             )}
           </div>
         )}
 
-        {product_items && product_items.length > 0 && (
-          <div className="product_items-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-            {product_items.map((item, index) => (
-              <div
-                key={index}
-                className="product_items-item flex flex-col items-center text-center p-6 bg-white border border-gray-100 rounded-xl hover:shadow-lg transition-all duration-300 group"
-              >
-                {item.icon && (
-                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 relative w-16 h-16">
-                    <SafeImage
-                      src={item.icon.url}
-                      alt={item.icon.alt || item.title || "Product Icon"}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                )}
-                {item.title && (
-                  <div className="title text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        {/* Product Items Marquee (Grid in practice) */}
+        <div className="max-w-7xl mx-auto">
+          {product_items && product_items.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 w-full my-6 md:my-12 justify-items-center">
+              {product_items.slice(0, 8).map((item, index) => (
+                <div
+                  key={index}
+                  className="relative rounded-[12px] sm:rounded-3xl overflow-hidden"
+                >
+                  {item.icon && (
+                    <>
+                      <SafeImage
+                        src={item.icon.url}
+                        alt={item.icon.alt || item.title || "Product Image"}
+                        width={500}
+                        height={500}
+                        className="object-cover size-full w-full h-full"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 rounded-[12px] sm:rounded-3xl [background:linear-gradient(148deg,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.00)_35.59%)]" />
+                    </>
+                  )}
+                  {item.title && (
+                    <span className="absolute top-0 left-0 text-white font-semibold text-xs  md:text-base pl-2.5 sm:pl-6 pt-2.5 sm:pt-4 z-10">
+                      {item.title}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">
+              No product items found.
+            </div>
+          )}
+        </div>
 
+        {/* CTA Button */}
         {cta && cta.url && (
-          <div className="text-center mt-12">
-            <Link
-              href={cta.url}
-              target={cta.target || "_self"}
-              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
-            >
-              {cta.title || "View All Products"}
+          <div className="text-center anim-uni-in-up">
+            <Link href={cta.url} target={cta.target || "_self"} className="btn">
+              {cta.title || "Learn More"}
             </Link>
           </div>
         )}
