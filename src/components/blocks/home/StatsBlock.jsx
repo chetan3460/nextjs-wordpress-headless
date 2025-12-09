@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useSpring, useMotionValue } from "framer-motion";
 import Link from "next/link";
+import SafeHTML from "@/components/common/SafeHTML";
 
 function Counter({ value, duration = 2 }) {
   const ref = useRef(null);
@@ -36,45 +37,44 @@ export default function StatsBlock({ data }) {
   const { title, description, stats_items, stats_cta } = data;
 
   return (
-    <section className="home_stats_block py-12" data-component="StatsBlock">
-      <div className="container-fluid mx-auto">
+    <section className="home_stats_block">
+      <div className="container-fluid">
         {(title || description) && (
           <div className="section-heading text-center">
-            {title && (
-              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="fade-text mb-2">{title}</h2>}
             {description && (
-              <div
-                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <SafeHTML html={description} className="anim-uni-in-up" />
             )}
           </div>
         )}
 
         {stats_items && stats_items.length > 0 && (
-          <div className="stats_items-grid grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div
+            className="stats-grid-items w-full lg:w-7/12 mx-auto py-6 md:py-12
+    grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-12"
+          >
             {stats_items.map((item, index) => (
-              <div
-                key={index}
-                className="stats_items-item text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex justify-center items-center gap-1 mb-2">
-                  {item.stats_number && (
-                    <div className="stats_number text-4xl md:text-5xl font-bold text-primary stats-counter">
-                      {item.stats_number}
-                    </div>
-                  )}
-                  {item.stats_sign && (
-                    <div className="stats_sign text-2xl md:text-4xl font-bold text-primary">
+              <div key={index} className="stats-item text-center">
+                {/* Number Display */}
+                <div className="inline-flex items-center justify-center">
+                  <div
+                    className="stats-counter text-[38px] leading-[35px] tracking-[-0.76px] md:text-[80px] md:leading-[76px] font-normal text-primary tabular-nums"
+                    data-target={item?.stats_number || ""}
+                    data-duration="2000"
+                  >
+                    {item?.stats_number}
+                  </div>
+
+                  {item?.stats_sign && (
+                    <span className="text-[38px] leading-[35px] md:text-[80px] md:leading-[75px] text-primary font-normal">
                       {item.stats_sign}
-                    </div>
+                    </span>
                   )}
                 </div>
-                {item.stats_title && (
-                  <div className="stats_title text-gray-800 font-medium text-lg uppercase tracking-wide">
+
+                {/* Stats Title */}
+                {item?.stats_title && (
+                  <div className="text-sm md:text-base text-grey-2">
                     {item.stats_title}
                   </div>
                 )}
@@ -84,11 +84,11 @@ export default function StatsBlock({ data }) {
         )}
 
         {stats_cta && stats_cta.url && (
-          <div className="text-center mt-12">
+          <div className="text-center">
             <Link
               href={stats_cta.url}
               target={stats_cta.target || "_self"}
-              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
+              className="btn"
             >
               {stats_cta.title || "View More Details"}
             </Link>

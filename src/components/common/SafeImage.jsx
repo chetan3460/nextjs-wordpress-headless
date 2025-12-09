@@ -10,5 +10,7 @@ export default function SafeImage({ src, alt, ...props }) {
     return null;
   }
 
-  return <Image src={src} alt={alt || ""} {...props} />;
+  const isLocal = src?.includes("localhost") || src?.includes("127.0.0.1");
+
+  return <Image src={src} alt={alt || ""} unoptimized={isLocal} {...props} />;
 }

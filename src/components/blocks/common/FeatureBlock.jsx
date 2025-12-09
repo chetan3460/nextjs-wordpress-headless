@@ -26,74 +26,115 @@ export default function FeatureBlock({ data }) {
   };
 
   return (
-    <section
-      className="home_features_block py-12"
-      data-component="FeatureBlock"
-    >
-      <div className="container-fluid mx-auto">
-        {(title || description) && (
-          <div className="section-heading text-center">
-            {title && (
-              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
-                {title}
-              </h2>
-            )}
-            {description && (
-              <div
-                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            )}
-          </div>
-        )}
+    <section className="home-features-block">
+      <div className="container-fluid relative">
+        <div className="flex lg:flex-row flex-col gap-3 lg:gap-24">
+          {/* Left Column */}
+          <div className="w-full lg:w-5/12 relative">
+            {(title || description) && (
+              <div className="section-heading text-center md:text-left">
+                {title && <h2 className="mb-1 fade-text">{title}</h2>}
 
-        {feature_items && feature_items.length > 0 && (
-          <div className="feature_items-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {feature_items.map((item, index) => (
-              <div
-                key={index}
-                className="feature_items-item p-6 rounded-2xl bg-white border border-gray-100 hover:shadow-lg transition-all duration-300"
-              >
-                {item.icon?.url && (
-                  <div className="mb-4">
-                    <SafeImage
-                      src={item.icon.url}
-                      alt={item.icon.alt || item.title || "Feature Icon"}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 object-contain"
-                    />
-                  </div>
-                )}
-
-                {item.title && (
-                  <div className="title text-xl font-bold text-gray-900 mb-2">
-                    {item.title}
-                  </div>
-                )}
-
-                {item.description && (
+                {description && (
                   <div
-                    className="description text-gray-600 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: item.description }}
+                    className="anim-uni-in-up"
+                    dangerouslySetInnerHTML={{ __html: description }}
                   />
                 )}
               </div>
-            ))}
-          </div>
-        )}
+            )}
 
-        {cta && cta.url && (
-          <div className="text-center mt-12">
-            <Link
-              href={cta.url}
-              target={cta.target || "_self"}
-              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
-            >
-              {cta.title || "Learn More"}
-            </Link>
+            {/* CTA Desktop */}
+            {cta?.url && (
+              <div className="hidden lg:block mt-6 anim-uni-in-up">
+                <Link
+                  href={cta.url}
+                  target={cta.target || "_self"}
+                  className="btn"
+                >
+                  {cta.title || "Learn More"}
+                </Link>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Right Column */}
+          {feature_items && feature_items.length > 0 && (
+            <div className="mt-4 md:mt-0 w-full lg:w-7/12 ">
+              <div className="grid grid-cols-2 gap-4 sm:gap-8 md:gap-10">
+                {feature_items.map((item, index) => {
+                  const icon = item.icon;
+                  const item_title = item.title;
+                  const item_description = item.description;
+                  const delay = (index + 1) * 0.2; // PHP logic: increases by 0.2 each item
+
+                  return (
+                    <div
+                      key={index}
+                      className="feature-item "
+                      data-delay={delay.toFixed(1)}
+                    >
+                      {/* Icon */}
+                      {icon?.url && (
+                        <div className="feature-icon">
+                          <img
+                            className="w-[56px] h-[56px]"
+                            src={icon.url}
+                            alt={icon.alt || item_title}
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div className="feature-content">
+                        {item_title && (
+                          <div className="h3 my-1 md:my-2 !font-semibold !text-grey-1">
+                            {item_title}
+                          </div>
+                        )}
+
+                        {item_description && (
+                          <div
+                            className="text-sm md:text-base tracking-[0.32px]"
+                            dangerouslySetInnerHTML={{
+                              __html: item_description,
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* CTA Mobile */}
+          {cta?.url && (
+            <div className="block lg:hidden mt-7 mx-auto anim-uni-in-up">
+              <Link
+                href={cta.url}
+                target={cta.target || "_self"}
+                className="btn"
+              >
+                {cta.title || "Learn More"}
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Decorative Shape (Mobile) */}
+        <div
+          className="md:hidden block absolute right-0 bottom-0 -z-1 pointer-none w-[85px]"
+          data-speed="1.25"
+        >
+          <img
+            src="/assets/images/home/shapes/shape-4.webp"
+            alt=""
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   );

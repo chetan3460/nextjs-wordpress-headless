@@ -110,51 +110,55 @@ export async function fetchPageWithACF(slug) {
  * @param {object} acf - ACF fields object
  * @returns {Promise<object>} Processed ACF fields with full image data
  */
+/**
+ * Process ACF fields to convert image IDs for ANY block automatically.
+ * It recursively walks through the object and finds keys like 'image', 'icon', etc.
+ */
 async function processACFImages(acf) {
-    // If home_panels exists, process each panel
-    if (acf.home_panels && Array.isArray(acf.home_panels)) {
-        const processedPanels = await Promise.all(
-            acf.home_panels.map(async (panel) => {
-                const processedPanel = { ...panel };
+    // List of keys that typically contain Image IDs in our ACF setup
+    const keysToHydrate = ['image', 'images', 'icon', 'logo', 'banner_images', 'mobile_image', 'desktop_image'];
 
-                // Process banner_slider images (hero_block)
-                if (panel.banner_slider && Array.isArray(panel.banner_slider)) {
-                    processedPanel.banner_slider = await Promise.all(
-                        panel.banner_slider.map(async (slide) => {
-                            if (slide.banner_images && typeof slide.banner_images === 'number') {
-                                const image = await fetchMediaById(slide.banner_images);
-                                return { ...slide, banner_images: image };
-                            }
-                            return slide;
-                        })
-                    );
+    // Helper: Recursive function to walk through data
+    async function traverseAndHydrate(obj) {
+        if (Array.isArray(obj)) {
+            return Promise.all(obj.map(item => traverseAndHydrate(item)));
+        }
+
+        if (obj && typeof obj === 'object') {
+            const newObj = { ...obj };
+
+            for (const key of Object.keys(newObj)) {
+                // 1. Handle Images (Automatic)
+                if (keysToHydrate.includes(key) && typeof newObj[key] === 'number') {
+                    newObj[key] = await fetchMediaById(newObj[key]);
                 }
 
-                // Process select_news (hero_block spotlight)
-                if (panel.select_news && Array.isArray(panel.select_news)) {
-                    processedPanel.select_news = await Promise.all(
-                        panel.select_news.map(async (newsId) => {
+                // 2. Handle News/Posts Selection (Specific Logic)
+                else if (key === 'select_news' && Array.isArray(newObj[key])) {
+                    const newsItems = await Promise.all(
+                        newObj[key].map(async (newsId) => {
                             if (typeof newsId === 'number') {
                                 return await fetchPostById(newsId);
                             }
                             return newsId;
                         })
                     );
-                    // Filter out any null results
-                    processedPanel.select_news = processedPanel.select_news.filter(Boolean);
+                    newObj[key] = newsItems.filter(Boolean);
                 }
 
-                // Process other image fields as needed
-                // Add more image field processing here for other blocks
+                // 3. Recurse deeper for nested objects/arrays
+                else {
+                    newObj[key] = await traverseAndHydrate(newObj[key]);
+                }
+            }
+            return newObj;
+        }
 
-                return processedPanel;
-            })
-        );
-
-        return { ...acf, home_panels: processedPanels };
+        return obj;
     }
 
-    return acf;
+    // Start traversal from the root ACF object
+    return traverseAndHydrate(acf);
 }
 
 /**

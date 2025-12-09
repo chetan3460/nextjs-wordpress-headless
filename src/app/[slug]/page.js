@@ -70,7 +70,7 @@ export default async function DynamicPage({ params }) {
     const blocks = page.acf?.home_panels || page.acf?.flexible_content || [];
 
     return (
-        <main>
+        <>
             {/* If no blocks, show title/content fallback */}
             {blocks.length === 0 && (
                 <div className="container-fluid py-16 xl:px-24 lg:px-14 px-5">
@@ -83,6 +83,6 @@ export default async function DynamicPage({ params }) {
             {blocks.map((block, index) => (
                 <BlockRenderer key={index} block={block} index={index} />
             ))}
-        </main>
+        </>
     );
 }

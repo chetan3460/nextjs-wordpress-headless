@@ -1,13 +1,13 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 import Link from "next/link";
 import SafeImage from "@/components/common/SafeImage";
+import SafeHTML from "@/components/common/SafeHTML";
 
 export default function ImageSliderBlock({ data }) {
   if (!data) return null;
@@ -18,108 +18,151 @@ export default function ImageSliderBlock({ data }) {
 
   return (
     <section
-      className="home_image_slider_block py-12"
+      className="image-slider-block relative "
       data-component="ImageSliderBlock"
+      data-load="lazy"
     >
-      <div className="container-fluid mx-auto">
+      <div className="container-fluid relative">
+        {/* Header Section */}
         {(title || description) && (
-          <div className="section-heading text-center">
-            {title && (
-              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
-                {title}
-              </h2>
-            )}
+          <div className="section-heading text-center mb-4 md:mb-8">
+            {title && <h2 className="mb-1 fade-text">{title}</h2>}
             {description && (
               <div
-                className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
-                dangerouslySetInnerHTML={{ __html: description }}
+                className="anim-uni-in-up"
+                dangerouslySetInnerHTML={{
+                  __html: description.includes("<p>")
+                    ? description
+                    : description
+                        .split(/\r\n|\r|\n/g) // Split by any newline char
+                        .filter((line) => line.trim() !== "") // Remove empty lines
+                        .map((line) => `<p>${line}</p>`) // Wrap each line in <p>
+                        .join(""), // Join back together
+                }}
               />
             )}
           </div>
         )}
 
+        {/* Slider Section */}
         {slider_items && slider_items.length > 0 && (
-          <div className="slider_items-grid image-slider relative bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="image-slider swiper overflow-hidden mb-8">
             <Swiper
-              modules={[Navigation, Pagination, Autoplay, EffectFade]}
-              effect="fade"
+              modules={[Navigation, Pagination, Autoplay]}
               speed={1000}
               autoplay={{
                 delay: 5000,
                 disableOnInteraction: false,
               }}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-btn-next",
+                prevEl: ".swiper-btn-prev",
               }}
               pagination={{
                 clickable: true,
                 el: ".swiper-pagination",
                 type: "bullets",
               }}
-              className="h-[500px] md:h-[600px] w-full"
+              className="w-full"
             >
-              {slider_items.map((item, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="slider_items-item relative w-full h-full"
-                >
-                  {/* Background Image */}
-                  {item.images && (
-                    <div className="absolute inset-0 w-full h-full">
-                      <SafeImage
-                        src={item.images.url}
-                        alt={
-                          item.images.alt || item.slider_title || "Slider Image"
-                        }
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                      />
-                      {/* Dark Overlay gradient */}
-                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-                    </div>
-                  )}
+              {slider_items.map((item, index) => {
+                const slide_image = item.images;
+                if (!slide_image) return null;
 
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-16 z-10">
-                    <div className="max-w-3xl">
-                      {item.slider_title && (
-                        <div className="slider_title text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                          {item.slider_title}
+                return (
+                  <SwiperSlide
+                    key={index}
+                    className="swiper-slide relative group"
+                  >
+                    <div className="relative overflow-hidden max-sm:aspect-square lg:aspect-auto long">
+                      {/* Image */}
+                      {slide_image && (
+                        <div className="w-full h-full">
+                          {/* Note: We use aspect ratio styles via class or Next.js Image fill */}
+                          <SafeImage
+                            src={slide_image.url}
+                            alt={
+                              slide_image.alt ||
+                              item.slider_title ||
+                              "Slider image"
+                            }
+                            width={1920}
+                            height={1080}
+                            className="w-full h-full object-cover rounded-2xl md:rounded-[40px]"
+                            priority={index === 0}
+                          />
                         </div>
                       )}
 
-                      {item.slider_description && (
-                        <div
-                          className="slider_description text-white text-lg md:text-xl leading-relaxed drop-shadow-md"
-                          dangerouslySetInnerHTML={{
-                            __html: item.slider_description,
-                          }}
-                        />
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-[linear-gradient(186deg,rgba(0,0,0,0)_17.36%,rgba(0,0,0,0.8)_95.64%)] lg:bg-[linear-gradient(180deg, rgba(0, 0, 0, 0.00) 55.77%, rgba(0, 0, 0, 0.50) 88.45%)] rounded-2xl md:rounded-[40px]"></div>
+
+                      {/* Slide Content */}
+                      {(item.slider_title || item.slider_description) && (
+                        <div className="slide-content absolute bottom-0 left-0 right-0 px-6 lg:px-16 pb-12 opacity-100">
+                          {/* Note: opacity-0 in PHP often relies on JS to verify visible. We force visible here or let CSS handle anims. */}
+                          {item.slider_title && (
+                            <div className="slide-title h3 !text-white font-semibold mb-2">
+                              {item.slider_title}
+                            </div>
+                          )}
+                          {item.slider_description && (
+                            <SafeHTML
+                              html={item.slider_description}
+                              className="slide-description prose-p:!text-white  prose-p:text-sm prose-p:lg:text-base prose-p:max-w-[559px] prose-p:leading-[19px]"
+                            />
+                          )}
+                        </div>
                       )}
                     </div>
+                  </SwiperSlide>
+                );
+              })}
+
+              {/* Slider Navigation */}
+              {slider_items.length > 1 && (
+                <div className="swiper-navigation flex items-center justify-center mt-3 gap-4">
+                  <div className="swiper-btn-prev cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="7"
+                      viewBox="0 0 9 7"
+                      fill="none"
+                    >
+                      <path
+                        d="M7.92214 3.18291C8.16739 3.18291 8.36621 3.38173 8.36621 3.62699C8.36621 3.87224 8.16739 4.07106 7.92214 4.07106L1.66704 4.07106L3.79543 6.19944C3.96885 6.37286 3.96885 6.65403 3.79543 6.82745C3.62201 7.00087 3.34084 7.00087 3.16742 6.82745L0.594961 4.255C0.24812 3.90816 0.24812 3.34581 0.594961 2.99897L3.16742 0.426516C3.34084 0.253095 3.62201 0.253096 3.79543 0.426516C3.96885 0.599937 3.96885 0.881107 3.79543 1.05453L1.66705 3.18291L7.92214 3.18291Z"
+                        fill="#DA000E"
+                      />
+                    </svg>
                   </div>
-                </SwiperSlide>
-              ))}
 
-              {/* Navigation Arrows */}
-              <div className="swiper-button-prev text-white! w-12! h-12! bg-white/10! hover:bg-primary! rounded-full backdrop-blur-sm transition-all after:text-xl!"></div>
-              <div className="swiper-button-next text-white! w-12! h-12! bg-white/10! hover:bg-primary! rounded-full backdrop-blur-sm transition-all after:text-xl!"></div>
+                  <div className="swiper-pagination flex gap-2 !w-auto"></div>
 
-              {/* Pagination */}
-              <div className="swiper-pagination bottom-8! flex! justify-start! pl-8! md:pl-16!"></div>
+                  <div className="swiper-btn-next w-12 cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="9"
+                      height="7"
+                      viewBox="0 0 9 7"
+                      fill="none"
+                    >
+                      <path
+                        d="M1.15891 3.18291C0.913661 3.18291 0.714844 3.38173 0.714844 3.62699C0.714844 3.87224 0.913661 4.07106 1.15892 4.07106L7.41401 4.07106L5.28562 6.19944C5.1122 6.37286 5.1122 6.65403 5.28562 6.82745C5.45904 7.00087 5.74021 7.00087 5.91364 6.82745L8.48609 4.255C8.83293 3.90816 8.83294 3.34581 8.48609 2.99897L5.91363 0.426516C5.74021 0.253095 5.45904 0.253096 5.28562 0.426516C5.1122 0.599937 5.1122 0.881107 5.28562 1.05453L7.41401 3.18291L1.15891 3.18291Z"
+                        fill="#DA000E"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              )}
             </Swiper>
           </div>
         )}
 
+        {/* CTA Section */}
         {cta && cta.url && (
-          <div className="text-center mt-12">
-            <Link
-              href={cta.url}
-              target={cta.target || "_self"}
-              className="btn btn-primary inline-flex items-center justify-center px-8 py-3 text-white bg-primary hover:bg-red-700 rounded-full transition-colors"
-            >
+          <div className="text-center mt-12 anim-uni-in-up">
+            <Link href={cta.url} target={cta.target || "_self"} className="btn">
               {cta.title || "Learn More"}
             </Link>
           </div>

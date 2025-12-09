@@ -16,7 +16,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className="font-sans antialiased text-gray-900">
         <Header menuItems={menu_items} siteLogo={site_logo} />
-        <main className="min-h-screen">
+        <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
           {children}
         </main>
         <Footer />

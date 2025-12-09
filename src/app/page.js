@@ -8,7 +8,6 @@ import StatsBlock from '@/components/blocks/home/StatsBlock';
 import ClientBlock from '@/components/blocks/home/ClientBlock';
 import TabBlock from '@/components/blocks/home/TabBlock';
 import LatestNewsBlock from '@/components/blocks/home/LatestNewsBlock';
-
 import FeatureBlock from '@/components/blocks/common/FeatureBlock';
 
 // Helper component to render blocks based on layout name
@@ -44,6 +43,7 @@ export default async function HomePage() {
   const pageData = await fetchPageWithACF('home');
 
   if (!pageData) {
+
     return (
       <main className="container mx-auto px-4 py-20">
         <h1 className="text-4xl font-bold text-center">Home page not found</h1>
@@ -56,7 +56,7 @@ export default async function HomePage() {
   const homePanels = pageData.acf.home_panels || [];
 
   return (
-    <main>
+    <>
       {/* 
         Render blocks dynamically based on WordPress order 
         This allows you to reorder blocks in WP Admin and see changes reflected here.
@@ -83,7 +83,7 @@ export default async function HomePage() {
           </pre>
         </div>
       )}
-    </main>
+    </>
   );
 }
 
