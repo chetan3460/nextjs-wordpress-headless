@@ -31,31 +31,35 @@ export default function ProductListingBlock({ data }) {
         <div className="max-w-7xl mx-auto">
           {product_items && product_items.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 w-full my-6 md:my-12 justify-items-center">
-              {product_items.slice(0, 8).map((item, index) => (
-                <div
-                  key={index}
-                  className="relative rounded-[12px] sm:rounded-3xl overflow-hidden"
-                >
-                  {item.icon && (
-                    <>
-                      <SafeImage
-                        src={item.icon.url}
-                        alt={item.icon.alt || item.title || "Product Image"}
-                        width={500}
-                        height={500}
-                        className="object-cover size-full w-full h-full"
-                      />
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 rounded-[12px] sm:rounded-3xl [background:linear-gradient(148deg,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.00)_35.59%)]" />
-                    </>
-                  )}
-                  {item.title && (
-                    <span className="absolute top-0 left-0 text-white font-semibold text-xs  md:text-base pl-2.5 sm:pl-6 pt-2.5 sm:pt-4 z-10">
-                      {item.title}
-                    </span>
-                  )}
-                </div>
-              ))}
+              {product_items.slice(0, 8).map((item, index) => {
+                const iconUrl = item.icon?.url || item.icon;
+                return (
+                  <div
+                    key={index}
+                    className="relative rounded-[12px] sm:rounded-3xl overflow-hidden"
+                  >
+                    {iconUrl && (
+                      <>
+                        <img
+                          src={iconUrl}
+                          alt={item.icon?.alt || item.title || "Product Image"}
+                          width={500}
+                          height={500}
+                          loading="lazy"
+                          className="object-cover size-full w-full h-full"
+                        />
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 rounded-[12px] sm:rounded-3xl [background:linear-gradient(148deg,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.00)_35.59%)]" />
+                      </>
+                    )}
+                    {item.title && (
+                      <span className="absolute top-0 left-0 text-white font-semibold text-xs  md:text-base pl-2.5 sm:pl-6 pt-2.5 sm:pt-4 z-10">
+                        {item.title}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center text-gray-500">

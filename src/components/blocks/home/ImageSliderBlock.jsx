@@ -50,7 +50,10 @@ export default function ImageSliderBlock({ data }) {
               pagination={{
                 clickable: true,
                 el: ".swiper-pagination",
-                type: "bullets",
+                type: "custom",
+                renderCustom: (swiper, current, total) => {
+                  return `${current}/${total}`;
+                },
               }}
               className="w-full"
             >
@@ -126,7 +129,7 @@ export default function ImageSliderBlock({ data }) {
                     </svg>
                   </div>
 
-                  <div className="swiper-pagination flex gap-2 !w-auto"></div>
+                  <div className="swiper-pagination text-primary text-xs font-medium !w-auto flex gap-1"></div>
 
                   <div className="swiper-btn-next w-12 cursor-pointer">
                     <svg
