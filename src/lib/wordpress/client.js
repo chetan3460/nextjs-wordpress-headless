@@ -314,10 +314,32 @@ export async function fetchMenu() {
  */
 export async function fetchPostBySlug(slug) {
     try {
-        const posts = await fetchREST(`/wp/v2/posts?slug=${slug}&_embed`);
+        console.log(`[fetchPostBySlug] Attempting to fetch post with slug: ${slug}`);
+
+        // Try fetching from posts endpoint first
+        let posts;
+        try {
+            console.log(`[fetchPostBySlug] Trying /wp/v2/posts?slug=${slug}`);
+            posts = await fetchREST(`/wp/v2/posts?slug=${slug}&_embed`);
+            console.log(`[fetchPostBySlug] Posts endpoint returned:`, posts?.length || 0, 'results');
+        } catch (postsError) {
+            console.log(`[fetchPostBySlug] Posts endpoint failed:`, postsError.message);
+        }
+
+        // If posts endpoint returned empty or failed, try news endpoint
+        if (!posts || posts.length === 0) {
+            console.log(`[fetchPostBySlug] Posts endpoint empty, trying news...`);
+            try {
+                posts = await fetchREST(`/wp/v2/news?slug=${slug}&_embed`);
+                console.log(`[fetchPostBySlug] News endpoint returned:`, posts?.length || 0, 'results');
+            } catch (newsError) {
+                console.error(`[fetchPostBySlug] News endpoint also failed:`, newsError.message);
+            }
+        }
 
         if (posts && posts.length > 0) {
             const post = posts[0];
+            console.log(`[fetchPostBySlug] Found post:`, post.title?.rendered || post.title);
 
             // Normalize data
             return {
@@ -340,6 +362,8 @@ export async function fetchPostBySlug(slug) {
                 } : { nodes: [] }
             };
         }
+
+        console.log(`[fetchPostBySlug] No post found for slug: ${slug}`);
         return null;
     } catch (error) {
         console.error(`Error fetching post by slug ${slug}:`, error);

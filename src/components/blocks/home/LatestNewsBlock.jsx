@@ -28,11 +28,7 @@ export default function LatestNewsBlock({ data }) {
   const newsCount = select_news?.length || 0;
 
   return (
-    <section
-      className="news-list-block"
-      data-component="NewsSlider"
-      data-load="eager"
-    >
+    <section className="news-list-block">
       <div className="container-fluid mx-auto relative overflow-hidden">
         {/* Header */}
         {(heading || sub_title) && (
@@ -90,7 +86,15 @@ export default function LatestNewsBlock({ data }) {
                   post.x_featured_media_large ||
                   "/images/placeholder.jpg";
 
-                const link = post.url || `/news/${post.slug || "#"}`;
+                // Extract slug from URL or use post.slug directly
+                // post.url might be like: "http://localhost/nextjs-wp/news-updates/dignissimos-voluptas-error-doloribus/"
+                let slug = post.slug;
+                if (!slug && post.url) {
+                  // Extract slug from URL (last segment before trailing slash)
+                  const urlParts = post.url.replace(/\/$/, "").split("/");
+                  slug = urlParts[urlParts.length - 1];
+                }
+                const link = slug ? `/news/${slug}` : "#";
 
                 // Map categories from object array if present
                 const categories = Array.isArray(post.categories)
@@ -114,10 +118,9 @@ export default function LatestNewsBlock({ data }) {
                       {/* Image Section */}
                       <div className="relative overflow-hidden h-64">
                         <Link href={link} className="block w-full h-full">
-                          <SafeImage
+                          <img
                             src={imageUrl}
                             alt={title}
-                            fill
                             className="rounded-t-2xl lazy-image object-cover w-full h-full scale-100 duration-700 transition-all group-hover:scale-110 overflow-hidden"
                           />
                         </Link>

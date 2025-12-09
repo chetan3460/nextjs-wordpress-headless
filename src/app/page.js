@@ -56,7 +56,7 @@ export default async function HomePage() {
   const homePanels = pageData.acf.home_panels || [];
 
   return (
-    <>
+    <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
       {/* 
         Render blocks dynamically based on WordPress order 
         This allows you to reorder blocks in WP Admin and see changes reflected here.
@@ -83,7 +83,7 @@ export default async function HomePage() {
           </pre>
         </div>
       )}
-    </>
+    </main>
   );
 }
 

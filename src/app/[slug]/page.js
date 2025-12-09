@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { fetchPageWithACF } from '@/lib/wordpress/client';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 
 // Import all block components
 import HeroBlock from '@/components/blocks/home/HeroBlock';
@@ -65,24 +66,35 @@ export default async function DynamicPage({ params }) {
         notFound();
     }
 
+    // Breadcrumb items
+    const breadcrumbItems = [
+        { label: 'Home', link: '/' },
+        { label: page.title, link: null }
+    ];
+
     // Attempt to find the flexible content field
     // Note: Adjust 'home_panels' if your inner pages use a different field name (e.g., 'page_blocks', 'content')
     const blocks = page.acf?.home_panels || page.acf?.flexible_content || [];
 
     return (
         <>
-            {/* If no blocks, show title/content fallback */}
-            {blocks.length === 0 && (
-                <div className="container-fluid py-16 xl:px-24 lg:px-14 px-5">
-                    <h1 className="text-4xl font-bold mb-8" dangerouslySetInnerHTML={{ __html: page.title }} />
-                    <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: page.content }} />
-                </div>
-            )}
+            {/* Breadcrumbs - Outside main tag */}
+            <Breadcrumbs items={breadcrumbItems} />
 
-            {/* Render Flexible Content Blocks */}
-            {blocks.map((block, index) => (
-                <BlockRenderer key={index} block={block} index={index} />
-            ))}
+            <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
+                {/* If no blocks, show title/content fallback */}
+                {blocks.length === 0 && (
+                    <div className="container-fluid py-16 xl:px-24 lg:px-14 px-5">
+                        <h1 className="text-4xl font-bold mb-8" dangerouslySetInnerHTML={{ __html: page.title }} />
+                        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: page.content }} />
+                    </div>
+                )}
+
+                {/* Render Flexible Content Blocks */}
+                {blocks.map((block, index) => (
+                    <BlockRenderer key={index} block={block} index={index} />
+                ))}
+            </main>
         </>
     );
 }
