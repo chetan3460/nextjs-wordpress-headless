@@ -52,7 +52,7 @@ export default function ClientBlock({ data }) {
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
-            loop={true}
+            loop={false}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,

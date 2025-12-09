@@ -190,14 +190,14 @@ async function fetchMediaById(mediaId) {
  */
 async function fetchPostById(postId) {
     try {
-        // Try fetching from posts endpoint first
+        // Try fetching from posts endpoint first with _embed to get featured image
         let post;
         try {
-            post = await fetchREST(`/wp/v2/posts/${postId}`);
+            post = await fetchREST(`/wp/v2/posts/${postId}?_embed`);
         } catch (postsError) {
             // If posts fails, try news custom post type
             try {
-                post = await fetchREST(`/wp/v2/news/${postId}`);
+                post = await fetchREST(`/wp/v2/news/${postId}?_embed`);
             } catch (newsError) {
                 console.error(`Error fetching post ${postId} from both posts and news:`, newsError);
                 return null;
@@ -235,13 +235,17 @@ async function fetchPostById(postId) {
             categories = categories.filter(Boolean);
         }
 
+        // Extract featured image from embedded data
+        const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null;
+
         return {
             id: post.id,
             title: post.title?.rendered || '',
             url: post.link || '',
             excerpt: post.excerpt?.rendered || '',
             date: post.date,
-            categories: categories
+            categories: categories,
+            featured_image: featuredImage
         };
     } catch (error) {
         console.error(`Error fetching post ${postId}:`, error);
