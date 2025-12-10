@@ -671,6 +671,17 @@ body.menu-open {
   .frm_message h3 {
     margin: 0;
   }
+  div#frm_field_12_container {
+    display: none;
+  }
+
+  /* Ensure Formidable Forms success messages are visible */
+  .frm_message,
+  .frm_success_style {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
 }
 
 .page-template-page-Initiatives {

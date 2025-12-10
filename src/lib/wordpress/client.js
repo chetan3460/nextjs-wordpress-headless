@@ -446,3 +446,33 @@ export async function fetchHeaderData() {
         return { site_logo: null, menu_items: [] };
     }
 }
+
+/**
+ * Fetch rendered Formidable form HTML from WordPress
+ * @param {string|number} formId - Form ID or key
+ * @returns {Promise<object>} Form data with rendered HTML
+ */
+export async function fetchFormidableForm(formId) {
+    if (!formId) {
+        throw new Error('Form ID is required');
+    }
+
+    try {
+        // Use NEXT_PUBLIC_WORDPRESS_URL for client-side fetching
+        const baseUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || '';
+        const url = `${baseUrl}/wp-json/custom/v1/formidable-form/${formId}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`REST API error: ${response.statusText}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(`Error fetching Formidable form ${formId}:`, error);
+        throw error;
+    }
+}
+
+

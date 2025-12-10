@@ -12,6 +12,7 @@ import TabBlock from '@/components/blocks/home/TabBlock';
 import LatestNewsBlock from '@/components/blocks/home/LatestNewsBlock';
 
 import FeatureBlock from '@/components/blocks/common/FeatureBlock';
+import GetInTouchBlock from '@/components/blocks/common/GetInTouchBlock';
 
 // 1. Metadata Generation
 export async function generateMetadata({ params }) {
@@ -48,6 +49,8 @@ const BlockRenderer = ({ block, index }) => {
             return <TabBlock key={index} data={block} />;
         case 'latest_news':
             return <LatestNewsBlock key={index} data={block} />;
+        case 'get_in_touch_block':
+            return <GetInTouchBlock key={index} data={block} />;
         default:
             console.warn(`Unknown block type: ${block.acf_fc_layout}`);
             return null;
