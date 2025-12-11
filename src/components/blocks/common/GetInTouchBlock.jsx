@@ -221,7 +221,7 @@ export default function GetInTouchBlock({ data }) {
                   value={value}
                   onChange={onChange}
                   className="phone-input-custom"
-                  inputClassName="!w-full !h-12 !px-4 !bg-white !rounded-r-lg !text-sm !outline-none focus:!ring-2 focus:!ring-primary"
+                  inputClassName="!w-full !h-12 !pl-0 !bg-white !rounded-r-lg !text-sm !outline-none focus:!ring-0"
                   countrySelectorStyleProps={{
                     buttonClassName:
                       "!h-12 !bg-white !rounded-l-lg !px-3 hover:!bg-gray-50",
