@@ -1,0 +1,30 @@
+/* Custom select dropdown styling */
+select option {
+  background-color: #ffffff;
+  color: #1f2937;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #3b82f6 !important;
+  background: #3b82f6 linear-gradient(0deg, #3b82f6 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+}
+
+select option:checked {
+  font-weight: 500;
+}
+
+/* Remove default select styling */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}

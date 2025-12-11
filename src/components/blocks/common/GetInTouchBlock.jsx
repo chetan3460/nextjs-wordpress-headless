@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
+import "@/app/phone-input.css";
+import "@/app/select-dropdown.css";
 import Image from "next/image";
 import SafeHTML from "@/components/common/SafeHTML";
 import { fetchGravityForm, submitGravityForm } from "@/lib/wordpress/client";
@@ -17,6 +21,7 @@ export default function GetInTouchBlock({ data }) {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -82,30 +87,43 @@ export default function GetInTouchBlock({ data }) {
 
     switch (field.type) {
       case "name":
-        // Name field - only render visible inputs
-        const visibleInputs = field.inputs
-          ? field.inputs.filter((input) => !input.isHidden)
-          : [];
+        // Name field - render as single input if only one visible input
+        const visibleInputs =
+          field.inputs?.filter((input) => !input.isHidden) || [];
 
-        // If only one visible input, render as single field
-        if (visibleInputs.length === 1) {
-          const input = visibleInputs[0];
+        if (visibleInputs.length <= 1) {
+          // Single input - use the actual input ID (e.g., input_4.3)
+          const inputId = visibleInputs[0]?.id
+            ? `input_${visibleInputs[0].id}`
+            : fieldId;
+          const showLabel = field.labelPlacement !== "hidden_label";
+
           return (
-            <div key={field.id} className="mb-4">
-              <label htmlFor={fieldId} className="block mb-2 font-medium">
-                {field.label}{" "}
-                {isRequired && <span className="text-red-600">*</span>}
-              </label>
+            <div key={field.id}>
+              {showLabel && (
+                <label
+                  htmlFor={inputId}
+                  className="block mb-2 font-medium text-sm"
+                >
+                  {field.label}{" "}
+                  {isRequired && <span className="text-red-600">*</span>}
+                </label>
+              )}
               <input
-                id={fieldId}
+                id={inputId}
                 type="text"
-                {...register(fieldId, { required: isRequired })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                placeholder={field.placeholder || input.label || ""}
+                {...register(inputId, { required: isRequired })}
+                className="w-full h-12 px-4 bg-white rounded-lg  text-sm"
+                placeholder={
+                  field.placeholder ||
+                  visibleInputs[0]?.label ||
+                  "Enter your name"
+                }
+                aria-label={!showLabel ? field.label : undefined}
               />
-              {errors[fieldId] && (
+              {errors[inputId] && (
                 <span className="text-red-600 text-sm">
-                  This field is required
+                  {field.errorMessage || "This field is required"}
                 </span>
               )}
             </div>
@@ -114,7 +132,7 @@ export default function GetInTouchBlock({ data }) {
 
         // Multiple visible inputs - render in grid
         return (
-          <div key={field.id} className="mb-4">
+          <div key={field.id}>
             <label className="block mb-2 font-medium">
               {field.label}{" "}
               {isRequired && <span className="text-red-600">*</span>}
@@ -125,7 +143,7 @@ export default function GetInTouchBlock({ data }) {
                   <input
                     type="text"
                     {...register(`input_${input.id}`, { required: isRequired })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg "
                     placeholder={input.label || input.placeholder || ""}
                   />
                 </div>
@@ -133,23 +151,36 @@ export default function GetInTouchBlock({ data }) {
             </div>
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                This field is required
+                {field.errorMessage || "This field is required"}
               </span>
             )}
           </div>
         );
 
       case "select":
+        const showSelectLabel = field.labelPlacement !== "hidden_label";
         return (
-          <div key={field.id} className="mb-4">
-            <label htmlFor={fieldId} className="block mb-2 font-medium">
-              {field.label}{" "}
-              {isRequired && <span className="text-red-600">*</span>}
-            </label>
+          <div key={field.id}>
+            {showSelectLabel && (
+              <label
+                htmlFor={fieldId}
+                className="block mb-2 font-medium text-sm"
+              >
+                {field.label}{" "}
+                {isRequired && <span className="text-red-600">*</span>}
+              </label>
+            )}
             <select
               id={fieldId}
               {...register(fieldId, { required: isRequired })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
+              className="w-full h-12 px-4 pr-10 bg-white rounded-lg  text-sm appearance-none cursor-pointer"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 1rem center",
+                backgroundSize: "1.25rem",
+              }}
+              aria-label={!showSelectLabel ? field.label : undefined}
             >
               <option value="">Select an option</option>
               {field.choices &&
@@ -161,7 +192,48 @@ export default function GetInTouchBlock({ data }) {
             </select>
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                This field is required
+                {field.errorMessage || "This field is required"}
+              </span>
+            )}
+          </div>
+        );
+
+      case "phone":
+        const showPhoneLabel = field.labelPlacement !== "hidden_label";
+        return (
+          <div key={field.id}>
+            {showPhoneLabel && (
+              <label
+                htmlFor={fieldId}
+                className="block mb-2 font-medium text-sm"
+              >
+                {field.label}{" "}
+                {isRequired && <span className="text-red-600">*</span>}
+              </label>
+            )}
+            <Controller
+              name={fieldId}
+              control={control}
+              rules={{ required: isRequired }}
+              render={({ field: { onChange, value } }) => (
+                <PhoneInput
+                  defaultCountry="in"
+                  value={value}
+                  onChange={onChange}
+                  className="phone-input-custom"
+                  inputClassName="!w-full !h-12 !px-4 !bg-white !rounded-r-lg !text-sm !outline-none focus:!ring-2 focus:!ring-primary"
+                  countrySelectorStyleProps={{
+                    buttonClassName:
+                      "!h-12 !bg-white !rounded-l-lg !px-3 hover:!bg-gray-50",
+                    buttonContentWrapperClassName:
+                      "!h-full !flex !items-center",
+                  }}
+                />
+              )}
+            />
+            {errors[fieldId] && (
+              <span className="text-red-600 text-sm">
+                {field.errorMessage || "This field is required"}
               </span>
             )}
           </div>
@@ -169,29 +241,39 @@ export default function GetInTouchBlock({ data }) {
 
       case "text":
       case "email":
-      case "phone":
-        const validationRules = { required: isRequired };
+        const validationRules = {
+          required: isRequired
+            ? field.errorMessage || "This field is required"
+            : false,
+        };
 
         // Add email validation pattern
         if (field.type === "email") {
           validationRules.pattern = {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "Invalid email address",
+            message: field.errorMessage || "Invalid email address",
           };
         }
 
+        const showTextLabel = field.labelPlacement !== "hidden_label";
         return (
-          <div key={field.id} className="mb-4">
-            <label htmlFor={fieldId} className="block mb-2 font-medium">
-              {field.label}{" "}
-              {isRequired && <span className="text-red-600">*</span>}
-            </label>
+          <div key={field.id}>
+            {showTextLabel && (
+              <label
+                htmlFor={fieldId}
+                className="block mb-2 font-medium text-sm"
+              >
+                {field.label}{" "}
+                {isRequired && <span className="text-red-600">*</span>}
+              </label>
+            )}
             <input
               id={fieldId}
               type={field.type}
               {...register(fieldId, validationRules)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full h-12 px-4 bg-white rounded-lg  text-sm"
               placeholder={field.placeholder || ""}
+              aria-label={!showTextLabel ? field.label : undefined}
             />
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
@@ -202,22 +284,29 @@ export default function GetInTouchBlock({ data }) {
         );
 
       case "textarea":
+        const showTextareaLabel = field.labelPlacement !== "hidden_label";
         return (
-          <div key={field.id} className="mb-4">
-            <label htmlFor={fieldId} className="block mb-2 font-medium">
-              {field.label}{" "}
-              {isRequired && <span className="text-red-600">*</span>}
-            </label>
+          <div key={field.id}>
+            {showTextareaLabel && (
+              <label
+                htmlFor={fieldId}
+                className="block mb-2 font-medium text-sm"
+              >
+                {field.label}{" "}
+                {isRequired && <span className="text-red-600">*</span>}
+              </label>
+            )}
             <textarea
               id={fieldId}
               {...register(fieldId, { required: isRequired })}
               rows={field.rows || 4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-3 bg-white rounded-lg  text-sm resize-none"
               placeholder={field.placeholder || ""}
+              aria-label={!showTextareaLabel ? field.label : undefined}
             />
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                This field is required
+                {field.errorMessage || "This field is required"}
               </span>
             )}
           </div>
@@ -395,16 +484,30 @@ export default function GetInTouchBlock({ data }) {
                 )}
 
                 {formFields && !formLoading && !formError && (
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {formFields.map((field) => renderField(field))}
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {formFields.map((field) => {
+                        // Textarea (message) should span full width
+                        if (field.type === "textarea") {
+                          return (
+                            <div key={field.id} className="md:col-span-2">
+                              {renderField(field)}
+                            </div>
+                          );
+                        }
+                        return renderField(field);
+                      })}
+                    </div>
 
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {submitting ? "Submitting..." : "Submit"}
-                    </button>
+                    <div className="flex  mt-2">
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className="btn"
+                      >
+                        {submitting ? "Sending..." : "Send Message"}
+                      </button>
+                    </div>
                   </form>
                 )}
               </div>

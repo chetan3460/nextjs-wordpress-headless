@@ -1,0 +1,86 @@
+/* Custom styling for react-international-phone */
+.phone-input-custom {
+  display: flex;
+  width: 100%;
+}
+
+.phone-input-custom .react-international-phone-country-selector-button {
+  height: 48px !important;
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 0.5rem 0 0 0.5rem !important;
+  padding: 0 0.75rem !important;
+  transition: background-color 0.2s;
+}
+
+.phone-input-custom .react-international-phone-country-selector-button:hover {
+  background-color: #f9fafb !important;
+}
+
+.phone-input-custom .react-international-phone-input {
+  height: 48px !important;
+  width: 100% !important;
+  padding: 0 1rem !important;
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.phone-input-custom .react-international-phone-input:focus,
+.phone-input-custom .react-international-phone-input:active,
+.phone-input-custom .react-international-phone-input:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove focus styles from country selector button */
+.phone-input-custom .react-international-phone-country-selector-button:focus,
+.phone-input-custom .react-international-phone-country-selector-button:active,
+.phone-input-custom
+  .react-international-phone-country-selector-button:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Dropdown styling */
+.phone-input-custom .react-international-phone-country-selector-dropdown {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 50 !important;
+  position: absolute !important;
+}
+
+/* Country option items in dropdown */
+.phone-input-custom
+  .react-international-phone-country-selector-dropdown__list-item {
+  padding: 8px 12px !important;
+  height: 40px !important;
+  min-height: 36px !important;
+  font-size: 14px !important;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.phone-input-custom
+  .react-international-phone-country-selector-dropdown__list-item:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Search input in dropdown */
+.phone-input-custom
+  .react-international-phone-country-selector-dropdown__search-input {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  font-size: 14px !important;
+}
