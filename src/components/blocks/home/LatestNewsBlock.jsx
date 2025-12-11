@@ -73,12 +73,6 @@ export default function LatestNewsBlock({ data }) {
               className="news-slider swiper fade-up-stagger-wrap gsap-no-scroll"
             >
               {select_news.map((post, index) => {
-                console.log("News Post Data:", {
-                  id: post.ID,
-                  title: post.title,
-                  featured_media: post.featured_media_src_url,
-                  x_featured: post.x_featured_media_large,
-                });
                 // Handle various data structures for featured image
                 const imageUrl =
                   post.featured_image || // New field from fetchPostById

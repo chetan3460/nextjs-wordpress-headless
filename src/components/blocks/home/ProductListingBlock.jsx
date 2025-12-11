@@ -8,7 +8,6 @@ export default function ProductListingBlock({ data }) {
   if (!data) return null;
 
   const { title, description, product_items, cta } = data;
-  console.log("ProductListingBlock data:", data);
 
   return (
     <section

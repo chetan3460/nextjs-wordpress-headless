@@ -223,7 +223,6 @@ export default function Footer() {
 
             {/* Designed by */}
             <div className="flex gap-1 items-center">
-              <Image src="/SR.svg" alt="ScreenRoot" width={20} height={20} />
               <span className="text-grey-3 text-sm">Designed by</span>
               <a
                 href="https://screenroot.com"

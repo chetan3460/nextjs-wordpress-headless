@@ -1,18 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Image from "next/image";
 import SafeHTML from "@/components/common/SafeHTML";
-import { fetchFormidableForm } from "@/lib/wordpress/client";
+import { fetchGravityForm, submitGravityForm } from "@/lib/wordpress/client";
 
 export default function GetInTouchBlock({ data }) {
-  const [formHTML, setFormHTML] = useState(null);
+  const [formFields, setFormFields] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const { title, description, phone, email, country, address, form_id } = data;
 
-  // Fetch form HTML when form_id is available
+  // Fetch Gravity Form fields when form_id is available
   useEffect(() => {
     if (!form_id) return;
 
@@ -21,9 +31,9 @@ export default function GetInTouchBlock({ data }) {
       setFormError(null);
 
       try {
-        const formData = await fetchFormidableForm(form_id);
-        if (formData.success && formData.html) {
-          setFormHTML(formData.html);
+        const formData = await fetchGravityForm(form_id);
+        if (formData.success && formData.fields) {
+          setFormFields(formData.fields);
         } else {
           setFormError("Form not found");
         }
@@ -37,6 +47,186 @@ export default function GetInTouchBlock({ data }) {
 
     loadForm();
   }, [form_id]);
+
+  // Handle form submission
+  const onSubmit = async (formData) => {
+    setSubmitting(true);
+    setSuccessMessage(null);
+
+    try {
+      const response = await submitGravityForm(form_id, formData);
+
+      if (response.success) {
+        setSuccessMessage("<h3>Thank you!</h3><p>" + response.message + "</p>");
+        reset();
+      } else {
+        setSuccessMessage(
+          '<p class="text-red-600">There was an error submitting the form.</p>'
+        );
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSuccessMessage(
+        '<p class="text-red-600">There was an error submitting the form. Please try again.</p>'
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Render form field based on type
+  const renderField = (field) => {
+    const fieldId = `input_${field.id}`;
+    // Force all fields to be required except textarea (message)
+    const isRequired = field.type !== "textarea" ? true : field.isRequired;
+
+    switch (field.type) {
+      case "name":
+        // Name field - only render visible inputs
+        const visibleInputs = field.inputs
+          ? field.inputs.filter((input) => !input.isHidden)
+          : [];
+
+        // If only one visible input, render as single field
+        if (visibleInputs.length === 1) {
+          const input = visibleInputs[0];
+          return (
+            <div key={field.id} className="mb-4">
+              <label htmlFor={fieldId} className="block mb-2 font-medium">
+                {field.label}{" "}
+                {isRequired && <span className="text-red-600">*</span>}
+              </label>
+              <input
+                id={fieldId}
+                type="text"
+                {...register(fieldId, { required: isRequired })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder={field.placeholder || input.label || ""}
+              />
+              {errors[fieldId] && (
+                <span className="text-red-600 text-sm">
+                  This field is required
+                </span>
+              )}
+            </div>
+          );
+        }
+
+        // Multiple visible inputs - render in grid
+        return (
+          <div key={field.id} className="mb-4">
+            <label className="block mb-2 font-medium">
+              {field.label}{" "}
+              {isRequired && <span className="text-red-600">*</span>}
+            </label>
+            <div className="grid grid-cols-2 gap-4">
+              {visibleInputs.map((input) => (
+                <div key={input.id}>
+                  <input
+                    type="text"
+                    {...register(`input_${input.id}`, { required: isRequired })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder={input.label || input.placeholder || ""}
+                  />
+                </div>
+              ))}
+            </div>
+            {errors[fieldId] && (
+              <span className="text-red-600 text-sm">
+                This field is required
+              </span>
+            )}
+          </div>
+        );
+
+      case "select":
+        return (
+          <div key={field.id} className="mb-4">
+            <label htmlFor={fieldId} className="block mb-2 font-medium">
+              {field.label}{" "}
+              {isRequired && <span className="text-red-600">*</span>}
+            </label>
+            <select
+              id={fieldId}
+              {...register(fieldId, { required: isRequired })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
+            >
+              <option value="">Select an option</option>
+              {field.choices &&
+                field.choices.map((choice, index) => (
+                  <option key={index} value={choice.value || choice.text}>
+                    {choice.text}
+                  </option>
+                ))}
+            </select>
+            {errors[fieldId] && (
+              <span className="text-red-600 text-sm">
+                This field is required
+              </span>
+            )}
+          </div>
+        );
+
+      case "text":
+      case "email":
+      case "phone":
+        const validationRules = { required: isRequired };
+
+        // Add email validation pattern
+        if (field.type === "email") {
+          validationRules.pattern = {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          };
+        }
+
+        return (
+          <div key={field.id} className="mb-4">
+            <label htmlFor={fieldId} className="block mb-2 font-medium">
+              {field.label}{" "}
+              {isRequired && <span className="text-red-600">*</span>}
+            </label>
+            <input
+              id={fieldId}
+              type={field.type}
+              {...register(fieldId, validationRules)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder={field.placeholder || ""}
+            />
+            {errors[fieldId] && (
+              <span className="text-red-600 text-sm">
+                {errors[fieldId].message || "This field is required"}
+              </span>
+            )}
+          </div>
+        );
+
+      case "textarea":
+        return (
+          <div key={field.id} className="mb-4">
+            <label htmlFor={fieldId} className="block mb-2 font-medium">
+              {field.label}{" "}
+              {isRequired && <span className="text-red-600">*</span>}
+            </label>
+            <textarea
+              id={fieldId}
+              {...register(fieldId, { required: isRequired })}
+              rows={field.rows || 4}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder={field.placeholder || ""}
+            />
+            {errors[fieldId] && (
+              <span className="text-red-600 text-sm">
+                This field is required
+              </span>
+            )}
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   // Don't render if no content
   if (
@@ -185,6 +375,13 @@ export default function GetInTouchBlock({ data }) {
           <div className="w-full md:w-9/12 prose placeholder:!text-grey-3">
             {form_id && (
               <div>
+                {successMessage && (
+                  <div
+                    className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
+                    dangerouslySetInnerHTML={{ __html: successMessage }}
+                  />
+                )}
+
                 {formLoading && (
                   <div className="text-center py-8">
                     <p>Loading form...</p>
@@ -197,11 +394,18 @@ export default function GetInTouchBlock({ data }) {
                   </div>
                 )}
 
-                {formHTML && !formLoading && !formError && (
-                  <div
-                    className="formidable-form-wrapper"
-                    dangerouslySetInnerHTML={{ __html: formHTML }}
-                  />
+                {formFields && !formLoading && !formError && (
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {formFields.map((field) => renderField(field))}
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {submitting ? "Submitting..." : "Submit"}
+                    </button>
+                  </form>
                 )}
               </div>
             )}

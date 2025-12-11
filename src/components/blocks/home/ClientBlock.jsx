@@ -14,7 +14,6 @@ export default function ClientBlock({ data }) {
   const [nextEl, setNextEl] = useState(null);
   const [paginationEl, setPaginationEl] = useState(null);
 
-  console.log("ClientBlock data:", data);
   if (!data) return null;
 
   const { title, description, client_items } = data;

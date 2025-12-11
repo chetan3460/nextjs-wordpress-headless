@@ -475,4 +475,64 @@ export async function fetchFormidableForm(formId) {
     }
 }
 
+/**
+ * Fetch rendered Gravity Form HTML from WordPress
+ * @param {string|number} formId - Form ID
+ * @returns {Promise<object>} Form data with rendered HTML
+ */
+export async function fetchGravityForm(formId) {
+    if (!formId) {
+        throw new Error('Form ID is required');
+    }
+
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || '';
+        const url = `${baseUrl}/wp-json/custom/v1/gravity-form/${formId}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`REST API error: ${response.statusText}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(`Error fetching Gravity Form ${formId}:`, error);
+        throw error;
+    }
+}
+
+/**
+ * Submit Gravity Form entry
+ * @param {string|number} formId - Form ID
+ * @param {object} data - Form data
+ * @returns {Promise<object>} Submission response
+ */
+export async function submitGravityForm(formId, data) {
+    if (!formId) {
+        throw new Error('Form ID is required');
+    }
+
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || '';
+        const url = `${baseUrl}/wp-json/custom/v1/gravity-form/${formId}/submit`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error(`REST API error: ${response.statusText}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(`Error submitting Gravity Form ${formId}:`, error);
+        throw error;
+    }
+}
 
