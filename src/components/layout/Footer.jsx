@@ -54,12 +54,10 @@ export default function Footer({ footerData }) {
                 <div className="lg:col-span-4 md:col-span-6">
                   <Link href="/" className="text-[22px] focus:outline-none">
                     {footer_logo && (
-                      <Image
+                      <img
                         src={footer_logo}
                         alt="Resplast"
-                        width={150}
-                        height={50}
-                        className="h-auto"
+                        className="h-auto max-w-[150px]"
                       />
                     )}
                   </Link>
