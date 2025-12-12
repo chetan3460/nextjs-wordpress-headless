@@ -85,8 +85,8 @@ export default function Footer({ footerData }) {
                         }
                         alt={
                           typeof footer_logo === "string"
-                            ? "Logo"
-                            : footer_logo.alt || footer_logo.title || "Logo"
+                            ? ""
+                            : footer_logo.alt || footer_logo.title || ""
                         }
                         className="h-auto"
                       />
