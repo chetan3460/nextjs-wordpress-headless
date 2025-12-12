@@ -32,9 +32,14 @@ export default function HeroBlock({ data }) {
           slidesPerView={1}
           effect="fade"
           loop={false}
-          autoplay={{ delay: 6000 }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          touchRatio={1}
+          touchAngle={45}
+          grabCursor={true}
+          simulateTouch={true}
+          allowTouchMove={true}
           // pagination={{ clickable: true }}
-          className="hero-slider swiper w-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px]"
+          className="hero-slider swiper w-full"
         >
           {banner_slider.map((slide, i) => {
             const image = slide.banner_images;
@@ -50,7 +55,7 @@ export default function HeroBlock({ data }) {
             return (
               <SwiperSlide key={i}>
                 {/* Swiper already renders `.swiper-slide`, so just wrap content */}
-                <div className="relative w-full h-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px]">
+                <div className="relative w-full">
                   {/* IMAGE */}
                   <SafeImage
                     src={imageUrl}
@@ -60,7 +65,7 @@ export default function HeroBlock({ data }) {
                     priority={i === 0} // first slide → high priority (LCP)
                     loading={i === 0 ? "eager" : "lazy"}
                     unoptimized={imageUrl.includes("localhost")}
-                    className="object-cover h-full w-full rounded-[18px] md:rounded-[40px]"
+                    className="object-cover h-full w-full rounded-[18px] md:rounded-[40px] aspect-[1] sm:aspect-[1.8] md:aspect-auto"
                   />
 
                   {/* OVERLAY CONTENT */}
