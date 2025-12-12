@@ -453,10 +453,10 @@ export async function fetchHeaderData() {
  */
 export async function fetchFooterData() {
     try {
-        // Fetch ACF options for footer
-        const options = await fetchREST('/acf/v3/options/options');
+        // Fetch footer data from custom REST API endpoint
+        const data = await fetchREST('/nextjs/v1/footer');
 
-        if (!options || !options.acf) {
+        if (!data) {
             return {
                 footer_logo: null,
                 contact_title: 'Contact us',
@@ -468,16 +468,14 @@ export async function fetchFooterData() {
             };
         }
 
-        const acf = options.acf;
-
         return {
-            footer_logo: acf.footer_logo || null,
-            contact_title: acf.contact_title || 'Contact us',
-            phone_no: acf.phone_no || null,
-            email: acf.email || null,
-            page_links: acf.page_links || [],
-            follow_us: acf.follow_us || { social_links: {} },
-            policy: acf.policy || null
+            footer_logo: data.footer_logo || null,
+            contact_title: data.contact_title || 'Contact us',
+            phone_no: data.phone_no || null,
+            email: data.email || null,
+            page_links: data.page_links || [],
+            follow_us: data.follow_us || { social_links: {} },
+            policy: data.policy || null
         };
     } catch (error) {
         console.error('Error fetching footer data:', error);
