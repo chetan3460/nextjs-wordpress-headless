@@ -1,14 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function Footer({ footerData }) {
-  const [currentYear, setCurrentYear] = useState("");
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear().toString());
-  }, []);
+  // Initialize with current year to prevent hydration mismatch
+  const currentYear = new Date().getFullYear().toString();
 
   if (!footerData) {
     return null;
