@@ -1,7 +1,7 @@
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import '@/app/css/style.css';
-import { fetchHeaderData } from '@/lib/wordpress/client';
+import { fetchHeaderData, fetchFooterData } from '@/lib/wordpress/client';
 
 export const metadata = {
   title: 'Resplast - Leading Plastic Manufacturer',
@@ -12,13 +12,16 @@ export default async function RootLayout({ children }) {
   // Fetch unified header data (Logo + Menu)
   const { menu_items, site_logo } = await fetchHeaderData();
 
+  // Fetch footer data from WordPress ACF options
+  const footerData = await fetchFooterData();
+
   return (
     <html lang="en">
       <head></head>
       <body className="font-sans antialiased text-gray-900">
         <Header menuItems={menu_items} siteLogo={site_logo} />
         {children}
-        <Footer />
+        <Footer footerData={footerData} />
       </body>
     </html>
   );

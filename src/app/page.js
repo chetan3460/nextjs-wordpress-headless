@@ -73,19 +73,6 @@ export default async function HomePage() {
           <p>No blocks found. Add components to the "Home Panels" flexible content field in WordPress.</p>
         </div>
       )}
-
-      {/* Debug: Show raw data in development mode */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="container mx-auto px-4 py-8 bg-gray-100 mt-8 border-t">
-          <h2 className="text-xl font-bold mb-4">Debug: Block Structure</h2>
-          <pre className="bg-white p-4 rounded text-xs overflow-auto max-h-[300px]">
-            {JSON.stringify(homePanels.map(p => ({
-              type: p.acf_fc_layout,
-              hidden: p.hide_block ? 'YES' : 'NO'
-            })), null, 2)}
-          </pre>
-        </div>
-      )}
     </main>
   );
 }

@@ -448,6 +448,53 @@ export async function fetchHeaderData() {
 }
 
 /**
+ * Fetch footer data from WordPress ACF options
+ * @returns {Promise<object>} Footer data including logo, contact info, links, social media
+ */
+export async function fetchFooterData() {
+    try {
+        // Fetch ACF options for footer
+        const options = await fetchREST('/acf/v3/options/options');
+
+        if (!options || !options.acf) {
+            return {
+                footer_logo: null,
+                contact_title: 'Contact us',
+                phone_no: null,
+                email: null,
+                page_links: [],
+                follow_us: { social_links: {} },
+                policy: null
+            };
+        }
+
+        const acf = options.acf;
+
+        return {
+            footer_logo: acf.footer_logo || null,
+            contact_title: acf.contact_title || 'Contact us',
+            phone_no: acf.phone_no || null,
+            email: acf.email || null,
+            page_links: acf.page_links || [],
+            follow_us: acf.follow_us || { social_links: {} },
+            policy: acf.policy || null
+        };
+    } catch (error) {
+        console.error('Error fetching footer data:', error);
+        return {
+            footer_logo: null,
+            contact_title: 'Contact us',
+            phone_no: null,
+            email: null,
+            page_links: [],
+            follow_us: { social_links: {} },
+            policy: null
+        };
+    }
+}
+
+
+/**
  * Fetch rendered Formidable form HTML from WordPress
  * @param {string|number} formId - Form ID or key
  * @returns {Promise<object>} Form data with rendered HTML
