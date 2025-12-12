@@ -78,9 +78,17 @@ export default function Footer({ footerData }) {
                   <Link href="/" className="text-[22px] focus:outline-none">
                     {footer_logo && (
                       <img
-                        src={footer_logo}
-                        alt="Resplast"
-                        className="h-auto max-w-[150px]"
+                        src={
+                          typeof footer_logo === "string"
+                            ? footer_logo
+                            : footer_logo.url
+                        }
+                        alt={
+                          typeof footer_logo === "string"
+                            ? "Logo"
+                            : footer_logo.alt || footer_logo.title || "Logo"
+                        }
+                        className="h-auto"
                       />
                     )}
                   </Link>
