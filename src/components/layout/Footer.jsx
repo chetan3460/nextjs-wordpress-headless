@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Footer({ footerData }) {
@@ -26,6 +25,34 @@ export default function Footer({ footerData }) {
   } = footerData;
 
   const social_links = follow_us?.social_links || {};
+
+  // Helper function to convert WordPress URL to Next.js path
+  const convertToNextPath = (wpUrl) => {
+    if (!wpUrl) return "#";
+
+    // If it's already a relative path, return as is
+    if (wpUrl.startsWith("/")) return wpUrl;
+
+    // If it's an external URL, return as is
+    if (
+      wpUrl.startsWith("http") &&
+      !wpUrl.includes("localhost") &&
+      !wpUrl.includes("127.0.0.1")
+    ) {
+      return wpUrl;
+    }
+
+    try {
+      const url = new URL(wpUrl);
+      // Remove the WordPress base path and return just the slug
+      let path = url.pathname.replace("/nextjs-wp", "");
+      // Remove trailing slash
+      path = path.endsWith("/") ? path.slice(0, -1) : path;
+      return path || "/";
+    } catch (e) {
+      return wpUrl;
+    }
+  };
 
   // Split page links into 2 columns
   const allLinks = page_links || [];
@@ -223,9 +250,8 @@ export default function Footer({ footerData }) {
                             className={index > 0 ? "mt-[10px]" : ""}
                           >
                             <Link
-                              href={link.page_link?.url || "#"}
+                              href={convertToNextPath(link.page_link?.url)}
                               className="text-sm md:text-base hover:text-primary text-black font-semibold duration-500 ease-in-out"
-                              target={link.page_link?.target || ""}
                             >
                               {link.page_link?.title || "Link"}
                             </Link>
@@ -240,9 +266,8 @@ export default function Footer({ footerData }) {
                         {column2.map((link, index) => (
                           <li key={index} className={index > 0 ? "mt-4" : ""}>
                             <Link
-                              href={link.page_link?.url || "#"}
+                              href={convertToNextPath(link.page_link?.url)}
                               className="text-sm md:text-base hover:text-primary text-black font-semibold duration-500 ease-in-out"
-                              target={link.page_link?.target || ""}
                             >
                               {link.page_link?.title || "Link"}
                             </Link>
@@ -265,9 +290,8 @@ export default function Footer({ footerData }) {
             {/* Policy Link */}
             <div>
               <Link
-                href={policyLink.url}
+                href={convertToNextPath(policyLink.url)}
                 className="text-sm md:text-base text-grey-3 hover:text-primary duration-500 ease-in-out"
-                target={policyLink.target || ""}
               >
                 {policyLink.title}
               </Link>
