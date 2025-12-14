@@ -24,7 +24,7 @@ export default function HeroBlock({ data }) {
 
   return (
     <section className="relative overflow-hidden hero-block pt-[83px]">
-      <div className="container-fluid relative flex items-center justify-between">
+      <div className="container-fluid relative flex md:flex-row flex-col items-center justify-between">
         {/* HERO SLIDER */}
         <Swiper
           modules={[Pagination, Autoplay, EffectFade]}
@@ -39,7 +39,7 @@ export default function HeroBlock({ data }) {
           simulateTouch={true}
           allowTouchMove={true}
           // pagination={{ clickable: true }}
-          className="hero-slider relative z-0"
+          className="hero-slider relative z-0 w-full"
         >
           {banner_slider.map((slide, i) => {
             const image = slide.banner_images;
@@ -117,7 +117,7 @@ export default function HeroBlock({ data }) {
 
         {/* SPOTLIGHT (RIGHT BLOCK) – outside Swiper for visibility */}
         {!hide_news && select_news && select_news.length > 0 && (
-          <div className="relative z-20 flex md:self-end pointer-events-none">
+          <div className="relative z-20 flex md:self-end max-md:w-full pointer-events-none">
             <div className="right-block flex justify-end relative md:absolute end-0 bottom-0 mt-2 sl:mt-0 w-full md:w-auto pointer-events-auto">
               {/* Background Shape */}
               <div className="hidden md:block bg-shape absolute bottom-[-10px] right-[-10px] z-0 pointer-events-none [backface-visibility:hidden]" />
