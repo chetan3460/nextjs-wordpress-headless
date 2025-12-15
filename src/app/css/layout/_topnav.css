@@ -111,7 +111,8 @@
     @apply m-0 list-none p-0;
     > li {
       @apply relative my-0 mr-7 last:mr-0 max-lg:mr-3 ltr:float-left rtl:float-right;
-      > a {
+      > a,
+      > span {
         @apply block text-base leading-5 font-medium tracking-[-0.2px] text-black capitalize;
         &:hover,
         &:active {
@@ -120,7 +121,8 @@
       }
       &:hover,
       &.active {
-        > a {
+        > a,
+        > span {
           @apply text-primary;
         }
       }
@@ -703,7 +705,8 @@
     transition: all 0.3s ease;
 
     /* Consistent padding for all menu items */
-    a.sub-menu-item {
+    a.sub-menu-item,
+    span.sub-menu-item {
       @apply text-base font-medium text-neutral-900;
       display: block;
       padding: 0;
@@ -758,7 +761,7 @@
         }
 
         a {
-          @apply text-sm font-normal text-neutral-700 py-3 px-4 block rounded-md;
+          @apply text-sm font-normal text-neutral-700 py-3 px-4 block rounded-md border-0;
           transition: all 0.2s ease;
 
           &:hover {
@@ -910,9 +913,20 @@
     @apply flex flex-col gap-6;
 
     li {
-      @apply border-0;
+      @apply border-0 last:border-0;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+        border-bottom: 0 !important;
+
+        a {
+          border-bottom: 0 !important;
+        }
+      }
+
       a {
-        @apply !text-sm !leading-3.25;
+        @apply !text-sm !leading-3.25 last:border-0;
+        border-bottom: 0 !important;
       }
     }
   }

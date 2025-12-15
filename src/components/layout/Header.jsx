@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+// Utility function to decode HTML entities
+const decodeHtmlEntities = (text) => {
+  if (typeof window === "undefined") return text;
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = text;
+  return textarea.value;
+};
+
 export default function Header({ menuItems = [], siteLogo }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -306,13 +314,12 @@ function DesktopMenuItem({ item }) {
         key={item.id || item.url}
         className={`has-submenu group relative ${item.cssClasses?.join(" ")}`}
       >
-        <Link
-          href={item.url || "#"}
-          className="sub-menu-item"
+        <span
+          className="sub-menu-item cursor-default"
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {item.label}
+          {decodeHtmlEntities(item.label)}
           <span className="menu-arrow w-4 h-4 flex items-center justify-center flex ml-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +335,7 @@ function DesktopMenuItem({ item }) {
               />
             </svg>
           </span>
-        </Link>
+        </span>
 
         {/* Regular Submenu (No Mega Menu) */}
         <ul className="submenu">
@@ -343,7 +350,7 @@ function DesktopMenuItem({ item }) {
   return (
     <li key={item.id || item.url} className={item.cssClasses?.join(" ")}>
       <Link href={item.url || "#"} className="sub-menu-item">
-        {item.label}
+        {decodeHtmlEntities(item.label)}
       </Link>
     </li>
   );
@@ -363,21 +370,17 @@ function MobileMenuItem({ item, closeMenu }) {
           isOpen ? "open" : ""
         }`}
       >
-        <div className="flex items-center justify-between">
-          <Link
-            href={item.url || "#"}
-            className="sub-menu-item flex-1"
-            onClick={closeMenu}
-          >
-            {item.label}
-          </Link>
-          <span
-            className="menu-arrow cursor-pointer p-2"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(!isOpen);
-            }}
-          >
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }}
+        >
+          <span className="sub-menu-item flex-1">
+            {decodeHtmlEntities(item.label)}
+          </span>
+          <span className="menu-arrow p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -404,7 +407,7 @@ function MobileMenuItem({ item, closeMenu }) {
                 className="sub-menu-item"
                 onClick={closeMenu}
               >
-                {child.label}
+                {decodeHtmlEntities(child.label)}
               </Link>
             </li>
           ))}
@@ -420,7 +423,7 @@ function MobileMenuItem({ item, closeMenu }) {
         className="sub-menu-item"
         onClick={closeMenu}
       >
-        {item.label}
+        {decodeHtmlEntities(item.label)}
       </Link>
     </li>
   );
