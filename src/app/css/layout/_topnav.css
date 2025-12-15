@@ -1,6 +1,25 @@
 /*********************************/
 /*         Menu                  */
 /*===============================*/
+
+/* CSS Custom Properties for Navigation */
+:root {
+  /* Transitions */
+  --nav-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Submenu */
+  --submenu-bg: rgba(248, 250, 252, 0.5);
+  --submenu-border-radius: 8px;
+  --submenu-gap: 1.5rem;
+  --submenu-padding: 15px;
+
+  /* Colors */
+  --menu-hover-bg: rgba(218, 0, 14, 0.05);
+  --menu-border-color: rgba(0, 0, 0, 0.1);
+}
+
 #topnav {
   @apply fixed start-0 end-0 top-0 z-50 border-0 bg-white py-5 duration-500;
   .logo {
@@ -25,7 +44,7 @@
         li {
           &.active {
             > a {
-              @apply !text-primary;
+              @apply text-primary!;
             }
           }
         }
@@ -193,14 +212,14 @@
   pointer-events: none;
   margin-top: 0;
   will-change: opacity;
-  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+  transition: opacity var(--nav-transition-fast), visibility 0s linear 0.2s;
 }
 #topnav .navigation-menu > li.has-mega:hover > .mega-panel,
 #topnav .navigation-menu > li.has-mega:focus-within > .mega-panel {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity 0.2s ease, visibility 0s linear 0s;
+  transition: opacity var(--nav-transition-fast), visibility 0s linear 0s;
 }
 /* Ensure submenu inside mega panel becomes visible when panel is visible */
 #topnav .navigation-menu > li.has-mega:hover > .mega-panel .submenu,
@@ -359,12 +378,12 @@
       }
       > li {
         .submenu {
-          transition: all 0.2s ease;
+          transition: all var(--nav-transition-fast);
           @apply invisible absolute start-0 top-full z-[1000] mt-2 min-w-[180px] list-none rounded-md bg-white px-0 py-[15px] opacity-0 shadow dark:bg-slate-900 dark:shadow-gray-800;
           li {
             @apply relative border-b border-b-neutral-50 last:border-0;
             a {
-              transition: all 0.3s;
+              transition: all var(--nav-transition-normal);
               @apply clear-both block px-2.5 py-4 text-base leading-normal font-normal whitespace-nowrap text-neutral-900 capitalize last:border-0;
               &:hover {
                 border-radius: 8px;
@@ -402,7 +421,7 @@
         }
 
         > a {
-          @apply min-h-[0] py-0;
+          @apply min-h-0 py-0;
         }
         &:hover {
           > .menu-arrow {
@@ -480,10 +499,7 @@
           .has-mega.open & {
             display: block !important;
           }
-          li {
-            a {
-            }
-          }
+          /* Submenu list items - styles inherited from parent */
           &.megamenu {
             li {
               .megamenu-head {
@@ -532,7 +548,7 @@
       > li > a:hover,
       .submenu li a:hover,
       &.has-submenu.open > a {
-        @apply !text-primary;
+        @apply text-primary!;
       }
       /* Active state for mobile submenu links */
       .submenu a.active {
@@ -568,7 +584,7 @@
 #navigation-mobile {
   /* Full-screen mobile menu that slides down from header with enhanced animations */
   @apply pointer-events-none fixed start-0 end-0 top-0 bottom-0 z-[999] w-[100vw] -translate-y-full overflow-y-auto bg-white dark:bg-slate-900;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--nav-transition-slow);
 
   &.open {
     @apply pointer-events-auto translate-y-0;
@@ -629,8 +645,8 @@
   > ul.navigation-menu > li {
     opacity: 0;
     transform: translateX(-30px);
-    transition: all 0.3s ease;
-    @apply last:!border-0;
+    transition: all var(--nav-transition-normal);
+    @apply last:border-0!;
   }
 
   /* Submenu items always visible, no animation */
@@ -701,8 +717,8 @@
 
   /* Mobile menu items styling */
   > ul.navigation-menu > li {
-    @apply border-b border-neutral-200/50 last:!border-b-0;
-    transition: all 0.3s ease;
+    @apply border-b border-neutral-200/50 last:border-b-0!;
+    transition: all var(--nav-transition-normal);
 
     /* Consistent padding for all menu items */
     a.sub-menu-item,
@@ -710,7 +726,7 @@
       @apply text-base font-medium text-neutral-900;
       display: block;
       padding: 0;
-      transition: color 0.3s ease;
+      transition: color var(--nav-transition-normal);
 
       &:hover {
         @apply text-primary;
@@ -720,7 +736,8 @@
     &.has-submenu {
       .menu-arrow {
         @apply text-neutral-600;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+        transition: transform var(--nav-transition-normal),
+          color var(--nav-transition-normal);
       }
 
       &:hover .menu-arrow {
@@ -738,12 +755,12 @@
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: max-height var(--nav-transition-normal),
+        opacity var(--nav-transition-normal),
+        margin var(--nav-transition-normal);
       margin-top: 0;
-      background: rgba(248, 250, 252, 0.5);
-      border-radius: 8px;
+      background: var(--submenu-bg);
+      border-radius: var(--submenu-border-radius);
 
       &.open {
         max-height: 1000px; /* Increased for larger menus */
@@ -753,20 +770,20 @@
 
       li {
         @apply border-0;
-        transition: all 0.2s ease;
+        transition: all var(--nav-transition-fast);
 
         &:hover {
-          background: rgba(218, 0, 14, 0.05);
+          background: var(--menu-hover-bg);
           transform: translateX(4px);
         }
 
         a {
           @apply text-sm font-normal text-neutral-700 py-3 px-4 block rounded-md border-0;
-          transition: all 0.2s ease;
+          transition: all var(--nav-transition-fast);
 
           &:hover {
             @apply text-primary;
-            background: rgba(218, 0, 14, 0.05);
+            background: var(--menu-hover-bg);
           }
         }
       }
@@ -925,7 +942,7 @@
       }
 
       a {
-        @apply !text-sm !leading-3.25 last:border-0;
+        @apply text-sm! leading-3.25! last:border-0;
         border-bottom: 0 !important;
       }
     }
