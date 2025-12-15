@@ -582,7 +582,7 @@
       animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       opacity: 1;
       transform: translateX(0);
-
+      @apply !mr-0 px-2 py-5 border-b border-neutral-900/10 last:!border-0;
       /* Stagger animation for each menu item */
       &:nth-child(1) {
         animation-delay: 0.1s;
@@ -628,6 +628,7 @@
     opacity: 0;
     transform: translateX(-30px);
     transition: all 0.3s ease;
+    @apply last:!border-0;
   }
 
   /* Submenu items always visible, no animation */
@@ -698,18 +699,15 @@
 
   /* Mobile menu items styling */
   > ul.navigation-menu > li {
-    @apply border-b border-neutral-200/50 last:border-0;
+    @apply border-b border-neutral-200/50 last:!border-b-0;
     transition: all 0.3s ease;
 
-    &:hover {
-      transform: translateX(8px);
-    }
-
-    a {
-      @apply text-lg font-medium text-black;
+    /* Consistent padding for all menu items */
+    a.sub-menu-item {
+      @apply text-base font-medium text-neutral-900;
       display: block;
-      padding: 0 0;
-      transition: all 0.3s ease;
+      padding: 0;
+      transition: color 0.3s ease;
 
       &:hover {
         @apply text-primary;
@@ -718,44 +716,62 @@
 
     &.has-submenu {
       .menu-arrow {
-        @apply text-black;
-        transition: transform 0.3s ease;
+        @apply text-neutral-600;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
       }
 
       &:hover .menu-arrow {
-        transform: translateX(4px);
+        @apply text-primary;
       }
 
       &.open .menu-arrow {
         transform: rotate(180deg);
+        @apply text-primary;
       }
     }
 
-    /* Submenu items */
+    /* Submenu items - Accordion style */
     .submenu {
       overflow: hidden;
       max-height: 0;
-      transition: max-height 0.4s ease-out;
+      opacity: 0;
+      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0;
+      background: rgba(248, 250, 252, 0.5);
+      border-radius: 8px;
 
       &.open {
-        max-height: 500px; /* Adjust based on your needs */
+        max-height: 1000px; /* Increased for larger menus */
+        opacity: 1;
+        margin-top: 12px;
       }
 
       li {
+        @apply border-0;
+        transition: all 0.2s ease;
+
         &:hover {
-          @apply bg-neutral-100;
+          background: rgba(218, 0, 14, 0.05);
           transform: translateX(4px);
         }
 
         a {
-          @apply text-base;
+          @apply text-sm font-normal text-neutral-700 py-3 px-4 block rounded-md;
+          transition: all 0.2s ease;
+
+          &:hover {
+            @apply text-primary;
+            background: rgba(218, 0, 14, 0.05);
+          }
         }
       }
     }
   }
 
   .submenu {
-    @apply !p-2 !pl-2;
+    @apply !p-0 !pl-0;
   }
 }
 
@@ -891,12 +907,12 @@
 
 @media (max-width: 991px) {
   .submenu {
-    @apply !mt-6 flex flex-col gap-6;
+    @apply flex flex-col gap-6;
 
     li {
-      @apply mb-6 border-0;
+      @apply border-0;
       a {
-        @apply !text-sm !leading-3.25 font-normal text-neutral-900;
+        @apply !text-sm !leading-3.25;
       }
     }
   }
@@ -916,7 +932,6 @@
         align-items: center;
         margin-bottom: 0;
         font-size: 16px;
-        font-style: normal;
         font-weight: 500;
         line-height: normal;
         color: var(--Neutral-Grey-8);

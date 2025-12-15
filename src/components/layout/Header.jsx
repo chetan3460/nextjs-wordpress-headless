@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Header({ menuItems = [], siteLogo }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +10,6 @@ export default function Header({ menuItems = [], siteLogo }) {
 
   // Use CMS logo if available, otherwise fallback to local assets
   const logoSrc = siteLogo || "/images/logo-light.png";
-  const logoDarkSrc = siteLogo || "/images/logo-dark.png"; // Assuming same logo unless we fetch both, standard WP is single logo
 
   // Transform flat menu items into tree structure
   const buildMenuTree = (items) => {
@@ -217,7 +215,7 @@ export default function Header({ menuItems = [], siteLogo }) {
           }`}
           aria-hidden={!isMenuOpen}
         >
-          <div className="mobile-header">
+          <div className="mobile-header flex items-center  px-5 py-4">
             <button
               id="mobileClose"
               className="mobile-close navbar-toggle"
@@ -230,27 +228,41 @@ export default function Header({ menuItems = [], siteLogo }) {
                 <span></span>
               </div>
             </button>
-            <div className="site-logo logo">
-              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+            <div className="site-logo logo flex items-center gap-2 ">
+              <Link
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2"
+              >
                 <img
-                  src="/images/logo-dark.png"
+                  src={siteLogo || "/images/logo-dark.png"}
                   alt="Resins & Plastics Ltd"
-                  width={150}
-                  height={40}
-                  className="l-dark"
-                />
-                <img
-                  src="/images/logo-light.png"
-                  alt="Resins & Plastics Ltd"
-                  width={150}
-                  height={40}
-                  className="l-light hidden"
+                  className="l-dark h-10 w-auto"
                 />
               </Link>
             </div>
+            {/* Language Selector */}
+            <div className="flex items-center gap-1.5 text-sm text-neutral-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span className="font-medium">EN</span>
+            </div>
           </div>
 
-          <ul className="navigation-menu">
+          <ul id="menu-mobile-menu" className="navigation-menu">
             {finalMenu.map((item) => (
               <MobileMenuItem
                 key={item.id || item.url}
@@ -263,7 +275,7 @@ export default function Header({ menuItems = [], siteLogo }) {
             <li>
               <Link
                 href="/contact"
-                className="btn my-6 ml-5"
+                className="btn !py-3 !px-4 !text-white !inline-block"
                 onClick={() => {
                   setIsMenuOpen(false);
                   document.body.classList.remove("menu-open");
@@ -347,11 +359,11 @@ function MobileMenuItem({ item, closeMenu }) {
   if (hasChildren) {
     return (
       <li
-        className={`has-submenu ${
+        className={`menu-item  menu-item-has-children has-submenu last:border-0 ${
           isOpen ? "open" : ""
-        } border-b border-neutral-200/50 last:border-0`}
+        }`}
       >
-        <div className="flex items-center justify-between pr-4">
+        <div className="flex items-center justify-between">
           <Link
             href={item.url || "#"}
             className="sub-menu-item flex-1"
@@ -372,10 +384,6 @@ function MobileMenuItem({ item, closeMenu }) {
               height="9"
               viewBox="0 0 14 9"
               fill="none"
-              style={{
-                transform: isOpen ? "rotate(180deg)" : "none",
-                transition: "transform 0.3s",
-              }}
             >
               <path
                 d="M13.25 1.5L7 7.75L0.75 1.5"
@@ -388,9 +396,9 @@ function MobileMenuItem({ item, closeMenu }) {
           </span>
         </div>
 
-        <ul className={`submenu ${isOpen ? "open" : ""} pl-4`}>
+        <ul className={`submenu ${isOpen ? "open" : ""}`}>
           {item.children.map((child) => (
-            <li key={child.id || child.url} className="border-0">
+            <li key={child.id || child.url} className="menu-item">
               <Link
                 href={child.url || "#"}
                 className="sub-menu-item"
@@ -406,7 +414,7 @@ function MobileMenuItem({ item, closeMenu }) {
   }
 
   return (
-    <li className="border-b border-neutral-200/50 last:border-0">
+    <li className="menu-item">
       <Link
         href={item.url || "#"}
         className="sub-menu-item"
