@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head></head>
-      <body className="font-sans antialiased text-gray-900">
+      <body className="font-instrument antialiased text-gray-900">
         <Header menuItems={menu_items} siteLogo={site_logo} />
         {children}
         <Footer footerData={footerData} />

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import SafeImage from "@/components/common/SafeImage";
+import Image from "next/image";
 import SafeHTML from "@/components/common/SafeHTML";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -94,7 +94,7 @@ export default function ClientBlock({ data }) {
                     {/* Client Image */}
                     {imageUrl && (
                       <div className="client-image text-center mb-6 h-[60px] flex items-center justify-center relative">
-                        <SafeImage
+                        <Image
                           src={imageUrl}
                           alt={imageAlt}
                           width={0}
@@ -110,7 +110,7 @@ export default function ClientBlock({ data }) {
                       {itemDesc && (
                         <div className="flex items-start gap-6 flex-grow">
                           <div className="shrink-0 mt-1 w-6 h-6 sm:w-8 sm:h-8 relative">
-                            <SafeImage
+                            <Image
                               src="/images/home/quotes.svg"
                               alt="Quote Icon"
                               fill

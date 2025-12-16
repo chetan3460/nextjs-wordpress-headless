@@ -51,29 +51,29 @@
       }
       &.active {
         .menu-arrow {
-          @apply border-primary dark:border-primary;
+          @apply border-primary;
         }
       }
     }
     .submenu {
       .submenu-arrow {
         border-width: 0px 0.125rem 0.125rem 0px;
-        @apply absolute end-[1.25rem] top-[15px] inline-block rounded-[0.5px] border-black p-[2px] ltr:-rotate-[45deg] rtl:rotate-[135deg] dark:border-white;
+        @apply absolute end-[1.25rem] top-[15px] inline-block rounded-[0.5px] border-black p-[2px] ltr:-rotate-[45deg] rtl:rotate-[135deg];
       }
       .has-submenu {
         &:hover {
           > .submenu-arrow {
-            @apply border-primary dark:border-primary;
+            @apply border-primary;
           }
         }
         .submenu {
           .has-submenu {
             &:hover {
               .submenu-arrow {
-                @apply border-primary dark:border-primary;
+                @apply border-primary;
               }
               > .submenu-arrow {
-                @apply border-primary dark:border-primary;
+                @apply border-primary;
               }
             }
           }
@@ -98,7 +98,7 @@
     }
 
     span {
-      @apply mb-[7px] block h-[2px] w-full bg-black dark:bg-white;
+      @apply mb-[7px] block h-[2px] w-full bg-black;
 
       &:last-child {
         @apply mb-0;
@@ -173,7 +173,7 @@
     @apply ltr:float-right rtl:float-left;
   }
   &.nav-sticky {
-    @apply fixed bg-white shadow dark:bg-slate-900 dark:shadow-gray-800;
+    @apply fixed bg-white shadow;
   }
 }
 
@@ -379,7 +379,7 @@
       > li {
         .submenu {
           transition: all var(--nav-transition-fast);
-          @apply invisible absolute start-0 top-full z-[1000] mt-2 min-w-[180px] list-none rounded-md bg-white px-0 py-[15px] opacity-0 shadow dark:bg-slate-900 dark:shadow-gray-800;
+          @apply invisible absolute start-0 top-full z-[1000] mt-2 min-w-[180px] list-none rounded-md bg-white px-0 py-[15px] opacity-0 shadow;
           li {
             @apply relative border-b border-b-neutral-50 last:border-0;
             a {
@@ -425,7 +425,7 @@
         }
         &:hover {
           > .menu-arrow {
-            @apply border-primary dark:border-primary;
+            @apply border-primary;
           }
         }
         &:hover,
@@ -569,7 +569,7 @@
   }
   .menu-extras {
     .menu-item {
-      @apply border-gray-200 dark:border-gray-700;
+      @apply border-gray-200;
     }
   }
   .has-submenu {
@@ -583,7 +583,7 @@
 
 #navigation-mobile {
   /* Full-screen mobile menu that slides down from header with enhanced animations */
-  @apply pointer-events-none fixed start-0 end-0 top-0 bottom-0 z-[999] w-[100vw] -translate-y-full overflow-y-auto bg-white dark:bg-slate-900;
+  @apply pointer-events-none fixed start-0 end-0 top-0 bottom-0 z-[999] w-[100vw] -translate-y-full overflow-y-auto bg-white;
   transition: transform var(--nav-transition-slow);
 
   &.open {

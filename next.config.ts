@@ -27,6 +27,8 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Allow localhost images in development (bypasses private IP check)
+    unoptimized: process.env.NODE_ENV === "development",
   },
 
   // Rewrites for API proxy (optional)

@@ -15,15 +15,15 @@
 
   @media (min-width: 1024px) {
     /* Only center when we have 3 or fewer slides AND use centeredSlides in Swiper config */
-    .certificate-slider[data-slides='1'] .swiper-wrapper,
-    .certificate-slider[data-slides='2'] .swiper-wrapper,
-    .certificate-slider[data-slides='3'] .swiper-wrapper {
+    .certificate-slider[data-slides="1"] .swiper-wrapper,
+    .certificate-slider[data-slides="2"] .swiper-wrapper,
+    .certificate-slider[data-slides="3"] .swiper-wrapper {
       justify-content: flex-start;
     }
-    
-    .certificate-slider[data-slides='1'] .swiper-slide,
-    .certificate-slider[data-slides='2'] .swiper-slide,
-    .certificate-slider[data-slides='3'] .swiper-slide {
+
+    .certificate-slider[data-slides="1"] .swiper-slide,
+    .certificate-slider[data-slides="2"] .swiper-slide,
+    .certificate-slider[data-slides="3"] .swiper-slide {
       flex-shrink: 0;
     }
   }
@@ -35,9 +35,7 @@
     /* background: white; */
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
     height: 100%;
   }

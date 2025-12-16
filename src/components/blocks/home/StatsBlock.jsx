@@ -31,10 +31,19 @@ function Counter({ value, duration = 2 }) {
   return <span ref={ref} />;
 }
 
-export default function StatsBlock({ data }) {
+export default function StatsBlock({ data, variant = "home" }) {
   if (!data) return null;
 
   const { title, description, stats_items, stats_cta } = data;
+
+  // Calculate dynamic columns based on item count (matches PHP logic)
+  const itemCount = stats_items?.length || 0;
+
+  // For about page, always use 5 columns on all screens; for home, responsive with max 4
+  const gridClasses =
+    variant === "about"
+      ? "grid-cols-5"
+      : `grid-cols-3 lg:grid-cols-${Math.min(4, itemCount)}`;
 
   return (
     <section className="home_stats_block">
@@ -50,8 +59,7 @@ export default function StatsBlock({ data }) {
 
         {stats_items && stats_items.length > 0 && (
           <div
-            className="stats-grid-items w-full lg:w-7/12 mx-auto py-6 md:py-12
-    grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-12"
+            className={`stats-grid-items w-full  mx-auto grid ${gridClasses} gap-2 lg:gap-12`}
           >
             {stats_items.map((item, index) => (
               <div key={index} className="stats-item text-center">
@@ -84,11 +92,11 @@ export default function StatsBlock({ data }) {
         )}
 
         {stats_cta && stats_cta.url && (
-          <div className="text-center">
+          <div className="text-center pt-6 md:pt-12">
             <Link
               href={stats_cta.url}
               target={stats_cta.target || "_self"}
-              className="btn"
+              className="btn "
             >
               {stats_cta.title || "View More Details"}
             </Link>

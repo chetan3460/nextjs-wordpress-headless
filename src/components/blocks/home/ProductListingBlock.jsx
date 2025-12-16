@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import SafeImage from "@/components/common/SafeImage";
 import SafeHTML from "@/components/common/SafeHTML";
 
 export default function ProductListingBlock({ data }) {

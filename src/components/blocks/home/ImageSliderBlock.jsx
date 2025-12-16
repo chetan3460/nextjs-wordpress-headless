@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
-import SafeImage from "@/components/common/SafeImage";
+import Image from "next/image";
 import SafeHTML from "@/components/common/SafeHTML";
 
 export default function ImageSliderBlock({ data }) {
@@ -71,7 +71,7 @@ export default function ImageSliderBlock({ data }) {
                       {slide_image && (
                         <div className="w-full h-full">
                           {/* Note: We use aspect ratio styles via class or Next.js Image fill */}
-                          <SafeImage
+                          <Image
                             src={slide_image.url}
                             alt={
                               slide_image.alt ||
