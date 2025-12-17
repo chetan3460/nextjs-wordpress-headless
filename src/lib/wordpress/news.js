@@ -2,17 +2,17 @@
  * WordPress API functions for News & Updates
  */
 
-const WORDPRESS_API_URL = process.env.WORDPRESS_REST_ENDPOINT || 'http://localhost/nextjs-wp/wp-json/wp/v2';
 const WORDPRESS_BASE_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://localhost/nextjs-wp';
 
 /**
- * Fetch paginated posts with optional filtering and sorting
+ * Fetch paginated posts with optional filtering, sorting, and search
  * @param {number} page - Page number (1-indexed)
  * @param {string|number} categoryId - Category ID or 'all'
  * @param {string} order - 'desc' (latest) or 'asc' (oldest)
+ * @param {string} search - Search query
  * @param {number} perPage - Posts per page
  */
-export async function fetchNewsPosts(page = 1, categoryId = 'all', order = 'desc', perPage = 6) {
+export async function fetchNewsPosts(page = 1, categoryId = 'all', order = 'desc', search = '', perPage = 6) {
     try {
         const params = new URLSearchParams({
             per_page: perPage.toString(),
@@ -25,6 +25,11 @@ export async function fetchNewsPosts(page = 1, categoryId = 'all', order = 'desc
         // Add category filter if not 'all'
         if (categoryId !== 'all') {
             params.append('news_category', categoryId.toString()); // Use news_category taxonomy
+        }
+
+        // Add search query if provided
+        if (search) {
+            params.append('search', search);
         }
 
         // Try news custom post type first, fallback to posts

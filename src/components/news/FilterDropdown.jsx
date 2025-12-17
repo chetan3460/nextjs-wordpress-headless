@@ -31,7 +31,7 @@ export default function FilterDropdown({ label, value, options, onChange }) {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleKeyDown}
-        className="inline-flex items-center gap-2 border border-[#D6D6D6] !font-semibold rounded-[12px] px-4 py-3 text-xs !bg-white !text-grey-7 focus:outline-none hover:!bg-transparent"
+        className="inline-flex items-center gap-2 border border-[#D6D6D6] font-semibold! rounded-[12px] px-4 py-3 text-xs bg-white! text-grey-7! focus:outline-none hover:bg-transparent!"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
@@ -56,7 +56,7 @@ export default function FilterDropdown({ label, value, options, onChange }) {
             {options.map((option) => (
               <li
                 key={option.value}
-                className="dd-item px-3 py-2 rounded-md md:text-base text-sm text-black hover:!text-primary hover:bg-[#CCD9EF]/20 cursor-pointer hover:font-semibold"
+                className="dd-item px-3 py-2 rounded-md md:text-base text-sm text-black hover:text-primary! hover:bg-[#CCD9EF]/20 cursor-pointer hover:font-semibold"
                 onClick={() => {
                   onChange(option.value);
                   setIsOpen(false);

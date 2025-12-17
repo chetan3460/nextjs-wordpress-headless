@@ -38,7 +38,7 @@ export default function BlogCard({ post }) {
       </Link>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col grow">
         {/* Category Badge */}
         {post.category && (
           <div className="mb-3">
@@ -60,7 +60,7 @@ export default function BlogCard({ post }) {
 
         {/* Excerpt */}
         <div
-          className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow [&>p]:line-clamp-2 [&>p]:m-0"
+          className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2 grow [&>p]:line-clamp-2 [&>p]:m-0"
           dangerouslySetInnerHTML={{ __html: post.excerpt }}
         />
 

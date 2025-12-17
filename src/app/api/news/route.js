@@ -7,8 +7,9 @@ export async function GET(request) {
     const page = parseInt(searchParams.get('page') || '1');
     const category = searchParams.get('category') || 'all';
     const order = searchParams.get('order') || 'desc';
+    const search = searchParams.get('search') || '';
 
-    const data = await fetchNewsPosts(page, category, order);
+    const data = await fetchNewsPosts(page, category, order, search);
 
     return NextResponse.json(data);
 }
