@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ScrollToTop from "./ScrollToTop";
 
-// Utility function to decode HTML entities
+// Utility function to decode HTML entities (works on both server and client)
 const decodeHtmlEntities = (text) => {
-  if (typeof window === "undefined") return text;
-  const textarea = document.createElement("textarea");
-  textarea.innerHTML = text;
-  return textarea.value;
+  if (!text) return text;
+
+  // Simple entity decoding that works on both server and client
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&#038;/g, "&");
 };
 
 export default function Header({ menuItems = [], siteLogo }) {

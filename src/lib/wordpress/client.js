@@ -51,17 +51,14 @@ export async function fetchREST(endpoint) {
  */
 export async function fetchPageWithACF(slug) {
     try {
-        console.log(`[fetchPageWithACF] Fetching page with slug: ${slug}`);
 
         // 1. Try requested slug with _embed
         let data = await fetchREST(`/wp/v2/pages?slug=${slug}&_embed`);
 
         // 2. If not found, try common homepage slugs
         if ((!data || data.length === 0) && slug === 'home') {
-            console.log('[fetchPageWithACF] "home" slug not found, trying alternatives...');
             const alts = ['front-page', 'homepage', 'main'];
             for (const alt of alts) {
-                console.log(`[fetchPageWithACF] Trying slug: ${alt}`);
                 data = await fetchREST(`/wp/v2/pages?slug=${alt}&_embed`);
                 if (data && data.length > 0) break;
             }
@@ -69,12 +66,10 @@ export async function fetchPageWithACF(slug) {
 
         // 3. Last resort: Try fetching "Home" by title/search if slug failed (or specific ID 80 we saw in debug)
         if ((!data || data.length === 0) && slug === 'home') {
-            console.log('[fetchPageWithACF] Still not found. Trying without _embed or known ID...');
             // Try ID 80 directly (from previous debug findings)
             try {
                 const page80 = await fetchREST('/wp/v2/pages/80?_embed');
                 if (page80 && page80.id) {
-                    console.log('[fetchPageWithACF] Found page by ID 80');
                     data = [page80];
                 }
             } catch (e) { }
@@ -86,7 +81,6 @@ export async function fetchPageWithACF(slug) {
         }
 
         const page = data[0];
-        console.log(`[fetchPageWithACF] Page found: ${page.title?.rendered} (ID: ${page.id})`);
 
         // Process ACF fields to convert image IDs to full image objects
         const acf = await processACFImages(page.acf || {});
@@ -312,28 +306,31 @@ export async function fetchMenu() {
 /**
  * Fetch a single post by slug via REST API
  */
-export async function fetchPostBySlug(slug) {
+export async function fetchPostBySlug(slug, postType = 'posts') {
     try {
         console.log(`[fetchPostBySlug] Attempting to fetch post with slug: ${slug}`);
 
-        // Try fetching from posts endpoint first
+        // Determine the endpoint based on post type
+        const endpoint = postType === 'news' ? '/wp/v2/news' : '/wp/v2/posts';
+
         let posts;
         try {
-            console.log(`[fetchPostBySlug] Trying /wp/v2/posts?slug=${slug}`);
-            posts = await fetchREST(`/wp/v2/posts?slug=${slug}&_embed`);
-            console.log(`[fetchPostBySlug] Posts endpoint returned:`, posts?.length || 0, 'results');
-        } catch (postsError) {
-            console.log(`[fetchPostBySlug] Posts endpoint failed:`, postsError.message);
+            console.log(`[fetchPostBySlug] Trying ${endpoint}?slug=${slug}`);
+            posts = await fetchREST(`${endpoint}?slug=${slug}&_embed`);
+            console.log(`[fetchPostBySlug] ${endpoint} returned:`, posts?.length || 0, 'results');
+        } catch (error) {
+            console.log(`[fetchPostBySlug] ${endpoint} failed:`, error.message);
         }
 
-        // If posts endpoint returned empty or failed, try news endpoint
+        // If first endpoint failed, try the other one
         if (!posts || posts.length === 0) {
-            console.log(`[fetchPostBySlug] Posts endpoint empty, trying news...`);
+            const fallbackEndpoint = postType === 'news' ? '/wp/v2/posts' : '/wp/v2/news';
+            console.log(`[fetchPostBySlug] ${endpoint} empty, trying ${fallbackEndpoint}...`);
             try {
-                posts = await fetchREST(`/wp/v2/news?slug=${slug}&_embed`);
-                console.log(`[fetchPostBySlug] News endpoint returned:`, posts?.length || 0, 'results');
+                posts = await fetchREST(`${fallbackEndpoint}?slug=${slug}&_embed`);
+                console.log(`[fetchPostBySlug] ${fallbackEndpoint} returned:`, posts?.length || 0, 'results');
             } catch (newsError) {
-                console.error(`[fetchPostBySlug] News endpoint also failed:`, newsError.message);
+                console.error(`[fetchPostBySlug] ${fallbackEndpoint} also failed:`, newsError.message);
             }
         }
 
@@ -341,11 +338,27 @@ export async function fetchPostBySlug(slug) {
             const post = posts[0];
             console.log(`[fetchPostBySlug] Found post:`, post.title?.rendered || post.title);
 
+            // Fetch ACF fields separately for this post
+            let acfData = null;
+            try {
+                acfData = await fetchREST(`${endpoint}/${post.id}?acf_format=standard`);
+                console.log(`[fetchPostBySlug] ACF data fetched:`, !!acfData?.acf);
+
+                // Process ACF images (convert IDs to full image objects)
+                if (acfData?.acf) {
+                    acfData.acf = await processACFImages(acfData.acf);
+                    console.log(`[fetchPostBySlug] ACF images processed`);
+                }
+            } catch (acfError) {
+                console.warn(`[fetchPostBySlug] Failed to fetch ACF data:`, acfError.message);
+            }
+
             // Normalize data
             return {
                 id: post.id,
                 title: post.title.rendered,
                 content: post.content.rendered,
+                excerpt: post.excerpt?.rendered,
                 date: post.date,
                 slug: post.slug,
                 featuredImage: post._embedded?.['wp:featuredmedia']?.[0] ? {
@@ -359,7 +372,12 @@ export async function fetchPostBySlug(slug) {
                         name: term.name,
                         slug: term.slug
                     }))
-                } : { nodes: [] }
+                } : { nodes: [] },
+                category: post._embedded?.['wp:term']?.[0]?.[0] ? {
+                    name: post._embedded['wp:term'][0][0].name,
+                    slug: post._embedded['wp:term'][0][0].slug
+                } : null,
+                acf: acfData?.acf || null
             };
         }
 
@@ -440,6 +458,21 @@ export async function fetchSiteLogo() {
 export async function fetchHeaderData() {
     try {
         const data = await fetchREST('/nextjs/v1/header');
+
+        // Decode HTML entities in menu labels to prevent hydration mismatch
+        if (data?.menu_items) {
+            data.menu_items = data.menu_items.map(item => ({
+                ...item,
+                label: item.label
+                    ?.replace(/&amp;/g, '&')
+                    ?.replace(/&#038;/g, '&')
+                    ?.replace(/&lt;/g, '<')
+                    ?.replace(/&gt;/g, '>')
+                    ?.replace(/&quot;/g, '"')
+                    ?.replace(/&#039;/g, "'")
+            }));
+        }
+
         return data || { site_logo: null, menu_items: [] };
     } catch (error) {
         console.error('Error fetching header data:', error);

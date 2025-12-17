@@ -31,6 +31,11 @@ const nextConfig = {
     unoptimized: process.env.NODE_ENV === "development",
   },
 
+  // Turbopack configuration
+  turbopack: {
+    root: "/Users/chetandhargalkar/Desktop/github/nextjs-wordpress-headless",
+  },
+
   // Rewrites for API proxy (optional)
   async rewrites() {
     return [
