@@ -4,6 +4,24 @@
   pointer-events: none;
   transform: none !important;
 }
+
+/* Base Swiper Button Styles (Original) */
+.swiper-btn-prev,
+.swiper-btn-next {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swiper-btn-prev:hover,
+.swiper-btn-next:hover {
+  transform: scale(1.1);
+}
+
+.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .swiper-pagination {
   position: relative;
   bottom: 0 !important;

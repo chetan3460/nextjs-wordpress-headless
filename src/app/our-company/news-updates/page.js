@@ -1,6 +1,6 @@
 import { fetchNewsPosts, fetchNewsCategories } from '@/lib/wordpress/news';
 import { fetchPageWithACF } from '@/lib/wordpress/client';
-import NewsListing from '@/components/news/NewsListing';
+import NewsListingBlock from '@/components/blocks/news/NewsListingBlock';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 
 export const metadata = {
@@ -18,7 +18,7 @@ export default async function NewsUpdatesPage() {
 
     // Get section title and description from ACF or use defaults
     const sectionTitle = pageData?.acf?.news_listing_title || "Driving what's next";
-    const sectionDescription = pageData?.acf?.news_listing_description || "A look at our innovations, research milestones, and events that keep us ahead in a changing world.";
+    // const sectionDescription = pageData?.acf?.news_listing_description || "A look at our innovations, research milestones, and events that keep us ahead in a changing world.";
 
     return (
         <main className='site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative'>
@@ -26,13 +26,17 @@ export default async function NewsUpdatesPage() {
             <Breadcrumbs />
 
             {/* News Listing with Client-side features */}
-            <NewsListing
+            <NewsListingBlock
                 initialPosts={postsData.posts}
                 initialCategories={categories}
                 initialHasMore={postsData.hasMore}
                 initialTotal={postsData.totalPosts}
-                sectionTitle={sectionTitle}
-                sectionDescription={sectionDescription}
+                data={{
+                    section_title: sectionTitle,
+                    posts_per_page: 6,
+                    show_filters: true,
+                    show_search: true
+                }}
             />
         </main>
     );

@@ -4,7 +4,7 @@ const path = require('path');
 /**
  * Next.js ACF Component Generator & Sync
  * Automatically generates React components and a BlockRenderer from ACF JSON definitions.
- * SMARTER VERSION: Detects existing custom blocks and uses folder prioritization.
+ * SMARTER VERSION: Detects existing custom blocks, uses folder prioritization, and supports --watch mode.
  */
 
 // --- CONFIGURATION ---
@@ -132,7 +132,7 @@ function generateComponentTemplate(layout) {
             output += `              alt={${name}.alt || "${label}"}\n`;
             output += `              fill\n`;
             output += `              className="object-cover"\n`;
-            output += `              sizes="(max-width: 1200px) 100vw, 1200px"\n`;
+            output += `              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px"\n`;
             output += `            />\n`;
             output += `          </div>\n`;
             output += `        )}\n`;
@@ -170,7 +170,7 @@ function generateComponentTemplate(layout) {
 }
 
 function generateBlockRenderer(blocks) {
-    let imports = `"use client";\n\nimport dynamic from "next/dynamic";\n\n`;
+    let imports = `"use client";\n\nimport dynamic from "next/dynamic";\nimport BlockErrorBoundary from "@/components/common/BlockErrorBoundary";\n\n`;
     let mapping = `const BLOCK_COMPONENTS = {\n`;
 
     // Deduplicate by layout name
@@ -206,7 +206,11 @@ function generateBlockRenderer(blocks) {
     component += `    }\n`;
     component += `    return null;\n`;
     component += `  }\n\n`;
-    component += `  return <Component data={block} key={block.id || index} />;\n`;
+    component += `  return (\n`;
+    component += `    <BlockErrorBoundary blockName={block.acf_fc_layout}>\n`;
+    component += `      <Component data={block} key={block.id || index} />\n`;
+    component += `    </BlockErrorBoundary>\n`;
+    component += `  );\n`;
     component += `}\n`;
 
     return imports + '\n' + mapping + component;
@@ -214,8 +218,8 @@ function generateBlockRenderer(blocks) {
 
 // --- RUN SCRIPT ---
 
-function run() {
-    console.log('🚀 Starting Smart ACF Component Sync...');
+function sync() {
+    console.log('🔄 Syncing ACF Components...');
 
     if (!fs.existsSync(ACF_JSON_DIR)) {
         console.error(`❌ ACF JSON directory not found: ${ACF_JSON_DIR}`);
@@ -243,7 +247,6 @@ function run() {
                         const existing = findExistingComponent(componentName);
 
                         if (existing) {
-                            console.log(`- Skipping ${componentName} (using version at ${existing.relativePath})`);
                             registeredBlocks.push({
                                 layout: layout.name,
                                 name: componentName,
@@ -282,11 +285,33 @@ function run() {
     });
 
     // Generate the BlockRenderer
-    console.log(`📝 Updating BlockRenderer at ${REGISTRY_FILE}...`);
     ensureDirectoryExists(path.dirname(REGISTRY_FILE));
     fs.writeFileSync(REGISTRY_FILE, generateBlockRenderer(registeredBlocks));
 
     console.log('✅ Sync complete!');
+}
+
+function run() {
+    const isWatch = process.argv.includes('--watch');
+
+    if (isWatch) {
+        console.log('👀 Watch Mode Active: Listening for ACF JSON changes...');
+        sync(); // Initial sync
+
+        let timeout;
+        fs.watch(ACF_JSON_DIR, { recursive: true }, (eventType, filename) => {
+            if (filename && filename.endsWith('.json')) {
+                // Debounce to prevent rapid multiple syncs
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    console.log(`\n📄 Detected change in ${filename}...`);
+                    sync();
+                }, 100);
+            }
+        });
+    } else {
+        sync();
+    }
 }
 
 run();

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
-import RelatedBlogs from '@/components/news/RelatedBlogs';
+import RelatedNewsBlock from '@/components/blocks/news/RelatedNewsBlock';
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -48,9 +48,19 @@ export default async function SingleNewsPage({ params }) {
 
 
     // Get related posts (same category)
-    const categoryId = post.categories?.[0] || 'all';
-    const relatedData = await fetchNewsPosts(1, categoryId, 'desc', 6);
-    const relatedPosts = relatedData.posts.filter(p => p.id !== post.id).slice(0, 6);
+    const categoryId = post.category?.id || post.categories?.nodes?.[0]?.id || 'all';
+    let relatedData = await fetchNewsPosts(1, categoryId, 'desc', '', 6);
+    let relatedPosts = Array.isArray(relatedData?.posts)
+        ? relatedData.posts.filter(p => p.id !== post.id).slice(0, 3)
+        : [];
+
+    // Fallback: If no related posts in same category, get latest posts
+    if (relatedPosts.length === 0) {
+        relatedData = await fetchNewsPosts(1, 'all', 'desc', '', 6);
+        relatedPosts = Array.isArray(relatedData?.posts)
+            ? relatedData.posts.filter(p => p.id !== post.id).slice(0, 3)
+            : [];
+    }
 
     return (
         <main className="site-main single-news mb-12 lg:mb-24 relative">
@@ -73,7 +83,7 @@ export default async function SingleNewsPage({ params }) {
                                     priority
                                 />
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent custom-rounded"></div>
+                            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent custom-rounded"></div>
 
                         </div>
 
@@ -126,7 +136,15 @@ export default async function SingleNewsPage({ params }) {
 
                             {/* Sidebar */}
                             <div className="w-full lg:w-4/12">
-                                <RelatedBlogs posts={relatedPosts} />
+                                <RelatedNewsBlock
+                                    posts={relatedPosts}
+                                    currentPostId={post.id}
+                                    layout="sidebar"
+                                    data={{
+                                        section_title: "Related Articles",
+                                        posts_to_show: 3
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -156,10 +174,10 @@ function ShareButtons({ post }) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M12.0013 1.33203H10.0013C9.11725 1.33203 8.2694 1.68322 7.64428 2.30834C7.01916 2.93346 6.66797 3.78131 6.66797 4.66536V6.66536H4.66797V9.33203H6.66797V14.6654H9.33464V9.33203H11.3346L12.0013 6.66536H9.33464V4.66536C9.33464 4.48855 9.40487 4.31898 9.5299 4.19396C9.65492 4.06894 9.82449 3.9987 10.0013 3.9987H12.0013V1.33203Z" fill="#DA000E" />
                     </svg>
-                </a>
+                </a >
 
                 {/* LinkedIn */}
-                <a
+                < a
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -170,10 +188,10 @@ function ShareButtons({ post }) {
                         <path d="M4.00065 6H1.33398V14H4.00065V6Z" fill="#DA000E" />
                         <path d="M2.66732 3.9987C3.4037 3.9987 4.00065 3.40174 4.00065 2.66536C4.00065 1.92898 3.4037 1.33203 2.66732 1.33203C1.93094 1.33203 1.33398 1.92898 1.33398 2.66536C1.33398 3.40174 1.93094 3.9987 2.66732 3.9987Z" fill="#DA000E" stroke="#DA000E" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                </a>
+                </a >
 
                 {/* Twitter/X */}
-                <a
+                < a
                     href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -186,9 +204,9 @@ function ShareButtons({ post }) {
                             <path d="M12.9993 2.5L8.88184 7.02938" stroke="#DA000E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </g>
                     </svg>
-                </a>
-            </div>
-        </div>
+                </a >
+            </div >
+        </div >
     );
 }
 

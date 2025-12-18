@@ -39,11 +39,11 @@ export default function StatsBlock({ data, variant = "home" }) {
   // Calculate dynamic columns based on item count (matches PHP logic)
   const itemCount = stats_items?.length || 0;
 
-  // For about page, always use 5 columns on all screens; for home, responsive with max 4
+  // Homepage uses 3 columns, About page uses 5 columns
   const gridClasses =
     variant === "about"
-      ? "grid-cols-5"
-      : `grid-cols-3 lg:grid-cols-${Math.min(4, itemCount)}`;
+      ? "grid-cols-2 lg:grid-cols-5"
+      : "grid-cols-2 lg:grid-cols-3";
 
   return (
     <section className="home_stats_block">

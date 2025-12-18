@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import BlockErrorBoundary from "@/components/common/BlockErrorBoundary";
 
 const AccordionBlock = dynamic(() => import("@/components/blocks/common/AccordionBlock"), { 
   loading: () => <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">Loading AccordionBlock...</div>
@@ -171,5 +172,9 @@ export default function BlockRenderer({ block, index }) {
     return null;
   }
 
-  return <Component data={block} key={block.id || index} />;
+  return (
+    <BlockErrorBoundary blockName={block.acf_fc_layout}>
+      <Component data={block} key={block.id || index} />
+    </BlockErrorBoundary>
+  );
 }

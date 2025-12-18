@@ -5,11 +5,13 @@ import { Pagination, Autoplay, EffectFade } from "swiper/modules";
 import SafeImage from "@/components/common/SafeImage";
 import SafeHTML from "@/components/common/SafeHTML";
 
+import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 
 export default function HeroBlock({ data }) {
+  const spotlightPaginationRef = useRef(null);
   // ACF data – keep keys aligned with the PHP template
   const banner_slider = data?.banner_slider || [];
   const cta = data?.cta || null;
@@ -147,7 +149,7 @@ export default function HeroBlock({ data }) {
                     slidesPerView={1}
                     pagination={{
                       clickable: true,
-                      el: ".spotlight-pagination",
+                      el: spotlightPaginationRef.current,
                     }}
                     className="w-full"
                   >
@@ -209,7 +211,10 @@ export default function HeroBlock({ data }) {
                     <div className="spotlight-navigation flex items-center justify-center gap-2 mt-[10px] relative">
                       <div className="curve-shape flex items-center justify-center -mb-[1px]" />
                       <div className="absolute z-10">
-                        <div className="spotlight-pagination flex gap-1 items-center justify-between" />
+                        <div
+                          ref={spotlightPaginationRef}
+                          className="spotlight-pagination flex gap-1 items-center justify-between"
+                        />
                       </div>
                     </div>
                   )}

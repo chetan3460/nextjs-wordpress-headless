@@ -9,7 +9,14 @@ import Link from "next/link";
 import Image from "next/image";
 import SafeHTML from "@/components/common/SafeHTML";
 
+import { useRef } from "react";
+
 export default function ImageSliderBlock({ data }) {
+  const swiperRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const paginationRef = useRef(null);
+
   if (!data) return null;
 
   const { title, description, slider_items, cta } = data;
@@ -44,16 +51,21 @@ export default function ImageSliderBlock({ data }) {
                 disableOnInteraction: false,
               }}
               navigation={{
-                nextEl: ".swiper-btn-next",
-                prevEl: ".swiper-btn-prev",
+                nextEl: nextRef.current,
+                prevEl: prevRef.current,
               }}
               pagination={{
                 clickable: true,
-                el: ".swiper-pagination",
+                el: paginationRef.current,
                 type: "custom",
                 renderCustom: (swiper, current, total) => {
                   return `${current}/${total}`;
                 },
+              }}
+              onBeforeInit={(swiper) => {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.params.pagination.el = paginationRef.current;
               }}
               className="w-full"
             >
@@ -94,14 +106,14 @@ export default function ImageSliderBlock({ data }) {
                         <div className="slide-content absolute bottom-0 left-0 right-0 px-6 lg:px-16 pb-12 opacity-100">
                           {/* Note: opacity-0 in PHP often relies on JS to verify visible. We force visible here or let CSS handle anims. */}
                           {item.slider_title && (
-                            <div className="slide-title h3 !text-white font-semibold mb-2">
+                            <div className="slide-title h3 text-white! font-semibold mb-2">
                               {item.slider_title}
                             </div>
                           )}
                           {item.slider_description && (
                             <SafeHTML
                               html={item.slider_description}
-                              className="slide-description prose-p:!text-white  prose-p:text-sm prose-p:lg:text-base prose-p:max-w-[559px] prose-p:leading-[19px]"
+                              className="slide-description prose-p:text-white!  prose-p:text-sm prose-p:lg:text-base prose-p:max-w-[559px] prose-p:leading-[19px]"
                             />
                           )}
                         </div>
@@ -114,7 +126,7 @@ export default function ImageSliderBlock({ data }) {
               {/* Slider Navigation */}
               {slider_items.length > 1 && (
                 <div className="swiper-navigation flex items-center justify-center mt-3 gap-4">
-                  <div className="swiper-btn-prev cursor-pointer">
+                  <div ref={prevRef} className="swiper-btn-prev cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="9"
@@ -129,9 +141,12 @@ export default function ImageSliderBlock({ data }) {
                     </svg>
                   </div>
 
-                  <div className="swiper-pagination text-primary text-xs font-medium !w-auto flex gap-1"></div>
+                  <div
+                    ref={paginationRef}
+                    className="swiper-pagination text-primary text-xs font-medium w-auto! flex gap-1"
+                  ></div>
 
-                  <div className="swiper-btn-next w-12 cursor-pointer">
+                  <div ref={nextRef} className="swiper-btn-next cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="9"

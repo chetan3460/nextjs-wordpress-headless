@@ -72,7 +72,7 @@ export async function fetchPageWithACF(slug) {
                 if (page80 && page80.id) {
                     data = [page80];
                 }
-            } catch (e) { }
+            } catch { }
         }
 
         if (!data || data.length === 0) {
@@ -188,7 +188,7 @@ async function fetchPostById(postId) {
         let post;
         try {
             post = await fetchREST(`/wp/v2/posts/${postId}?_embed`);
-        } catch (postsError) {
+        } catch {
             // If posts fails, try news custom post type
             try {
                 post = await fetchREST(`/wp/v2/news/${postId}?_embed`);
@@ -369,11 +369,13 @@ export async function fetchPostBySlug(slug, postType = 'posts') {
                 } : null,
                 categories: post._embedded?.['wp:term']?.[0] ? {
                     nodes: post._embedded['wp:term'][0].map(term => ({
+                        id: term.id,
                         name: term.name,
                         slug: term.slug
                     }))
                 } : { nodes: [] },
                 category: post._embedded?.['wp:term']?.[0]?.[0] ? {
+                    id: post._embedded['wp:term'][0][0].id,
                     name: post._embedded['wp:term'][0][0].name,
                     slug: post._embedded['wp:term'][0][0].slug
                 } : null,
@@ -445,7 +447,7 @@ export async function fetchSiteLogo() {
             return media ? media.url : null;
         }
         return null;
-    } catch (error) {
+    } catch {
         // Silently fail if settings are restricted
         return null;
     }
