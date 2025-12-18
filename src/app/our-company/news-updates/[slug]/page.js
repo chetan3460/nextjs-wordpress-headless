@@ -3,7 +3,7 @@ import { fetchNewsPosts } from '@/lib/wordpress/news';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
-import NewsContentBlock from '@/components/news/NewsContentBlock';
+import BlockRenderer from '@/components/common/BlockRenderer';
 import RelatedBlogs from '@/components/news/RelatedBlogs';
 
 export async function generateMetadata({ params }) {
@@ -110,7 +110,7 @@ export default async function SingleNewsPage({ params }) {
                                 {/* Render Flexible Content Blocks */}
                                 {post.acf?.news_panels && post.acf.news_panels.length > 0 ? (
                                     post.acf.news_panels.map((block, index) => (
-                                        <NewsContentBlock key={index} block={block} />
+                                        <BlockRenderer key={index} block={block} index={index} />
                                     ))
                                 ) : (
                                     /* Fallback to post content if no flexible blocks */

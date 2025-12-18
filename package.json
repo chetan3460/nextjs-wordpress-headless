@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "sync-acf-blocks": "node scripts/sync-acf-blocks.js"
   },
   "dependencies": {
     "@apollo/client": "^4.0.9",
