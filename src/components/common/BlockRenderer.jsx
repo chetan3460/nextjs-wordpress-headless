@@ -60,6 +60,9 @@ const HomeStatsBlock = dynamic(() => import("@/components/blocks/home/HomeStatsB
 const HomeTabBlock = dynamic(() => import("@/components/blocks/home/HomeTabBlock"), { 
   loading: () => <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">Loading HomeTabBlock...</div>
 });
+const HomeTestBlock = dynamic(() => import("@/components/blocks/common/HomeTestBlock"), { 
+  loading: () => <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">Loading HomeTestBlock...</div>
+});
 const LatestNews = dynamic(() => import("@/components/blocks/home/LatestNews"), { 
   loading: () => <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">Loading LatestNews...</div>
 });
@@ -135,6 +138,7 @@ const BLOCK_COMPONENTS = {
   "home_product_listing_block": HomeProductListingBlock,
   "home_stats_block": HomeStatsBlock,
   "home_tab_block": HomeTabBlock,
+  "home_test_block": HomeTestBlock,
   "latest_news": LatestNews,
   "leadership_block": LeadershipBlock,
   "milestones_block": MilestonesBlock,
