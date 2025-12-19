@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync-acf-blocks": "node scripts/sync-acf-blocks.js"
+    "sync-acf-blocks": "node scripts/sync-acf-blocks.js",
+    "fetch-acf": "node scripts/fetch-acf-from-db.js && npm run sync-acf-blocks",
+    "import-acf": "node scripts/import-acf-export.js && npm run sync-acf-blocks",
+    "acf-sync": "npm run import-acf"
   },
   "dependencies": {
     "@apollo/client": "^4.0.9",
@@ -32,6 +35,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.7",
+    "mysql2": "^3.16.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

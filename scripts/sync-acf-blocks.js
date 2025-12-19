@@ -9,7 +9,7 @@ const path = require('path');
 
 // --- CONFIGURATION ---
 const WORDPRESS_THEME_PATH = '/Applications/XAMPP/xamppfiles/htdocs/nextjs-wp/wp-content/themes/nextjswp-theme';
-const ACF_JSON_DIR = path.join(WORDPRESS_THEME_PATH, 'acf-json');
+const ACF_JSON_DIR = path.join(process.cwd(), 'acf-json'); // Use local acf-json folder
 const NEXTJS_COMPONENTS_DIR = path.join(process.cwd(), 'src/components/blocks');
 const REGISTRY_FILE = path.join(process.cwd(), 'src/components/common/BlockRenderer.jsx');
 
