@@ -30,7 +30,19 @@ export async function fetchGraphQL(query, variables = {}) {
  * @returns {Promise<any>} REST API response data
  */
 export async function fetchREST(endpoint) {
-    const baseUrl = process.env.WORDPRESS_REST_ENDPOINT || '';
+    // For client-side requests, we must use NEXT_PUBLIC variables
+    // For server-side, we can use either
+    const publicUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL;
+    const serverUrl = process.env.WORDPRESS_REST_ENDPOINT;
+
+    // Determine the base URL
+    let baseUrl = '';
+    if (publicUrl) {
+        baseUrl = `${publicUrl}/wp-json`;
+    } else if (serverUrl) {
+        baseUrl = serverUrl;
+    }
+
     const url = `${baseUrl}${endpoint}`;
 
     const response = await fetch(url, {
@@ -38,7 +50,7 @@ export async function fetchREST(endpoint) {
     });
 
     if (!response.ok) {
-        throw new Error(`REST API error: ${response.statusText}`);
+        throw new Error(`REST API error: ${response.statusText} at ${url}`);
     }
 
     return response.json();
@@ -616,3 +628,61 @@ export async function submitGravityForm(formId, data) {
     }
 }
 
+
+/**
+ * Fetch all terms from 'team_category' taxonomy
+ * @returns {Promise<Array>} List of categories
+ */
+export async function fetchTeamCategories() {
+    try {
+        const categories = await fetchREST('/wp/v2/team_category?per_page=100&hide_empty=true');
+        return categories.map(cat => ({
+            id: cat.id,
+            name: cat.name,
+            slug: cat.slug,
+            count: cat.count
+        }));
+    } catch (error) {
+        console.error('Error fetching team categories:', error);
+        return [];
+    }
+}
+
+/**
+ * Fetch team members for a specific category slug
+ * @param {string} categorySlug - The slug of the team category
+ * @returns {Promise<Array>} List of team members
+ */
+export async function fetchTeamMembersByCategory(categorySlug) {
+    try {
+        // First get the category ID from the slug
+        const categories = await fetchREST(`/wp/v2/team_category?slug=${categorySlug}`);
+        if (!categories || categories.length === 0) return [];
+
+        const categoryId = categories[0].id;
+
+        // Fetch team members with this category ID
+        const members = await fetchREST(`/wp/v2/team_member?team_category=${categoryId}&per_page=100&_embed&orderby=menu_order&order=asc&acf_format=standard`);
+
+        const processedMembers = await Promise.all(members.map(async (member) => {
+            // Process ACF fields for this member (like 'position')
+            const acf = await processACFImages(member.acf || {});
+
+            return {
+                id: member.id,
+                title: member.title.rendered,
+                position: acf.position || acf.job_title || '',
+                featuredImage: member._embedded?.['wp:featuredmedia']?.[0] ? {
+                    url: member._embedded['wp:featuredmedia'][0].source_url,
+                    alt: member._embedded['wp:featuredmedia'][0].alt_text || member.title.rendered
+                } : null,
+                slug: member.slug
+            };
+        }));
+
+        return processedMembers;
+    } catch (error) {
+        console.error(`Error fetching team members for category ${categorySlug}:`, error);
+        return [];
+    }
+}

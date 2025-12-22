@@ -10,7 +10,6 @@ export default function LeadershipBlock({ data }) {
     leaders_image,
     quote_message,
     leader_title,
-    leadere_designation
   } = data || {};
 
   if (hide_block) return null;
@@ -18,27 +17,30 @@ export default function LeadershipBlock({ data }) {
   return (
     <section className="leadership_block py-12">
       <div className="container-fluid">
-        {title && (
-          <h2 className="text-3xl font-bold mb-6">{title}</h2>
-        )}
-        {description && (
-          <div 
-            className="prose max-w-none mb-6"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        )}
+        <div className="section-heading ">
+          {title && <h2 className="">{title}</h2>}
+          {description && (
+            <div
+              className="prose max-w-none mb-6"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          )}
+        </div>
         {leaders_image?.url && (
           <div className="relative aspect-video mb-6 overflow-hidden rounded-xl">
             <Image
               src={leaders_image.url}
-              alt={leaders_image.alt || "leaders Image [ width: 364px; height: 350px;  ]"}
+              alt={
+                leaders_image.alt ||
+                "leaders Image [ width: 364px; height: 350px;  ]"
+              }
               fill
               className="object-cover"
             />
           </div>
         )}
         {quote_message && (
-          <div 
+          <div
             className="prose max-w-none mb-6"
             dangerouslySetInnerHTML={{ __html: quote_message }}
           />
