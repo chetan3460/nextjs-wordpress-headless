@@ -21,10 +21,13 @@ const FOLDER_MAPPING = {
     'privacy': 'common',
     'careers': 'careers',
     'news': 'news',
+    'leadership': 'our-company',
+    'leader': 'our-company',
+    'team': 'our-company',
 };
 
 // Priority folders (when multiple copies of a component exist, prefer these)
-const PRIORITY_FOLDERS = ['home', 'common', 'about', 'news', 'careers'];
+const PRIORITY_FOLDERS = ['our-company', 'home', 'common', 'about', 'news', 'careers'];
 
 // --- UTILITIES ---
 const toPascalCase = (str) => {
@@ -222,8 +225,23 @@ function sync() {
     console.log('🔄 Syncing ACF Components...');
 
     if (!fs.existsSync(ACF_JSON_DIR)) {
-        console.error(`❌ ACF JSON directory not found: ${ACF_JSON_DIR}`);
-        return;
+        ensureDirectoryExists(ACF_JSON_DIR);
+    }
+
+    // --- AUTO-SYNC FROM WORDPRESS THEME ---
+    // If the WordPress theme path is valid, copy JSON files locally first
+    const themeAcfPath = path.join(WORDPRESS_THEME_PATH, 'acf-json');
+    if (fs.existsSync(themeAcfPath)) {
+        console.log(`📂 Syncing JSON files from theme: ${themeAcfPath}`);
+        const themeFiles = fs.readdirSync(themeAcfPath).filter(f => f.endsWith('.json'));
+        themeFiles.forEach(file => {
+            const src = path.join(themeAcfPath, file);
+            const dest = path.join(ACF_JSON_DIR, file);
+            fs.copyFileSync(src, dest);
+        });
+        console.log(`✓ Copied ${themeFiles.length} files.\n`);
+    } else {
+        console.warn(`⚠️ WORDPRESS_THEME_PATH not found or no acf-json folder: ${themeAcfPath}`);
     }
 
     const files = fs.readdirSync(ACF_JSON_DIR).filter(f => f.endsWith('.json'));
@@ -256,8 +274,10 @@ function sync() {
                             // 2. If not found, determine target folder and generate
                             let targetFolder = 'common';
                             const fileName = file.toLowerCase();
+                            const layoutName = layout.name.toLowerCase();
+
                             for (const [key, folder] of Object.entries(FOLDER_MAPPING)) {
-                                if (fileName.includes(key)) {
+                                if (fileName.includes(key) || layoutName.includes(key)) {
                                     targetFolder = folder;
                                     break;
                                 }

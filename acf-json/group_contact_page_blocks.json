@@ -3,11 +3,11 @@
     "title": "Contact Page Blocks",
     "fields": [
         {
-            "key": "field_contact_panels",
-            "label": "Contact Panels",
-            "name": "contact_panels",
+            "key": "field_69491164d1a34",
+            "label": "",
+            "name": "",
             "aria-label": "",
-            "type": "flexible_content",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,133 +16,20 @@
                 "class": "",
                 "id": ""
             },
-            "layouts": {
-                "layout_contact_info_block": {
-                    "key": "layout_contact_info_block",
-                    "name": "contact_info_block",
-                    "label": "Contact Info Block",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_contact_hide_block",
-                            "label": "Hide Block",
-                            "name": "hide_block",
-                            "aria-label": "",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "",
-                            "default_value": 0,
-                            "ui": 1,
-                            "ui_on_text": "",
-                            "ui_off_text": ""
-                        },
-                        {
-                            "key": "field_contact_title",
-                            "label": "Title",
-                            "name": "title",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_contact_description",
-                            "label": "Description",
-                            "name": "description",
-                            "aria-label": "",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
-                            "key": "field_contact_email",
-                            "label": "Email",
-                            "name": "email",
-                            "aria-label": "",
-                            "type": "email",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_contact_phone",
-                            "label": "Phone",
-                            "name": "phone",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                }
-            },
-            "button_label": "Add Block",
-            "min": "",
-            "max": ""
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "page",
                 "operator": "==",
-                "value": "page"
-            },
-            {
-                "param": "page_template",
-                "operator": "==",
-                "value": "default"
+                "value": "407"
             }
         ]
     ],
@@ -156,7 +43,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "show_in_graphql": 1,
-    "graphql_field_name": "contactPanels",
-    "modified": 1766139400
+    "modified": 1766396280
 }
