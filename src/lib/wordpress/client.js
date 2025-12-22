@@ -122,7 +122,7 @@ export async function fetchPageWithACF(slug) {
  */
 async function processACFImages(acf) {
     // List of keys that typically contain Image IDs in our ACF setup
-    const keysToHydrate = ['image', 'images', 'icon', 'logo', 'banner_images', 'mobile_image', 'desktop_image', 'inner_banner_image', 'certificate_image', 'certificate_popup_image'];
+    const keysToHydrate = ['image', 'images', 'icon', 'logo', 'banner_images', 'mobile_image', 'desktop_image', 'inner_banner_image', 'certificate_image', 'certificate_popup_image', 'leaders_image'];
 
     // Helper: Recursive function to walk through data
     async function traverseAndHydrate(obj) {
