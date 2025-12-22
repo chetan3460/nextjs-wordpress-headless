@@ -10,6 +10,7 @@ export default function LeadershipBlock({ data }) {
     leaders_image,
     quote_message,
     leader_title,
+    leadere_designation,
   } = data || {};
 
   if (hide_block) return null;
@@ -46,7 +47,10 @@ export default function LeadershipBlock({ data }) {
           />
         )}
         {leader_title && (
-          <h2 className="text-3xl font-bold mb-6">{leader_title}</h2>
+          <h2 className="text-3xl font-bold mb-2">{leader_title}</h2>
+        )}
+        {leadere_designation && (
+          <p className="text-xl text-grey-3 mb-6">{leadere_designation}</p>
         )}
       </div>
     </section>
