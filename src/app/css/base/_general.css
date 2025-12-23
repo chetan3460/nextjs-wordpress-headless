@@ -1,4 +1,4 @@
-/* _general.css - General Typography and Styles from WordPress Theme */
+/* _general.css */
 
 /*********************************/
 /*             General            */
@@ -61,5 +61,7 @@ h4,
 
 /* Product grid smooth transitions */
 .product-grid {
-  transition: opacity 0.3s ease-in-out, min-height 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    min-height 0.3s ease-in-out;
 }

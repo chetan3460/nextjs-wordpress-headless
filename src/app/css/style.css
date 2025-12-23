@@ -12,59 +12,30 @@
 
 /* Base Styles */
 @import "./base/utilities.css";
-
-/* // FONTS */
-@import "./custom/_fonts.css";
-
-/* // general */
-@import "./custom/_general.css";
-
-/* Buttons */
-@import "./custom/_buttons.css";
+@import "./base/_fonts.css";
+@import "./base/_general.css";
+@import "./base/_buttons.css";
 
 /* Components */
-@import "./components/scroll-to-top.css"; /* If you created this */
+@import "./components/scroll-to-top.css";
 @import "./components/mobile-filter-modal.css";
 @import "./components/filter-accordion.css";
-@import "./components/google-translate.css";
-@import "./cookie-consent.css";
+@import "./components/cookie-consent.css";
+@import "./components/_topnav.css";
+@import "./components/certificate_block.css";
 
-/* // structure */
-@import "./layout/_topnav.css";
+/* Pages */
+@import "./pages/_helper.css";
+@import "./pages/_hero.css";
+@import "./pages/_countdown.css";
+@import "./pages/_contact.css";
+@import "./pages/news-detail.css";
 
-/* // pages */
-@import "./custom/pages/_helper.css";
-@import "./custom/pages/_hero.css";
-@import "./custom/pages/_countdown.css";
-@import "./custom/pages/_contact.css";
+/* Plugins */
+@import "./plugins/_swiper-slider.css";
+@import "./plugins/_datepicker.css";
+@import "./plugins/reports-filter.css";
 
-/* // blocks */
-/* Manual imports for existing blocks */
-/* @import "./blocks/homeTabBlock.css";
-@import "./blocks/distribution-map.css";
-@import "./blocks/accordion_block.css";
-@import "./team-members-block.css";
-@import "./blocks/testimonials-block.css";
-@import "./blocks/global-banner-block.css";
-@import "./blocks/products.css";
-@import "./blocks/privacy_accordion_block.css"; */
-/* @import './sustainability-impact-block.css'; */
-
-@import "./blocks/certificate_block.css";
-
-/* AUTO-GENERATED BLOCKS - Add new imports below */
-/* @import "./blocks/service_block_css.css"; */
-/* END AUTO-GENERATED BLOCKS */
-
-/* // Plugins */
-@import "./custom/plugins/_swiper-slider.css";
-@import "./custom/plugins/_datepicker.css";
-@import "./custom/plugins/reports-filter.css";
-
-/* // News Detail Page */
-@import "./news-detail.css";
-
-/* @import "./milestones-timeline.css"; */
 /* Custom Swiper Button Disabled States */
 .swiper-btn-prev-pagination.swiper-button-disabled,
 .swiper-btn-next-pagination.swiper-button-disabled {

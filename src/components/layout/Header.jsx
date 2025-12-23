@@ -195,11 +195,6 @@ export default function Header({ menuItems = [], siteLogo }) {
               </ul>
             </div>
 
-            {/* Language Dropdown - Placeholder for GTranslate */}
-            <div className="gtranslate-wrapper">
-              {/* GTranslate will be integrated here */}
-            </div>
-
             {/* Contact CTA Button */}
             <Link
               href="/contact-us"
@@ -255,25 +250,6 @@ export default function Header({ menuItems = [], siteLogo }) {
                   className="l-dark h-10 w-auto"
                 />
               </Link>
-            </div>
-            {/* Language Selector */}
-            <div className="flex items-center gap-1.5 text-sm text-neutral-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-              <span className="font-medium">EN</span>
             </div>
           </div>
 
