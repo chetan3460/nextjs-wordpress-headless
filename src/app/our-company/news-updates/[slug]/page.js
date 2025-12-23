@@ -6,6 +6,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
 import RelatedNewsBlock from '@/components/blocks/news/RelatedNewsBlock';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }) {
         };
     }
 
-    return {
+    // Use Yoast SEO data if available
+    return generateMetadataFromYoast(post, {
         title: `${post.title} | News & Updates`,
         description: post.excerpt?.replace(/<[^>]*>/g, '').substring(0, 160),
-    };
+    });
 }
 
 export default async function SingleNewsPage({ params }) {

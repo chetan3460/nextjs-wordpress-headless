@@ -3,11 +3,16 @@ import { fetchPageWithACF } from '@/lib/wordpress/client';
 import NewsListingBlock from '@/components/blocks/news/NewsListingBlock';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
-export const metadata = {
-    title: 'News & Updates | Driving what\'s next',
-    description: 'Stay updated with our latest news, insights, and industry developments',
-};
+export async function generateMetadata() {
+    const pageData = await fetchPageWithACF('news-updates');
+
+    return generateMetadataFromYoast(pageData, {
+        title: 'News & Updates | Driving what\'s next',
+        description: 'Stay updated with our latest news, insights, and industry developments',
+    });
+}
 
 export default async function NewsUpdatesPage() {
     // Fetch initial data on server

@@ -2,6 +2,7 @@ import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
 export default async function ContactPage() {
     // 1. Fetch page data (try 'contact-us', fallback to 'contact')
@@ -17,7 +18,7 @@ export default async function ContactPage() {
                 <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
                 <p>Could not find a page with slug "contact-us" or "contact" in WordPress.</p>
             </main>
-        ); x
+        );
     }
 
     const { title, acf } = pageData;
@@ -48,7 +49,14 @@ export default async function ContactPage() {
     );
 }
 
-export const metadata = {
-    title: 'Contact Us',
-    description: 'Get in touch with us.',
-};
+export async function generateMetadata() {
+    let pageData = await fetchPageWithACF('contact-us');
+    if (!pageData) {
+        pageData = await fetchPageWithACF('contact');
+    }
+
+    return generateMetadataFromYoast(pageData, {
+        title: 'Contact Us',
+        description: 'Get in touch with us.',
+    });
+}

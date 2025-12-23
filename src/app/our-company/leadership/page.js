@@ -2,6 +2,7 @@ import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
 export default async function LeadershipPage() {
     // Fetch the Leadership page data from WordPress
@@ -48,10 +49,14 @@ export default async function LeadershipPage() {
     );
 }
 
-export const metadata = {
-    title: 'Leadership - Our Company',
-    description: 'Meet our leadership team and learn about our vision.',
-};
+export async function generateMetadata() {
+    const pageData = await fetchPageWithACF('leadership');
+
+    return generateMetadataFromYoast(pageData, {
+        title: 'Leadership - Our Company',
+        description: 'Meet our leadership team.',
+    });
+}
 
 // Revalidate every 60 seconds
 export const revalidate = 60;

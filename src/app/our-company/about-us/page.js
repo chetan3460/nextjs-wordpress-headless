@@ -2,6 +2,7 @@ import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
 export default async function AboutUsPage() {
     // Fetch the About Us page data from WordPress
@@ -48,10 +49,14 @@ export default async function AboutUsPage() {
     );
 }
 
-export const metadata = {
-    title: 'About Us - Our Company',
-    description: 'Learn about our company, mission, and values.',
-};
+export async function generateMetadata() {
+    const pageData = await fetchPageWithACF('about-us');
+
+    return generateMetadataFromYoast(pageData, {
+        title: 'About Us - Our Company',
+        description: 'Learn about our company, mission, and values.',
+    });
+}
 
 // Revalidate every 60 seconds
 export const revalidate = 60;
