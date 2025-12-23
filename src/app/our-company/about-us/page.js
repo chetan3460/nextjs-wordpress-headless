@@ -5,58 +5,59 @@ import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
 export default async function AboutUsPage() {
-    // Fetch the About Us page data from WordPress
-    const pageData = await fetchPageWithACF('about-us');
+  // Fetch the About Us page data from WordPress
+  const pageData = await fetchPageWithACF('about-us');
 
-    if (!pageData) {
-        return (
-            <main className="container mx-auto px-4 py-20">
-                <h1 className="text-4xl font-bold text-center">Page not found</h1>
-                <p className="text-center mt-4">
-                    Please ensure a page with slug &quot;about-us&quot; exists in WordPress.
-                </p>
-            </main>
-        );
-    }
-
-    // Get about panels (flexible content blocks)
-    const aboutPanels = pageData.acf?.about_panels || [];
-
-    // Generate dynamic breadcrumbs
-    const breadcrumbItems = generateBreadcrumbs('/our-company/about-us', pageData.title);
-
+  if (!pageData) {
     return (
-        <>
-            {/* Breadcrumbs */}
-            <Breadcrumbs items={breadcrumbItems} />
-
-            {/* Main content with flexible blocks */}
-            <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
-                {aboutPanels.length > 0 ? (
-                    aboutPanels.map((block, index) => (
-                        <BlockRenderer key={index} block={block} index={index} />
-                    ))
-                ) : (
-                    <div className="container mx-auto py-20 text-center">
-                        <p>
-                            No blocks found. Add components to the &quot;About Panels&quot; flexible
-                            content field in WordPress.
-                        </p>
-                    </div>
-                )}
-            </main>
-        </>
+      <main className="container mx-auto px-4 py-20">
+        <h1 className="text-4xl font-bold text-center">Page not found</h1>
+        <p className="text-center mt-4">
+          Please ensure a page with slug &quot;about-us&quot; exists in WordPress.
+        </p>
+      </main>
     );
+  }
+
+  // Get about panels (flexible content blocks)
+  const aboutPanels = pageData.acf?.about_panels || [];
+
+  // Generate dynamic breadcrumbs
+  const breadcrumbItems = generateBreadcrumbs('/our-company/about-us', pageData.title);
+
+  return (
+    <>
+      {/* Breadcrumbs */}
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {/* Main content with flexible blocks */}
+      <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
+        {aboutPanels.length > 0 ? (
+          aboutPanels.map((block, index) => (
+            <BlockRenderer key={index} block={block} index={index} />
+          ))
+        ) : (
+          <div className="container mx-auto py-20 text-center">
+            <p>
+              No blocks found. Add components to the &quot;About Panels&quot; flexible content field
+              in WordPress.
+            </p>
+          </div>
+        )}
+      </main>
+    </>
+  );
 }
 
 export async function generateMetadata() {
-    const pageData = await fetchPageWithACF('about-us');
+  const pageData = await fetchPageWithACF('about-us');
 
-    return generateMetadataFromYoast(pageData, {
-        title: 'About Us - Our Company',
-        description: 'Learn about our company, mission, and values.',
-    });
+  return generateMetadataFromYoast(pageData, {
+    title: 'About Us - Our Company',
+    description: 'Learn about our company, mission, and values.',
+  });
 }
 
 // Revalidate every 60 seconds
-export const revalidate = 60;
+// Revalidate every hour (static content, rarely changes)
+export const revalidate = 3600;

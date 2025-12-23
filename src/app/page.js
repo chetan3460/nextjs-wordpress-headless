@@ -16,11 +16,12 @@ export default async function HomePage() {
   const pageData = await fetchPageWithACF('home');
 
   if (!pageData) {
-
     return (
       <main className="container mx-auto px-4 py-20">
         <h1 className="text-4xl font-bold text-center">Home page not found</h1>
-        <p className="text-center mt-4">Please ensure a page with slug &quot;home&quot; exists in WordPress.</p>
+        <p className="text-center mt-4">
+          Please ensure a page with slug &quot;home&quot; exists in WordPress.
+        </p>
       </main>
     );
   }
@@ -35,17 +36,18 @@ export default async function HomePage() {
         This allows you to reorder blocks in WP Admin and see changes reflected here.
       */}
       {homePanels.length > 0 ? (
-        homePanels.map((block, index) => (
-          <BlockRenderer key={index} block={block} index={index} />
-        ))
+        homePanels.map((block, index) => <BlockRenderer key={index} block={block} index={index} />)
       ) : (
         <div className="container mx-auto py-20 text-center">
-          <p>No blocks found. Add components to the &quot;Home Panels&quot; flexible content field in WordPress.</p>
+          <p>
+            No blocks found. Add components to the &quot;Home Panels&quot; flexible content field in
+            WordPress.
+          </p>
         </div>
       )}
     </main>
   );
 }
 
-// Revalidate every 60 seconds
-export const revalidate = 60;
+// Revalidate every 30 seconds (homepage changes frequently)
+export const revalidate = 30;

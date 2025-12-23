@@ -285,4 +285,5 @@ function ShareButtons({ post }) {
   );
 }
 
-export const revalidate = 60;
+// Revalidate every 30 minutes (individual articles rarely change after publish)
+export const revalidate = 1800;

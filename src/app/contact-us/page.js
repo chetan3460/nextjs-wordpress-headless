@@ -4,59 +4,65 @@ import BlockRenderer from '@/components/common/BlockRenderer';
 import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
 
+// Revalidate every hour (static content)
+export const revalidate = 3600;
+
 export default async function ContactPage() {
-    // 1. Fetch page data (try 'contact-us', fallback to 'contact')
-    let pageData = await fetchPageWithACF('contact-us');
+  // 1. Fetch page data (try 'contact-us', fallback to 'contact')
+  let pageData = await fetchPageWithACF('contact-us');
 
-    if (!pageData) {
-        pageData = await fetchPageWithACF('contact');
-    }
+  if (!pageData) {
+    pageData = await fetchPageWithACF('contact');
+  }
 
-    if (!pageData) {
-        return (
-            <main className="container mx-auto px-4 py-20 text-center">
-                <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
-                <p>Could not find a page with slug "contact-us" or "contact" in WordPress.</p>
-            </main>
-        );
-    }
-
-    const { title, acf } = pageData;
-    const blocks = acf?.contact_panels || acf?.contact_page_blocks || [];
-
-    // 2. Generate dynamic breadcrumbs
-    const breadcrumbItems = generateBreadcrumbs('/contact-us', title);
-
+  if (!pageData) {
     return (
-        <>
-            <Breadcrumbs items={breadcrumbItems} />
-
-            <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
-                {blocks.length > 0 ? (
-                    blocks.map((block, index) => (
-                        <BlockRenderer key={block.id || index} block={block} index={index} />
-                    ))
-                ) : (
-                    <div className="container mx-auto py-20 text-center">
-                        <h1 className="text-3xl font-bold mb-4">{title}</h1>
-                        <p className="text-gray-500">
-                            No content blocks found. Please add blocks to this page in WordPress.
-                        </p>
-                    </div>
-                )}
-            </main>
-        </>
+      <main className="container mx-auto px-4 py-20 text-center">
+        <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
+        <p>
+          Please ensure a page with slug &quot;contact-us&quot; or &quot;contact&quot; exists in
+          WordPress.
+        </p>
+      </main>
     );
+  }
+
+  const { title, acf } = pageData;
+  const blocks = acf?.contact_panels || acf?.contact_page_blocks || [];
+
+  // 2. Generate dynamic breadcrumbs
+  const breadcrumbItems = generateBreadcrumbs('/contact-us', title);
+
+  return (
+    <>
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
+        {blocks.length > 0 ? (
+          blocks.map((block, index) => (
+            <BlockRenderer key={block.id || index} block={block} index={index} />
+          ))
+        ) : (
+          <div className="container mx-auto py-20 text-center">
+            <h1 className="text-3xl font-bold mb-4">{title}</h1>
+            <p className="text-gray-500">
+              No content blocks found. Please add blocks to this page in WordPress.
+            </p>
+          </div>
+        )}
+      </main>
+    </>
+  );
 }
 
 export async function generateMetadata() {
-    let pageData = await fetchPageWithACF('contact-us');
-    if (!pageData) {
-        pageData = await fetchPageWithACF('contact');
-    }
+  let pageData = await fetchPageWithACF('contact-us');
+  if (!pageData) {
+    pageData = await fetchPageWithACF('contact');
+  }
 
-    return generateMetadataFromYoast(pageData, {
-        title: 'Contact Us',
-        description: 'Get in touch with us.',
-    });
+  return generateMetadataFromYoast(pageData, {
+    title: 'Contact Us',
+    description: 'Get in touch with us.',
+  });
 }

@@ -1,6 +1,12 @@
 {
-  "name": "nextjs-wordpress-headless",
+  "name": "nexuspress",
   "version": "0.1.0",
+  "description": "NexusPress - AI-Powered WordPress Platform built with Next.js",
+  "author": "Chetan Dhargalkar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chetan3460/nexuspress.git"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
