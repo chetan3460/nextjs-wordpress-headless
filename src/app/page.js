@@ -1,6 +1,15 @@
 import { fetchPageWithACF } from '@/lib/wordpress/client';
-
 import BlockRenderer from '@/components/common/BlockRenderer';
+import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
+
+export async function generateMetadata() {
+  const pageData = await fetchPageWithACF('home');
+
+  return generateMetadataFromYoast(pageData, {
+    title: 'Home - Resins & Plastics',
+    description: 'Leading manufacturer of high-performance resin and plastic solutions.',
+  });
+}
 
 export default async function HomePage() {
   // Fetch home page with ACF fields
