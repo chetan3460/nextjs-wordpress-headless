@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="font-instrument antialiased text-gray-900">
+      <body className="font-instrument antialiased text-gray-900 bg-white">
         <Analytics />
         <Header menuItems={menu_items} siteLogo={site_logo} />
         {children}
