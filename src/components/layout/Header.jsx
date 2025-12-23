@@ -150,7 +150,7 @@ export default function Header({ menuItems = [], siteLogo }) {
       {/* Scroll to Top Button */}
       <ScrollToTop />
 
-      <header id="header" data-component="Header" data-load="eager">
+      <header id="header">
         <nav
           id="topnav"
           className={`defaultscroll is-sticky ${isSticky ? "nav-sticky" : ""}`}
@@ -202,7 +202,7 @@ export default function Header({ menuItems = [], siteLogo }) {
 
             {/* Contact CTA Button */}
             <Link
-              href="/contact"
+              href="/contact-us"
               aria-label="Contact us"
               className="max-sl:!hidden btn"
             >
