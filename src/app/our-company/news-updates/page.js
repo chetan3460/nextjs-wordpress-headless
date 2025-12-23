@@ -2,6 +2,7 @@ import { fetchNewsPosts, fetchNewsCategories } from '@/lib/wordpress/news';
 import { fetchPageWithACF } from '@/lib/wordpress/client';
 import NewsListingBlock from '@/components/blocks/news/NewsListingBlock';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 
 export const metadata = {
     title: 'News & Updates | Driving what\'s next',
@@ -20,10 +21,13 @@ export default async function NewsUpdatesPage() {
     const sectionTitle = pageData?.acf?.news_listing_title || "Driving what's next";
     // const sectionDescription = pageData?.acf?.news_listing_description || "A look at our innovations, research milestones, and events that keep us ahead in a changing world.";
 
+    // Generate dynamic breadcrumbs
+    const breadcrumbItems = generateBreadcrumbs('/our-company/news-updates', 'News & Updates');
+
     return (
         <main className='site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative'>
             {/* Breadcrumbs */}
-            <Breadcrumbs />
+            <Breadcrumbs items={breadcrumbItems} />
 
             {/* News Listing with Client-side features */}
             <NewsListingBlock

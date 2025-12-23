@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
 import RelatedNewsBlock from '@/components/blocks/news/RelatedNewsBlock';
+import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 
 export async function generateMetadata({ params }) {
     const { slug } = await params;
@@ -62,10 +63,13 @@ export default async function SingleNewsPage({ params }) {
             : [];
     }
 
+    // Generate dynamic breadcrumbs
+    const breadcrumbItems = generateBreadcrumbs(`/our-company/news-updates/${slug}`, post.title);
+
     return (
         <main className="site-main single-news mb-12 lg:mb-24 relative">
             {/* Breadcrumbs */}
-            <Breadcrumbs />
+            <Breadcrumbs items={breadcrumbItems} />
             <div className='site-main flex flex-col gap-12 lg:gap-y-10 mb-12 lg:mb-24 relative'>
 
                 {/* Hero Section */}

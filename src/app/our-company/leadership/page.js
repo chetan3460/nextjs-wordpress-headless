@@ -1,6 +1,7 @@
 import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
+import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 
 export default async function LeadershipPage() {
     // Fetch the Leadership page data from WordPress
@@ -20,24 +21,8 @@ export default async function LeadershipPage() {
     // Get leadership panels (flexible content blocks)
     const leadershipPanels = pageData.acf?.leadership_panels || [];
 
-    // Auto-generate breadcrumbs from URL path
-    const pathname = '/our-company/leadership';
-    const pathSegments = pathname.split('/').filter(Boolean);
-
-    const breadcrumbItems = [
-        { label: 'Home', link: '/' },
-        ...pathSegments.map((segment, index) => {
-            const path = '/' + pathSegments.slice(0, index + 1).join('/');
-            const label = segment
-                .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-
-            // Last item has no link (current page)
-            const isLast = index === pathSegments.length - 1;
-            return { label, link: isLast ? null : path };
-        }),
-    ];
+    // Generate dynamic breadcrumbs
+    const breadcrumbItems = generateBreadcrumbs('/our-company/leadership', pageData.title);
 
     return (
         <>

@@ -1,6 +1,7 @@
 import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import BlockRenderer from '@/components/common/BlockRenderer';
+import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 
 export default async function ContactPage() {
     // 1. Fetch page data (try 'contact-us', fallback to 'contact')
@@ -22,11 +23,8 @@ export default async function ContactPage() {
     const { title, acf } = pageData;
     const blocks = acf?.contact_panels || acf?.contact_page_blocks || [];
 
-    // 2. Breadcrumbs
-    const breadcrumbItems = [
-        { label: 'Home', link: '/' },
-        { label: title, link: null } // Current page
-    ];
+    // 2. Generate dynamic breadcrumbs
+    const breadcrumbItems = generateBreadcrumbs('/contact-us', title);
 
     return (
         <>

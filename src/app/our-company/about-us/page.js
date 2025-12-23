@@ -1,7 +1,7 @@
 import { fetchPageWithACF } from '@/lib/wordpress/client';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
-
 import BlockRenderer from '@/components/common/BlockRenderer';
+import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
 
 export default async function AboutUsPage() {
     // Fetch the About Us page data from WordPress
@@ -21,24 +21,8 @@ export default async function AboutUsPage() {
     // Get about panels (flexible content blocks)
     const aboutPanels = pageData.acf?.about_panels || [];
 
-    // Auto-generate breadcrumbs from URL path
-    const pathname = '/our-company/about-us';
-    const pathSegments = pathname.split('/').filter(Boolean);
-
-    const breadcrumbItems = [
-        { label: 'Home', link: '/' },
-        ...pathSegments.map((segment, index) => {
-            const path = '/' + pathSegments.slice(0, index + 1).join('/');
-            const label = segment
-                .split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-
-            // Last item has no link (current page)
-            const isLast = index === pathSegments.length - 1;
-            return { label, link: isLast ? null : path };
-        }),
-    ];
+    // Generate dynamic breadcrumbs
+    const breadcrumbItems = generateBreadcrumbs('/our-company/about-us', pageData.title);
 
     return (
         <>
