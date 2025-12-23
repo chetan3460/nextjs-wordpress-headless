@@ -1,29 +1,3 @@
-import { GraphQLClient } from 'graphql-request';
-
-const endpoint = process.env.WORDPRESS_GRAPHQL_ENDPOINT || '';
-
-export const graphQLClient = new GraphQLClient(endpoint, {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
-
-/**
- * Fetch data from WordPress GraphQL API
- * @param {string} query - GraphQL query string
- * @param {object} variables - Query variables
- * @returns {Promise<any>} GraphQL response data
- */
-export async function fetchGraphQL(query, variables = {}) {
-    try {
-        const data = await graphQLClient.request(query, variables);
-        return data;
-    } catch (error) {
-        console.error('GraphQL Error:', error);
-        throw error;
-    }
-}
-
 /**
  * Fetch data from WordPress REST API
  * @param {string} endpoint - REST API endpoint path

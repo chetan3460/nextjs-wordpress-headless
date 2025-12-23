@@ -17,7 +17,6 @@
     "@tailwindcss/forms": "^0.5.10",
     "framer-motion": "^12.23.25",
     "graphql": "^16.12.0",
-    "graphql-request": "^7.3.5",
     "gsap": "^3.13.0",
     "modules": "^0.4.0",
     "next": "16.0.7",
