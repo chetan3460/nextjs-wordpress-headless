@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, EffectFade } from "swiper/modules";
-import SafeImage from "@/components/common/SafeImage";
-import SafeHTML from "@/components/common/SafeHTML";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import SafeImage from '@/components/common/SafeImage';
+import SafeHTML from '@/components/common/SafeHTML';
 
-import { useRef } from "react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+import { useRef } from 'react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 export default function HeroBlock({ data }) {
   const spotlightPaginationRef = useRef(null);
@@ -50,9 +50,9 @@ export default function HeroBlock({ data }) {
             const imageUrl = image?.url || image;
             const imageAlt = image?.alt || `Hero slide ${i + 1}`;
 
-            const slide_title = slide.banner_title || "";
-            const slide_subtitle = slide.banner_subtitle || "";
-            const slide_description = slide.banner_description || "";
+            const slide_title = slide.banner_title || '';
+            const slide_subtitle = slide.banner_subtitle || '';
+            const slide_description = slide.banner_description || '';
 
             return (
               <SwiperSlide key={i}>
@@ -62,32 +62,32 @@ export default function HeroBlock({ data }) {
                   <img
                     src={imageUrl}
                     alt={imageAlt}
-                    className="object-cover h-full w-full rounded-[18px] md:rounded-[40px] aspect-[1] sm:aspect-[1.8] md:aspect-auto"
+                    className="object-cover h-full w-full  aspect-[1] sm:aspect-[1.8] md:aspect-auto"
                   />
 
                   {/* OVERLAY CONTENT */}
                   <div className="absolute inset-0 flex justify-start items-start sl:items-center max-lg:flex-col z-1">
                     {/* Dark gradient overlay for text readability */}
 
-                    <div className="pl-3 pt-7 lg:pt-0 sl:pl-10 lg:pl-14 left-block flex flex-col relative w-full lg:w-2/3 space-y-6 text-white z-10">
+                    <div className="left-block flex flex-col relative w-full  space-y-6 text-white z-10 text-center">
                       {/* Titles container */}
-                      <div className="hero-titles-container">
+                      <div className="hero-titles-container ">
                         {slide_title && (
-                          <h1 className="hero-title font-bold !text-white tracking-[-1.5px] mb-0 text-[clamp(2rem,8vw,5rem)] leading-[0.95]">
+                          <span className="badge badge-yellow mb-5 px-4 py-2 text-sm !inline-block bg-[#fdf7bc] !border-0 text-black font-normal ">
                             {slide_title}
-                          </h1>
+                          </span>
                         )}
 
                         {slide_subtitle && (
-                          <h2 className="hero-subtitle font-medium tracking-[-0.36px] md:tracking-[-0.84px] !text-white !text-[clamp(1.125rem,4vw,2.75rem)] leading-[1.1]">
+                          <h1 className="hero-title font-medium !text-white tracking-[-1.5px] mb-4 text-[clamp(2.5rem,8vw,4.25rem)] leading-[0.95] max-w-[1000px] mx-auto">
                             {slide_subtitle}
-                          </h2>
+                          </h1>
                         )}
 
                         {slide_description && (
                           <SafeHTML
                             html={slide_description}
-                            className="hero-description prose prose-p:text-[14px] sm:prose-p:text-base prose-p:text-white! prose-p:leading-[22px] md:prose-p:text-[18px] max-w-[400px] lg:max-w-[490px] mt-2 md:mt-4"
+                            className="hero-description  prose-p:text-[14px] sm:prose-p:text-base prose-p:text-white! prose-p:leading-[22px] md:prose-p:text-[18px] mt-2 md:mt-4 max-w-[625px] mb-10 sm:mb-14 max-sm:max-w-[420px] mx-auto"
                           />
                         )}
                       </div>
@@ -99,13 +99,9 @@ export default function HeroBlock({ data }) {
                             href={cta.url}
                             className="btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold inline-block transition-colors"
                             target={cta.target || undefined}
-                            rel={
-                              cta.target === "_blank"
-                                ? "noopener noreferrer"
-                                : undefined
-                            }
+                            rel={cta.target === '_blank' ? 'noopener noreferrer' : undefined}
                           >
-                            {cta.title || "Get in Touch"}
+                            {cta.title || 'Get in Touch'}
                           </a>
                         </div>
                       )}
@@ -154,8 +150,8 @@ export default function HeroBlock({ data }) {
                     className="w-full"
                   >
                     {select_news.map((news_post, idx) => {
-                      const newsTitle = news_post.title || "";
-                      const newsUrl = news_post.url || "#";
+                      const newsTitle = news_post.title || '';
+                      const newsUrl = news_post.url || '#';
                       const newsCategories = news_post.categories || [];
 
                       return (
@@ -166,13 +162,11 @@ export default function HeroBlock({ data }) {
                                 {/* Tags */}
                                 {newsCategories.length > 0 && (
                                   <div className="flex flex-wrap gap-1 mb-3">
-                                    {newsCategories
-                                      .slice(0, 2)
-                                      .map((cat, catIdx) => (
-                                        <span key={catIdx} className="badge">
-                                          {cat.name}
-                                        </span>
-                                      ))}
+                                    {newsCategories.slice(0, 2).map((cat, catIdx) => (
+                                      <span key={catIdx} className="badge">
+                                        {cat.name}
+                                      </span>
+                                    ))}
                                   </div>
                                 )}
 

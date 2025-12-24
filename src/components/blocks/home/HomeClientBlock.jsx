@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import Image from "next/image";
-import SafeHTML from "@/components/common/SafeHTML";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import Image from 'next/image';
+import SafeHTML from '@/components/common/SafeHTML';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function ClientBlock({ data }) {
   const [prevEl, setPrevEl] = useState(null);
@@ -24,7 +24,7 @@ export default function ClientBlock({ data }) {
     return (
       <div className="py-12 text-center border-2 border-dashed border-red-500 m-4 p-4 text-red-500">
         <h3 className="font-bold">ClientBlock: No client items found</h3>
-        <p>Data keys available: {Object.keys(data).join(", ")}</p>
+        <p>Data keys available: {Object.keys(data).join(', ')}</p>
         <pre className="text-xs text-left mt-2 bg-gray-100 p-2 overflow-auto max-h-40">
           {JSON.stringify(data, null, 2)}
         </pre>
@@ -39,9 +39,7 @@ export default function ClientBlock({ data }) {
         {(title || description) && (
           <div className="section-heading text-center mb-8">
             {title && <h2 className="mb-1 fade-text">{title}</h2>}
-            {description && (
-              <SafeHTML html={description} className="anim-uni-in-up" />
-            )}
+            {description && <SafeHTML html={description} className="anim-uni-in-up" />}
           </div>
         )}
 
@@ -63,7 +61,7 @@ export default function ClientBlock({ data }) {
             pagination={{
               el: paginationEl,
               clickable: true,
-              type: "custom",
+              type: 'custom',
               renderCustom: (swiper, current, total) => {
                 return `${current}/${total}`;
               },
@@ -85,54 +83,37 @@ export default function ClientBlock({ data }) {
               const itemDesc = item.description;
 
               return (
-                <SwiperSlide
-                  key={index}
-                  className="client-item group h-full !h-auto"
-                >
+                <SwiperSlide key={index} className="client-item group h-full !h-auto">
                   {/* !h-auto helps with equal height items in flex swiper */}
-                  <div className="client-item bg-light-blue px-5 sm:px-6 pt-6 pb-8 sm:pb-12 rounded-[20px] md:rounded-[40px] relative flex flex-col h-full animate-card-3">
-                    {/* Client Image */}
-                    {imageUrl && (
-                      <div className="client-image text-center mb-6 h-[60px] flex items-center justify-center relative">
-                        <Image
-                          src={imageUrl}
-                          alt={imageAlt}
-                          width={0}
-                          height={0}
-                          sizes="100vw"
-                          className="mx-auto object-contain h-full w-auto"
+                  <div className="client-item bg-white p-4 sm:p-8 rounded-xl space-y-6relative flex flex-col h-full ">
+                    <div className="flex items-center gap-3">
+                      {/* Client Image */}
+                      {imageUrl && (
+                        <div className="client-image text-center  h-[60px] flex items-center justify-center relative">
+                          <Image
+                            src={imageUrl}
+                            alt={imageAlt}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            className="size-11 rounded-full object-center object-cover bg-linear-[156deg,#FFF_32.92%,#A585FF_91%]"
+                          />
+                        </div>
+                      )}
+                      {itemTitle && (
+                        <div className="text-base font-medium  text-black">{itemTitle}</div>
+                      )}
+                    </div>
+                    <div className="border-t border-stroke-4 dark:border-stroke-5 my-5"></div>
+                    {/* Client Content */}
+                    {itemDesc && (
+                      <div className="testimonial-content">
+                        <SafeHTML
+                          html={itemDesc}
+                          className="prose prose-p:text-charcoal text-base leading-[22px]"
                         />
                       </div>
                     )}
-
-                    {/* Client Content */}
-                    <div className="client-content flex flex-col flex-grow">
-                      {itemDesc && (
-                        <div className="flex items-start gap-6 flex-grow">
-                          <div className="shrink-0 mt-1 w-6 h-6 sm:w-8 sm:h-8 relative">
-                            <Image
-                              src="/images/home/quotes.svg"
-                              alt="Quote Icon"
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-
-                          <div className="testimonial-content flex flex-col gap-4 flex-grow text-left">
-                            <SafeHTML
-                              html={itemDesc}
-                              className="prose prose-p:text-charcoal text-base leading-[22px]"
-                            />
-
-                            {itemTitle && (
-                              <div className="body-1 font-semibold mt-auto text-charcoal">
-                                {itemTitle}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </SwiperSlide>
               );
@@ -142,7 +123,7 @@ export default function ClientBlock({ data }) {
           {/* Slider Navigation */}
           <div
             className={`mt-8 flex justify-center items-center gap-4 ${
-              clientCount <= 3 ? "lg:hidden" : ""
+              clientCount <= 3 ? 'lg:hidden' : ''
             }`}
           >
             <div

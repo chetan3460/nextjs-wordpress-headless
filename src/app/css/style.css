@@ -1,40 +1,40 @@
 /* Tailwind CSS */
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 /* Essential Swiper CSS - Core functionality */
-@import "swiper/css";
-@import "swiper/css/pagination";
-@import "swiper/css/autoplay";
-@import "swiper/css/navigation";
-@import "swiper/css/effect-fade";
-@import "swiper/css/grid";
+@import 'swiper/css';
+@import 'swiper/css/pagination';
+@import 'swiper/css/autoplay';
+@import 'swiper/css/navigation';
+@import 'swiper/css/effect-fade';
+@import 'swiper/css/grid';
 
 /* Base Styles */
-@import "./base/utilities.css";
-@import "./base/_fonts.css";
-@import "./base/_general.css";
-@import "./base/_buttons.css";
+@import './base/utilities.css';
+@import './base/_fonts.css';
+@import './base/_general.css';
+@import './base/_buttons.css';
 
 /* Components */
-@import "./components/scroll-to-top.css";
-@import "./components/mobile-filter-modal.css";
-@import "./components/filter-accordion.css";
-@import "./components/cookie-consent.css";
-@import "./components/_topnav.css";
-@import "./components/certificate_block.css";
+@import './components/scroll-to-top.css';
+@import './components/mobile-filter-modal.css';
+@import './components/filter-accordion.css';
+@import './components/cookie-consent.css';
+@import './components/_topnav.css';
+@import './components/certificate_block.css';
 
 /* Pages */
-@import "./pages/_helper.css";
-@import "./pages/_hero.css";
-@import "./pages/_countdown.css";
-@import "./pages/_contact.css";
-@import "./pages/news-detail.css";
+@import './pages/_helper.css';
+@import './pages/_hero.css';
+@import './pages/_countdown.css';
+@import './pages/_contact.css';
+@import './pages/news-detail.css';
 
 /* Plugins */
-@import "./plugins/_swiper-slider.css";
-@import "./plugins/_datepicker.css";
-@import "./plugins/reports-filter.css";
+@import './plugins/_swiper-slider.css';
+@import './plugins/_datepicker.css';
+@import './plugins/reports-filter.css';
 
 /* Custom Swiper Button Disabled States */
 .swiper-btn-prev-pagination.swiper-button-disabled,
@@ -57,6 +57,7 @@ html {
 
 body {
   scrollbar-color: var(--scrollbar-color) transparent;
+  background-color: #f4f5f8;
 }
 
 /* Global Styles for Auto-Generated Paragraphs */
@@ -79,12 +80,18 @@ body {
   --breakpoint-2xl: 1440px;
 
   /* Custom Colors (base) */
-  --color-primary: #da000e; /* Primary / Brand Red – #DA000E */
+  --color-primary: #0f1217; /* Primary / Brand Red – #DA000E */
   --color-black: #1c1c1c; /* Neutral 900 / Near Black – #1C1C1C */
   --color-light-gray: #ccd9ef; /* Legacy light gray (check usage) – #CCD9EF */
   --color-mid-gray: #f4f4f4; /* Neutral 100 – light gray – #F4F4F4 */
   --color-gray-50: #d9d9d9;
   --color-gray-150: #6c6c6c;
+
+  --color-background-1: #fcfcfd;
+  --color-background-2: #f9fafb;
+
+  --color-stroke-1: #dfe4eb;
+  --color-stroke-4: #eceff4;
 
   --color-light-blue: #dff2fd; /* Sky 50 / Very light blue – #DFF2FD */
 
@@ -96,44 +103,8 @@ body {
 
   --color-pink-50: #ffb6b0;
 
-  /* New Color Palette */
-  /* Neutrals */
-  --color-neutral-1: #f4f4f4; /* Neutral 1 – #F4F4F4 */
-  --color-neutral-2: #ffffff; /* Neutral 2 – #FFFFFF */
-
-  /* Greys */
-  --color-grey-1: #222222; /* Grey 1 – #222222 */
-  --color-grey-2: #3d3d3d; /* Grey 2 – #3D3D3D */
-  --color-grey-3: #828282; /* Grey 3 – #828282 */
-  --color-grey-4: #bdbdbd; /* Grey 4 – #BDBDBD */
-  --color-grey-5: #e0e0e0; /* Grey 5 – #E0E0E0 */
-  --color-grey-6: #f2f2f2; /* Grey 6 – #F2F2F2 */
-  --color-grey-7: #333; /* Grey 6 – #F2F2F2 */
-
-  /* Chip & Extended Colors */
-  --color-chip-stroke: #ba3333; /* Chip Stroke – #BA3333 */
-  --color-extended-1: linear-gradient(
-    180deg,
-    #dd575f 0%,
-    #b02932 100%
-  ); /* Extended 1 gradient */
-  --color-extended-2: #dff2fd; /* Extended 2 – #DFF2FD */
-  --color-extended-3: #eef7e7; /* Extended 3 – #EEF7E7 */
-
-  /* Legacy palette additions (semantic) */
-  /* Usage examples: text-neutral-900, bg-neutral-50, border-neutral-300, text-brand-red, bg-sky-50 */
-  --color-neutral-900: #1c1c1c; /* Neutral 900 – near-black text – #1C1C1C */
-  --color-neutral-50: #f2f2f2; /* Neutral 50 – ultra light gray background – #F2F2F2 */
-  --color-brand-red: #da000e; /* Brand Red – actions/accents – #DA000E */
-  --color-dark-red: #ba3333; /* Brand Red – actions/accents – #DA000E */
-  --color-sky-50: #dff2fd; /* Sky 50 – pale blue background – #DFF2FD */
-  --color-neutral-100: #f4f4f4; /* Neutral 100 – light gray background – #F4F4F4 */
-  --color-neutral-200: #eaeaea; /* Neutral 200 – divider gray – #EAEAEA */
-  --color-neutral-300: #cbcbcb; /* Neutral 300 – border gray – #CBCBCB */
-  --color-neutral-500: #8f8f8f; /* Neutral 500 – medium gray text – #8F8F8F */
-
   /* Custom Font Families */
-  --font-instrument: "Instrument Sans", sans-serif;
+  --font-instrument: 'Instrument Sans', sans-serif;
 
   /* Custom Spacing */
   --spacing-0_75: 0.1875rem;
@@ -157,143 +128,21 @@ body {
 .border-black {
   border-color: var(--color-black);
 }
-
-/* Charcoal helpers */
-.text-charcoal {
-  color: var(--color-charcoal);
+.border-stroke-1 {
+  border-color: var(--color-stroke-1);
 }
-
-.bg-charcoal {
-  background-color: var(--color-charcoal);
+.bg-background-2 {
+  background-color: var(--color-background-2);
 }
-
-.border-charcoal {
-  border-color: var(--color-charcoal);
-}
-
-/* New Color Palette Utility Classes */
-/* Neutrals */
-.text-neutral-1 {
-  color: var(--color-neutral-1);
-}
-.bg-neutral-1 {
-  background-color: var(--color-neutral-1);
-}
-.border-neutral-1 {
-  border-color: var(--color-neutral-1);
-}
-
-.text-neutral-2 {
-  color: var(--color-neutral-2);
-}
-.bg-neutral-2 {
-  background-color: var(--color-neutral-2);
-}
-.border-neutral-2 {
-  border-color: var(--color-neutral-2);
-}
-
-/* Greys */
-.text-grey-1 {
-  color: var(--color-grey-1);
-}
-.bg-grey-1 {
-  background-color: var(--color-grey-1);
-}
-.border-grey-1 {
-  border-color: var(--color-grey-1);
-}
-
-.text-grey-2 {
-  color: var(--color-grey-2);
-}
-.bg-grey-2 {
-  background-color: var(--color-grey-2);
-}
-.border-grey-2 {
-  border-color: var(--color-grey-2);
-}
-
-.text-grey-3 {
-  color: var(--color-grey-3);
-}
-.bg-grey-3 {
-  background-color: var(--color-grey-3);
-}
-.border-grey-3 {
-  border-color: var(--color-grey-3);
-}
-
-.text-grey-4 {
-  color: var(--color-grey-4);
-}
-.bg-grey-4 {
-  background-color: var(--color-grey-4);
-}
-.border-grey-4 {
-  border-color: var(--color-grey-4);
-}
-
-.text-grey-5 {
-  color: var(--color-grey-5);
-}
-.bg-grey-5 {
-  background-color: var(--color-grey-5);
-}
-.border-grey-5 {
-  border-color: var(--color-grey-5);
-}
-
-.text-grey-6 {
-  color: var(--color-grey-6);
-}
-.bg-grey-6 {
-  background-color: var(--color-grey-6);
-}
-.border-grey-6 {
-  border-color: var(--color-grey-6);
-}
-
-/* Chip & Extended Colors */
-.text-chip-stroke {
-  color: var(--color-chip-stroke);
-}
-.bg-chip-stroke {
-  background-color: var(--color-chip-stroke);
-}
-.border-chip-stroke {
-  border-color: var(--color-chip-stroke);
-}
-
-.bg-extended-1 {
-  background: var(--color-extended-1);
-}
-
-.text-extended-2 {
-  color: var(--color-extended-2);
-}
-.bg-extended-2 {
-  background-color: var(--color-extended-2);
-}
-.border-extended-2 {
-  border-color: var(--color-extended-2);
-}
-
-.text-extended-3 {
-  color: var(--color-extended-3);
-}
-.bg-extended-3 {
-  background-color: var(--color-extended-3);
-}
-.border-extended-3 {
-  border-color: var(--color-extended-3);
+.border-stroke-4 {
+  border-color: var(--color-stroke-4);
 }
 
 * {
   scrollbar-width: thin;
 }
 body {
-  @apply font-instrument text-grey-2;
+  @apply font-instrument;
 }
 html,
 body {
@@ -347,7 +196,7 @@ body {
   margin-inline: auto;
 }
 @utility container-fluid {
-  @apply px-4 lg:px-5 2xl:px-24;
+  @apply px-4 lg:px-5;
   margin-inline: auto;
 }
 /* Custom Utility Classes */
@@ -355,26 +204,7 @@ body {
   font-family: var(--font-instrument);
 }
 /* Form */
-@layer components {
-  /* All placeholders inside Formidable forms */
-  .frm_form_field input::placeholder,
-  .frm_form_field textarea::placeholder {
-    @apply !text-grey-3;
-  }
 
-  /* “Placeholder” style for a <select> first option */
-  .frm_form_field select option {
-    @apply !text-grey-3;
-  }
-  .frm_form select {
-    @apply pr-8; /* Add more if you need bigger gap */
-  }
-  @media only screen and (max-width: 782px) {
-    .with_frm_style .iti {
-      width: 100% !important;
-    }
-  }
-}
 a {
   text-decoration: none !important;
 }
@@ -391,7 +221,7 @@ a {
 .section-heading {
   @apply mx-auto mb-6 max-w-full lg:mb-8 lg:max-w-[852px];
   h2 {
-    @apply mb-2;
+    @apply mb-3;
   }
   p {
     @apply text-base leading-[21px] font-normal md:text-[18px] md:leading-[25px];
@@ -409,15 +239,12 @@ a {
 .hero-block {
   .bg-shape {
     /* content: url('/images/home/spotlight-shape.svg'); */
-    content: url("/images/home/Vector 1978.svg");
+    content: url('/images/home/Vector 1978.svg');
   }
   .spotlight-header {
     border-radius: 18px;
-    background: linear-gradient(
-        180deg,
-        rgba(227, 227, 227, 0.38) 7.69%,
-        rgba(107, 107, 107, 0.38) 57.21%
-      ),
+    background:
+      linear-gradient(180deg, rgba(227, 227, 227, 0.38) 7.69%, rgba(107, 107, 107, 0.38) 57.21%),
       #da000e;
   }
   .spotlight-slider .swiper-pagination-bullet {
@@ -428,14 +255,14 @@ a {
     @apply h-[8px] w-[8px] bg-neutral-500;
   }
   .curve-shape {
-    content: url("/images/home/curve-shape.svg");
+    content: url('/images/home/curve-shape.svg');
   }
 }
 
 .product-items {
   .curve-shape {
     /* content: url('/images/home/curve.svg'); */
-    content: url("/images/home/Vector-1.svg");
+    content: url('/images/home/Vector-1.svg');
     cursor: none;
     right: -10px;
     bottom: -10px;
@@ -453,7 +280,7 @@ a {
 .feature_items-item,
 .innovations-card {
   .curve-shape {
-    content: url("/images/home/card-curve.svg");
+    content: url('/images/home/card-curve.svg');
     cursor: none;
     right: -10px;
     bottom: -10px;
@@ -470,7 +297,7 @@ a {
 /* Image Slider */
 .image-slider {
   .curve-shape {
-    content: url("/images/home/curve-lg.svg");
+    content: url('/images/home/curve-lg.svg');
     cursor: none;
     z-index: 2;
     right: -13px;
@@ -480,7 +307,7 @@ a {
       bottom: -8px;
     }
     @media (max-width: 767px) {
-      content: url("/images/home/Vector-1.svg");
+      content: url('/images/home/Vector-1.svg');
       right: -7px;
       bottom: -7px;
       width: 56px;
@@ -538,22 +365,22 @@ a {
 }
 .inner_banner_image-wrapper {
   .curve-shape {
-    content: url("/images/home/curve-long.svg");
+    content: url('/images/home/curve-long.svg');
     cursor: none;
     @media (max-width: 767px) {
-      content: url("/images/home/curve.svg");
+      content: url('/images/home/curve.svg');
       width: 56px;
     }
   }
 }
 .feature_items-item {
   .curve-shape {
-    content: url("/images/home/curve.svg");
+    content: url('/images/home/curve.svg');
     cursor: none;
   }
 }
 .top-curve-shape {
-  content: url("/images/values/top-curve.png");
+  content: url('/images/values/top-curve.png');
 
   @media (max-width: 767px) {
   }
@@ -574,7 +401,7 @@ body.menu-open {
 .innovations-card,
 .quote-card {
   .curve-shape {
-    content: url("/images/home/card-curve.svg");
+    content: url('/images/home/card-curve.svg');
     cursor: none;
     right: -10px;
     bottom: -10px;
@@ -609,17 +436,17 @@ body.menu-open {
 
   input {
     &::placeholder {
-      @apply !text-grey-3;
+      /* @apply !text-grey; */
     }
   }
   input::placeholder {
     color: var(--grey-3) !important;
   }
   .curve-shape {
-    content: url("/images/home/curve-long.svg");
+    content: url('/images/home/curve-long.svg');
     cursor: none;
     @media (max-width: 767px) {
-      content: url("/images/home/curve.svg");
+      content: url('/images/home/curve.svg');
       width: 56px;
     }
   }
@@ -665,17 +492,14 @@ body.menu-open {
   --r: 25px;
   --s: 25px;
   border-radius: var(--r);
-  --_m: /calc(2 * var(--r)) calc(2 * var(--r)) radial-gradient(
-      #000 70%,
-      #0000 72%
-    ) no-repeat;
-  mask: right 0 bottom calc(var(--s) + var(--r)) var(--_m),
+  --_m: /calc(2 * var(--r)) calc(2 * var(--r)) radial-gradient(#000 70%, #0000 72%) no-repeat;
+  mask:
+    right 0 bottom calc(var(--s) + var(--r)) var(--_m),
     right calc(var(--s) + var(--r)) bottom 0 var(--_m),
-    radial-gradient(var(--s) at 100% 100%, #0000 99%, #000 calc(100% + 1px))
-      calc(-1 * var(--r)) calc(-1 * var(--r)) no-repeat,
+    radial-gradient(var(--s) at 100% 100%, #0000 99%, #000 calc(100% + 1px)) calc(-1 * var(--r))
+      calc(-1 * var(--r)) no-repeat,
     conic-gradient(
-      from 90deg at calc(100% - var(--s) - 2 * var(--r))
-        calc(100% - var(--s) - 2 * var(--r)),
+      from 90deg at calc(100% - var(--s) - 2 * var(--r)) calc(100% - var(--s) - 2 * var(--r)),
       #0000 25%,
       #000 0
     );
@@ -716,7 +540,7 @@ body.menu-open {
             width: 1.5px;
             height: 23px;
             position: absolute;
-            content: "";
+            content: '';
             left: 0;
             transition: all ease-in;
             z-index: 1;
@@ -746,7 +570,7 @@ body.menu-open {
     }
   }
 }
-@use "../utils" as *;
+@use '../utils' as *;
 
 .inner_banner_image-wrapper {
   &.bottom-right {
@@ -824,7 +648,7 @@ body.mobile-popup-open {
 .feature_items-item {
   position: relative;
   &::before {
-    content: url("/images/values/bg-shape.png");
+    content: url('/images/values/bg-shape.png');
     position: absolute;
     top: 0;
     right: 0;

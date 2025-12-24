@@ -9,15 +9,15 @@
 /* Tailwind + @apply version */
 .btn,
 .button {
-  @apply bg-primary relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-2 text-sm leading-[24px] font-medium tracking-[-0.3px] text-white transition-all duration-300 md:text-base md:font-bold;
+  @apply bg-primary relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-2 text-sm leading-[24px] font-medium tracking-[-0.3px] text-white transition-all duration-300 md:text-base md:font-bold border border-transparent;
 
   &:before {
     content: '';
-    @apply absolute top-full left-0 -z-10 h-full w-full bg-[#ab000b] transition-all duration-500;
+    @apply absolute top-full left-0 -z-10 h-full w-full bg-[#fcfcfd] transition-all duration-500;
   }
 
   &:hover {
-    @apply text-white;
+    @apply text-black border-[#d7dde5] border;
 
     &:before {
       @apply top-0;

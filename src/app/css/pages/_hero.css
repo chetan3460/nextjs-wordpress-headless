@@ -1,0 +1,4 @@
+.hero-bg-overlay-light {
+  --tw-gradient-position: 180deg, #fffc 43.93%, #fff 100%;
+  background-image: linear-gradient(var(--tw-gradient-stops, 180deg, #fffc 43.93%, #fff 100%));
+}

@@ -4,7 +4,7 @@
 /*             General            */
 /*===============================*/
 p {
-  @apply text-grey-2;
+  @apply text-[#1a1a1c99];
 }
 
 h6,
@@ -31,7 +31,7 @@ h1,
 .h2,
 h2,
 .display-2 {
-  @apply text-grey-1 text-[32px] leading-[35px] font-medium tracking-[-0.48px] md:text-[56px] md:leading-[61px] md:tracking-[-0.84px];
+  @apply text-black text-[32px] leading-[35px] font-normal tracking-[-0.48px] md:text-[56px] md:leading-[61px] md:tracking-[-0.84px];
 }
 .h3,
 h3,
@@ -56,7 +56,7 @@ h4,
   @apply bg-indigo-600/90 text-white;
 }
 .badge {
-  @apply border-chip-stroke/40 text-primary flex items-center justify-center rounded-[43px] border px-2 py-1 text-xs leading-[17px] font-semibold tracking-[0.24px];
+  @apply flex items-center justify-center rounded-[43px];
 }
 
 /* Product grid smooth transitions */

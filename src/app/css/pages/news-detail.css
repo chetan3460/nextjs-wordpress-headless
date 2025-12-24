@@ -45,7 +45,7 @@
     @apply mt-0 mb-1 pl-0 text-black;
   }
   .prose li::marker {
-    @apply text-grey-1;
+    /* @apply text-grey; */
   }
   .prose blockquote {
     @apply border-primary my-8 rounded-r-lg border-l-4 bg-gray-50 py-4 pl-6 text-gray-600 italic;

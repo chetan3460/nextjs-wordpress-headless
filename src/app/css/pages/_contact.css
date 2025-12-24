@@ -42,20 +42,13 @@
 
   input {
     &::placeholder {
-      @apply !text-grey-3;
+      /* @apply text-grey-; */
     }
   }
   input::placeholder {
     color: var(--grey-3) !important;
   }
-  .curve-shape {
-    content: url('/images/home/curve-long.svg');
-    cursor: none;
-    @media (max-width: 767px) {
-      content: url('/images/home/curve.svg');
-      width: 56px;
-    }
-  }
+
   .frm_error {
     color: #e90000 !important;
   }
