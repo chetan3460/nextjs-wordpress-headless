@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import Link from "next/link";
-import Image from "next/image";
-import SafeHTML from "@/components/common/SafeHTML";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Link from 'next/link';
+import Image from 'next/image';
+import SafeHTML from '@/components/common/SafeHTML';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { convertToNextPath } from '@/lib/utils/urls';
 
-import { useRef } from "react";
+import { useState } from 'react';
 
 export default function ImageSliderBlock({ data }) {
-  const swiperRef = useRef(null);
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const paginationRef = useRef(null);
+  const [prevEl, setPrevEl] = useState(null);
+  const [nextEl, setNextEl] = useState(null);
+  const [paginationEl, setPaginationEl] = useState(null);
 
   if (!data) return null;
 
@@ -34,9 +35,7 @@ export default function ImageSliderBlock({ data }) {
         {(title || description) && (
           <div className="section-heading text-center mb-4 md:mb-8">
             {title && <h2 className="mb-1 fade-text">{title}</h2>}
-            {description && (
-              <SafeHTML html={description} className="anim-uni-in-up" />
-            )}
+            {description && <SafeHTML html={description} className="anim-uni-in-up" />}
           </div>
         )}
 
@@ -51,21 +50,16 @@ export default function ImageSliderBlock({ data }) {
                 disableOnInteraction: false,
               }}
               navigation={{
-                nextEl: nextRef.current,
-                prevEl: prevRef.current,
+                nextEl,
+                prevEl,
               }}
               pagination={{
                 clickable: true,
-                el: paginationRef.current,
-                type: "custom",
+                el: paginationEl,
+                type: 'custom',
                 renderCustom: (swiper, current, total) => {
                   return `${current}/${total}`;
                 },
-              }}
-              onBeforeInit={(swiper) => {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-                swiper.params.pagination.el = paginationRef.current;
               }}
               className="w-full"
             >
@@ -74,10 +68,7 @@ export default function ImageSliderBlock({ data }) {
                 if (!slide_image) return null;
 
                 return (
-                  <SwiperSlide
-                    key={index}
-                    className="swiper-slide relative group"
-                  >
+                  <SwiperSlide key={index} className="swiper-slide relative group">
                     <div className="relative overflow-hidden max-sm:aspect-square lg:aspect-auto long">
                       {/* Image */}
                       {slide_image && (
@@ -85,11 +76,7 @@ export default function ImageSliderBlock({ data }) {
                           {/* Note: We use aspect ratio styles via class or Next.js Image fill */}
                           <Image
                             src={slide_image.url}
-                            alt={
-                              slide_image.alt ||
-                              item.slider_title ||
-                              "Slider image"
-                            }
+                            alt={slide_image.alt || item.slider_title || 'Slider image'}
                             width={1920}
                             height={1080}
                             className="w-full h-full object-cover rounded-2xl md:rounded-[40px]"
@@ -126,39 +113,17 @@ export default function ImageSliderBlock({ data }) {
               {/* Slider Navigation */}
               {slider_items.length > 1 && (
                 <div className="swiper-navigation flex items-center justify-center mt-3 gap-4">
-                  <div ref={prevRef} className="swiper-btn-prev cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="9"
-                      height="7"
-                      viewBox="0 0 9 7"
-                      fill="none"
-                    >
-                      <path
-                        d="M7.92214 3.18291C8.16739 3.18291 8.36621 3.38173 8.36621 3.62699C8.36621 3.87224 8.16739 4.07106 7.92214 4.07106L1.66704 4.07106L3.79543 6.19944C3.96885 6.37286 3.96885 6.65403 3.79543 6.82745C3.62201 7.00087 3.34084 7.00087 3.16742 6.82745L0.594961 4.255C0.24812 3.90816 0.24812 3.34581 0.594961 2.99897L3.16742 0.426516C3.34084 0.253095 3.62201 0.253096 3.79543 0.426516C3.96885 0.599937 3.96885 0.881107 3.79543 1.05453L1.66705 3.18291L7.92214 3.18291Z"
-                        fill="#DA000E"
-                      />
-                    </svg>
+                  <div ref={setPrevEl} className="swiper-btn-prev cursor-pointer">
+                    <ChevronLeft className="w-6 h-6 text-primary" strokeWidth={2.5} />
                   </div>
 
                   <div
-                    ref={paginationRef}
+                    ref={setPaginationEl}
                     className="swiper-pagination text-primary text-xs font-medium w-auto! flex gap-1"
                   ></div>
 
-                  <div ref={nextRef} className="swiper-btn-next cursor-pointer">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="9"
-                      height="7"
-                      viewBox="0 0 9 7"
-                      fill="none"
-                    >
-                      <path
-                        d="M1.15891 3.18291C0.913661 3.18291 0.714844 3.38173 0.714844 3.62699C0.714844 3.87224 0.913661 4.07106 1.15892 4.07106L7.41401 4.07106L5.28562 6.19944C5.1122 6.37286 5.1122 6.65403 5.28562 6.82745C5.45904 7.00087 5.74021 7.00087 5.91364 6.82745L8.48609 4.255C8.83293 3.90816 8.83294 3.34581 8.48609 2.99897L5.91363 0.426516C5.74021 0.253095 5.45904 0.253096 5.28562 0.426516C5.1122 0.599937 5.1122 0.881107 5.28562 1.05453L7.41401 3.18291L1.15891 3.18291Z"
-                        fill="#DA000E"
-                      />
-                    </svg>
+                  <div ref={setNextEl} className="swiper-btn-next cursor-pointer">
+                    <ChevronRight className="w-6 h-6 text-primary" strokeWidth={2.5} />
                   </div>
                 </div>
               )}
@@ -169,8 +134,8 @@ export default function ImageSliderBlock({ data }) {
         {/* CTA Section */}
         {cta && cta.url && (
           <div className="text-center mt-12 anim-uni-in-up">
-            <Link href={cta.url} target={cta.target || "_self"} className="btn">
-              {cta.title || "Learn More"}
+            <Link href={convertToNextPath(cta.url)} target={cta.target || '_self'} className="btn">
+              {cta.title || 'Learn More'}
             </Link>
           </div>
         )}

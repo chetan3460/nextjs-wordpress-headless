@@ -2,16 +2,19 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import SafeImage from '@/components/common/SafeImage';
 import SafeHTML from '@/components/common/SafeHTML';
+import Link from 'next/link';
+import SafeImage from '@/components/common/SafeImage';
+import { Megaphone, ChevronRight } from 'lucide-react';
+import { convertToNextPath } from '@/lib/utils/urls';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
 export default function HeroBlock({ data }) {
-  const spotlightPaginationRef = useRef(null);
+  const [spotlightPaginationEl, setSpotlightPaginationEl] = useState(null);
   // ACF data – keep keys aligned with the PHP template
   const banner_slider = data?.banner_slider || [];
   const cta = data?.cta || null;
@@ -47,8 +50,10 @@ export default function HeroBlock({ data }) {
             const image = slide.banner_images;
             if (!image) return null;
 
-            const imageUrl = image?.url || image;
-            const imageAlt = image?.alt || `Hero slide ${i + 1}`;
+            // Handle ACF Image return formats (URL string or Image object)
+            const imageUrl = typeof image === 'string' ? image : image?.url;
+            const imageAlt =
+              typeof image === 'object' ? image?.alt : slide.banner_title || `Hero slide ${i + 1}`;
 
             const slide_title = slide.banner_title || '';
             const slide_subtitle = slide.banner_subtitle || '';
@@ -57,14 +62,15 @@ export default function HeroBlock({ data }) {
             return (
               <SwiperSlide key={i}>
                 {/* Swiper already renders `.swiper-slide`, so just wrap content */}
-                <div className="relative w-full ">
+                <div className="relative w-full aspect-square sm:aspect-video md:aspect-[2.4] lg:h-[700px] lg:aspect-auto">
                   {/* IMAGE */}
-                  <img
+                  <SafeImage
                     src={imageUrl}
                     alt={imageAlt}
-                    className="object-cover h-full w-full  aspect-[1] sm:aspect-[1.8] md:aspect-auto"
+                    fill
+                    priority={i === 0}
+                    className="object-cover"
                   />
-
                   {/* OVERLAY CONTENT */}
                   <div className="absolute inset-0 flex justify-start items-start sl:items-center max-lg:flex-col z-1">
                     {/* Dark gradient overlay for text readability */}
@@ -95,14 +101,13 @@ export default function HeroBlock({ data }) {
                       {/* CTA (shared for all slides, like PHP) */}
                       {cta && cta.url && (
                         <div className="cta-block">
-                          <a
-                            href={cta.url}
+                          <Link
+                            href={convertToNextPath(cta.url)}
                             className="btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold inline-block transition-colors"
                             target={cta.target || undefined}
-                            rel={cta.target === '_blank' ? 'noopener noreferrer' : undefined}
                           >
                             {cta.title || 'Get in Touch'}
-                          </a>
+                          </Link>
                         </div>
                       )}
                     </div>
@@ -125,12 +130,7 @@ export default function HeroBlock({ data }) {
                 {/* Header */}
                 <div className="spotlight-header flex items-start gap-3 p-4 min-h-[100px] text-white">
                   <div className="w-5 h-5 flex items-center justify-center">
-                    <SafeImage
-                      src="/images/home/Announcement.svg"
-                      alt="Announcement"
-                      width={20}
-                      height={20}
-                    />
+                    <Megaphone className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-[18px] font-semibold leading-[22px] tracking-[-0.36px]">
                     Spotlight
@@ -145,7 +145,7 @@ export default function HeroBlock({ data }) {
                     slidesPerView={1}
                     pagination={{
                       clickable: true,
-                      el: spotlightPaginationRef.current,
+                      el: spotlightPaginationEl,
                     }}
                     className="w-full"
                   >
@@ -177,20 +177,12 @@ export default function HeroBlock({ data }) {
                                       ? `${newsTitle.substring(0, 40)}...`
                                       : newsTitle}
                                   </div>
-                                  <a
-                                    href={newsUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center"
+                                  <Link
+                                    href={convertToNextPath(newsUrl)}
+                                    className="flex items-center justify-center text-[#DA000E]"
                                   >
-                                    <SafeImage
-                                      className="w-4 h-4"
-                                      src="/images/home/right-arrow.svg"
-                                      alt="Read More"
-                                      width={16}
-                                      height={16}
-                                    />
-                                  </a>
+                                    <ChevronRight className="w-4 h-4" strokeWidth={3} />
+                                  </Link>
                                 </div>
                               </div>
                             </div>
@@ -206,7 +198,7 @@ export default function HeroBlock({ data }) {
                       <div className="curve-shape flex items-center justify-center -mb-[1px]" />
                       <div className="absolute z-10">
                         <div
-                          ref={spotlightPaginationRef}
+                          ref={setSpotlightPaginationEl}
                           className="spotlight-pagination flex gap-1 items-center justify-between"
                         />
                       </div>

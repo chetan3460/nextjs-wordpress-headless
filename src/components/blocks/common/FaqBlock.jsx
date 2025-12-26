@@ -19,8 +19,8 @@ export default function FaqBlock({ data }) {
   };
 
   return (
-    <section className="">
-      <div className="bg-[#f4f5f8] max-w-[1880px] mx-auto">
+    <section className="max-[1920px]:px-5">
+      <div className="bg-[#eaeceb] mx-auto max-w-[1880px] rounded-2xl py-18 md:rounded-4xl md:py-20 lg:py-25 xl:py-28">
         <div className="container-fluid">
           {/* Section Header */}
           <div className="section-heading text-center space-y-3 md:space-y-5 max-w-[720px] mx-auto lg:mb-[70px] mb-12">

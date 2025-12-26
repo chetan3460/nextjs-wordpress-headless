@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -130,19 +131,7 @@ export default function ClientBlock({ data }) {
               ref={setPrevEl}
               className="swiper-btn-prev-pagination swiper-btn-prev w-[40px] h-[40px] flex items-center justify-center cursor-pointer hover:opacity-75 transition-opacity"
             >
-              {/* SVG prev arrow */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="7"
-                viewBox="0 0 9 7"
-                fill="none"
-              >
-                <path
-                  d="M7.92214 3.18291C8.16739 3.18291 8.36621 3.38173 8.36621 3.62699C8.36621 3.87224 8.16739 4.07106 7.92214 4.07106L1.66704 4.07106L3.79543 6.19944C3.96885 6.37286 3.96885 6.65403 3.79543 6.82745C3.62201 7.00087 3.34084 7.00087 3.16742 6.82745L0.594961 4.255C0.24812 3.90816 0.24812 3.34581 0.594961 2.99897L3.16742 0.426516C3.34084 0.253095 3.62201 0.253096 3.79543 0.426516C3.96885 0.599937 3.96885 0.881107 3.79543 1.05453L1.66705 3.18291L7.92214 3.18291Z"
-                  fill="currentColor"
-                />
-              </svg>
+              <ChevronLeft className="w-6 h-6 text-primary" strokeWidth={2.5} />
             </div>
 
             <div
@@ -154,19 +143,7 @@ export default function ClientBlock({ data }) {
               ref={setNextEl}
               className="swiper-btn-next-pagination swiper-btn-next w-[40px] h-[40px] flex items-center justify-center cursor-pointer hover:opacity-75 transition-opacity"
             >
-              {/* SVG next arrow */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="7"
-                viewBox="0 0 9 7"
-                fill="none"
-              >
-                <path
-                  d="M1.15891 3.18291C0.913661 3.18291 0.714844 3.38173 0.714844 3.62699C0.714844 3.87224 0.913661 4.07106 1.15892 4.07106L7.41401 4.07106L5.28562 6.19944C5.1122 6.37286 5.1122 6.65403 5.28562 6.82745C5.45904 7.00087 5.74021 7.00087 5.91364 6.82745L8.48609 4.255C8.83293 3.90816 8.83294 3.34581 8.48609 2.99897L5.91363 0.426516C5.74021 0.253095 5.45904 0.253096 5.28562 0.426516C5.1122 0.599937 5.1122 0.881107 5.28562 1.05453L7.41401 3.18291L1.15891 3.18291Z"
-                  fill="currentColor"
-                />
-              </svg>
+              <ChevronRight className="w-6 h-6 text-primary" strokeWidth={2.5} />
             </div>
           </div>
         </div>

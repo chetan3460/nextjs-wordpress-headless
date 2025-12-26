@@ -1,21 +1,19 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import {
-  fetchTeamCategories,
-  fetchTeamMembersByCategory,
-} from "@/lib/wordpress/client";
-import TeamCard from "./TeamCard";
-import SafeHTML from "@/components/common/SafeHTML";
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { fetchTeamCategories, fetchTeamMembersByCategory } from '@/lib/wordpress/client';
+import TeamCard from './TeamCard';
+import SafeHTML from '@/components/common/SafeHTML';
 
 // Swiper styles are imported in globals.css/style.css
 
 export default function TeamMembersBlock({ data }) {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const paginationRef = useRef(null);
+  const [prevEl, setPrevEl] = useState(null);
+  const [nextEl, setNextEl] = useState(null);
+  const [paginationEl, setPaginationEl] = useState(null);
   const {
     hide_block,
     title,
@@ -41,7 +39,7 @@ export default function TeamMembersBlock({ data }) {
         let cats = [];
         if (selected_categories && selected_categories.length > 0) {
           // Normalize selected_categories (it might be objects from ACF)
-          cats = selected_categories.map((cat) => ({
+          cats = selected_categories.map(cat => ({
             id: cat.term_id || cat.id,
             name: cat.name,
             slug: cat.slug,
@@ -57,7 +55,7 @@ export default function TeamMembersBlock({ data }) {
           }
         }
       } catch (error) {
-        console.error("Error loading team categories:", error);
+        console.error('Error loading team categories:', error);
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -75,10 +73,8 @@ export default function TeamMembersBlock({ data }) {
 
     async function loadMembers() {
       try {
-        const categoryMembers = await fetchTeamMembersByCategory(
-          activeCategory
-        );
-        setMembers((prev) => ({ ...prev, [activeCategory]: categoryMembers }));
+        const categoryMembers = await fetchTeamMembersByCategory(activeCategory);
+        setMembers(prev => ({ ...prev, [activeCategory]: categoryMembers }));
       } catch (error) {
         console.error(`Error loading members for ${activeCategory}:`, error);
       }
@@ -124,7 +120,7 @@ export default function TeamMembersBlock({ data }) {
                 style={{
                   width: `calc(${100 / categories.length}% - 4px)`,
                   left: `calc(${(activeIndex * 100) / categories.length}% + ${
-                    activeIndex === 0 ? "2px" : "2px"
+                    activeIndex === 0 ? '2px' : '2px'
                   })`,
                 }}
               />
@@ -134,9 +130,7 @@ export default function TeamMembersBlock({ data }) {
                   key={category.id || category.slug}
                   onClick={() => handleTabClick(category.slug, index)}
                   className={`relative z-10 text-sm md:text-base font-medium px-4 py-3 rounded-full transition-all duration-300 flex-1 text-center ${
-                    activeCategory === category.slug
-                      ? "text-white"
-                      : "text-primary hover:bg-red-50"
+                    activeCategory === category.slug ? 'text-white' : 'text-primary hover:bg-red-50'
                   }`}
                 >
                   {category.name}
@@ -160,26 +154,21 @@ export default function TeamMembersBlock({ data }) {
                   spaceBetween={24}
                   slidesPerView={1}
                   watchOverflow={true}
-                  onUpdate={(swiper) => {
+                  onUpdate={swiper => {
                     // This checks if arrows should be visible (swiper is locked if slides <= slidesPerView)
                     setShowNav(!swiper.isLocked);
                   }}
                   pagination={{
                     clickable: true,
-                    el: paginationRef.current,
-                    type: "custom",
+                    el: paginationEl,
+                    type: 'custom',
                     renderCustom: (swiper, current, total) => {
                       return `${current}/${total}`;
                     },
                   }}
                   navigation={{
-                    nextEl: nextRef.current,
-                    prevEl: prevRef.current,
-                  }}
-                  onBeforeInit={(swiper) => {
-                    swiper.params.navigation.prevEl = prevRef.current;
-                    swiper.params.navigation.nextEl = nextRef.current;
-                    swiper.params.pagination.el = paginationRef.current;
+                    nextEl,
+                    prevEl,
                   }}
                   breakpoints={{
                     640: { slidesPerView: 2 },
@@ -189,16 +178,14 @@ export default function TeamMembersBlock({ data }) {
                   className="overflow-visible!"
                 >
                   {currentMembers.length > 0 ? (
-                    currentMembers.map((member) => (
+                    currentMembers.map(member => (
                       <SwiperSlide key={member.id}>
                         <TeamCard member={member} />
                       </SwiperSlide>
                     ))
                   ) : (
                     <div className="text-center py-20 w-full">
-                      <p className="text-grey-3 text-lg">
-                        No team members found in this category.
-                      </p>
+                      <p className="text-grey-3 text-lg">No team members found in this category.</p>
                     </div>
                   )}
                 </Swiper>
@@ -207,49 +194,26 @@ export default function TeamMembersBlock({ data }) {
               {/* Slider Navigation & Pagination - Only show if there's enough slides */}
               <div
                 className={`mt-8 pagination-wrapper flex justify-center items-center gap-6 transition-opacity duration-300 ${
-                  showNav ? "opacity-100" : "opacity-0 pointer-events-none"
+                  showNav ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
               >
                 <button
-                  ref={prevRef}
+                  ref={setPrevEl}
                   className="swiper-btn-prev-pagination w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="7"
-                    viewBox="0 0 9 7"
-                    fill="none"
-                    className="rotate-180"
-                  >
-                    <path
-                      d="M1.16 3.18a.44.44 0 000 .89h6.25L5.29 6.2a.44.44 0 10.63.63l2.58-2.58a.9.9 0 000-1.26L5.92.43a.44.44 0 10-.63.63l2.13 2.13H1.16z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <ChevronLeft className="w-5 h-5" strokeWidth={2.5} />
                 </button>
 
                 <div
-                  ref={paginationRef}
+                  ref={setPaginationEl}
                   className="swiper-pagination-custom text-primary text-sm font-semibold w-auto! flex gap-1"
                 ></div>
 
                 <button
-                  ref={nextRef}
+                  ref={setNextEl}
                   className="swiper-btn-next-pagination w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="7"
-                    viewBox="0 0 9 7"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.16 3.18a.44.44 0 000 .89h6.25L5.29 6.2a.44.44 0 10.63.63l2.58-2.58a.9.90 0 000-1.26L5.92.43a.44.44 0 10-.63.63l2.13 2.13H1.16z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <ChevronRight className="w-5 h-5" strokeWidth={2.5} />
                 </button>
               </div>
             </div>

@@ -1,16 +1,20 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import Image from "next/image";
-import SafeHTML from "@/components/common/SafeHTML";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import Image from 'next/image';
+import SafeHTML from '@/components/common/SafeHTML';
+import { ChevronLeft, ChevronRight, Eye, X } from 'lucide-react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function CertificateBlock({ data }) {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [prevEl, setPrevEl] = useState(null);
+  const [nextEl, setNextEl] = useState(null);
+  const [paginationEl, setPaginationEl] = useState(null);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -19,17 +23,17 @@ export default function CertificateBlock({ data }) {
       const scrollY = window.scrollY;
 
       // Lock scroll
-      document.body.style.position = "fixed";
+      document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-      document.body.style.overflow = "hidden";
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
 
       return () => {
         // Restore scroll
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        document.body.style.overflow = "";
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
         window.scrollTo(0, scrollY);
       };
     }
@@ -76,13 +80,13 @@ export default function CertificateBlock({ data }) {
                 spaceBetween={30}
                 slidesPerView={1}
                 navigation={{
-                  prevEl: ".swiper-btn-prev-pagination",
-                  nextEl: ".swiper-btn-next-pagination",
+                  prevEl,
+                  nextEl,
                 }}
                 pagination={{
-                  el: ".swiper-pagination-custom",
+                  el: paginationEl,
                   clickable: true,
-                  type: "custom",
+                  type: 'custom',
                   renderCustom: (swiper, current, total) => {
                     return `${current}/${total}`;
                   },
@@ -104,10 +108,10 @@ export default function CertificateBlock({ data }) {
                         <div className="certificate-image-container bg-[#EFF9FE] flex items-center justify-center p-4 rounded-t-2xl ">
                           <Image
                             src={item.certificate_image.url}
-                            alt={item.certificate_image.alt || "Certificate"}
+                            alt={item.certificate_image.alt || 'Certificate'}
                             width={item.certificate_image.width || 400}
                             height={item.certificate_image.height || 300}
-                            className="certificate-display-image !w-auto !h-auto mx-auto"
+                            className="certificate-display-image w-auto! h-auto! mx-auto"
                           />
                         </div>
                       )}
@@ -134,32 +138,23 @@ export default function CertificateBlock({ data }) {
                               onClick={() =>
                                 handleViewCertificate(
                                   item.certificate_popup_image.url,
-                                  item.certificate_popup_image.alt ||
-                                    item.certificate_no
+                                  item.certificate_popup_image.alt || item.certificate_no
                                 )
                               }
                               role="button"
                               tabIndex={0}
-                              onKeyPress={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
+                              onKeyPress={e => {
+                                if (e.key === 'Enter' || e.key === ' ') {
                                   handleViewCertificate(
                                     item.certificate_popup_image.url,
-                                    item.certificate_popup_image.alt ||
-                                      item.certificate_no
+                                    item.certificate_popup_image.alt || item.certificate_no
                                   );
                                 }
                               }}
-                              aria-label={`View ${
-                                item.certificate_no || "certificate"
-                              }`}
+                              aria-label={`View ${item.certificate_no || 'certificate'}`}
                             >
                               <span className="icon">
-                                <Image
-                                  src="/images/about/Eye.svg"
-                                  alt=""
-                                  width={20}
-                                  height={20}
-                                />
+                                <Eye className="w-5 h-5 text-primary" />
                               </span>
                               View Certificate
                             </div>
@@ -173,36 +168,23 @@ export default function CertificateBlock({ data }) {
 
               {/* Slider Navigation & Pagination */}
               <div className="mt-3 lg:hidden flex justify-center items-center gap-4 mb-6">
-                <div className="swiper-btn-prev-pagination swiper-btn-prev cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="7"
-                    viewBox="0 0 9 7"
-                    fill="none"
-                  >
-                    <path
-                      d="M7.92 3.18c.24 0 .44.2.44.45s-.2.44-.44.44H1.67l2.13 2.13a.44.44 0 01-.63.63L.59 4.26a.9.9 0 010-1.26l2.58-2.57a.44.44 0 01.63.63L1.67 3.18h6.25z"
-                      fill="#DA000E"
-                    />
-                  </svg>
+                <div
+                  ref={setPrevEl}
+                  className="swiper-btn-prev-pagination swiper-btn-prev cursor-pointer flex items-center justify-center"
+                >
+                  <ChevronLeft className="w-6 h-6 text-primary" strokeWidth={2.5} />
                 </div>
 
-                <div className="swiper-pagination-custom text-primary text-xs font-medium !w-auto"></div>
+                <div
+                  ref={setPaginationEl}
+                  className="swiper-pagination-custom text-primary text-xs font-medium w-auto!"
+                ></div>
 
-                <div className="swiper-btn-next-pagination swiper-btn-next cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="9"
-                    height="7"
-                    viewBox="0 0 9 7"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.16 3.18a.44.44 0 000 .89h6.25L5.29 6.2a.44.44 0 10.63.63l2.58-2.58a.9.9 0 000-1.26L5.92.43a.44.44 0 10-.63.63l2.13 2.13H1.16z"
-                      fill="#DA000E"
-                    />
-                  </svg>
+                <div
+                  ref={setNextEl}
+                  className="swiper-btn-next-pagination swiper-btn-next cursor-pointer flex items-center justify-center"
+                >
+                  <ChevronRight className="w-6 h-6 text-primary" strokeWidth={2.5} />
                 </div>
               </div>
             </div>
@@ -213,22 +195,19 @@ export default function CertificateBlock({ data }) {
       {/* Certificate Modal */}
       {selectedCertificate && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 bg-opacity-75 p-4"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/80 bg-opacity-75 p-4"
           onClick={closeModal}
           role="dialog"
           aria-modal="true"
           aria-label="Certificate viewer"
         >
-          <div
-            className=" max-w-4xl max-h-[90vh] overflow-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className=" max-w-4xl max-h-[90vh] overflow-auto" onClick={e => e.stopPropagation()}>
             <button
               className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75 transition-all z-10"
               onClick={closeModal}
               aria-label="Close certificate viewer"
             >
-              ✕
+              <X className="w-6 h-6" />
             </button>
             <Image
               src={selectedCertificate.image}

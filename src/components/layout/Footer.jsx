@@ -266,19 +266,6 @@ export default function Footer({ footerData }) {
                 © {currentYear} {copyright_text || 'NexusPress. All rights reserved'}
               </p>
             </div>
-
-            {/* Designed by */}
-            <div className="flex gap-1 items-center">
-              <span className="text-grey-3">Designed by</span>
-              <a
-                href="https://screenroot.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#000] hover:text-primary duration-500 ease-in-out"
-              >
-                ScreenRoot
-              </a>
-            </div>
           </div>
         </div>
       </div>
