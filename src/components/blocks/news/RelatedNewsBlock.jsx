@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import { useRef, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { fetchNewsPosts } from "@/lib/wordpress/news";
-import { useState } from "react";
+import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getNewsLink } from '@/lib/utils/urls';
 
 /**
  * Related News Block
@@ -12,18 +11,14 @@ import { useState } from "react";
  */
 export default function RelatedNewsBlock({
   data,
-  currentPostId,
   posts: initialPosts = [],
-  layout = "block", // "block" or "sidebar"
+  layout: propLayout = 'block', // "block" or "sidebar"
 }) {
   const {
     hide_block,
-    section_title = data?.section_title || "Related Articles",
-    posts_to_show = data?.posts_to_show || 3,
-    show_category = data?.show_category !== undefined
-      ? data.show_category
-      : true,
+    section_title = data?.section_title || 'Related Articles',
     show_date = data?.show_date !== undefined ? data.show_date : true,
+    layout = propLayout, // Use propLayout as default if not in data
   } = data || {};
 
   const [posts, setPosts] = useState(initialPosts);
@@ -45,9 +40,9 @@ export default function RelatedNewsBlock({
   useEffect(() => {
     if (posts && posts.length > 0 && swiperRef.current) {
       // Only initialize on mobile
-      if (typeof window !== "undefined" && window.innerWidth < 1024) {
-        import("swiper").then(({ default: Swiper }) => {
-          import("swiper/modules").then(({ Navigation, Pagination }) => {
+      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+        import('swiper').then(({ default: Swiper }) => {
+          import('swiper/modules').then(({ Navigation, Pagination }) => {
             new Swiper(swiperRef.current, {
               modules: [Navigation, Pagination],
               slidesPerView: 1,
@@ -59,7 +54,7 @@ export default function RelatedNewsBlock({
               pagination: {
                 el: paginationRef.current,
                 clickable: true,
-                type: "custom",
+                type: 'custom',
                 renderCustom: (swiper, current, total) => {
                   return `${current}/${total}`;
                 },
@@ -87,105 +82,106 @@ export default function RelatedNewsBlock({
 
   return (
     <section className="related_news_block py-12">
-      <div className={layout === "sidebar" ? "" : "container-fluid"}>
+      <div className={layout === 'sidebar' ? '' : 'container-fluid'}>
         <div className="h3 font-semibold mb-6">{section_title}</div>
 
         {/* List Layout (Shared for Mobile and Sidebar) */}
-        <div
-          className={`flex flex-col gap-4 ${
-            layout === "sidebar" ? "" : "lg:hidden"
-          }`}
-        >
-          {posts.map((post) => (
-            <article key={post.id} className="group">
-              <Link
-                href={`/our-company/news-updates/${post.slug}`}
-                className="flex bg-neutral-1 rounded-2xl overflow-hidden hover:bg-white hover:shadow-md transition-all duration-300"
-              >
-                {post.featuredImage && (
-                  <div className="w-4/12 flex-shrink-0 aspect-[1.5]">
-                    <Image
-                      src={post.featuredImage.url}
-                      alt={post.featuredImage.alt || post.title}
-                      width={120}
-                      height={80}
-                      className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                )}
+        <div className={`flex flex-col gap-4 ${layout === 'sidebar' ? '' : 'lg:hidden'}`}>
+          {posts.map(post => {
+            const link = getNewsLink(post);
 
-                <div className="w-8/12 p-3 flex flex-col justify-center">
-                  {show_date && post.date && (
-                    <time
-                      dateTime={post.date}
-                      className="text-xs text-[#555] tracking-normal mb-1"
-                    >
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </time>
-                  )}
-
-                  <div className="text-sm font-medium text-black line-clamp-2 group-hover:text-primary transition-colors leading-snug">
-                    {post.title}
-                  </div>
-
-                  <span className="inline-flex items-center text-sm text-primary font-semibold mt-2">
-                    Read More
-                  </span>
-                </div>
-              </Link>
-            </article>
-          ))}
-        </div>
-
-        {/* Desktop Grid Layout (Only for full-width blocks) */}
-        {layout === "block" && (
-          <div className="hidden lg:grid grid-cols-3 gap-6">
-            {posts.slice(0, posts_to_show).map((post) => (
+            return (
               <article key={post.id} className="group">
                 <Link
-                  href={`/our-company/news-updates/${post.slug}`}
-                  className="block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  href={link}
+                  className="flex bg-neutral-1 rounded-2xl overflow-hidden hover:bg-white hover:shadow-md transition-all duration-300"
                 >
                   {post.featuredImage && (
-                    <div className="aspect-video overflow-hidden">
+                    <div className="w-4/12 shrink-0 aspect-[1.5]">
                       <Image
                         src={post.featuredImage.url}
                         alt={post.featuredImage.alt || post.title}
-                        width={400}
-                        height={225}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        width={120}
+                        height={80}
+                        className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                   )}
 
-                  <div className="p-5 flex flex-col">
+                  <div className="w-8/12 p-3 flex flex-col justify-center">
                     {show_date && post.date && (
                       <time
                         dateTime={post.date}
-                        className="text-xs text-gray-500 mb-2"
+                        className="text-xs text-[#555] tracking-normal mb-1"
                       >
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          month: 'long',
+                          year: 'numeric',
                         })}
                       </time>
                     )}
 
-                    <div className="text-lg font-bold text-black line-clamp-2 mb-3 group-hover:text-primary transition-colors">
+                    <div className="text-sm font-medium text-black line-clamp-2 group-hover:text-primary transition-colors leading-snug">
                       {post.title}
                     </div>
 
-                    <span className="text-sm text-primary font-semibold mt-auto">
-                      Read More →
+                    <span className="inline-flex items-center text-sm text-primary font-semibold mt-2">
+                      Read More
                     </span>
                   </div>
                 </Link>
               </article>
-            ))}
+            );
+          })}
+        </div>
+
+        {/* Desktop Grid Layout (Only for full-width blocks) */}
+        {layout === 'block' && (
+          <div className="hidden lg:grid grid-cols-3 gap-6">
+            {posts.slice(0, posts_to_show).map(post => {
+              const link = getNewsLink(post);
+
+              return (
+                <article key={post.id} className="group">
+                  <Link
+                    href={link}
+                    className="block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  >
+                    {post.featuredImage && (
+                      <div className="aspect-video overflow-hidden">
+                        <Image
+                          src={post.featuredImage.url}
+                          alt={post.featuredImage.alt || post.title}
+                          width={400}
+                          height={225}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+
+                    <div className="p-5 flex flex-col">
+                      {show_date && post.date && (
+                        <time dateTime={post.date} className="text-xs text-gray-500 mb-2">
+                          {new Date(post.date).toLocaleDateString('en-US', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                          })}
+                        </time>
+                      )}
+
+                      <div className="text-lg font-bold text-black line-clamp-2 mb-3 group-hover:text-primary transition-colors">
+                        {post.title}
+                      </div>
+
+                      <span className="text-sm text-primary font-semibold mt-auto">
+                        Read More →
+                      </span>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         )}
       </div>

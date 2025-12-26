@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { convertToNextPath } from '@/lib/utils/urls';
 
 export default function Footer({ footerData }) {
   // Initialize with current year to prevent hydration mismatch
@@ -22,30 +24,6 @@ export default function Footer({ footerData }) {
   } = footerData;
 
   const social_links = follow_us?.social_links || {};
-
-  // Helper function to convert WordPress URL to Next.js path
-  const convertToNextPath = wpUrl => {
-    if (!wpUrl) return '#';
-
-    // If it's already a relative path, return as is
-    if (wpUrl.startsWith('/')) return wpUrl;
-
-    // If it's an external URL, return as is
-    if (wpUrl.startsWith('http') && !wpUrl.includes('localhost') && !wpUrl.includes('127.0.0.1')) {
-      return wpUrl;
-    }
-
-    try {
-      const url = new URL(wpUrl);
-      // Remove the WordPress base path and return just the slug
-      let path = url.pathname.replace('/nextjs-wp', '');
-      // Remove trailing slash
-      path = path.endsWith('/') ? path.slice(0, -1) : path;
-      return path || '/';
-    } catch (e) {
-      return wpUrl;
-    }
-  };
 
   // Split page links into 2 columns
   const allLinks = page_links || [];
@@ -74,15 +52,18 @@ export default function Footer({ footerData }) {
                 <div className="lg:col-span-4 md:col-span-6">
                   <Link href="/" className="text-[22px] focus:outline-none">
                     {footer_logo && (
-                      <img
-                        src={typeof footer_logo === 'string' ? footer_logo : footer_logo.url}
-                        alt={
-                          typeof footer_logo === 'string'
-                            ? ''
-                            : footer_logo.alt || footer_logo.title || ''
-                        }
-                        className="h-auto"
-                      />
+                      <div className="relative h-12 w-48">
+                        <Image
+                          src={typeof footer_logo === 'string' ? footer_logo : footer_logo.url}
+                          alt={
+                            typeof footer_logo === 'string'
+                              ? ''
+                              : footer_logo.alt || footer_logo.title || ''
+                          }
+                          fill
+                          className="object-contain object-left"
+                        />
+                      </div>
                     )}
                   </Link>
                 </div>

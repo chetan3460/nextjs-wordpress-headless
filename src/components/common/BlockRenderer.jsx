@@ -2,94 +2,190 @@
 
 import dynamic from 'next/dynamic';
 import BlockErrorBoundary from '@/components/common/BlockErrorBoundary';
-import BlockLoadingSkeleton from '@/components/common/BlockLoadingSkeleton';
 
 const AccordionBlock = dynamic(() => import('@/components/blocks/common/AccordionBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Accordion" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading AccordionBlock...
+    </div>
+  ),
 });
 const CertificateBlock = dynamic(() => import('@/components/blocks/about/CertificateBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Certificate" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading CertificateBlock...
+    </div>
+  ),
 });
 const DistributionBlock = dynamic(() => import('@/components/blocks/common/DistributionBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Distribution" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading DistributionBlock...
+    </div>
+  ),
+});
+const FaqBlock = dynamic(() => import('@/components/blocks/common/FaqBlock'), {
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading FaqBlock...
+    </div>
+  ),
 });
 const GalleryBlock = dynamic(() => import('@/components/blocks/common/GalleryBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Gallery" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading GalleryBlock...
+    </div>
+  ),
 });
 const GetInTouchBlock = dynamic(() => import('@/components/blocks/common/GetInTouchBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Get In Touch" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading GetInTouchBlock...
+    </div>
+  ),
 });
 const GlobalBannerBlock = dynamic(() => import('@/components/blocks/common/GlobalBannerBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Banner" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading GlobalBannerBlock...
+    </div>
+  ),
 });
 const HeroBlock = dynamic(() => import('@/components/blocks/home/HeroBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Hero" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HeroBlock...
+    </div>
+  ),
 });
 const HomeClientBlock = dynamic(() => import('@/components/blocks/home/HomeClientBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Clients" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HomeClientBlock...
+    </div>
+  ),
 });
 const HomeFeaturesBlock = dynamic(() => import('@/components/blocks/common/HomeFeaturesBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Features" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HomeFeaturesBlock...
+    </div>
+  ),
 });
 const HomeImageSliderBlock = dynamic(
   () => import('@/components/blocks/home/HomeImageSliderBlock'),
   {
-    loading: () => <BlockLoadingSkeleton blockName="Image Slider" />,
+    loading: () => (
+      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+        Loading HomeImageSliderBlock...
+      </div>
+    ),
   }
 );
 const HomeProductListingBlock = dynamic(
   () => import('@/components/blocks/home/HomeProductListingBlock'),
   {
-    loading: () => <BlockLoadingSkeleton blockName="Products" />,
+    loading: () => (
+      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+        Loading HomeProductListingBlock...
+      </div>
+    ),
   }
 );
-const HomeSliderBlock = dynamic(() => import('@/components/blocks/common/HomeSliderBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Slider" />,
-});
 const HomeStatsBlock = dynamic(() => import('@/components/blocks/home/HomeStatsBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Statistics" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HomeStatsBlock...
+    </div>
+  ),
 });
 const HomeTabBlock = dynamic(() => import('@/components/blocks/home/HomeTabBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Tabs" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HomeTabBlock...
+    </div>
+  ),
 });
 const LatestNews = dynamic(() => import('@/components/blocks/home/LatestNews'), {
-  loading: () => <BlockLoadingSkeleton blockName="Latest News" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading LatestNews...
+    </div>
+  ),
 });
 const LeadershipBlock = dynamic(() => import('@/components/blocks/our-company/LeadershipBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Leadership" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading LeadershipBlock...
+    </div>
+  ),
 });
 const LeadershipBlockSlider = dynamic(
   () => import('@/components/blocks/our-company/LeadershipBlockSlider'),
   {
-    loading: () => <BlockLoadingSkeleton blockName="Leadership Slider" />,
+    loading: () => (
+      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+        Loading LeadershipBlockSlider...
+      </div>
+    ),
   }
 );
 const MilestonesBlock = dynamic(() => import('@/components/blocks/common/MilestonesBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Milestones" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading MilestonesBlock...
+    </div>
+  ),
 });
 const NewsContentBlock = dynamic(() => import('@/components/blocks/news/NewsContentBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="News Content" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading NewsContentBlock...
+    </div>
+  ),
 });
 const NewsListingBlock = dynamic(() => import('@/components/blocks/news/NewsListingBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="News Listing" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading NewsListingBlock...
+    </div>
+  ),
 });
 const RelatedNewsBlock = dynamic(() => import('@/components/blocks/news/RelatedNewsBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Related News" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading RelatedNewsBlock...
+    </div>
+  ),
 });
 const TeamMembersBlock = dynamic(() => import('@/components/blocks/our-company/TeamMembersBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Team Members" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading TeamMembersBlock...
+    </div>
+  ),
 });
 const TestLeaderBlock = dynamic(() => import('@/components/blocks/our-company/TestLeaderBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Test Leader" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading TestLeaderBlock...
+    </div>
+  ),
 });
 const TestimonialsBlock = dynamic(() => import('@/components/blocks/careers/TestimonialsBlock'), {
-  loading: () => <BlockLoadingSkeleton blockName="Testimonials" />,
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading TestimonialsBlock...
+    </div>
+  ),
 });
 
 const BLOCK_COMPONENTS = {
   accordion_block: AccordionBlock,
   certificate_block: CertificateBlock,
   distribution_block: DistributionBlock,
+  faq_block: FaqBlock,
   gallery_block: GalleryBlock,
   get_in_touch_block: GetInTouchBlock,
   global_banner_block: GlobalBannerBlock,
@@ -98,7 +194,6 @@ const BLOCK_COMPONENTS = {
   home_features_block: HomeFeaturesBlock,
   home_image_slider_block: HomeImageSliderBlock,
   home_product_listing_block: HomeProductListingBlock,
-  home_slider_block: HomeSliderBlock,
   home_stats_block: HomeStatsBlock,
   home_tab_block: HomeTabBlock,
   latest_news: LatestNews,

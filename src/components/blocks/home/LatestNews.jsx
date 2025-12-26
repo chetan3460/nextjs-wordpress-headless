@@ -1,20 +1,22 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import SafeImage from "@/components/common/SafeImage";
-import SafeHTML from "@/components/common/SafeHTML";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { useState } from 'react';
+import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Clock, BookOpen } from 'lucide-react';
+import SafeHTML from '@/components/common/SafeHTML';
+import Image from 'next/image';
+import { convertToNextPath, getNewsLink } from '@/lib/utils/urls';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 // Helper to format date
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-  const options = { day: "numeric", month: "short" }; // 'j M' format -> '9 Dec'
-  return new Date(dateString).toLocaleDateString("en-US", options);
+const formatDate = dateString => {
+  if (!dateString) return '';
+  const options = { day: 'numeric', month: 'short' }; // 'j M' format -> '9 Dec'
+  return new Date(dateString).toLocaleDateString('en-US', options);
 };
 
 export default function LatestNewsBlock({ data }) {
@@ -28,7 +30,7 @@ export default function LatestNewsBlock({ data }) {
   const newsCount = select_news?.length || 0;
 
   return (
-    <section className="news-list-block">
+    <section className="news-list-block bg-[#f9fafb] py-12">
       <div className="container-fluid mx-auto relative overflow-hidden">
         {/* Header */}
         {(heading || sub_title) && (
@@ -61,7 +63,7 @@ export default function LatestNewsBlock({ data }) {
               pagination={{
                 el: paginationEl,
                 clickable: true,
-                type: "custom",
+                type: 'custom',
                 renderCustom: (swiper, current, total) => {
                   return `${current}/${total}`;
                 },
@@ -78,80 +80,89 @@ export default function LatestNewsBlock({ data }) {
                   post.featured_image || // New field from fetchPostById
                   post.featured_media_src_url ||
                   post.x_featured_media_large ||
-                  "/images/placeholder.jpg";
+                  '/images/placeholder.jpg';
 
-                // Extract slug from URL or use post.slug directly
-                // post.url might be like: "http://localhost/nextjs-wp/news-updates/dignissimos-voluptas-error-doloribus/"
-                let slug = post.slug;
-                if (!slug && post.url) {
-                  // Extract slug from URL (last segment before trailing slash)
-                  const urlParts = post.url.replace(/\/$/, "").split("/");
-                  slug = urlParts[urlParts.length - 1];
-                }
-                const link = slug ? `/news/${slug}` : "#";
+                const link = getNewsLink(post);
 
                 // Map categories from object array if present
                 const categories = Array.isArray(post.categories)
-                  ? post.categories.map((c) => c.name)
+                  ? post.categories.map(c => c.name)
                   : post.categories_names || [];
 
                 // Mock read time or use if available
-                const readTime = post.read_time || "5";
-                const title =
-                  post.title?.rendered ||
-                  post.title ||
-                  post.post_title ||
-                  "Untitled";
+                const readTime = post.read_time || '5';
+                const title = post.title?.rendered || post.title || post.post_title || 'Untitled';
 
                 return (
-                  <SwiperSlide
-                    key={post.ID || post.id || index}
-                    className="h-auto"
-                  >
-                    <div className="news-item rounded-2xl flex flex-col flex-shrink-0 transition-all duration-300 group animate-card-3 h-full">
-                      {/* Image Section */}
-                      <div className="relative overflow-hidden h-64">
-                        <Link href={link} className="block w-full h-full">
-                          <img
+                  <SwiperSlide key={post.ID || post.id || index} className="h-auto">
+                    <article className="bg-white dark:bg-background-5 rounded-[20px] overflow-hidden border border-stroke-4 dark:border-stroke-5 max-w-[500px] mx-auto md:mx-0 md:max-w-full h-full flex flex-col">
+                      {/* Image */}
+                      <figure className="relative overflow-hidden">
+                        <Link href={link} className="block aspect-16/10">
+                          <Image
                             src={imageUrl}
                             alt={title}
-                            className="rounded-t-2xl lazy-image object-cover w-full h-full scale-100 duration-700 transition-all group-hover:scale-110 overflow-hidden"
+                            fill
+                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                           />
                         </Link>
-                      </div>
+                      </figure>
 
-                      {/* Content Section */}
-                      <div className="flex flex-col gap-4 items-start justify-between bg-gray-100 px-5 pt-5 pb-7  relative min-h-[170px] flex-grow rounded-b-2xl">
-                        {/* Categories Pills */}
-                        {categories && categories.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {categories.slice(0, 3).map((cat, idx) => (
-                              <span key={idx} className="badge">
-                                {cat}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                      {/* Content */}
+                      <div className="p-6 space-y-6 flex flex-col grow">
+                        {/* Badges and Meta Info */}
+                        <div className="flex items-center justify-between xl:gap-6 gap-3.5 flex-wrap">
+                          {/* Category Badge */}
+                          {categories && categories.length > 0 && (
+                            <span className="badge badge-green">{categories[0]}</span>
+                          )}
 
-                        {/* Title */}
-                        <Link href={link} className="block">
-                          <div className="text-base font-semibold leading-[19px] text-gray-900 line-clamp-2">
-                            <SafeHTML html={title} />
-                          </div>
-                        </Link>
+                          {/* Time Indicator */}
+                          <span className="flex items-center gap-1">
+                            <Clock
+                              className="w-5 h-5 stroke-secondary dark:stroke-accent"
+                              strokeWidth={1.5}
+                            />
+                            <span className="text-tagline-3 font-normal text-secondary dark:text-accent whitespace-nowrap">
+                              {formatDate(post.date)}
+                            </span>
+                          </span>
 
-                        {/* Date and Read Time */}
-                        <div className="flex justify-between items-center font-medium text-base text-gray-500 gap-1.5 w-full mt-auto">
-                          <time dateTime={post.date}>
-                            {formatDate(post.date)}
-                          </time>
-                          <div className="flex items-center gap-1.5">
-                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
-                            <span>{readTime} min read</span>
-                          </div>
+                          {/* Read Time Indicator */}
+                          <span className="flex items-center gap-1">
+                            <BookOpen
+                              className="w-5 h-5 stroke-secondary dark:stroke-accent"
+                              strokeWidth={1.5}
+                            />
+                            <span className="text-tagline-3 font-normal text-secondary dark:text-accent whitespace-nowrap">
+                              {readTime} min read
+                            </span>
+                          </span>
+                        </div>
+
+                        {/* Title and Description */}
+                        <div className="space-y-2 grow">
+                          <Link href={link}>
+                            <h3 className=" text-black transition-colors mb-2">{title}</h3>
+                          </Link>
+                          {post.excerpt && (
+                            <div className="line-clamp-2">
+                              <SafeHTML html={post.excerpt.rendered || post.excerpt} />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Read More Button */}
+                        <div>
+                          <Link
+                            href={link}
+                            className="btn hover:btn-secondary dark:hover:btn-accent dark:btn-transparent btn-white btn-md"
+                          >
+                            <span>Read more</span>
+                          </Link>
                         </div>
                       </div>
-                    </div>
+                    </article>
                   </SwiperSlide>
                 );
               })}
@@ -160,7 +171,7 @@ export default function LatestNewsBlock({ data }) {
             {/* Slider Navigation & Pagination */}
             <div
               className={`mt-3 flex justify-center items-center gap-4 ${
-                newsCount >= 4 ? "lg:hidden" : ""
+                newsCount >= 4 ? 'lg:hidden' : ''
               } mb-6`}
             >
               <div
@@ -209,19 +220,14 @@ export default function LatestNewsBlock({ data }) {
             {cta && cta.url && (
               <div className="text-center mt-4 anim-uni-in-up">
                 <Link
-                  href={cta.url}
-                  target={cta.target || "_self"}
-                  className="btn" // Assuming generic btn class is handled by global styles as per PHP
+                  href={convertToNextPath(cta.url)}
+                  target={cta.target || '_self'}
+                  className="btn"
                 >
-                  {cta.title || "View All News"}
+                  {cta.title || 'View All News'}
                 </Link>
               </div>
             )}
-
-            {/* Shape Image (Mobile) */}
-            <div className="md:hidden block absolute left-0 bottom-0 -z-1 pointer-none opacity-50">
-              {/* Placeholder for shape or empty if not critical */}
-            </div>
           </div>
         )}
       </div>

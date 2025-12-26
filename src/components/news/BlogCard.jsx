@@ -1,15 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
-import { formatDate } from "@/lib/wordpress/news";
+import Image from 'next/image';
+import Link from 'next/link';
+import { formatDate } from '@/lib/wordpress/news';
+import { getNewsLink } from '@/lib/utils/urls';
 
 export default function BlogCard({ post }) {
+  const link = getNewsLink(post);
+
   return (
     <article className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
       {/* Featured Image */}
-      <Link
-        href={`/our-company/news-updates/${post.slug}`}
-        className="relative h-64 w-full overflow-hidden bg-gray-100"
-      >
+      <Link href={link} className="relative h-64 w-full overflow-hidden bg-gray-100">
         {post.featuredImage ? (
           <Image
             src={post.featuredImage.url}
@@ -20,12 +20,7 @@ export default function BlogCard({ post }) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
-            <svg
-              className="w-16 h-16"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -51,7 +46,7 @@ export default function BlogCard({ post }) {
         {/* Title */}
         <h3 className="mb-3">
           <Link
-            href={`/our-company/news-updates/${post.slug}`}
+            href={link}
             className="text-xl font-bold text-gray-900 hover:text-primary transition-colors line-clamp-2"
           >
             {post.title}
@@ -68,12 +63,7 @@ export default function BlogCard({ post }) {
         <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
           <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span className="flex items-center gap-1">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

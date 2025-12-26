@@ -87,10 +87,13 @@ body {
   --color-gray-50: #d9d9d9;
   --color-gray-150: #6c6c6c;
 
+  --color-ns-green-light: #e8fbc6;
+
   --color-background-1: #fcfcfd;
   --color-background-2: #f9fafb;
 
   --color-stroke-1: #dfe4eb;
+  --color-stroke-2: #e3e7ed;
   --color-stroke-4: #eceff4;
 
   --color-light-blue: #dff2fd; /* Sky 50 / Very light blue – #DFF2FD */
@@ -124,12 +127,17 @@ body {
 .bg-black {
   background-color: var(--color-black);
 }
-
+.badge-green {
+  background-color: var(--color-ns-green-light);
+}
 .border-black {
   border-color: var(--color-black);
 }
 .border-stroke-1 {
   border-color: var(--color-stroke-1);
+}
+.border-t-stroke-2 {
+  border-top-color: var(--color-stroke-2);
 }
 .bg-background-2 {
   background-color: var(--color-background-2);

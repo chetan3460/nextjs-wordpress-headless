@@ -56,7 +56,11 @@ h4,
   @apply bg-indigo-600/90 text-white;
 }
 .badge {
-  @apply flex items-center justify-center rounded-[43px];
+  @apply inline-block px-5 py-1.5 text-sm font-normal lowercase whitespace-nowrap rounded-full;
+}
+
+.badge-white-v2 {
+  @apply bg-white/80;
 }
 
 /* Product grid smooth transitions */

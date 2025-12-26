@@ -1609,16 +1609,79 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_69452d61762b4": {
-                    "key": "layout_69452d61762b4",
-                    "name": "home_slider_block",
-                    "label": "Home Slider Block",
+                "layout_694e0a0b372e5": {
+                    "key": "layout_694e0a0b372e5",
+                    "name": "faq_block",
+                    "label": "FAQ Block",
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_69452d6e762b6",
-                            "label": "Slider Items",
-                            "name": "slider_items",
+                            "key": "field_694e0a14372e7",
+                            "label": "Hide Block",
+                            "name": "hide_block",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "allow_in_bindings": 1,
+                            "ui": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
+                            "key": "field_694e0a1c372e8",
+                            "label": "Title",
+                            "name": "title",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_694e0a27372e9",
+                            "label": "Content",
+                            "name": "content",
+                            "aria-label": "",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_694e0a35372ea",
+                            "label": "FAQ Items",
+                            "name": "faq_items",
                             "aria-label": "",
                             "type": "repeater",
                             "instructions": "",
@@ -1637,9 +1700,9 @@
                             "rows_per_page": 20,
                             "sub_fields": [
                                 {
-                                    "key": "field_69452d7b762b7",
-                                    "label": "Title",
-                                    "name": "title",
+                                    "key": "field_694e0a43372eb",
+                                    "label": "FAQ Title",
+                                    "name": "faq_title",
                                     "aria-label": "",
                                     "type": "text",
                                     "instructions": "",
@@ -1656,7 +1719,29 @@
                                     "placeholder": "",
                                     "prepend": "",
                                     "append": "",
-                                    "parent_repeater": "field_69452d6e762b6"
+                                    "parent_repeater": "field_694e0a35372ea"
+                                },
+                                {
+                                    "key": "field_694e0a4e372ec",
+                                    "label": "FAQ Content",
+                                    "name": "faq_content",
+                                    "aria-label": "",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "allow_in_bindings": 0,
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 1,
+                                    "delay": 0,
+                                    "parent_repeater": "field_694e0a35372ea"
                                 }
                             ]
                         }
@@ -1689,5 +1774,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1766393681
+    "modified": 1766722153
 }
