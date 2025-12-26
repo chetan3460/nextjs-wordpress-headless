@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+
   images: {
     remotePatterns: [
       {
@@ -9,6 +11,11 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '127.0.0.1',
+      },
+      {
+        protocol: 'https',
+        hostname: 'staging.screenroot.com',
+        pathname: '/nexuspresscms/wp-content/uploads/**',
       },
       {
         protocol: 'https',
@@ -22,7 +29,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
       },
-      // Add your production WordPress domain here later
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -30,21 +36,26 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Allow localhost images in development (bypasses private IP check)
+    // Disable optimization in development only
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
-  // Turbopack configuration
-  turbopack: {
-    root: '/Users/chetandhargalkar/Desktop/github/nextjs-wordpress-headless',
-  },
+  // Remove Turbopack root for Vercel deployment
+  ...(process.env.VERCEL
+    ? {}
+    : {
+        turbopack: {
+          root: '/Users/chetandhargalkar/Desktop/github/nextjs-wordpress-headless',
+        },
+      }),
 
-  // Rewrites for API proxy (optional)
+  // Update rewrites for production
   async rewrites() {
+    const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://localhost/nextjs-wp';
     return [
       {
         source: '/api/wordpress/:path*',
-        destination: 'http://localhost/nextjs-wp/wp-json/:path*',
+        destination: `${wpUrl}/wp-json/:path*`,
       },
     ];
   },
