@@ -30,7 +30,7 @@ export default function LatestNewsBlock({ data }) {
   const newsCount = select_news?.length || 0;
 
   return (
-    <section className="news-list-block bg-[#f9fafb] py-12 md:py-24">
+    <section className="news-list-block bg-background-3 py-12 md:py-24">
       <div className="container-fluid mx-auto relative overflow-hidden">
         {/* Header */}
         {(heading || sub_title) && (

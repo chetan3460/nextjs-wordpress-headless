@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import SafeImage from "@/components/common/SafeImage";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function TabBlock({ data }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -17,11 +17,7 @@ export default function TabBlock({ data }) {
       <div className="container-fluid mx-auto">
         {(title || description) && (
           <div className="section-heading text-center">
-            {title && (
-              <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="fade-text text-3xl md:text-4xl font-bold mb-4">{title}</h2>}
             {description && (
               <div
                 className="anim-uni-in-up text-lg text-gray-600 max-w-3xl mx-auto"
@@ -43,15 +39,13 @@ export default function TabBlock({ data }) {
                     text-left p-4 rounded-xl transition-all duration-300
                     ${
                       activeTab === index
-                        ? "bg-primary text-white shadow-lg scale-[1.02]"
-                        : "bg-white text-gray-600 hover:bg-gray-50 hover:text-primary"
+                        ? 'bg-primary text-white shadow-lg scale-[1.02]'
+                        : 'bg-white text-gray-600 hover:bg-gray-50 hover:text-primary'
                     }
                   `}
                 >
                   {item.title && (
-                    <div className="tabs_items-item font-bold text-lg mb-1">
-                      {item.title}
-                    </div>
+                    <div className="tabs_items-item font-bold text-lg mb-1">{item.title}</div>
                   )}
                   {/* Showing preview of description if needed, or just title */}
                 </button>
@@ -75,21 +69,21 @@ export default function TabBlock({ data }) {
                         {/* Image Side */}
                         {(item.tab_image || item.tab_inner_image) && (
                           <div className="w-full md:w-1/2 relative h-64 md:h-full">
-                            <SafeImage
-                              src={
-                                item.tab_inner_image?.url || item.tab_image?.url
-                              }
-                              alt={item.title || "Tab Image"}
-                              fill
-                              className="object-cover"
+                            <Image
+                              src={item.tab_inner_image?.url || item.tab_image?.url}
+                              alt={item.title || 'Tab Image'}
+                              width={item.tab_inner_image?.width || item.tab_image?.width || 800}
+                              height={item.tab_inner_image?.height || item.tab_image?.height || 600}
+                              className="w-full h-full object-cover"
                             />
                             {item.tab_mobile_image && (
                               <div className="md:hidden absolute inset-0">
-                                <SafeImage
+                                <Image
                                   src={item.tab_mobile_image.url}
                                   alt="Mobile View"
-                                  fill
-                                  className="object-cover"
+                                  width={item.tab_mobile_image.width || 400}
+                                  height={item.tab_mobile_image.height || 600}
+                                  className="w-full h-full object-cover"
                                 />
                               </div>
                             )}
@@ -98,9 +92,7 @@ export default function TabBlock({ data }) {
 
                         {/* Text Side */}
                         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
-                          <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                            {item.title}
-                          </h3>
+                          <h3 className="text-2xl font-bold mb-4 text-gray-900">{item.title}</h3>
                           {item.description && (
                             <div
                               className="text-gray-600 leading-relaxed"

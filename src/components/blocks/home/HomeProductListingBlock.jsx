@@ -2,97 +2,135 @@
 
 import Link from 'next/link';
 import SafeHTML from '@/components/common/SafeHTML';
-import SafeImage from '@/components/common/SafeImage';
+import Image from 'next/image';
+import { convertToNextPath } from '@/lib/utils/urls';
 
 export default function HomeProductListingBlock({ data }) {
   if (!data || data.hide_block) return null;
 
   const { title, description, product_items = [], cta } = data;
 
-  // We expect 5 items for the grid (1 large + 4 small)
-  // If we have more, we slice. If we have fewer, we handle gracefully.
-  const mainCardItem = product_items[0] || {};
-  const gridItems = product_items.slice(1, 5);
+  // Map first 5 items to the grid
+  const items = product_items.slice(0, 5);
+  // Separate into 4 small and 1 large (the 5th one)
+  const smallItems = items.slice(0, 4);
+  const largeItem = items[4];
 
   return (
-    <section className="home-product-listing-block pt-14 md:pt-16 lg:pt-[88px] xl:pt-[100px] pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
-      <div className="container-fluid max-w-[1440px] px-5 sm:mx-auto">
-        <div className="bg-background-2 rounded-[30px] py-14 md:py-[100px]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-12 justify-center items-stretch gap-y-8 md:gap-x-8">
-              {/* LARGE CARD (Item 1) */}
-              <div className="col-span-12 lg:col-span-8 relative rounded-[20px] overflow-hidden h-full group">
-                {/* Background image from Item 0 */}
-                <div className="absolute inset-0 z-0 pointer-events-none transition-transform duration-700 group-hover:scale-105">
-                  <SafeImage
-                    src={
-                      typeof mainCardItem.icon === 'string'
-                        ? mainCardItem.icon
-                        : mainCardItem.icon?.url
-                    }
-                    alt={mainCardItem.title || 'Background'}
-                    fill
-                    className="object-cover object-center brightness-90 group-hover:brightness-100 transition-all"
-                  />
-                  {/* Overlay for readability */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent lg:from-black/40" />
-                </div>
+    <section className="xl:py-[100px] lg:py-[90px] md:py-20 py-16 bg-background-3 dark:bg-background-7">
+      <div className="main-container max-w-[1440px] px-5 sm:mx-auto">
+        {/* Header */}
+        <div className="text-center space-y-3 mb-10 md:mb-[70px]">
+          {title && (
+            <h2 data-ns-animate data-delay="0.2">
+              {title}
+            </h2>
+          )}
+          {description && (
+            <div data-ns-animate data-delay="0.3" className="max-w-[776px] mx-auto text-grey-3">
+              <SafeHTML html={description} />
+            </div>
+          )}
+        </div>
 
-                <div className="relative z-10 bg-transparent py-8 lg:py-[42px] px-7 lg:px-14 space-y-14 h-full flex flex-col justify-between text-center lg:text-left items-center lg:items-start text-white">
-                  <div className="">
-                    {title && (
-                      <span className="badge bg-primary text-white mb-5 inline-block">{title}</span>
-                    )}
-                    {description && (
-                      <SafeHTML
-                        html={description}
-                        className="text-4xl md:text-5xl font-bold max-w-[564px] leading-tight"
-                      />
+        {/* Grid */}
+        <div className="mb-[72px]">
+          <div className="grid grid-cols-12 sm:gap-8 gap-y-8">
+            {/* Small Items */}
+            {smallItems.map((item, index) => {
+              const icon = item.icon;
+              const iconUrl = typeof icon === 'string' ? icon : icon?.url;
+              const iconWidth = typeof icon === 'object' ? icon?.width : 400;
+              const iconHeight = typeof icon === 'object' ? icon?.height : 225;
+              const delay = 0.4 + index * 0.1;
+              return (
+                <div
+                  key={index}
+                  data-ns-animate
+                  data-delay={delay.toFixed(1)}
+                  className="col-span-12 lg:col-span-4 sm:col-span-6"
+                >
+                  <div className="bg-white dark:bg-background-8 rounded-[20px] md:p-8 p-6 space-y-6 h-full flex flex-col justify-between">
+                    <div className="space-y-1">
+                      <h3 className="">{item.title}</h3>
+                      {item.description ? (
+                        <div className="text-sm">
+                          <SafeHTML html={item.description} />
+                        </div>
+                      ) : (
+                        <p>Tailored services for your brand.</p>
+                      )}
+                    </div>
+                    {iconUrl && (
+                      <div>
+                        <figure className=" max-w-full w-full overflow-hidden rounded-2xl">
+                          <Image
+                            src={iconUrl}
+                            alt={item.title || 'services'}
+                            width={iconWidth || 400}
+                            height={iconHeight || 225}
+                            className="w-full h-full object-cover"
+                          />
+                        </figure>
+                      </div>
                     )}
                   </div>
-                  {cta && cta.url && (
+                </div>
+              );
+            })}
+
+            {/* Large Item (Item 5) */}
+            {largeItem && (
+              <div className="col-span-12 lg:col-span-8">
+                <div className="bg-white  rounded-[20px] md:p-8 p-6 space-y-6">
+                  <div className="space-y-1">
+                    <h3 className="">{largeItem.title}</h3>
+                    {largeItem.description ? (
+                      <div className="">
+                        <SafeHTML html={largeItem.description} />
+                      </div>
+                    ) : (
+                      <p>Creative direction and consulting.</p>
+                    )}
+                  </div>
+                  {largeItem.icon && (
                     <div>
-                      <Link
-                        href={cta.url}
-                        target={cta.target || '_self'}
-                        className="btn bg-white text-black hover:bg-primary hover:text-white border-white"
-                      >
-                        {cta.title || "Let's Talk Strategy"}
-                      </Link>
+                      <figure className=" overflow-hidden rounded-2xl w-full">
+                        <Image
+                          src={
+                            typeof largeItem.icon === 'string'
+                              ? largeItem.icon
+                              : largeItem.icon?.url
+                          }
+                          alt={largeItem.title || 'services'}
+                          width={typeof largeItem.icon === 'object' ? largeItem.icon?.width : 800}
+                          height={typeof largeItem.icon === 'object' ? largeItem.icon?.height : 340}
+                          className="w-full h-full object-cover"
+                        />
+                      </figure>
                     </div>
                   )}
                 </div>
               </div>
-
-              {/* GRID ITEMS (Items 2-5) */}
-              {gridItems.map((item, index) => {
-                const iconUrl = typeof item.icon === 'string' ? item.icon : item.icon?.url;
-                return (
-                  <div key={index} className="col-span-12 md:col-span-6 lg:col-span-4 h-full">
-                    <div className="bg-white rounded-[20px] p-8 space-y-6 h-full flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-bold text-black">{item.title}</h3>
-                        {/* Note: ACF lacks item-level description, so we only show title */}
-                      </div>
-
-                      {iconUrl && (
-                        <div className="flex-1 flex items-center justify-center p-4">
-                          <figure className="max-w-[345px] w-full rounded-2xl overflow-hidden relative min-h-[170px]">
-                            <SafeImage
-                              src={iconUrl}
-                              alt={item.title || 'Service Icon'}
-                              fill
-                              className="object-contain"
-                            />
-                          </figure>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            )}
           </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div
+          data-ns-animate
+          data-delay="0.9"
+          className="flex flex-col md:flex-row items-center gap-y-5 md:gap-x-3 justify-center"
+        >
+          {cta && cta.url && (
+            <Link
+              href={convertToNextPath(cta.url)}
+              target={cta.target || '_self'}
+              className="btn btn-secondary dark:btn-accent btn-md hover:btn-white dark:hover:btn-white-dark w-[90%] md:w-auto text-center"
+            >
+              <span>{cta.title || 'Explore services'}</span>
+            </Link>
+          )}
         </div>
       </div>
     </section>

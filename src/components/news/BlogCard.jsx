@@ -14,8 +14,9 @@ export default function BlogCard({ post }) {
           <Image
             src={post.featuredImage.url}
             alt={post.featuredImage.alt}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            width={post.featuredImage.width || 640}
+            height={post.featuredImage.height || 360}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (

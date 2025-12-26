@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import SafeHTML from '@/components/common/SafeHTML';
 import Link from 'next/link';
-import SafeImage from '@/components/common/SafeImage';
+import Image from 'next/image';
 import { Megaphone, ChevronRight } from 'lucide-react';
 import { convertToNextPath } from '@/lib/utils/urls';
 
@@ -62,14 +62,15 @@ export default function HeroBlock({ data }) {
             return (
               <SwiperSlide key={i}>
                 {/* Swiper already renders `.swiper-slide`, so just wrap content */}
-                <div className="relative w-full aspect-square sm:aspect-video md:aspect-[2.4] lg:h-[700px] lg:aspect-auto">
+                <div className="relative w-full aspect-square sm:aspect-video md:aspect-[2.4] lg:aspect-auto">
                   {/* IMAGE */}
-                  <SafeImage
+                  <Image
                     src={imageUrl}
                     alt={imageAlt}
-                    fill
+                    width={(typeof image === 'object' ? image?.width : 1920) || 1920}
+                    height={(typeof image === 'object' ? image?.height : 700) || 700}
                     priority={i === 0}
-                    className="object-cover"
+                    className="w-full h-auto object-cover"
                   />
                   {/* OVERLAY CONTENT */}
                   <div className="absolute inset-0 flex justify-start items-start sl:items-center max-lg:flex-col z-1">

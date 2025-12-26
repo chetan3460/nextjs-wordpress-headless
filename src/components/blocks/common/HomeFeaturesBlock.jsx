@@ -1,8 +1,8 @@
 'use client';
 
-import SafeImage from '@/components/common/SafeImage';
 import SafeHTML from '@/components/common/SafeHTML';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function FeatureBlock({ data }) {
   if (!data) return null;
@@ -27,7 +27,7 @@ export default function FeatureBlock({ data }) {
   };
 
   return (
-    <section className="home-features-block">
+    <section className="home-features-block bg-background-3 py-12 md:py-24">
       <div className="container-fluid relative">
         <div className="flex  flex-col gap-3">
           {/* Left Column */}
@@ -69,11 +69,12 @@ export default function FeatureBlock({ data }) {
                       {/* Icon */}
                       {icon?.url && (
                         <div className="feature-icon size-14 rounded-full bg-[#c6f56f] p-3.5 flex items-center justify-center">
-                          <img
-                            className="w-[56px] h-[56px]"
+                          <Image
                             src={icon.url}
                             alt={icon.alt || item_title}
-                            loading="lazy"
+                            width={56}
+                            height={56}
+                            className="w-[56px] h-[56px] object-contain"
                           />
                         </div>
                       )}
@@ -117,7 +118,13 @@ export default function FeatureBlock({ data }) {
           className="md:hidden block absolute right-0 bottom-0 -z-1 pointer-none w-[85px]"
           data-speed="1.25"
         >
-          <img src="/assets/images/home/shapes/shape-4.webp" alt="" loading="lazy" />
+          <Image
+            src="/assets/images/home/shapes/shape-4.webp"
+            alt=""
+            width={85}
+            height={85}
+            className="w-full h-auto"
+          />
         </div>
       </div>
     </section>

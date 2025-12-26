@@ -52,18 +52,17 @@ export default function Footer({ footerData }) {
                 <div className="lg:col-span-4 md:col-span-6">
                   <Link href="/" className="text-[22px] focus:outline-none">
                     {footer_logo && (
-                      <div className="relative h-12 w-48">
-                        <Image
-                          src={typeof footer_logo === 'string' ? footer_logo : footer_logo.url}
-                          alt={
-                            typeof footer_logo === 'string'
-                              ? ''
-                              : footer_logo.alt || footer_logo.title || ''
-                          }
-                          fill
-                          className="object-contain object-left"
-                        />
-                      </div>
+                      <Image
+                        src={typeof footer_logo === 'string' ? footer_logo : footer_logo.url}
+                        alt={
+                          typeof footer_logo === 'string'
+                            ? ''
+                            : footer_logo.alt || footer_logo.title || ''
+                        }
+                        width={(typeof footer_logo === 'object' ? footer_logo.width : 192) || 192}
+                        height={(typeof footer_logo === 'object' ? footer_logo.height : 48) || 48}
+                        className="h-12 w-auto object-contain object-left"
+                      />
                     )}
                   </Link>
                 </div>

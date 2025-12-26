@@ -57,7 +57,6 @@ html {
 
 body {
   scrollbar-color: var(--scrollbar-color) transparent;
-  background-color: #f4f5f8;
 }
 
 /* Global Styles for Auto-Generated Paragraphs */
@@ -80,10 +79,10 @@ body {
   --breakpoint-2xl: 1440px;
 
   /* Custom Colors (base) */
-  --color-primary: #0f1217; /* Primary / Brand Red – #DA000E */
-  --color-black: #1c1c1c; /* Neutral 900 / Near Black – #1C1C1C */
-  --color-light-gray: #ccd9ef; /* Legacy light gray (check usage) – #CCD9EF */
-  --color-mid-gray: #f4f4f4; /* Neutral 100 – light gray – #F4F4F4 */
+  --color-primary: #0f1217;
+  --color-black: #1c1c1c;
+  --color-light-gray: #ccd9ef;
+  --color-mid-gray: #f4f4f4;
   --color-gray-50: #d9d9d9;
   --color-gray-150: #6c6c6c;
 
@@ -91,6 +90,10 @@ body {
 
   --color-background-1: #fcfcfd;
   --color-background-2: #f9fafb;
+  --color-background-3: #f4f5f8;
+  --color-background-6: #13141a;
+  --color-background-7: #1c1d24;
+  --color-background-8: #25262e;
 
   --color-stroke-1: #dfe4eb;
   --color-stroke-2: #e3e7ed;
@@ -117,7 +120,7 @@ body {
   --rounded-40: 40px;
   --rounded-20: 20px;
   --spacing-3_25: 0.8125rem;
-  --scrollbar-color: #da000e;
+  --scrollbar-color: #864ffe;
   --scrollbar-hover: #ba3333;
 }
 .text-black {
@@ -142,8 +145,34 @@ body {
 .bg-background-2 {
   background-color: var(--color-background-2);
 }
+.bg-background-3 {
+  background-color: var(--color-background-3);
+}
 .border-stroke-4 {
   border-color: var(--color-stroke-4);
+}
+.bg-background-3 {
+  background-color: var(--color-background-3);
+}
+.bg-background-6 {
+  background-color: var(--color-background-6);
+}
+.bg-background-7 {
+  background-color: var(--color-background-7);
+}
+.bg-background-8 {
+  background-color: var(--color-background-8);
+}
+
+.text-heading-5 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+.text-heading-6 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
 }
 
 * {

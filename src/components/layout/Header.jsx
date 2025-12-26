@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import ScrollToTop from "./ScrollToTop";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import ScrollToTop from './ScrollToTop';
 
 // Utility function to decode HTML entities (works on both server and client)
-const decodeHtmlEntities = (text) => {
+const decodeHtmlEntities = text => {
   if (!text) return text;
 
   // Simple entity decoding that works on both server and client
   return text
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
-    .replace(/&#038;/g, "&");
+    .replace(/&#038;/g, '&');
 };
 
 export default function Header({ menuItems = [], siteLogo }) {
@@ -23,34 +24,34 @@ export default function Header({ menuItems = [], siteLogo }) {
   const [isSticky, setIsSticky] = useState(false);
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
 
-  // Use CMS logo if available, otherwise fallback to local assets
-  const logoSrc = siteLogo || "/images/logo-light.png";
+  // Normalize siteLogo to always be a string URL
+  const logoSrc =
+    typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || '/images/logo-light.png';
 
   // Transform flat menu items into tree structure
-  const buildMenuTree = (items) => {
+  const buildMenuTree = items => {
     if (!items || !items.length) return [];
 
     const itemMap = {};
     const tree = [];
 
     // Normalize and map items
-    items.forEach((item) => {
+    items.forEach(item => {
       itemMap[item.id] = {
         ...item,
         children: [],
         // Ensure classes is an array
         cssClasses: Array.isArray(item.cssClasses)
           ? item.cssClasses
-          : (item.cssClasses || "").split(" "),
+          : (item.cssClasses || '').split(' '),
       };
     });
 
     // Build hierarchy
-    items.forEach((item) => {
+    items.forEach(item => {
       const node = itemMap[item.id];
       // Handle parentId being 0 or "0" or null for root items
-      const parentId =
-        item.parentId === "0" || item.parentId === 0 ? null : item.parentId;
+      const parentId = item.parentId === '0' || item.parentId === 0 ? null : item.parentId;
 
       if (parentId && itemMap[parentId]) {
         itemMap[parentId].children.push(node);
@@ -69,11 +70,11 @@ export default function Header({ menuItems = [], siteLogo }) {
     menuTree.length > 0
       ? menuTree
       : [
-          { id: 1, label: "Home", url: "/", children: [] },
-          { id: 2, label: "About", url: "/about", children: [] },
-          { id: 3, label: "Products", url: "/products", children: [] },
-          { id: 4, label: "News", url: "/news", children: [] },
-          { id: 5, label: "Contact", url: "/contact", children: [] },
+          { id: 1, label: 'Home', url: '/', children: [] },
+          { id: 2, label: 'About', url: '/about', children: [] },
+          { id: 3, label: 'Products', url: '/products', children: [] },
+          { id: 4, label: 'News', url: '/news', children: [] },
+          { id: 5, label: 'Contact', url: '/contact', children: [] },
         ];
 
   // Sticky header on scroll
@@ -90,8 +91,8 @@ export default function Header({ menuItems = [], siteLogo }) {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Handle menu toggle
@@ -105,44 +106,44 @@ export default function Header({ menuItems = [], siteLogo }) {
 
     // Toggle body scroll
     if (newState) {
-      document.body.classList.add("menu-open");
+      document.body.classList.add('menu-open');
     } else {
-      document.body.classList.remove("menu-open");
+      document.body.classList.remove('menu-open');
     }
   };
 
   // Close menu on desktop resize
   useEffect(() => {
     const closeOnDesktop = () => {
-      const isDesktop = window.matchMedia("(min-width: 992px)").matches;
+      const isDesktop = window.matchMedia('(min-width: 992px)').matches;
       if (isDesktop && isMenuOpen) {
         setIsMenuOpen(false);
-        document.body.classList.remove("menu-open");
+        document.body.classList.remove('menu-open');
       }
     };
 
-    window.addEventListener("resize", closeOnDesktop, { passive: true });
-    window.addEventListener("orientationchange", closeOnDesktop, {
+    window.addEventListener('resize', closeOnDesktop, { passive: true });
+    window.addEventListener('orientationchange', closeOnDesktop, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener("resize", closeOnDesktop);
-      window.removeEventListener("orientationchange", closeOnDesktop);
+      window.removeEventListener('resize', closeOnDesktop);
+      window.removeEventListener('orientationchange', closeOnDesktop);
     };
   }, [isMenuOpen]);
 
   // Close menu on Escape key
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape" && isMenuOpen) {
+    const handleEscape = e => {
+      if (e.key === 'Escape' && isMenuOpen) {
         setIsMenuOpen(false);
-        document.body.classList.remove("menu-open");
+        document.body.classList.remove('menu-open');
       }
     };
 
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [isMenuOpen]);
 
   return (
@@ -151,10 +152,7 @@ export default function Header({ menuItems = [], siteLogo }) {
       <ScrollToTop />
 
       <header id="header">
-        <nav
-          id="topnav"
-          className={`defaultscroll is-sticky ${isSticky ? "nav-sticky" : ""}`}
-        >
+        <nav id="topnav" className={`defaultscroll is-sticky ${isSticky ? 'nav-sticky' : ''}`}>
           <div className="container-fluid relative flex items-center lg:justify-between gap-2">
             {/* Mobile Menu Toggle */}
             <div className="menu-extras lg:hidden">
@@ -178,10 +176,13 @@ export default function Header({ menuItems = [], siteLogo }) {
             {/* Logo */}
             <div className="site-logo logo">
               <Link href="/" className="focus:outline-none">
-                <img
+                <Image
                   src={logoSrc}
                   alt="Resins & Plastics Ltd"
-                  className="max-lg:w-[225px] w-[250px] h-[40px]"
+                  width={typeof siteLogo === 'object' ? siteLogo.width || 250 : 250}
+                  height={typeof siteLogo === 'object' ? siteLogo.height || 40 : 40}
+                  className="max-lg:w-[225px] w-[250px] h-10 object-contain"
+                  priority
                 />
               </Link>
             </div>
@@ -189,28 +190,24 @@ export default function Header({ menuItems = [], siteLogo }) {
             {/* Desktop Navigation */}
             <div id="navigation" className="flex items-center justify-end">
               <ul className="navigation-menu flex items-center justify-end flex-wrap">
-                {finalMenu.map((item) => (
+                {finalMenu.map(item => (
                   <DesktopMenuItem key={item.id || item.url} item={item} />
                 ))}
               </ul>
             </div>
 
             {/* Contact CTA Button */}
-            <Link
-              href="/contact-us"
-              aria-label="Contact us"
-              className="max-sl:!hidden btn"
-            >
+            <Link href="/contact-us" aria-label="Contact us" className="max-sl:hidden! btn">
               <span className="z-10">Contact Us</span>
             </Link>
 
             {/* Mobile overlay */}
             <div
               id="nav-overlay"
-              className={isMenuOpen ? "active" : ""}
+              className={isMenuOpen ? 'active' : ''}
               onClick={() => {
                 setIsMenuOpen(false);
-                document.body.classList.remove("menu-open");
+                document.body.classList.remove('menu-open');
               }}
               aria-hidden="true"
             ></div>
@@ -220,8 +217,8 @@ export default function Header({ menuItems = [], siteLogo }) {
         {/* Mobile Navigation */}
         <div
           id="navigation-mobile"
-          className={`${isMenuOpen ? "open" : ""} ${
-            hasBeenOpened && isMenuOpen ? "first-open" : ""
+          className={`${isMenuOpen ? 'open' : ''} ${
+            hasBeenOpened && isMenuOpen ? 'first-open' : ''
           }`}
           aria-hidden={!isMenuOpen}
         >
@@ -244,17 +241,23 @@ export default function Header({ menuItems = [], siteLogo }) {
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-2"
               >
-                <img
-                  src={siteLogo || "/images/logo-dark.png"}
+                <Image
+                  src={
+                    typeof siteLogo === 'string'
+                      ? siteLogo
+                      : siteLogo?.url || '/images/logo-dark.png'
+                  }
                   alt="Resins & Plastics Ltd"
-                  className="l-dark h-10 w-auto"
+                  width={typeof siteLogo === 'object' ? siteLogo.width || 200 : 200}
+                  height={typeof siteLogo === 'object' ? siteLogo.height || 40 : 40}
+                  className="l-dark h-10 w-auto object-contain"
                 />
               </Link>
             </div>
           </div>
 
           <ul id="menu-mobile-menu" className="navigation-menu">
-            {finalMenu.map((item) => (
+            {finalMenu.map(item => (
               <MobileMenuItem
                 key={item.id || item.url}
                 item={item}
@@ -266,10 +269,10 @@ export default function Header({ menuItems = [], siteLogo }) {
             <li>
               <Link
                 href="/contact"
-                className="btn !py-3 !px-4 !text-white !inline-block"
+                className="btn py-3! px-4! text-white! inline-block!"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  document.body.classList.remove("menu-open");
+                  document.body.classList.remove('menu-open');
                 }}
               >
                 Contact Us
@@ -292,15 +295,11 @@ function DesktopMenuItem({ item }) {
     return (
       <li
         key={item.id || item.url}
-        className={`has-submenu group relative ${item.cssClasses?.join(" ")}`}
+        className={`has-submenu group relative ${item.cssClasses?.join(' ')}`}
       >
-        <span
-          className="sub-menu-item cursor-default"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
+        <span className="sub-menu-item cursor-default" aria-haspopup="true" aria-expanded="false">
           {decodeHtmlEntities(item.label)}
-          <span className="menu-arrow w-4 h-4 flex items-center justify-center flex ml-1">
+          <span className="menu-arrow w-4 h-4 flex items-center justify-center ml-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"
@@ -319,7 +318,7 @@ function DesktopMenuItem({ item }) {
 
         {/* Regular Submenu (No Mega Menu) */}
         <ul className="submenu">
-          {item.children.map((child) => (
+          {item.children.map(child => (
             <DesktopMenuItem key={child.id || child.url} item={child} />
           ))}
         </ul>
@@ -328,8 +327,8 @@ function DesktopMenuItem({ item }) {
   }
 
   return (
-    <li key={item.id || item.url} className={item.cssClasses?.join(" ")}>
-      <Link href={item.url || "#"} className="sub-menu-item">
+    <li key={item.id || item.url} className={item.cssClasses?.join(' ')}>
+      <Link href={item.url || '#'} className="sub-menu-item">
         {decodeHtmlEntities(item.label)}
       </Link>
     </li>
@@ -347,19 +346,17 @@ function MobileMenuItem({ item, closeMenu }) {
     return (
       <li
         className={`menu-item  menu-item-has-children has-submenu last:border-0 ${
-          isOpen ? "open" : ""
+          isOpen ? 'open' : ''
         }`}
       >
         <div
           className="flex items-center justify-between cursor-pointer"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             setIsOpen(!isOpen);
           }}
         >
-          <span className="sub-menu-item flex-1">
-            {decodeHtmlEntities(item.label)}
-          </span>
+          <span className="sub-menu-item flex-1">{decodeHtmlEntities(item.label)}</span>
           <span className="menu-arrow p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -379,14 +376,10 @@ function MobileMenuItem({ item, closeMenu }) {
           </span>
         </div>
 
-        <ul className={`submenu ${isOpen ? "open" : ""}`}>
-          {item.children.map((child) => (
+        <ul className={`submenu ${isOpen ? 'open' : ''}`}>
+          {item.children.map(child => (
             <li key={child.id || child.url} className="menu-item">
-              <Link
-                href={child.url || "#"}
-                className="sub-menu-item"
-                onClick={closeMenu}
-              >
+              <Link href={child.url || '#'} className="sub-menu-item" onClick={closeMenu}>
                 {decodeHtmlEntities(child.label)}
               </Link>
             </li>
@@ -398,11 +391,7 @@ function MobileMenuItem({ item, closeMenu }) {
 
   return (
     <li className="menu-item">
-      <Link
-        href={item.url || "#"}
-        className="sub-menu-item"
-        onClick={closeMenu}
-      >
+      <Link href={item.url || '#'} className="sub-menu-item" onClick={closeMenu}>
         {decodeHtmlEntities(item.label)}
       </Link>
     </li>
