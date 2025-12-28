@@ -159,6 +159,10 @@ export default function LatestNewsBlock({ data }) {
                             className="btn hover:btn-secondary dark:hover:btn-accent dark:btn-transparent btn-white btn-md"
                           >
                             <span>Read more</span>
+                            <span className="sr-only">
+                              {' '}
+                              about {post.title.rendered || post.title}
+                            </span>
                           </Link>
                         </div>
                       </div>
