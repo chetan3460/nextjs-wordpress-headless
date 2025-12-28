@@ -1,4 +1,4 @@
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/HeaderNew';
 import Footer from '@/components/layout/Footer';
 import Analytics from '@/components/common/Analytics';
 import '@/app/css/style.css';
@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="font-instrument antialiased text-gray-900 bg-background-2">
+      <body className="font-inter antialiased text-gray-900 bg-background-2">
         <Analytics />
         <Header menuItems={menu_items} siteLogo={site_logo} />
         {children}

@@ -1,3 +1,6 @@
+/* Import Inter from Google Fonts - Must be first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 /* Tailwind CSS */
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
@@ -12,7 +15,6 @@
 
 /* Base Styles */
 @import './base/utilities.css';
-@import './base/_fonts.css';
 @import './base/_general.css';
 @import './base/_buttons.css';
 
@@ -77,49 +79,192 @@ body {
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1440px;
+  --breakpoint-lp: 1440px; /* Large Plus breakpoint from AI Agency template */
 
-  /* Custom Colors (base) */
+  /* Font Families */
+  --font-inter: 'Inter', sans-serif;
+  --font-inter-tight: 'Inter Tight', sans-serif;
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+
+  /* Primary Colors */
   --color-primary: #0f1217;
-  --color-black: #1c1c1c;
+  --color-primary-50: #f4f2fe;
+  --color-primary-100: #ece8ff;
+  --color-primary-200: #dcd4ff;
+  --color-primary-300: #c3b1ff;
+  --color-primary-400: #a585ff;
+  --color-primary-500: #864ffe;
+  --color-primary-600: #7c31f6;
+
+  /* Secondary & Accent Colors */
+  --color-secondary: #1a1a1c;
+  --color-accent: #fcfcfc;
+
+  /* Base Colors */
+  --color-black: #000;
+  --color-white: #fff;
+  --color-charcoal: #111111;
+  --color-dark: #3c4858;
+  --color-dark-footer: #192132;
+  --color-dark-100: #010101;
+
+  /* Gray Scale */
   --color-light-gray: #ccd9ef;
   --color-mid-gray: #f4f4f4;
   --color-gray-50: #d9d9d9;
   --color-gray-150: #6c6c6c;
 
-  --color-ns-green-light: #e8fbc6;
-
+  /* Background Colors */
   --color-background-1: #fcfcfd;
   --color-background-2: #f9fafb;
   --color-background-3: #f4f5f8;
-  --color-background-6: #13141a;
-  --color-background-7: #1c1d24;
-  --color-background-8: #25262e;
+  --color-background-4: #f0f2f6;
+  --color-background-5: #13171e;
+  --color-background-6: #0f1217;
+  --color-background-7: #181d26;
+  --color-background-8: #070b10;
+  --color-background-9: #1f252f;
+  --color-background-11: #b5b5b9;
+  --color-background-12: #eaeceb;
 
+  /* Stroke/Border Colors */
   --color-stroke-1: #dfe4eb;
   --color-stroke-2: #e3e7ed;
+  --color-stroke-3: #d7dde5;
   --color-stroke-4: #eceff4;
+  --color-stroke-5: #1b232f;
+  --color-stroke-6: #202731;
+  --color-stroke-7: #2a333e;
+  --color-stroke-8: #303b49;
+  --color-stroke-9: var(--color-background-8);
 
-  --color-light-blue: #dff2fd; /* Sky 50 / Very light blue – #DFF2FD */
-
-  --color-dark: #3c4858; /* Dark text – #3C4858 */
-  --color-dark-footer: #192132; /* Dark footer background – #192132 */
-  --color-white: #ffffff; /* White – #FFFFFF */
-  --color-charcoal: #111111; /* Charcoal – #111111 */
-  --color-dark-100: #010101; /* Charcoal – #111111 */
-
+  /* Brand Colors */
+  --color-ns-yellow: #f9eb57;
+  --color-ns-green: #c6f56f;
+  --color-ns-red: #ffb9a2;
+  --color-ns-cyan: #83e7ee;
+  --color-ns-green-light: #e8fbc6;
+  --color-ns-cyan-light: #cdf5f8;
+  --color-ns-yellow-light: #fdf7bc;
+  --color-light-blue: #dff2fd;
   --color-pink-50: #ffb6b0;
+  --color-red-400: oklch(70.4% 0.191 22.216);
 
-  /* Custom Font Families */
-  --font-instrument: 'Instrument Sans', sans-serif;
+  /* Gradients */
+  --color-gradient-1: linear-gradient(135deg, #a585ff 0%, #ffc2ad 100%);
+  --color-gradient-5: linear-gradient(165deg, #ffffff80 0.51%, #fff0 64.43%);
+  --color-gradient-6: linear-gradient(#83e7ee 0%, #c6f56f 100%);
+  --color-gradient-7: linear-gradient(#fff 0%, #83e7ee 100%);
+  --color-gradient-8: linear-gradient(156deg, #fff 32.92%, #a585ff 91%);
+  --color-gradient-9: linear-gradient(156deg, #dfb0ff 32.92%, #fdbedc 91%);
+  --color-gradient-11: linear-gradient(179deg, #fff0 0.68%, #fff 79.47%);
+  --color-gradient-12: radial-gradient(73.01% 80.77% at 19.23% 47.79%, #83e7ee 0%, #864ffe00 100%);
 
-  /* Custom Spacing */
+  /* Typography - Headings */
+  --text-heading-1: 4.25rem;
+  --text-heading-1--line-height: 110%;
+  --text-heading-2: 3.25rem;
+  --text-heading-2--line-height: 120%;
+  --text-heading-3: 2.5rem;
+  --text-heading-3--line-height: 120%;
+  --text-heading-4: 2rem;
+  --text-heading-4--line-height: 130%;
+  --text-heading-5: 1.5rem;
+  --text-heading-5--line-height: 140%;
+  --text-heading-6: 1.25rem;
+  --text-heading-6--line-height: 140%;
+
+  /* Typography - Taglines */
+  --text-tagline-1: 1rem;
+  --text-tagline-1--line-height: 150%;
+  --text-tagline-2: 0.875rem;
+  --text-tagline-2--line-height: 150%;
+  --text-tagline-3: 0.75rem;
+  --text-tagline-3--line-height: 150%;
+
+  /* Typography - Text Sizes */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: calc(1 / 0.75);
+  --text-sm: 0.875rem;
+  --text-sm--line-height: calc(1.25 / 0.875);
+  --text-base: 1rem;
+  --text-base--line-height: calc(1.5 / 1);
+  --text-lg: 1.125rem;
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl: 1.25rem;
+  --text-xl--line-height: calc(1.75 / 1.25);
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: calc(2 / 1.5);
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: calc(2.5 / 2.25);
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing: 0.25rem;
   --spacing-0_75: 0.1875rem;
   --spacing-3_25: 0.8125rem;
+  --stack-cards-gap: 2rem;
 
-  /* Custom border radius */
-  --rounded-40: 40px;
+  /* Container Sizes */
+  --container-xs: 20rem;
+  --container-md: 28rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-5xl: 64rem;
+  --container-6xl: 72rem;
+
+  /* Border Radius */
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
   --rounded-20: 20px;
-  --spacing-3_25: 0.8125rem;
+  --rounded-40: 40px;
+
+  /* Shadows */
+  --drop-shadow-2xl: 0 25px 25px #00000026;
+
+  /* Blur Effects */
+  --blur-ns-badge-blur: 17.2283px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-3xl: 64px;
+
+  /* Transitions & Animations */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --default-transition-duration: 0.15s;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Default Font Families */
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
+
+  /* Scrollbar */
   --scrollbar-color: #864ffe;
   --scrollbar-hover: #ba3333;
 }
@@ -179,7 +324,7 @@ body {
   scrollbar-width: thin;
 }
 body {
-  @apply font-instrument;
+  @apply font-inter;
 }
 html,
 body {
@@ -237,8 +382,71 @@ body {
   margin-inline: auto;
 }
 /* Custom Utility Classes */
-.font-nunito {
-  font-family: var(--font-instrument);
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+/* Typography Utilities */
+.text-tagline-1 {
+  font-size: var(--text-tagline-1);
+  line-height: var(--text-tagline-1--line-height);
+}
+
+.text-tagline-2 {
+  font-size: var(--text-tagline-2);
+  line-height: var(--text-tagline-2--line-height);
+}
+
+.text-tagline-3 {
+  font-size: var(--text-tagline-3);
+  line-height: var(--text-tagline-3--line-height);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+/* Button Base Styles */
+.btn {
+  @apply inline-flex items-center gap-2 rounded-full font-medium transition-all duration-200;
+  text-decoration: none !important;
+}
+
+.btn-md {
+  @apply px-6 py-2.5 text-tagline-1;
+}
+
+.btn-sm {
+  @apply px-4 py-2 text-tagline-2;
+}
+
+.btn-lg {
+  @apply px-8 py-3 text-tagline-1;
+}
+
+/* Button Color Variants */
+.btn-secondary {
+  @apply bg-secondary text-accent border border-transparent;
+}
+
+.btn-secondary:hover {
+  @apply bg-secondary/90;
+}
+
+.btn-primary {
+  @apply bg-primary-500 text-white border border-transparent;
+}
+
+.btn-primary:hover {
+  @apply bg-primary-600;
+}
+
+.dark .btn-accent {
+  @apply bg-accent text-secondary border border-transparent;
+}
+
+.dark .btn-accent:hover {
+  @apply bg-accent/90;
 }
 /* Form */
 
