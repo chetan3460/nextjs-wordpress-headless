@@ -6,8 +6,9 @@ export async function generateMetadata() {
   const pageData = await fetchPageWithACF('home');
 
   return generateMetadataFromYoast(pageData, {
-    title: 'Home - Resins & Plastics',
-    description: 'Leading manufacturer of high-performance resin and plastic solutions.',
+    title: 'NexusPress - AI-Powered WordPress Platform',
+    description:
+      'NexusPress combines the power of Next.js with WordPress headless CMS for blazing-fast, SEO-optimized websites. Experience the future of content management.',
   });
 }
 
