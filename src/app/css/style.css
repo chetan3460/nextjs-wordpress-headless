@@ -268,6 +268,28 @@ body {
   --scrollbar-color: #864ffe;
   --scrollbar-hover: #ba3333;
 }
+
+/* Base Typography Styles */
+p {
+  font-size: var(--text-tagline-2);
+  line-height: var(--tw-leading, var(--text-tagline-2--line-height));
+  --tw-font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-normal);
+  color: #1a1a1c99 !important;
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  p {
+    color: color-mix(in oklab, var(--color-secondary) 60%, transparent) !important;
+  }
+}
+
+@media (min-width: 40rem) {
+  p {
+    font-size: var(--text-tagline-1);
+    line-height: var(--tw-leading, var(--text-tagline-1--line-height));
+  }
+}
 .text-black {
   color: var(--color-black);
 }
@@ -381,6 +403,19 @@ body {
   @apply px-4 lg:px-5;
   margin-inline: auto;
 }
+
+/* Main Container - AI Agency Template */
+.main-container {
+  max-width: 1290px;
+  padding-inline: calc(var(--spacing) * 5);
+  margin-inline: auto;
+}
+
+@media (min-width: 1440px) {
+  .main-container {
+    padding-inline: calc(var(--spacing) * 0);
+  }
+}
 /* Custom Utility Classes */
 .font-inter {
   font-family: var(--font-inter);
@@ -400,6 +435,39 @@ body {
 .text-tagline-3 {
   font-size: var(--text-tagline-3);
   line-height: var(--text-tagline-3--line-height);
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: var(--text-heading-1);
+  line-height: var(--text-heading-1--line-height);
+  font-weight: 700;
+}
+
+/* Heading Typography Utilities */
+.text-heading-2 {
+  font-size: var(--text-heading-2);
+  line-height: var(--tw-leading, var(--text-heading-2--line-height));
+}
+
+.text-heading-3 {
+  font-size: var(--text-heading-3);
+  line-height: var(--tw-leading, var(--text-heading-3--line-height));
+}
+
+.text-heading-4 {
+  font-size: var(--text-heading-4);
+  line-height: var(--tw-leading, var(--text-heading-4--line-height));
+}
+
+.text-heading-5 {
+  font-size: var(--text-heading-5);
+  line-height: var(--tw-leading, var(--text-heading-5--line-height));
+}
+
+.text-heading-6 {
+  font-size: var(--text-heading-6);
+  line-height: var(--tw-leading, var(--text-heading-6--line-height));
 }
 
 .text-secondary {

@@ -17,6 +17,13 @@ const CertificateBlock = dynamic(() => import('@/components/blocks/about/Certifi
     </div>
   ),
 });
+const ContentImageBlock = dynamic(() => import('@/components/blocks/common/ContentImageBlock'), {
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading ContentImageBlock...
+    </div>
+  ),
+});
 const DistributionBlock = dynamic(() => import('@/components/blocks/common/DistributionBlock'), {
   loading: () => (
     <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
@@ -70,6 +77,13 @@ const HomeFeaturesBlock = dynamic(() => import('@/components/blocks/common/HomeF
   loading: () => (
     <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
       Loading HomeFeaturesBlock...
+    </div>
+  ),
+});
+const HomeHeroBlock = dynamic(() => import('@/components/blocks/home/HomeHeroBlock'), {
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading HomeHeroBlock...
     </div>
   ),
 });
@@ -184,6 +198,7 @@ const TestimonialsBlock = dynamic(() => import('@/components/blocks/careers/Test
 const BLOCK_COMPONENTS = {
   accordion_block: AccordionBlock,
   certificate_block: CertificateBlock,
+  content_image_block: ContentImageBlock,
   distribution_block: DistributionBlock,
   faq_block: FaqBlock,
   gallery_block: GalleryBlock,
@@ -192,6 +207,7 @@ const BLOCK_COMPONENTS = {
   hero_block: HeroBlock,
   home_client_block: HomeClientBlock,
   home_features_block: HomeFeaturesBlock,
+  home_hero_block: HomeHeroBlock,
   home_image_slider_block: HomeImageSliderBlock,
   home_product_listing_block: HomeProductListingBlock,
   home_stats_block: HomeStatsBlock,
