@@ -312,7 +312,9 @@ export async function fetchPostBySlug(slug, postType = 'posts') {
     }
 
     // Determine the endpoint based on post type
-    const endpoint = postType === 'news' ? '/wp/v2/news' : '/wp/v2/posts';
+    let endpoint = '/wp/v2/posts';
+    if (postType === 'news') endpoint = '/wp/v2/news';
+    if (postType === 'case-studies') endpoint = '/wp/v2/case-studies';
 
     let posts;
     try {

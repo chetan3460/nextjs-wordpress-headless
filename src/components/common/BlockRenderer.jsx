@@ -10,6 +10,13 @@ const AccordionBlock = dynamic(() => import('@/components/blocks/common/Accordio
     </div>
   ),
 });
+const CaseStudiesBlock = dynamic(() => import('@/components/blocks/common/CaseStudiesBlock'), {
+  loading: () => (
+    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
+      Loading CaseStudiesBlock...
+    </div>
+  ),
+});
 const CertificateBlock = dynamic(() => import('@/components/blocks/about/CertificateBlock'), {
   loading: () => (
     <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
@@ -197,6 +204,7 @@ const TestimonialsBlock = dynamic(() => import('@/components/blocks/careers/Test
 
 const BLOCK_COMPONENTS = {
   accordion_block: AccordionBlock,
+  case_studies_block: CaseStudiesBlock,
   certificate_block: CertificateBlock,
   content_image_block: ContentImageBlock,
   distribution_block: DistributionBlock,
