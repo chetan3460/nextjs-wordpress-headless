@@ -297,6 +297,22 @@ p {
 .bg-black {
   background-color: var(--color-black);
 }
+
+/* Badge Styles - AI Agency Template */
+.badge {
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 1.5);
+  font-size: var(--text-tagline-2);
+  line-height: var(--tw-leading, var(--text-tagline-2--line-height));
+  --tw-font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-normal);
+  text-wrap: nowrap;
+  color: var(--color-secondary);
+  text-transform: lowercase;
+  border-radius: var(--radius-3xl);
+  display: inline-block;
+}
+
 .badge-green {
   background-color: var(--color-ns-green-light);
 }

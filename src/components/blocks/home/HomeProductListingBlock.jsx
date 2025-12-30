@@ -1,136 +1,73 @@
 'use client';
 
-import Link from 'next/link';
-import SafeHTML from '@/components/common/SafeHTML';
 import Image from 'next/image';
-import { convertToNextPath } from '@/lib/utils/urls';
+import SafeHTML from '@/components/common/SafeHTML';
 
+/**
+ * Home Product Listing Block - AI Agency Feature Section
+ * Matches the exact UI from ai-agency.html feature section
+ */
 export default function HomeProductListingBlock({ data }) {
   if (!data || data.hide_block) return null;
 
-  const { title, description, product_items = [], cta } = data;
-
-  // Map first 5 items to the grid
-  const items = product_items.slice(0, 5);
-  // Separate into 4 small and 1 large (the 5th one)
-  const smallItems = items.slice(0, 4);
-  const largeItem = items[4];
+  const { subtitle, title, description, product_items = [] } = data;
 
   return (
-    <section className="xl:py-[100px] lg:py-[90px] md:py-20 py-16 bg-background-3 dark:bg-background-7">
-      <div className="main-container max-w-[1440px] px-5 sm:mx-auto">
+    <section className="pt-16 md:pt-20 lg:pt-[90px] xl:pt-[100px] pb-16 md:pb-20 lg:pb-[90px] xl:pb-[100px] bg-white">
+      <div className="main-container">
         {/* Header */}
-        <div className="text-center space-y-3 mb-10 md:mb-[70px]">
-          {title && (
-            <h2 data-ns-animate data-delay="0.2">
-              {title}
-            </h2>
-          )}
-          {description && (
-            <div data-ns-animate data-delay="0.3" className="max-w-[776px] mx-auto text-grey-3">
-              <SafeHTML html={description} />
-            </div>
-          )}
-        </div>
-
-        {/* Grid */}
-        <div className="mb-[72px]">
-          <div className="grid grid-cols-12 sm:gap-8 gap-y-8">
-            {/* Small Items */}
-            {smallItems.map((item, index) => {
-              const icon = item.icon;
-              const iconUrl = typeof icon === 'string' ? icon : icon?.url;
-              const iconWidth = typeof icon === 'object' ? icon?.width : 400;
-              const iconHeight = typeof icon === 'object' ? icon?.height : 225;
-              const delay = 0.4 + index * 0.1;
-              return (
-                <div
-                  key={index}
-                  data-ns-animate
-                  data-delay={delay.toFixed(1)}
-                  className="col-span-12 lg:col-span-4 sm:col-span-6"
-                >
-                  <div className="bg-white dark:bg-background-8 rounded-[20px] md:p-8 p-6 space-y-6 h-full flex flex-col justify-between">
-                    <div className="space-y-1">
-                      <h3 className="">{item.title}</h3>
-                      {item.description ? (
-                        <div className="text-sm">
-                          <SafeHTML html={item.description} />
-                        </div>
-                      ) : (
-                        <p>Tailored services for your brand.</p>
-                      )}
-                    </div>
-                    {iconUrl && (
-                      <div>
-                        <figure className=" max-w-full w-full overflow-hidden rounded-2xl">
-                          <Image
-                            src={iconUrl}
-                            alt={item.title || 'services'}
-                            width={iconWidth || 400}
-                            height={iconHeight || 225}
-                            className="w-full h-full object-cover"
-                          />
-                        </figure>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Large Item (Item 5) */}
-            {largeItem && (
-              <div className="col-span-12 lg:col-span-8">
-                <div className="bg-white  rounded-[20px] md:p-8 p-6 space-y-6">
-                  <div className="space-y-1">
-                    <h3 className="">{largeItem.title}</h3>
-                    {largeItem.description ? (
-                      <div className="">
-                        <SafeHTML html={largeItem.description} />
-                      </div>
-                    ) : (
-                      <p>Creative direction and consulting.</p>
-                    )}
-                  </div>
-                  {largeItem.icon && (
-                    <div>
-                      <figure className=" overflow-hidden rounded-2xl w-full">
-                        <Image
-                          src={
-                            typeof largeItem.icon === 'string'
-                              ? largeItem.icon
-                              : largeItem.icon?.url
-                          }
-                          alt={largeItem.title || 'services'}
-                          width={typeof largeItem.icon === 'object' ? largeItem.icon?.width : 800}
-                          height={typeof largeItem.icon === 'object' ? largeItem.icon?.height : 340}
-                          className="w-full h-full object-cover"
-                        />
-                      </figure>
-                    </div>
-                  )}
-                </div>
-              </div>
+        <div className="text-center space-y-5 max-w-[750px] mx-auto mb-10 md:mb-[70px]">
+          {subtitle && <span className="badge badge-green">{subtitle}</span>}
+          <div>
+            {title && <h2 className="mb-3">{title}</h2>}
+            {description && (
+              <p className="text-secondary/60 max-w-[600px] mx-auto">{description}</p>
             )}
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div
-          data-ns-animate
-          data-delay="0.9"
-          className="flex flex-col md:flex-row items-center gap-y-5 md:gap-x-3 justify-center"
-        >
-          {cta && cta.url && (
-            <Link
-              href={convertToNextPath(cta.url)}
-              target={cta.target || '_self'}
-              className="btn btn-secondary dark:btn-accent btn-md hover:btn-white dark:hover:btn-white-dark w-[90%] md:w-auto text-center"
-            >
-              <span>{cta.title || 'Explore services'}</span>
-            </Link>
-          )}
+        {/* Feature Items Grid */}
+        <div className="grid grid-cols-12 space-y-8 md:space-y-0 md:gap-8 mb-10 xl:mb-18">
+          {product_items.map((item, index) => {
+            const icon = item.icon;
+            const iconUrl = typeof icon === 'string' ? icon : icon?.url;
+            const iconWidth = typeof icon === 'object' ? icon?.width : 800;
+            const iconHeight = typeof icon === 'object' ? icon?.height : 450;
+
+            // Determine grid column span based on index
+            // Pattern: large (8), small (4), small (4), large (8)
+            const isLarge = index === 0 || index === 3;
+            const colSpan = isLarge
+              ? 'col-span-12 md:col-span-6 lg:col-span-8'
+              : 'col-span-12 md:col-span-6 lg:col-span-4';
+
+            return (
+              <div
+                key={index}
+                className={`${colSpan} p-8 rounded-[20px] bg-background-3 space-y-6`}
+              >
+                <div className="space-y-2">
+                  {item.title && <h5 className="max-sm:text-heading-6">{item.title}</h5>}
+                  {item.description && (
+                    <div className={isLarge ? 'max-w-[450px]' : ''}>
+                      <SafeHTML html={item.description} />
+                    </div>
+                  )}
+                </div>
+                {iconUrl && (
+                  <figure className="w-full">
+                    <Image
+                      src={iconUrl}
+                      alt={item.title || 'feature image'}
+                      width={iconWidth}
+                      height={iconHeight}
+                      className="w-full object-cover rounded-2xl"
+                    />
+                  </figure>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ export default function ContentImageBlock({ data }) {
   if (hide_block) return null;
 
   return (
-    <section className="content-image-block py-16 md:py-20 lg:py-32 xl:py-40">
+    <section className="content-image-block pt-16 md:pt-20 lg:pt-32 xl:pt-40">
       <div className="main-container">
         <div className="relative z-0">
           {/* Gradient Background */}
