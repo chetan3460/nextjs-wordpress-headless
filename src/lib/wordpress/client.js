@@ -303,6 +303,19 @@ export async function fetchMenu() {
 }
 
 /**
+ * Fetch all case studies
+ */
+export async function fetchCaseStudies(perPage = 4) {
+  try {
+    const caseStudies = await fetchREST(`/wp/v2/case-studies?per_page=${perPage}&_embed`);
+    return caseStudies || [];
+  } catch (error) {
+    console.error('Error fetching case studies:', error);
+    return [];
+  }
+}
+
+/**
  * Fetch a single post by slug via REST API
  */
 export async function fetchPostBySlug(slug, postType = 'posts') {

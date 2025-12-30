@@ -97,7 +97,7 @@ function renderDetailBlock(block, index) {
 }
 
 export default async function CaseStudyDetailPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   // Fetch data using REST API client
   const caseStudy = await fetchPostBySlug(slug, 'case-studies');
@@ -105,6 +105,8 @@ export default async function CaseStudyDetailPage({ params }) {
   if (!caseStudy) {
     notFound();
   }
+
+  console.log(`[CaseStudyDetailPage] Found case study: ${caseStudy.title}`);
 
   const { title, acf } = caseStudy;
   const blocks = acf?.detail_blocks || [];
