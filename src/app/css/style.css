@@ -269,7 +269,54 @@ body {
   --scrollbar-hover: #ba3333;
 }
 
-/* Base Typography Styles */
+/* Base Typography Styles - Headings */
+h2 {
+  font-size: var(--text-heading-3);
+  line-height: var(--tw-leading, var(--text-heading-3--line-height));
+}
+
+@media (min-width: 48rem) {
+  h2 {
+    font-size: var(--text-heading-2);
+    line-height: var(--tw-leading, var(--text-heading-2--line-height));
+  }
+}
+
+h3 {
+  font-size: var(--text-heading-5);
+  line-height: var(--tw-leading, var(--text-heading-5--line-height));
+}
+
+@media (min-width: 48rem) {
+  h3 {
+    font-size: var(--text-heading-4);
+    line-height: var(--tw-leading, var(--text-heading-4--line-height));
+  }
+}
+
+@media (min-width: 80rem) {
+  h3 {
+    font-size: var(--text-heading-3);
+    line-height: var(--tw-leading, var(--text-heading-3--line-height));
+  }
+}
+
+h4 {
+  font-size: var(--text-heading-4);
+  line-height: var(--tw-leading, var(--text-heading-4--line-height));
+}
+
+h5 {
+  font-size: var(--text-heading-5);
+  line-height: var(--tw-leading, var(--text-heading-5--line-height));
+}
+
+h6 {
+  font-size: var(--text-heading-6);
+  line-height: var(--tw-leading, var(--text-heading-6--line-height));
+}
+
+/* Base Typography Styles - Paragraphs */
 p {
   font-size: var(--text-tagline-2);
   line-height: var(--tw-leading, var(--text-tagline-2--line-height));

@@ -2,130 +2,94 @@
 
 import SafeHTML from '@/components/common/SafeHTML';
 import Link from 'next/link';
-import Image from 'next/image';
 
-export default function FeatureBlock({ data }) {
-  if (!data) return null;
+/**
+ * Home Features Block - AI Agency Services Section
+ * Matches the exact UI from ai-agency.html services section
+ */
+export default function HomeFeaturesBlock({ data }) {
+  if (!data || data.hide_block) return null;
 
-  const { title, description, feature_items, cta } = data;
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
+  const { subtitle, title, description, feature_items = [], cta } = data;
 
   return (
-    <section className="home-features-block bg-background-3 py-12 md:py-24">
-      <div className="container-fluid relative">
-        <div className="flex  flex-col gap-3">
-          {/* Left Column */}
-          <div className="w-full relative">
-            {(title || description) && (
-              <div className="section-heading text-center ">
-                {title && <h2 className="mb-1 fade-text">{title}</h2>}
-
-                {description && <SafeHTML html={description} className="anim-uni-in-up" />}
-              </div>
-            )}
-
-            {/* CTA Desktop */}
-            {cta?.url && (
-              <div className="hidden lg:block mt-6 anim-uni-in-up">
-                <Link href={cta.url} target={cta.target || '_self'} className="btn">
-                  {cta.title || 'Learn More'}
-                </Link>
-              </div>
-            )}
+    <section className="pt-16 md:pt-20 lg:pt-[90px] xl:pt-[100px] pb-16 md:pb-20 lg:pb-[90px] xl:pb-[100px] bg-[url('/images/ns-img-169.png')] bg-no-repeat bg-cover bg-top">
+      <div className="main-container">
+        {/* Header */}
+        <div className="text-center space-y-5 max-w-[750px] mx-auto mb-14">
+          {subtitle && <span className="badge badge-green">{subtitle}</span>}
+          <div>
+            {title && <h2 className="mb-3">{title}</h2>}
+            {description && <SafeHTML html={description} className="max-w-[600px] mx-auto" />}
           </div>
+        </div>
 
-          {/* Right Column */}
-          {feature_items && feature_items.length > 0 && (
-            <div className="mt-4 md:mt-0 w-full  ">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 ">
-                {feature_items.map((item, index) => {
-                  const icon = item.icon;
-                  const item_title = item.title;
-                  const item_description = item.description;
-                  const delay = (index + 1) * 0.2; // PHP logic: increases by 0.2 each item
+        {/* Feature Items Grid */}
+        <div className="grid grid-cols-12 space-y-8 md:space-y-0 md:gap-8 mb-10 lg:mb-18 max-w-[1010px] mx-auto">
+          {feature_items.map((item, index) => {
+            // Determine grid column span based on index
+            // Pattern: large (7), small (5), small (5), large (7)
+            const isLarge = index === 0 || index === 3;
+            const colSpan = isLarge
+              ? 'col-span-12 md:col-span-6 lg:col-span-7'
+              : 'col-span-12 md:col-span-6 lg:col-span-5';
 
-                  return (
-                    <div
-                      key={index}
-                      className="feature-item sm:p-8 p-5 bg-[#fcfcfd]  rounded-[20px] space-y-2 h-full flex flex-col border border-stroke-1 "
-                      data-delay={delay.toFixed(1)}
-                    >
-                      {/* Icon */}
-                      {icon?.url && (
-                        <div className="feature-icon size-14 rounded-full bg-[#c6f56f] p-3.5 flex items-center justify-center">
-                          <Image
-                            src={icon.url}
-                            alt={icon.alt || item_title}
-                            width={56}
-                            height={56}
-                            className="w-[56px] h-[56px] object-contain"
-                          />
-                        </div>
-                      )}
+            return (
+              <div
+                key={index}
+                className={`${colSpan} p-8 rounded-[20px] bg-white space-y-6 sm:min-h-[288px]`}
+              >
+                {/* Icon */}
+                {item.icon && (
+                  <div className="w-full">
+                    {typeof item.icon === 'string' ? (
+                      item.icon.startsWith('http') ? (
+                        <img
+                          src={item.icon}
+                          alt={item.title || 'icon'}
+                          className="w-[52px] h-[52px] object-contain"
+                        />
+                      ) : (
+                        <span className="text-[52px] text-secondary">{item.icon}</span>
+                      )
+                    ) : item.icon?.url ? (
+                      <img
+                        src={item.icon.url}
+                        alt={item.icon.alt || item.title || 'icon'}
+                        className="w-[52px] h-[52px] object-contain"
+                      />
+                    ) : (
+                      <span className="text-[52px] text-secondary">🎯</span>
+                    )}
+                  </div>
+                )}
 
-                      {/* Content */}
-                      <div className="feature-content">
-                        {item_title && (
-                          <div className="h3 my-1 md:my-2 !font-normal !text-grey-1">
-                            {item_title}
-                          </div>
-                        )}
-
-                        {item_description && (
-                          <div
-                            className="text-base"
-                            dangerouslySetInnerHTML={{
-                              __html: item_description,
-                            }}
-                          />
-                        )}
-                      </div>
+                {/* Content */}
+                <div className="space-y-2">
+                  {item.title && <h5 className="max-sm:text-heading-6">{item.title}</h5>}
+                  {item.description && (
+                    <div className={isLarge ? 'max-w-[430px]' : ''}>
+                      <SafeHTML html={item.description} />
                     </div>
-                  );
-                })}
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-
-          {/* CTA Mobile */}
-          {cta?.url && (
-            <div className="block lg:hidden mt-7 mx-auto anim-uni-in-up">
-              <Link href={cta.url} target={cta.target || '_self'} className="btn">
-                {cta.title || 'Learn More'}
-              </Link>
-            </div>
-          )}
+            );
+          })}
         </div>
 
-        {/* Decorative Shape (Mobile) */}
-        <div
-          className="md:hidden block absolute right-0 bottom-0 -z-1 pointer-none w-[85px]"
-          data-speed="1.25"
-        >
-          <Image
-            src="/assets/images/home/shapes/shape-4.webp"
-            alt=""
-            width={85}
-            height={85}
-            className="w-full h-auto"
-          />
-        </div>
+        {/* CTA Button */}
+        {cta?.url && (
+          <div className="flex items-center justify-center">
+            <Link
+              href={cta.url}
+              target={cta.target || '_self'}
+              className="btn btn-secondary hover:btn-primary btn-md w-[85%] md:w-auto mx-auto"
+            >
+              <span>{cta.title || 'Talk to an expert'}</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
