@@ -13,36 +13,8 @@ export default function CaseStudiesBlock({ data }) {
 
   if (hide_block) return null;
 
-  // Use dummy items if no case studies are provided yet to demonstrate UI
-  const displayItems =
-    case_studies.length > 0
-      ? case_studies
-      : [
-          {
-            image: { url: '/images/ns-img-183.png', alt: 'Project 1' },
-            title: 'AI-powered patient care solutions in healthcare.',
-            description: 'Empowering healthcare providers with smart, scalable solutions.',
-            link: '#',
-          },
-          {
-            image: { url: '/images/ns-img-184.png', alt: 'Project 2' },
-            title: 'Retail analytics for better insights',
-            description: 'Understand shopper behavior and drive data-led decisions.',
-            link: '#',
-          },
-          {
-            image: { url: '/images/ns-img-185.png', alt: 'Project 3' },
-            title: 'Risk management tools for finance sectors',
-            description: 'Identify, assess, and mitigate financial risk with confidence.',
-            link: '#',
-          },
-          {
-            image: { url: '/images/ns-img-186.jpg', alt: 'Project 4' },
-            title: 'Proven results with measurable outcomes',
-            description: 'Evidence-based outcomes that speak for themselves.',
-            link: '#',
-          },
-        ];
+  // No fallback data - rely on CMS input
+  const displayItems = case_studies || [];
 
   return (
     <section className="pt-16 md:pt-20 lg:pt-[90px] xl:pt-[160px] pb-16 md:pb-20 lg:pb-[90px] xl:pb-[160px] bg-white">
