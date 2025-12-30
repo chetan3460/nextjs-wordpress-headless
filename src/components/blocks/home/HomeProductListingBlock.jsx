@@ -5,7 +5,6 @@ import SafeHTML from '@/components/common/SafeHTML';
 
 /**
  * Home Product Listing Block - AI Agency Feature Section
- * Matches the exact UI from ai-agency.html feature section
  */
 export default function HomeProductListingBlock({ data }) {
   if (!data || data.hide_block) return null;
@@ -21,7 +20,7 @@ export default function HomeProductListingBlock({ data }) {
           <div>
             {title && <h2 className="mb-3">{title}</h2>}
             {description && (
-              <p className="text-secondary/60 max-w-[600px] mx-auto">{description}</p>
+              <SafeHTML html={description} className="text-secondary/60 max-w-[600px] mx-auto" />
             )}
           </div>
         </div>
