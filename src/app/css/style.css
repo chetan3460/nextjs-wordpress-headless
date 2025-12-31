@@ -394,17 +394,6 @@ p {
   background-color: var(--color-background-8);
 }
 
-.text-heading-5 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-}
-.text-heading-6 {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 700;
-}
-
 * {
   scrollbar-width: thin;
 }
@@ -458,11 +447,11 @@ body {
 }
 
 /* Container Configuration */
-@utility container {
+.container {
   padding-inline: 12px;
   margin-inline: auto;
 }
-@utility container-fluid {
+.container-fluid {
   @apply px-4 lg:px-5;
   margin-inline: auto;
 }
@@ -531,6 +520,19 @@ body {
 .text-heading-6 {
   font-size: var(--text-heading-6);
   line-height: var(--tw-leading, var(--text-heading-6--line-height));
+}
+
+/* Responsive Heading Variants */
+@media (min-width: 40rem) {
+  .sm\:text-heading-5 {
+    font-size: var(--text-heading-5);
+    line-height: var(--tw-leading, var(--text-heading-5--line-height));
+  }
+
+  .sm\:text-heading-6 {
+    font-size: var(--text-heading-6);
+    line-height: var(--tw-leading, var(--text-heading-6--line-height));
+  }
 }
 
 .text-secondary {

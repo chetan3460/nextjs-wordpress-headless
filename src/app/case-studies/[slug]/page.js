@@ -118,14 +118,44 @@ export default async function CaseStudyDetailPage({ params }) {
 
   return (
     <main>
-      <section className="pb-24 md:pb-36 lg:pb-44 xl:pb-[200px] xl:pt-[180px] md:pt-42 sm:pt-36 pt-32">
+      {/* Title Section */}
+      <section className="xl:pt-[180px] md:pt-42 sm:pt-36 pt-32 pb-12">
+        <div className="main-container">
+          <div className="flex flex-col lg:flex-row items-start lg:gap-[72px]">
+            <div className="max-w-full w-full">
+              {acf?.subtitle && <span className="badge badge-green mb-6">{acf.subtitle}</span>}
+              <h1 className="hero-title mb-0">{title}</h1>
+            </div>
+            {/* Empty space for sidebar alignment */}
+            <div className="lg:max-w-[400px] w-full hidden lg:block"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Image Section - Full Width */}
+      {caseStudy.featuredImage?.node?.sourceUrl && (
+        <section className="pb-12">
+          <div className="main-container">
+            <figure className="rounded-xl overflow-hidden">
+              <Image
+                src={caseStudy.featuredImage.node.sourceUrl}
+                alt={caseStudy.featuredImage.node.altText || title}
+                width={1290}
+                height={600}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </figure>
+          </div>
+        </section>
+      )}
+
+      {/* Content Section */}
+      <section className="pb-24 md:pb-36 lg:pb-44 xl:pb-[200px]">
         <div className="main-container">
           <div className="flex flex-col lg:flex-row items-start lg:gap-[72px]">
             {/* Main Content Column */}
             <div className="lg:max-w-[767px] max-w-full w-full">
-              {acf?.subtitle && <span className="badge badge-green mb-6">{acf.subtitle}</span>}
-              <h1 className="hero-title mb-8">{title}</h1>
-
               <div className="case-study-content">
                 {blocks.map((block, index) => renderDetailBlock(block, index))}
               </div>
@@ -133,20 +163,20 @@ export default async function CaseStudyDetailPage({ params }) {
 
             {/* Sticky Sidebar / Table of Contents */}
             {toc.length > 0 && (
-              <aside className="lg:max-w-[400px] w-full lg:sticky lg:top-32 hidden lg:block">
-                <div className="p-8 lg:p-11 rounded-[20px] bg-background-1 space-y-6">
+              <aside className="table-of-contents lg:max-w-[449px] w-full lg:block lg:sticky lg:top-20 hidden">
+                <div className="p-11 rounded-[20px] bg-background-1 dark:bg-background-6 space-y-4 w-full">
                   <h3 className="text-heading-5">Summary</h3>
-                  <ul className="space-y-1">
+                  <ul className="w-full">
                     {toc.map((item, i) => (
                       <li key={i}>
                         <a
                           href={`#${item.id}`}
-                          className="py-4 flex items-center justify-between border-b border-stroke-4 last:border-b-0 hover:text-primary transition-colors group"
+                          className="lenis-scroll-to py-4 flex items-center justify-between border-b border-b-stroke-4 dark:border-b-stroke-7"
                         >
-                          <span className="text-lg font-medium opacity-60 group-hover:opacity-100 transition-opacity">
+                          <span className="text-lg leading-[27px] font-normal text-secondary">
                             {item.label}
                           </span>
-                          <span className="opacity-40 group-hover:opacity-100 transition-opacity">
+                          <span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -156,7 +186,8 @@ export default async function CaseStudyDetailPage({ params }) {
                             >
                               <path
                                 d="M10 8.5L14 12.5L10 16.5"
-                                stroke="currentColor"
+                                className="stroke-secondary dark:stroke-accent"
+                                strokeOpacity="0.6"
                                 strokeWidth="1.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"

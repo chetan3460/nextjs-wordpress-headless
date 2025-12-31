@@ -108,7 +108,7 @@ export default function CaseStudiesBlock({ data }) {
                       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 md:justify-between">
                         {item.title && (
                           <h3 className="text-heading-6 sm:text-heading-5 max-w-[500px]">
-                            <SafeHTML html={item.title} />
+                            {item.title}
                           </h3>
                         )}
                         {item.description && (
