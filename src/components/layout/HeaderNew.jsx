@@ -292,9 +292,7 @@ function NavItem({ item, activeMenu, setActiveMenu }) {
 
                   {/* Content */}
                   <div className="relative z-10 flex-1">
-                    <p className="text-tagline-1 font-normal text-secondary dark:text-accent">
-                      {child.label}
-                    </p>
+                    <p className="text-tagline-1 font-normal text-secondary">{child.label}</p>
                     {child.description && (
                       <p className="text-tagline-3 font-normal text-secondary/60 dark:text-accent/60 mt-0.5">
                         {child.description}

@@ -211,7 +211,8 @@ function generateBlockRenderer(blocks) {
   uniqueBlocks.forEach(block => {
     const basename = path.basename(block.name, path.extname(block.name));
     const importPath = `@/components/blocks/${block.folder}/${basename}`;
-    imports += `const ${basename} = dynamic(() => import("${importPath}"), { \n  loading: () => <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">Loading ${basename}...</div>\n});\n`;
+    // Remove loading state to prevent flickering on page reload
+    imports += `const ${basename} = dynamic(() => import("${importPath}"), { ssr: true });\n`;
     mapping += `  "${block.layout}": ${basename},\n`;
   });
 

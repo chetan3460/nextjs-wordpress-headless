@@ -2042,6 +2042,48 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_case_studies_repeater",
+                            "label": "Case Studies",
+                            "name": "case_studies",
+                            "type": "repeater",
+                            "layout": "block",
+                            "button_label": "Add Case Study",
+                            "sub_fields": [
+                                {
+                                    "key": "field_cs_item_image",
+                                    "label": "Image",
+                                    "name": "image",
+                                    "type": "image",
+                                    "return_format": "array"
+                                },
+                                {
+                                    "key": "field_cs_item_title",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "field_cs_item_desc",
+                                    "label": "Description",
+                                    "name": "description",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "field_cs_item_link",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_case_studies_cta",
+                            "label": "CTA Button",
+                            "name": "cta",
+                            "type": "link",
+                            "return_format": "array"
                         }
                     ],
                     "min": "",

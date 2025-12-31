@@ -1,9 +1,11 @@
+import { cache } from 'react';
+
 /**
  * Fetch data from WordPress REST API
  * @param {string} endpoint - REST API endpoint path
  * @returns {Promise<any>} REST API response data
  */
-export async function fetchREST(endpoint) {
+export const fetchREST = cache(async endpoint => {
   // For client-side requests, we must use NEXT_PUBLIC variables
   // For server-side, we can use either
   const publicUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL;
@@ -19,8 +21,12 @@ export async function fetchREST(endpoint) {
 
   const url = `${baseUrl}${endpoint}`;
 
+  // Longer cache in development for better performance
+  const cacheTime = process.env.NODE_ENV === 'development' ? 3600 : 60;
+
   const response = await fetch(url, {
-    next: { revalidate: 60 }, // Cache for 60 seconds
+    next: { revalidate: cacheTime },
+    keepalive: true, // Reuse TCP connections
   });
 
   if (!response.ok) {
@@ -28,14 +34,14 @@ export async function fetchREST(endpoint) {
   }
 
   return response.json();
-}
+});
 
 /**
  * Fetch page with ACF fields via REST API
  * @param {string} slug - Page slug (e.g., 'home', 'about')
  * @returns {Promise<object>} Page data with ACF fields
  */
-export async function fetchPageWithACF(slug) {
+export const fetchPageWithACF = cache(async slug => {
   try {
     // 1. Try requested slug with _embed
     let data = await fetchREST(`/wp/v2/pages?slug=${slug}&_embed`);
@@ -82,7 +88,7 @@ export async function fetchPageWithACF(slug) {
     console.error('Error fetching page with ACF:', error);
     return null;
   }
-}
+});
 
 /**
  * Process ACF fields to convert image IDs to full image objects
@@ -157,7 +163,7 @@ async function processACFImages(acf) {
  * @param {number} mediaId - WordPress media ID
  * @returns {Promise<object>} Media object with URL, alt, etc.
  */
-async function fetchMediaById(mediaId) {
+const fetchMediaById = cache(async mediaId => {
   try {
     const media = await fetchREST(`/wp/v2/media/${mediaId}`);
     return {
@@ -172,14 +178,14 @@ async function fetchMediaById(mediaId) {
     console.error(`Error fetching media ${mediaId}:`, error);
     return null;
   }
-}
+});
 
 /**
  * Fetch post by ID (for news/posts)
  * @param {number} postId - WordPress post ID
  * @returns {Promise<object>} Post object with title, URL, categories, etc.
  */
-async function fetchPostById(postId) {
+const fetchPostById = cache(async postId => {
   try {
     // Try fetching from posts endpoint first with _embed to get featured image
     let post;
@@ -242,7 +248,7 @@ async function fetchPostById(postId) {
     console.error(`Error fetching post ${postId}:`, error);
     return null;
   }
-}
+});
 
 /**
  * Fetch Primary Menu via REST API
@@ -318,7 +324,7 @@ export async function fetchCaseStudies(perPage = 4) {
 /**
  * Fetch a single post by slug via REST API
  */
-export async function fetchPostBySlug(slug, postType = 'posts') {
+export const fetchPostBySlug = cache(async (slug, postType = 'posts') => {
   try {
     if (process.env.NODE_ENV === 'development') {
       console.log(`[fetchPostBySlug] Attempting to fetch post with slug: ${slug}`);
@@ -433,7 +439,7 @@ export async function fetchPostBySlug(slug, postType = 'posts') {
     console.error(`Error fetching post by slug ${slug}:`, error);
     return null;
   }
-}
+});
 
 /**
  * Fetch all posts (for static paths) via REST API

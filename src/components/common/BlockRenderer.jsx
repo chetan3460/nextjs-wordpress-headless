@@ -4,208 +4,93 @@ import dynamic from 'next/dynamic';
 import BlockErrorBoundary from '@/components/common/BlockErrorBoundary';
 
 const AccordionBlock = dynamic(() => import('@/components/blocks/common/AccordionBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading AccordionBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const CaseStudiesBlock = dynamic(() => import('@/components/blocks/common/CaseStudiesBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading CaseStudiesBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const CertificateBlock = dynamic(() => import('@/components/blocks/about/CertificateBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading CertificateBlock...
-    </div>
-  ),
+  ssr: true,
+});
+const ChecklistSection = dynamic(() => import('@/components/blocks/common/ChecklistSection'), {
+  ssr: true,
 });
 const ContentImageBlock = dynamic(() => import('@/components/blocks/common/ContentImageBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading ContentImageBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const DistributionBlock = dynamic(() => import('@/components/blocks/common/DistributionBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading DistributionBlock...
-    </div>
-  ),
+  ssr: true,
 });
-const FaqBlock = dynamic(() => import('@/components/blocks/common/FaqBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading FaqBlock...
-    </div>
-  ),
-});
+const FaqBlock = dynamic(() => import('@/components/blocks/common/FaqBlock'), { ssr: true });
 const GalleryBlock = dynamic(() => import('@/components/blocks/common/GalleryBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading GalleryBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const GetInTouchBlock = dynamic(() => import('@/components/blocks/common/GetInTouchBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading GetInTouchBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const GlobalBannerBlock = dynamic(() => import('@/components/blocks/common/GlobalBannerBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading GlobalBannerBlock...
-    </div>
-  ),
+  ssr: true,
 });
-const HeroBlock = dynamic(() => import('@/components/blocks/home/HeroBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HeroBlock...
-    </div>
-  ),
-});
+const HeroBlock = dynamic(() => import('@/components/blocks/home/HeroBlock'), { ssr: true });
 const HomeClientBlock = dynamic(() => import('@/components/blocks/home/HomeClientBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HomeClientBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const HomeFeaturesBlock = dynamic(() => import('@/components/blocks/common/HomeFeaturesBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HomeFeaturesBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const HomeHeroBlock = dynamic(() => import('@/components/blocks/home/HomeHeroBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HomeHeroBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const HomeImageSliderBlock = dynamic(
   () => import('@/components/blocks/home/HomeImageSliderBlock'),
-  {
-    loading: () => (
-      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-        Loading HomeImageSliderBlock...
-      </div>
-    ),
-  }
+  { ssr: true }
 );
 const HomeProductListingBlock = dynamic(
   () => import('@/components/blocks/home/HomeProductListingBlock'),
-  {
-    loading: () => (
-      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-        Loading HomeProductListingBlock...
-      </div>
-    ),
-  }
+  { ssr: true }
 );
 const HomeStatsBlock = dynamic(() => import('@/components/blocks/home/HomeStatsBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HomeStatsBlock...
-    </div>
-  ),
+  ssr: true,
 });
-const HomeTabBlock = dynamic(() => import('@/components/blocks/home/HomeTabBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading HomeTabBlock...
-    </div>
-  ),
-});
-const LatestNews = dynamic(() => import('@/components/blocks/home/LatestNews'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading LatestNews...
-    </div>
-  ),
-});
+const HomeTabBlock = dynamic(() => import('@/components/blocks/home/HomeTabBlock'), { ssr: true });
+const ImageBlock = dynamic(() => import('@/components/blocks/common/ImageBlock'), { ssr: true });
+const LatestNews = dynamic(() => import('@/components/blocks/home/LatestNews'), { ssr: true });
 const LeadershipBlock = dynamic(() => import('@/components/blocks/our-company/LeadershipBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading LeadershipBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const LeadershipBlockSlider = dynamic(
   () => import('@/components/blocks/our-company/LeadershipBlockSlider'),
-  {
-    loading: () => (
-      <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-        Loading LeadershipBlockSlider...
-      </div>
-    ),
-  }
+  { ssr: true }
 );
 const MilestonesBlock = dynamic(() => import('@/components/blocks/common/MilestonesBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading MilestonesBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const NewsContentBlock = dynamic(() => import('@/components/blocks/news/NewsContentBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading NewsContentBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const NewsListingBlock = dynamic(() => import('@/components/blocks/news/NewsListingBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading NewsListingBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const RelatedNewsBlock = dynamic(() => import('@/components/blocks/news/RelatedNewsBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading RelatedNewsBlock...
-    </div>
-  ),
+  ssr: true,
 });
+const RichText = dynamic(() => import('@/components/blocks/common/RichText'), { ssr: true });
 const TeamMembersBlock = dynamic(() => import('@/components/blocks/our-company/TeamMembersBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading TeamMembersBlock...
-    </div>
-  ),
+  ssr: true,
 });
 const TestLeaderBlock = dynamic(() => import('@/components/blocks/our-company/TestLeaderBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading TestLeaderBlock...
-    </div>
-  ),
+  ssr: true,
 });
+const Testimonial = dynamic(() => import('@/components/blocks/common/Testimonial'), { ssr: true });
 const TestimonialsBlock = dynamic(() => import('@/components/blocks/careers/TestimonialsBlock'), {
-  loading: () => (
-    <div className="py-20 text-center animate-pulse bg-gray-50 rounded-xl m-4 border-2 border-dashed border-gray-200 text-gray-400 font-medium">
-      Loading TestimonialsBlock...
-    </div>
-  ),
+  ssr: true,
 });
 
 const BLOCK_COMPONENTS = {
   accordion_block: AccordionBlock,
   case_studies_block: CaseStudiesBlock,
   certificate_block: CertificateBlock,
+  checklist_section: ChecklistSection,
   content_image_block: ContentImageBlock,
   distribution_block: DistributionBlock,
   faq_block: FaqBlock,
@@ -220,6 +105,7 @@ const BLOCK_COMPONENTS = {
   home_product_listing_block: HomeProductListingBlock,
   home_stats_block: HomeStatsBlock,
   home_tab_block: HomeTabBlock,
+  image_block: ImageBlock,
   latest_news: LatestNews,
   leadership_block: LeadershipBlock,
   leadership_block_slider: LeadershipBlockSlider,
@@ -227,8 +113,10 @@ const BLOCK_COMPONENTS = {
   news_content_block: NewsContentBlock,
   news_listing_block: NewsListingBlock,
   related_news_block: RelatedNewsBlock,
+  rich_text: RichText,
   team_members_block: TeamMembersBlock,
   test_leader_block: TestLeaderBlock,
+  testimonial: Testimonial,
   testimonials_block: TestimonialsBlock,
 };
 
