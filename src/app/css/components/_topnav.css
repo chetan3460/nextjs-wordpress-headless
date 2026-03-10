@@ -23,7 +23,7 @@
 #topnav {
   @apply fixed start-0 end-0 top-0 z-50 border-0 bg-white py-5 duration-500;
   .logo {
-    @apply text-black ltr:float-left rtl:float-right;
+    @apply text-white ltr:float-left rtl:float-right;
     .l-dark {
       @apply hidden;
     }
@@ -98,7 +98,7 @@
     }
 
     span {
-      @apply mb-[7px] block h-[2px] w-full bg-black;
+      @apply mb-[7px] block h-[2px] w-full bg-white;
 
       &:last-child {
         @apply mb-0;
@@ -132,7 +132,7 @@
       @apply relative my-0 mr-7 last:mr-0 max-lg:mr-3 ltr:float-left rtl:float-right;
       > a,
       > span {
-        @apply block text-base leading-5 font-medium tracking-[-0.2px] text-black capitalize;
+        @apply block text-base leading-5 font-medium tracking-[-0.2px] text-white capitalize;
         &:hover,
         &:active {
           @apply text-primary;
@@ -212,14 +212,18 @@
   pointer-events: none;
   margin-top: 0;
   will-change: opacity;
-  transition: opacity var(--nav-transition-fast), visibility 0s linear 0.2s;
+  transition:
+    opacity var(--nav-transition-fast),
+    visibility 0s linear 0.2s;
 }
 #topnav .navigation-menu > li.has-mega:hover > .mega-panel,
 #topnav .navigation-menu > li.has-mega:focus-within > .mega-panel {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transition: opacity var(--nav-transition-fast), visibility 0s linear 0s;
+  transition:
+    opacity var(--nav-transition-fast),
+    visibility 0s linear 0s;
 }
 /* Ensure submenu inside mega panel becomes visible when panel is visible */
 #topnav .navigation-menu > li.has-mega:hover > .mega-panel .submenu,
@@ -228,14 +232,8 @@
   opacity: 1 !important;
 }
 #topnav .navigation-menu > li.has-mega:hover > .mega-panel .submenu li a,
-#topnav
-  .navigation-menu
-  > li.has-mega:focus-within
-  > .mega-panel
-  .submenu
-  li
-  a {
-  color: #111;
+#topnav .navigation-menu > li.has-mega:focus-within > .mega-panel .submenu li a {
+  color: #f8f9fa;
   opacity: 1;
 }
 
@@ -538,8 +536,7 @@
       > li.has-submenu > a {
         position: relative;
         color: var(--Neutral-Grey-8, var(--color-neutral-900, #1c1c1c));
-        font-family: var(--font-instrument, "Instrument Sans"),
-          "Instrument Sans", sans-serif;
+        font-family: var(--font-instrument, 'Instrument Sans'), 'Instrument Sans', sans-serif;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
@@ -723,7 +720,7 @@
     /* Consistent padding for all menu items */
     a.sub-menu-item,
     span.sub-menu-item {
-      @apply text-base font-medium text-neutral-900;
+      @apply text-base font-medium text-white;
       display: block;
       padding: 0;
       transition: color var(--nav-transition-normal);
@@ -736,7 +733,8 @@
     &.has-submenu {
       .menu-arrow {
         @apply text-neutral-600;
-        transition: transform var(--nav-transition-normal),
+        transition:
+          transform var(--nav-transition-normal),
           color var(--nav-transition-normal);
       }
 
@@ -755,7 +753,8 @@
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height var(--nav-transition-normal),
+      transition:
+        max-height var(--nav-transition-normal),
         opacity var(--nav-transition-normal),
         margin var(--nav-transition-normal);
       margin-top: 0;
@@ -846,7 +845,7 @@
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  color: var(--color-black);
+  color: var(--color-white);
   transition: transform 0.2s ease;
   cursor: pointer;
   pointer-events: auto;

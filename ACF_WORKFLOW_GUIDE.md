@@ -8,7 +8,6 @@ When creating a Field Group for a page (e.g., "Services Page"), follow this stri
 
 1.  **Field Group Title:** `Services Page Blocks`
 2.  **Field Name (The Container):**
-
     - **Label:** `Page Panels` (or `Services Panels`)
     - **Name:** `services_panels` (Use `_panels` suffix!)
     - **Type:** `Flexible Content`
@@ -24,9 +23,11 @@ When creating a Field Group for a page (e.g., "Services Page"), follow this stri
 After saving in WordPress:
 
 1.  **Run Sync:**
+
     ```bash
     npm run sync-acf-blocks
     ```
+
     - This copies the JSON from the theme to your Next.js project.
     - It auto-generates the React component (e.g., `PricingBlock.jsx`) if it doesn't exist.
     - It updates `BlockRenderer.jsx`.
@@ -36,11 +37,11 @@ After saving in WordPress:
 Create your page file (e.g., `src/app/services/page.js`) using this template. Notice how the variable matches your field name from Step 1!
 
 ```javascript
-import { fetchPageWithACF } from "@/lib/wordpress/client";
-import BlockRenderer from "@/components/common/BlockRenderer";
+import { fetchPageWithACF } from '@/lib/wordpress/client';
+import BlockRenderer from '@/components/common/BlockRenderer';
 
 export default async function ServicesPage() {
-  const pageData = await fetchPageWithACF("services");
+  const pageData = await fetchPageWithACF('services');
   if (!pageData) return null;
 
   // MATCH THIS NAME TO YOUR ACF FIELD NAME:
