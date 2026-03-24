@@ -1,5 +1,6 @@
-/* Import Inter from Google Fonts - Must be first */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap');
 
 /* Tailwind CSS */
 @import 'tailwindcss';
@@ -136,11 +137,13 @@ body {
   --color-background-9: #1f252f;
   --color-background-11: #b5b5b9;
   --color-background-12: #eaeceb;
+  --color-background-13: #0d0d12;
+  --color-background-14: #12161f;
 
   /* Stroke/Border Colors */
-  --color-stroke-1: #dfe4eb;
-  --color-stroke-2: #e3e7ed;
-  --color-stroke-3: #d7dde5;
+  --color-stroke-1: #94aecf;
+  --color-stroke-2: #0708052d;
+  --color-stroke-3: #7c8ea5;
   --color-stroke-4: #eceff4;
   --color-stroke-5: #1b232f;
   --color-stroke-6: #202731;
@@ -156,7 +159,6 @@ body {
   --color-opai-blue: #227eff;
   --color-opai-lemon: #d0ff00;
   --color-opai-green: #09f647;
-  --color-background-14: #12161f;
 
   /* Brand Colors */
   --color-ns-yellow: #f9eb57;
@@ -194,27 +196,52 @@ body {
   --text-heading-6: 1.25rem;
   --text-heading-6--line-height: 140%;
 
+  /* Inter Tight Headings */
+  --text-it-heading-4: 2rem;
+  --text-it-heading-4--line-height: 130%;
+  --text-it-heading-5: 1.5rem;
+  --text-it-heading-5--line-height: 140%;
+  --text-it-heading-6: 1.25rem;
+  --text-it-heading-6--line-height: 140%;
+
+  /* IBM Plex Mono Headings */
+  --text-is-heading-6: 1.25rem;
+  --text-is-heading-6--line-height: 140%;
+
   /* Sora Headings */
-  --text-sora-heading-1: 88px;
-  --text-sora-heading-1--line-height: 110%;
-  --text-sora-heading-2: 56px;
-  --text-sora-heading-2--line-height: 110%;
-  --text-sora-heading-3: 48px;
-  --text-sora-heading-3--line-height: 110%;
-  --text-sora-heading-4: 40px;
-  --text-sora-heading-4--line-height: 110%;
-  --text-sora-heading-5: 24px;
-  --text-sora-heading-5--line-height: 110%;
-  --text-sora-heading-6: 18px;
-  --text-sora-heading-6--line-height: 110%;
+  --text-sora-heading-1: 4rem;
+  --text-sora-heading-1--line-height: 120%;
+  --text-sora-heading-1--letter-spacing: -3.2px;
+  --text-sora-heading-2: 3rem;
+  --text-sora-heading-2--line-height: 120%;
+  --text-sora-heading-2--letter-spacing: -2.4px;
+  --text-sora-heading-3: 2.5rem;
+  --text-sora-heading-3--line-height: 120%;
+  --text-sora-heading-3--letter-spacing: -1.6px;
+  --text-sora-heading-4: 2rem;
+  --text-sora-heading-4--line-height: 130%;
+  --text-sora-heading-5: 1.5rem;
+  --text-sora-heading-5--line-height: 140%;
+  --text-sora-heading-6: 1.25rem;
+  --text-sora-heading-6--line-height: 140%;
+
+  /* Manrope Headings */
+  --text-manrope-heading-2: 3rem;
+  --text-manrope-heading-2--line-height: 120%;
+  --text-manrope-heading-4: 2rem;
+  --text-manrope-heading-4--line-height: 130%;
+  --text-manrope-heading-6: 1.25rem;
+  --text-manrope-heading-6--line-height: 140%;
 
   /* Typography - Taglines */
-  --text-tagline-1: 1rem;
+  --text-tagline-1: 1.125rem;
   --text-tagline-1--line-height: 150%;
-  --text-tagline-2: 0.875rem;
+  --text-tagline-2: 1rem;
   --text-tagline-2--line-height: 150%;
-  --text-tagline-3: 0.75rem;
+  --text-tagline-3: 0.875rem;
   --text-tagline-3--line-height: 150%;
+  --text-tagline-4: 0.75rem;
+  --text-tagline-4--line-height: 150%;
 
   /* Typography - Text Sizes */
   --text-xs: 0.75rem;
@@ -231,10 +258,13 @@ body {
   --text-2xl--line-height: calc(2 / 1.5);
   --text-4xl: 2.25rem;
   --text-4xl--line-height: calc(2.5 / 2.25);
+  --text-4_5xl: 2.5rem;
+  --text-4_5xl--line-height: 1;
   --text-5xl: 3rem;
   --text-5xl--line-height: 1;
   --text-6xl: 3.75rem;
-  --text-6xl--line-height: 1;
+  --text-6_5xl: 4rem;
+  --text-6_5xl--line-height: 1;
   --text-7xl: 4.5rem;
   --text-7xl--line-height: 1;
   --text-8xl: 6rem;
@@ -422,106 +452,12 @@ body {
   }
 }
 /* Custom Utility Classes */
+
 .font-inter {
   font-family: var(--font-inter);
 }
 
-/* Typography Utilities */
-.text-tagline-1 {
-  font-size: var(--text-tagline-1);
-  line-height: var(--text-tagline-1--line-height);
-}
-
-.text-tagline-2 {
-  font-size: var(--text-tagline-2);
-  line-height: var(--text-tagline-2--line-height);
-}
-
-.text-tagline-3 {
-  font-size: var(--text-tagline-3);
-  line-height: var(--text-tagline-3--line-height);
-}
-
 /* Heading Typography Utilities */
-.text-sora-heading-1 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-1);
-  line-height: var(--tw-leading, var(--text-sora-heading-1--line-height));
-}
-.text-sora-heading-2 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-2);
-  line-height: var(--tw-leading, var(--text-sora-heading-2--line-height));
-}
-.text-sora-heading-3 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-3);
-  line-height: var(--tw-leading, var(--text-sora-heading-3--line-height));
-}
-.text-sora-heading-4 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-4);
-  line-height: var(--tw-leading, var(--text-sora-heading-4--line-height));
-}
-.text-sora-heading-5 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-5);
-  line-height: var(--tw-leading, var(--text-sora-heading-5--line-height));
-}
-.text-sora-heading-6 {
-  font-family: var(--font-sora);
-  font-size: var(--text-sora-heading-6);
-  line-height: var(--tw-leading, var(--text-sora-heading-6--line-height));
-}
-
-/* Hero Title */
-.hero-title {
-  font-size: var(--text-heading-1);
-  line-height: var(--text-heading-1--line-height);
-  font-weight: 700;
-}
-
-.text-heading-2 {
-  font-size: var(--text-heading-2);
-  line-height: var(--tw-leading, var(--text-heading-2--line-height));
-}
-
-.text-heading-3 {
-  font-size: var(--text-heading-3);
-  line-height: var(--tw-leading, var(--text-heading-3--line-height));
-}
-
-.text-heading-4 {
-  font-size: var(--text-heading-4);
-  line-height: var(--tw-leading, var(--text-heading-4--line-height));
-}
-
-.text-heading-5 {
-  font-size: var(--text-heading-5);
-  line-height: var(--tw-leading, var(--text-heading-5--line-height));
-}
-
-.text-heading-6 {
-  font-size: var(--text-heading-6);
-  line-height: var(--tw-leading, var(--text-heading-6--line-height));
-}
-
-/* Responsive Heading Variants */
-@media (min-width: 40rem) {
-  .sm\:text-heading-5 {
-    font-size: var(--text-heading-5);
-    line-height: var(--tw-leading, var(--text-heading-5--line-height));
-  }
-
-  .sm\:text-heading-6 {
-    font-size: var(--text-heading-6);
-    line-height: var(--tw-leading, var(--text-heading-6--line-height));
-  }
-}
-
-.text-secondary {
-  color: var(--color-secondary) !important;
-}
 
 /* Button Base Styles */
 .btn {
@@ -597,7 +533,7 @@ body {
 .dropdown-menu span,
 .dropdown-menu p,
 .dropdown-menu h4 {
-  color: #f8f9fa !important;
+  color: inherit;
 }
 
 .header-pill {

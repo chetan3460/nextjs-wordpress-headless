@@ -13,8 +13,8 @@ export default function CTA2Block() {
                 className="font-sora md:text-sora-heading-3 text-sora-heading-4 max-md:-leading-[110%] lg:text-sora-heading-2 font-normal"
                 data-opai-split-text
               >
-                <span className="font-normal text-white/90"> Start Your AI </span>
-                <span className="text-white/30"> Transformation Today. </span>
+                <span className="font-normal text-white/90"> Start Your Headless </span>
+                <span className="text-white/30"> Journey Today. </span>
               </h2>
               <p
                 className="text-tagline-2 font-inter-tight text-white/60"
@@ -22,7 +22,7 @@ export default function CTA2Block() {
                 data-delay="0.3"
                 data-line-delay="0.1"
               >
-                Let’s explore how NexSas can drive success for your business.
+                Let’s explore how Nexsas can revolutionize your WordPress experience.
               </p>
               <div
                 className="mt-6 md:mt-12"

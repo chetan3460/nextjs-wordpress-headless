@@ -25,7 +25,7 @@ export default function MobileMenu({ isOpen, items, onClose, logo }) {
             </Link>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/5 text-[#F8F9FA] hover:text-white"
+              className="p-2 rounded-full bg-white/5 text-white/90 hover:text-white"
               aria-label="Close Mobile Menu"
             >
               <X size={20} />
@@ -65,7 +65,7 @@ function MobileNavItem({ item, onClose }) {
         <Link
           href={item.url}
           onClick={onClose}
-          className="block py-3 text-base text-[#F8F9FA] hover:text-white transition-colors font-sora"
+          className="block py-3 text-base text-white/90 hover:text-white transition-colors font-sora"
         >
           {item.label}
         </Link>
@@ -77,7 +77,7 @@ function MobileNavItem({ item, onClose }) {
     <li>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="mobile-menu-toggle flex w-full cursor-pointer items-center justify-between py-2.5 text-base text-[#F8F9FA] hover:text-white transition-colors font-sora"
+        className="mobile-menu-toggle flex w-full cursor-pointer items-center justify-between py-2.5 text-base text-white/90 hover:text-white transition-colors font-sora"
       >
         <span>{item.label}</span>
         <ChevronDown

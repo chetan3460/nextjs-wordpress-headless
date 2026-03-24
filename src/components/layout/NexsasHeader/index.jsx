@@ -200,7 +200,7 @@ function NavItem({ item, activeMegaMenu, setActiveMegaMenu }) {
 
       <Link
         href={item.url}
-        className={`relative z-10 flex items-center gap-1 text-sm font-ibm-plex-mono transition-colors duration-300 ${isActive ? 'text-white' : 'text-[#F8F9FA] hover:text-white'}`}
+        className={`relative z-10 flex items-center gap-1 text-sm font-ibm-plex-mono transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/90 hover:text-white'}`}
       >
         {label}
         {isMega && (

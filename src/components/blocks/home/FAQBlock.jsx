@@ -38,7 +38,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    What is Headless WordPress?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -46,12 +46,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Headless WordPress decouples the backend content management from the frontend presentation. WordPress acts as a powerful API-driven CMS, while Nexsas uses Next.js to deliver a blazing-fast, modern user experience.
                   </p>
                 </div>
               </div>
@@ -66,7 +61,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    Why choose Next.js for your WordPress frontend?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -74,12 +69,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Next.js offers superior performance through Static Site Generation (SSG) and Incremental Static Regeneration (ISR), providing near-instant load times and an app-like feel that traditional themes can't match.
                   </p>
                 </div>
               </div>
@@ -94,7 +84,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    How does Nexsas handle SEO?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -102,12 +92,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Nexsas comes with built-in SEO optimizations, including server-side rendering for meta tags, automatic sitemap generation, and lightning-fast Core Web Vitals to help you rank higher on Google.
                   </p>
                 </div>
               </div>
@@ -122,7 +107,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    What are the performance benefits?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -130,12 +115,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    By eliminating the heavy WordPress frontend, we reduce TBT (Total Blocking Time) and FCP (First Contentful Paint). Your site becomes more secure, scalable, and resilient to traffic spikes.
                   </p>
                 </div>
               </div>
@@ -150,7 +130,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    Can I still use WordPress plugins?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -158,12 +138,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Yes! You can continue using your favorite backend plugins like Yoast, ACF, and WooCommerce. Nexsas fetches and displays this data seamlessly through WPGraphQL.
                   </p>
                 </div>
               </div>
@@ -178,7 +153,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    How does authentication work?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -186,12 +161,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Nexsas supports modern authentication flows using JWT (JSON Web Tokens) or NextAuth.js, allowing you to build secure member areas and personalized user experiences.
                   </p>
                 </div>
               </div>
@@ -206,7 +176,7 @@ export default function FAQBlock() {
                   <button
                     className="font-inter-tight text-tagline-2 cursor-pointer text-left text-white"
                   >
-                    How can user feedback shape the design process?
+                    Is it compatible with my host?
                   </button>
                   <div className="accordion-plus-icon"></div>
                 </h3>
@@ -214,12 +184,7 @@ export default function FAQBlock() {
                   <p
                     className="text-tagline-2 font-inter-tight max-w-[531px] cursor-text pb-6 font-extralight text-white/50"
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse varius enim in eros elementum tristique. Duis
-                    cursus, mi quis viverra ornare, eros dolor interdum nulla,
-                    ut commodo diam libero vitae erat. Aenean faucibus nibh et
-                    justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-                    risus tristique posuere.
+                    Absolutely. You can host your WordPress backend on any standard provider (WPEngine, Kinsta, Cloudways) and deploy your Nexsas frontend to Vercel, Netlify, or AWS.
                   </p>
                 </div>
               </div>

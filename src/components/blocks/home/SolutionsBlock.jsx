@@ -10,30 +10,29 @@ export default function SolutionsBlock() {
             <div className="space-y-2 text-center md:space-y-3">
               <h2
                 data-opai-split-text
-                className="font-sora md:text-sora-heading-3 text-sora-heading-4 lg:text-sora-heading-2 text-background-13/90 font-normal max-md:leading-[110%] lg:mx-auto lg:max-w-[600px]"
+                className="font-sora md:text-sora-heading-3 text-sora-heading-4 lg:text-sora-heading-2 text-background-13/90 font-normal max-md:leading-[110%] lg:mx-auto lg:max-w-[700px]"
                 itemProp="name"
               >
-                Innovative AI
+                Scalable Headless
 
                 <span className="text-background-13/50">
                   solutions for <br className="hidden md:block" />
-                  every industry
+                  modern businesses
                 </span>
               </h2>
               <p
                 data-opai-split-text
                 data-delay="0.3"
                 data-line-delay="0.1"
-                className="font-inter-tight text-tagline-2 text-background-13/60 font-normal lg:mx-auto lg:max-w-[350px]"
+                className="font-inter-tight text-tagline-2 text-background-13/60 font-normal lg:mx-auto lg:max-w-[450px]"
               >
-                We specialize in delivering AI-driven transformations across
-                sectors.
+                We deliver high-performance WordPress architectures for every digital need.
               </p>
             </div>
 
             {/*  Industries Grid  */}
             <div className="grid grid-cols-12 gap-y-8 md:gap-8">
-              {/*  Retail & E-commerce Card  */}
+              {/*  E-commerce Card  */}
               <div className="col-span-12 md:col-span-6 lg:col-span-4">
                 <div
                   data-opai-animate
@@ -85,18 +84,18 @@ export default function SolutionsBlock() {
                     <h3
                       className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
                     >
-                      Retail & E-commerce
+                      Enterprise E-commerce
                     </h3>
                     <p
                       className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
                     >
-                      Personalize customer journeys and drive sales.
+                      Scalable stores with lightning-fast checkout.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/*  Healthcare Card  */}
+              {/*  SaaS Marketing Card  */}
               <div className="col-span-12 md:col-span-6 lg:col-span-4">
                 <div
                   data-opai-animate
@@ -134,18 +133,18 @@ export default function SolutionsBlock() {
                     <h3
                       className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
                     >
-                      Healthcare
+                      SaaS Marketing
                     </h3>
                     <p
                       className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
                     >
-                      Enable better outcomes with predictive diagnostics.
+                      High-converting landing pages for growth teams.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/*  Finance Card  */}
+              {/*  Enterprise Blogs Card  */}
               <div className="col-span-12 md:col-span-6 lg:col-span-4">
                 <div
                   data-opai-animate
@@ -175,13 +174,6 @@ export default function SolutionsBlock() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                      <path
-                        d="M29.25 19.5C29.25 17.0147 27.2353 15 24.75 15L21.5 15C19.0147 15 17 17.0147 17 19.5C17 21.9853 19.0147 24 21.5 24L24.75 24C27.2353 24 29.25 26.0147 29.25 28.5C29.25 30.9853 27.2353 33 24.75 33L21.5 33C19.0147 33 17 30.9853 17 28.5"
-                        stroke="#11141D"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
                     </svg>
                   </div>
 
@@ -190,18 +182,18 @@ export default function SolutionsBlock() {
                     <h3
                       className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
                     >
-                      Finance
+                      Enterprise Publishers
                     </h3>
                     <p
                       className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
                     >
-                      Detect fraud and optimize financial strategies.
+                      Unmatched performance for global news sites.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/*  Legal & Real Estate Card  */}
+              {/*  Creative Portfolios Card  */}
               <div
                 className="col-span-12 md:col-span-6 lg:col-span-4 lg:col-start-5"
               >
@@ -233,20 +225,6 @@ export default function SolutionsBlock() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                      <path
-                        d="M25.5 13L42 19L42 43.875"
-                        stroke="#11141D"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M13 16.25L13 16.25M16.25 29.25L16.25 29.25M13 37.375L13 37.375M35.75 37.375L35.75 37.375M35.75 29.25L35.75 29.25"
-                        stroke="#11141D"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
                     </svg>
                   </div>
 
@@ -255,12 +233,12 @@ export default function SolutionsBlock() {
                     <h3
                       className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
                     >
-                      Legal & real estate
+                      Creative Agencies
                     </h3>
                     <p
                       className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
                     >
-                      Automate research and streamline processes.
+                      Immersive, designer-led experiences that win.
                     </p>
                   </div>
                 </div>

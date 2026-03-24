@@ -21,11 +21,11 @@ export function MegaMenuCompany({ items = [] }) {
             />
           ))
         ) : (
-          <p className="text-[#F8F9FA]/40 text-xs p-4 italic">No items found in WordPress menu.</p>
+          <p className="text-white/40 text-xs p-4 italic">No items found in WordPress menu.</p>
         )}
       </ul>
       <figure className="flex-1 space-y-3">
-        <p className="text-[12px] font-sora text-[#F8F9FA]/60 font-medium uppercase tracking-wider">
+        <p className="text-[12px] font-sora text-white/60 font-medium uppercase tracking-wider">
           What&apos;s New
         </p>
         <Link
@@ -41,8 +41,8 @@ export function MegaMenuCompany({ items = [] }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
             <div className="absolute bottom-4 left-4 space-y-1">
-              <p className="text-sm font-sora text-[#F8F9FA] font-medium">Investment Management</p>
-              <p className="text-xs text-[#F8F9FA]/80 max-w-[180px]">
+              <p className="text-sm font-sora text-white/90 font-medium">Investment Management</p>
+              <p className="text-xs text-white/80 max-w-[180px]">
                 Platform that helps you manage your investments.
               </p>
             </div>
@@ -57,7 +57,7 @@ export function MegaMenuPlatform({ items = [] }) {
   return (
     <div className="grid grid-cols-12 items-start gap-y-6 md:gap-x-6">
       <div className="col-span-12 lg:col-span-4">
-        <p className="text-xs text-[#F8F9FA]/40 pb-3 pl-2 font-medium uppercase tracking-wider">
+        <p className="text-xs text-white/40 pb-3 pl-2 font-medium uppercase tracking-wider">
           Overview
         </p>
         <ul className="space-y-1">
@@ -67,7 +67,7 @@ export function MegaMenuPlatform({ items = [] }) {
                 href={item.url}
                 className="group relative block p-2 rounded-xl transition-all duration-300 hover:bg-white/5"
               >
-                <span className="text-sm text-[#F8F9FA] font-sora group-hover:text-white">
+                <span className="text-sm text-white/90 font-sora group-hover:text-white">
                   {item.label}
                 </span>
               </Link>
@@ -123,17 +123,17 @@ function MenuLink({ href, title, description, icon }) {
     <li>
       <Link
         href={href}
-        className="group relative flex items-start gap-4 rounded-[12px] p-3 transition-all duration-300 hover:bg-white/5 text-[#F8F9FA]"
+        className="group relative flex items-start gap-4 rounded-[12px] p-3 transition-all duration-300 hover:bg-white/5 text-white/90"
       >
         <div className="relative z-10 mt-0.5 text-white/70 group-hover:text-white transition-colors">
           {icon}
         </div>
         <div className="relative z-10 space-y-0.5">
-          <p className="text-[16px] font-sora font-normal leading-normal text-[#F8F9FA] group-hover:text-white transition-colors">
+          <p className="text-[16px] font-sora font-normal leading-normal text-white/90 group-hover:text-white transition-colors">
             {title}
           </p>
           {description && (
-            <p className="text-[12px] font-inter-tight text-[#F8F9FA]/60 font-normal leading-normal group-hover:text-[#F8F9FA] transition-colors">
+            <p className="text-[12px] font-inter-tight text-white/60 font-normal leading-normal group-hover:text-white/90 transition-colors">
               {description}
             </p>
           )}
@@ -156,8 +156,8 @@ function FeaturedCard({ image, title, description }) {
           />
         </figure>
         <div className="space-y-1 pb-1">
-          <p className="text-sm text-[#F8F9FA] font-sora font-normal">{title}</p>
-          <p className="text-xs text-[#F8F9FA] font-sora font-normal opacity-60">{description}</p>
+          <p className="text-sm text-white/90 font-sora font-normal">{title}</p>
+          <p className="text-xs text-white/90 font-sora font-normal opacity-60">{description}</p>
         </div>
       </article>
     </Link>

@@ -201,7 +201,7 @@ export default function HeroBlock({ data }) {
             data-delay="1.1"
             data-duration="0.7"
             data-instant
-            className="border-stroke-5 bg-background-8/50 relative z-10 mx-auto h-[300px] max-w-[1223px] rounded-20 border p-2 backdrop-blur-3xl md:h-[400px] lg:h-[573px]"
+            className="relative z-10 mx-auto h-[300px] max-w-[1223px]   md:h-[400px] lg:h-[573px]"
           >
             <img
               src={imageUrl}
