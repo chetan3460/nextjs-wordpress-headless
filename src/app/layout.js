@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
         <Analytics />
         <Header menuItems={menu_items} siteLogo={site_logo} />
         {children}
-        <Footer footerData={footerData} />
+        <Footer footerData={footerData} siteLogo={site_logo} />
       </body>
     </html>
   );

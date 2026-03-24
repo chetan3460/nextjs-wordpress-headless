@@ -151,7 +151,7 @@ export default function Header({ menuItems = [], siteLogo }) {
       {/* Scroll to Top Button */}
       <ScrollToTop />
 
-      <header id="header">
+      <header id="header" className="ai-solutions-scope">
         <nav id="topnav" className={`defaultscroll is-sticky ${isSticky ? 'nav-sticky' : ''}`}>
           <div className="container-fluid relative flex items-center lg:justify-between gap-2">
             {/* Mobile Menu Toggle */}

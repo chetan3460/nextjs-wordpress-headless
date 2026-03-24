@@ -1,0 +1,224 @@
+{
+  "home_panels": [
+    {
+      "acf_fc_layout": "hero_block",
+      "hide_block": true,
+      "banner_slider": [
+        {
+          "banner_images": 751,
+          "banner_title": "Artificial intelligence solutions",
+          "banner_subtitle": "Build Intelligent Websites with AI-Powered WordPress",
+          "banner_description": "NexusPress combines Next.js performance with WordPress flexibility and AI capabilities. Create stunning, fast websites that think for themselves."
+        }
+      ],
+      "cta": {
+        "title": "Get started",
+        "url": "http://localhost/nextjs-wp/contact-us/",
+        "target": ""
+      },
+      "hide_news": true,
+      "select_news": [
+        439,
+        451,
+        443
+      ]
+    },
+    {
+      "acf_fc_layout": "home_product_listing_block",
+      "hide_block": false,
+      "title": "Automation that fits your needs.",
+      "description": "Powerful tools to streamline operations and boost efficiency. Automate tasks with NextSaaS and focus on what matters.",
+      "product_items": [
+        {
+          "icon": 840,
+          "title": "Web design & front-end development",
+          "description": "Create yoyr free account in seconds"
+        },
+        {
+          "icon": 841,
+          "title": "Ui/ux design for saas and products",
+          "description": "Create yoyr free account in seconds"
+        },
+        {
+          "icon": 842,
+          "title": "Brand identity design",
+          "description": "Create yoyr free account in seconds"
+        },
+        {
+          "icon": 843,
+          "title": "Framer, webflow & next.js development",
+          "description": "Create yoyr free account in seconds"
+        }
+      ],
+      "cta": {
+        "title": "Explore services",
+        "url": "http://localhost/nextjs-wp/our-company/about-us/",
+        "target": ""
+      }
+    },
+    {
+      "acf_fc_layout": "home_stats_block",
+      "hide_block": true,
+      "title": "Built on a strong foundation, driven by innovation",
+      "description": "Founded in 1971, RPL has grown into India’s trusted resin manufacturer, delivering sustainable, scalable solutions for leading coatings and adhesive brands.",
+      "stats_items": [
+        {
+          "stats_number": "54",
+          "stats_sign": "+",
+          "stats_title": "years of experience"
+        },
+        {
+          "stats_number": "125",
+          "stats_sign": "+",
+          "stats_title": "unique formulations"
+        },
+        {
+          "stats_number": "1500",
+          "stats_sign": "+",
+          "stats_title": "satisfied customers"
+        }
+      ],
+      "stats_cta": {
+        "title": "Hello world!",
+        "url": "http://localhost/nextjs-wp/sample-page/",
+        "target": ""
+      }
+    },
+    {
+      "acf_fc_layout": "home_features_block",
+      "hide_block": false,
+      "title": "Build Smarter with AI-Powered Features",
+      "description": "NexusPress combines intelligent automation with powerful performance. Discover how AI transforms content management into a seamless, efficient experience.",
+      "feature_items": [
+        {
+          "icon": 763,
+          "title": "AI-Powered Search",
+          "description": "Discover content effortlessly with intelligent semantic search that understands natural language queries. Our AI analyzes user intent to deliver the most relevant results in milliseconds."
+        },
+        {
+          "icon": 762,
+          "title": "Smart Recommendations",
+          "description": "Boost engagement with AI-driven content suggestions tailored to each visitor. Our intelligent recommendation engine analyzes user behavior to surface personalized content automatically."
+        },
+        {
+          "icon": 764,
+          "title": "Intelligent Optimization",
+          "description": "Experience lightning-fast performance with AI that automatically optimizes images, caching, and delivery. Our smart optimization reduces load times by 70% while adapting to traffic patterns."
+        },
+        {
+          "icon": 765,
+          "title": "Smart Chatbot",
+          "description": "<p class=\"!mb-0 mt-0\">Provide instant assistance with an AI chatbot that understands context and delivers helpful responses. Automatically answer visitor questions, recommend products, and qualify leads around the clock.</p>"
+        }
+      ],
+      "cta": {
+        "title": "Talk to an expert",
+        "url": "http://localhost/nextjs-wp/contact-us/",
+        "target": ""
+      }
+    },
+    {
+      "acf_fc_layout": "home_image_slider_block",
+      "hide_block": true,
+      "title": "Building a Greener Digital Future",
+      "description": "Sustainable technology that doesn't compromise on performance. NexusPress is engineered for efficiency, reducing carbon footprint while delivering exceptional speed.",
+      "slider_items": [
+        {
+          "images": 786,
+          "slider_title": "Optimized Architecture, Minimal Impact",
+          "slider_description": "NexusPress's headless architecture eliminates unnecessary database queries and server requests. Our Next.js 15 implementation with intelligent caching reduces server processing by 70%, meaning every page load consumes significantly less energy than traditional WordPress. Through static generation, edge computing, and automatic code optimization, we deliver lightning-fast performance while minimizing environmental impact. Build exceptional websites that are kind to the planet."
+        },
+        {
+          "images": 787,
+          "slider_title": "Carbon-Neutral Infrastructure",
+          "slider_description": "NexusPress deploys on green hosting platforms powered by 100% renewable energy. Our partnerships with carbon-neutral providers and optimized serverless architecture ensure your website's environmental footprint stays minimal. By serving pre-rendered static pages instead of processing PHP on every request, we reduce CPU usage by up to 95%. Join thousands of developers building a sustainable digital future—where performance and environmental responsibility go hand in hand."
+        }
+      ],
+      "cta": {
+        "title": "Qui sunt nisi vel dolores et aut quod.",
+        "url": "http://localhost/nextjs-wp/news-updates/qui-sunt-nisi-vel-dolores-et-aut-quod/",
+        "target": ""
+      }
+    },
+    {
+      "acf_fc_layout": "home_client_block",
+      "hide_block": true,
+      "title": "Trusted by Industry Leaders",
+      "description": "Our clients' success stories speak louder than words. Here's how NexusPress solutions have powered their growth.",
+      "client_items": [
+        {
+          "image": 771,
+          "description": "As a small business owner, your service has been a lifesaver in managing cash flow and optimizing financial strategies. It has truly exceeded my expectations.",
+          "title": "Michael Chen"
+        },
+        {
+          "image": 774,
+          "description": "The platform's intuitive interface and powerful features have revolutionized our workflow. Customer support.",
+          "title": "David Wilson"
+        },
+        {
+          "image": 773,
+          "description": "The automation features have saved us countless hours. A game-changer for our business operations and team.",
+          "title": "Daniel Walker"
+        },
+        {
+          "image": 772,
+          "description": "Outstanding service and innovative solutions. The team's responsiveness and expertise have been invaluable.",
+          "title": "Joseph Martinez"
+        }
+      ]
+    },
+    {
+      "acf_fc_layout": "latest_news",
+      "sub_title": "Our recent news & insights highlight the latest developments and trends shaping our industry.",
+      "heading": "Our Latest Thinking Articles",
+      "cta": {
+        "title": "Explore more blog",
+        "url": "http://localhost/nextjs-wp/our-company/news-updates/",
+        "target": ""
+      },
+      "select_news": [
+        451,
+        445,
+        437
+      ],
+      "hide_block": false
+    },
+    {
+      "acf_fc_layout": "faq_block",
+      "hide_block": true,
+      "title": "All the essential information you need to understand.",
+      "content": "By offering concise and informative responses, this section helps users find solutions without the need to contact customer support, saving time",
+      "faq_items": [
+        {
+          "faq_title": "What is Artificial Intelligence?",
+          "faq_content": "Artificial Intelligence (AI) refers to computer systems that can perform tasks typically requiring human intelligence, such as learning, reasoning, problem-solving, and decision-making. AI technologies include machine learning, natural language processing, computer vision, and robotics."
+        },
+        {
+          "faq_title": "How is Machine Learning connected to Artificial Intelligence?",
+          "faq_content": "Machine Learning is a subset of AI that enables computers to learn and improve from experience without being explicitly programmed. It uses algorithms to analyze data, identify patterns, and make predictions, forming the foundation for most modern AI applications."
+        },
+        {
+          "faq_title": "Is Artificial Intelligence taking over human jobs?",
+          "faq_content": "While AI is automating certain tasks, it's more accurate to say it's transforming jobs rather than eliminating them. AI creates new opportunities and enhances human capabilities, requiring workers to adapt and develop new skills rather than being completely replaced."
+        },
+        {
+          "faq_title": "What are the various types of Artificial Intelligence?",
+          "faq_content": "AI can be categorized into three main types: Narrow AI (task-specific, like Siri), General AI (human-level intelligence across all domains), and Super AI (surpassing human intelligence). Currently, we only have Narrow AI, with General AI being the next major milestone."
+        }
+      ]
+    }
+  ],
+  "homepage_blocks": [
+    {
+      "acf_fc_layout": "home_hero_block",
+      "title": "AI solutions built for real business impact",
+      "subtitle": "",
+      "text": "Streamline operations, elevate decision-making, and fuel growthwith practical, results-driven AI.",
+      "cta_text": "Watch now",
+      "cta_link": "https://www.youtube.com/watch?v=BTMjD7_evjE&t=2s",
+      "image": 975,
+      "hide_block": false
+    }
+  ]
+}

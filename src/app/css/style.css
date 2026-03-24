@@ -25,6 +25,7 @@
 @import './components/cookie-consent.css';
 @import './components/_topnav.css';
 @import './components/certificate_block.css';
+@import './components/ai-solutions.css';
 
 /* Pages */
 @import './pages/_helper.css';
@@ -130,7 +131,7 @@ body {
   --color-background-4: #f0f2f6;
   --color-background-5: #13171e;
   --color-background-6: #0f1217;
-  --color-background-7: #181d26;
+  --color-background-7: #f8f9fa;
   --color-background-8: #070b10;
   --color-background-9: #1f252f;
   --color-background-11: #b5b5b9;
@@ -192,6 +193,20 @@ body {
   --text-heading-5--line-height: 140%;
   --text-heading-6: 1.25rem;
   --text-heading-6--line-height: 140%;
+
+  /* Sora Headings */
+  --text-sora-heading-1: 88px;
+  --text-sora-heading-1--line-height: 110%;
+  --text-sora-heading-2: 56px;
+  --text-sora-heading-2--line-height: 110%;
+  --text-sora-heading-3: 48px;
+  --text-sora-heading-3--line-height: 110%;
+  --text-sora-heading-4: 40px;
+  --text-sora-heading-4--line-height: 110%;
+  --text-sora-heading-5: 24px;
+  --text-sora-heading-5--line-height: 110%;
+  --text-sora-heading-6: 18px;
+  --text-sora-heading-6--line-height: 110%;
 
   /* Typography - Taglines */
   --text-tagline-1: 1rem;
@@ -281,76 +296,6 @@ body {
   /* Scrollbar */
   --scrollbar-color: #864ffe;
   --scrollbar-hover: #ba3333;
-}
-
-/* Base Typography Styles - Headings */
-h2 {
-  font-size: var(--text-heading-3);
-  line-height: var(--tw-leading, var(--text-heading-3--line-height));
-}
-
-@media (min-width: 48rem) {
-  h2 {
-    font-size: var(--text-heading-2);
-    line-height: var(--tw-leading, var(--text-heading-2--line-height));
-  }
-}
-
-h3 {
-  font-size: var(--text-heading-5);
-  line-height: var(--tw-leading, var(--text-heading-5--line-height));
-}
-
-@media (min-width: 48rem) {
-  h3 {
-    font-size: var(--text-heading-4);
-    line-height: var(--tw-leading, var(--text-heading-4--line-height));
-  }
-}
-
-@media (min-width: 80rem) {
-  h3 {
-    font-size: var(--text-heading-3);
-    line-height: var(--tw-leading, var(--text-heading-3--line-height));
-  }
-}
-
-h4 {
-  font-size: var(--text-heading-4);
-  line-height: var(--tw-leading, var(--text-heading-4--line-height));
-}
-
-h5 {
-  font-size: var(--text-heading-5);
-  line-height: var(--tw-leading, var(--text-heading-5--line-height));
-}
-
-h6 {
-  font-size: var(--text-heading-6);
-  line-height: var(--tw-leading, var(--text-heading-6--line-height));
-}
-
-/* Base Typography Styles - Paragraphs */
-/* p {
-  font-size: var(--text-tagline-2);
-  line-height: var(--tw-leading, var(--text-tagline-2--line-height));
-  --tw-font-weight: var(--font-weight-normal);
-  font-weight: var(--font-weight-normal);
-  color: #1a1a1c99 !important;
-}
-
-@supports (color: color-mix(in lab, red, red)) {
-  p {
-    color: color-mix(in oklab, var(--color-secondary) 60%, transparent) !important;
-  }
-} */
-
-.text-black {
-  color: var(--color-black);
-}
-
-.bg-black {
-  background-color: var(--color-black);
 }
 
 /* Badge Styles - AI Agency Template */
@@ -497,6 +442,38 @@ body {
   line-height: var(--text-tagline-3--line-height);
 }
 
+/* Heading Typography Utilities */
+.text-sora-heading-1 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-1);
+  line-height: var(--tw-leading, var(--text-sora-heading-1--line-height));
+}
+.text-sora-heading-2 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-2);
+  line-height: var(--tw-leading, var(--text-sora-heading-2--line-height));
+}
+.text-sora-heading-3 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-3);
+  line-height: var(--tw-leading, var(--text-sora-heading-3--line-height));
+}
+.text-sora-heading-4 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-4);
+  line-height: var(--tw-leading, var(--text-sora-heading-4--line-height));
+}
+.text-sora-heading-5 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-5);
+  line-height: var(--tw-leading, var(--text-sora-heading-5--line-height));
+}
+.text-sora-heading-6 {
+  font-family: var(--font-sora);
+  font-size: var(--text-sora-heading-6);
+  line-height: var(--tw-leading, var(--text-sora-heading-6--line-height));
+}
+
 /* Hero Title */
 .hero-title {
   font-size: var(--text-heading-1);
@@ -504,7 +481,6 @@ body {
   font-weight: 700;
 }
 
-/* Heading Typography Utilities */
 .text-heading-2 {
   font-size: var(--text-heading-2);
   line-height: var(--tw-leading, var(--text-heading-2--line-height));

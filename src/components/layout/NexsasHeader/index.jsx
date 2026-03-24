@@ -14,7 +14,8 @@ export default function NexsasHeader({ menuItems = [], siteLogo }) {
   const headerRef = useRef(null);
 
   // Logo fallback
-  const logoSrc = '/images/logo/logo-white-small.svg';
+  const siteLogoUrl = typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || siteLogo?.source_url;
+  const logoSrc = siteLogoUrl || '/images/logo/logo-white-small.svg';
 
   // Build tree from flat WP menu
   const buildMenuTree = items => {
@@ -81,7 +82,7 @@ export default function NexsasHeader({ menuItems = [], siteLogo }) {
 
   return (
     <>
-      <header className="fixed top-6 left-1/2 z-[70] w-full px-4 -translate-x-1/2 pointer-events-none">
+      <header className="ai-solutions-scope fixed top-6 left-1/2 z-70 w-full px-4 -translate-x-1/2 pointer-events-none">
         <nav
           ref={headerRef}
           className="header-pill mx-auto flex w-full max-w-[350px] items-center justify-between rounded-full border border-stroke-3-18 py-1.5 pr-2 pl-2 md:max-w-[640px] lg:max-w-[818px] lg:gap-12 lg:py-0 pointer-events-auto"
@@ -91,9 +92,9 @@ export default function NexsasHeader({ menuItems = [], siteLogo }) {
             <Image
               src={logoSrc}
               alt="Nexsas"
-              width={44}
-              height={44}
-              className="size-full"
+              width={typeof siteLogo === 'object' ? siteLogo?.width || 44 : 44}
+              height={typeof siteLogo === 'object' ? siteLogo?.height || 44 : 44}
+              className="size-full object-contain"
               priority
             />
           </Link>
@@ -190,7 +191,7 @@ function NavItem({ item, activeMegaMenu, setActiveMegaMenu }) {
     >
       <div className="pointer-events-none absolute inset-0">
         <div
-          className={`nav-item-line absolute top-0 left-1/2 h-[1px] -translate-x-1/2 rounded-full transition-all duration-500 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'}`}
+          className={`nav-item-line absolute top-0 left-1/2 h-px -translate-x-1/2 rounded-full transition-all duration-500 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'}`}
         />
         <div
           className={`nav-item-gradient absolute top-0 left-1/2 h-full w-[calc(100%+40px)] -translate-x-1/2 blur-lg transition-opacity duration-500 ${isActive ? 'opacity-60' : 'opacity-0 group-hover:opacity-40'}`}
@@ -213,7 +214,7 @@ function NavItem({ item, activeMegaMenu, setActiveMegaMenu }) {
       {/* Local Dropdown for Resources */}
       {isMega && type === 'resources' && (
         <div
-          className={`absolute top-full left-1/2 -translate-x-1/2 pt-[22px] transition-all duration-300 origin-top z-[60] ${
+          className={`absolute top-full left-1/2 -translate-x-1/2 pt-[22px] transition-all duration-300 origin-top z-60 ${
             isActive ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
           }`}
         >

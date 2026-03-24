@@ -1,6 +1,16 @@
 import { fetchPageWithACF } from '@/lib/wordpress/client';
-import BlockRenderer from '@/components/common/BlockRenderer';
 import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
+
+import HeroBlock from '@/components/blocks/home/HeroBlock';
+import ImpactBlock from '@/components/blocks/home/ImpactBlock';
+import EmpoweringBlock from '@/components/blocks/home/EmpoweringBlock';
+import SolutionsBlock from '@/components/blocks/home/SolutionsBlock';
+import PortfolioBlock from '@/components/blocks/home/PortfolioBlock';
+import TestimonialsBlock from '@/components/blocks/home/TestimonialsBlock';
+import FAQBlock from '@/components/blocks/home/FAQBlock';
+import CTA1Block from '@/components/blocks/home/CTA1Block';
+import CTA2Block from '@/components/blocks/home/CTA2Block';
+import ContactBlock from '@/components/blocks/home/ContactBlock';
 
 export async function generateMetadata() {
   const pageData = await fetchPageWithACF('home');
@@ -13,42 +23,41 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  // Fetch home page with ACF fields
   const pageData = await fetchPageWithACF('home');
+  // Extract layout blocks from ACF
+  const blocks = pageData?.acf?.homepage_blocks || [];
+  const panels = pageData?.acf?.home_panels || [];
 
-  if (!pageData) {
-    return (
-      <main className="container mx-auto px-4 py-20">
-        <h1 className="text-4xl font-bold text-center">Home page not found</h1>
-        <p className="text-center mt-4">
-          Please ensure a page with slug &quot;home&quot; exists in WordPress.
-        </p>
-      </main>
-    );
-  }
+  // Helper macro to find a block by its ACF layout name
+  const getBlockData = (layoutName) => blocks.find(b => b.acf_fc_layout === layoutName) || null;
 
-  // Get home panels (flexible content blocks)
-  const homePanels = pageData.acf.home_panels || [];
+  const heroData = getBlockData('home_hero_block');
+  const impactData = getBlockData('home_impact_block');
+  const empoweringData = getBlockData('home_empowering_block');
+  const solutionsData = getBlockData('home_solutions_block');
+  const portfolioData = getBlockData('home_portfolio_block');
+  const testimonialsData = getBlockData('home_testimonials_block');
+  const faqData = getBlockData('home_faq_block');
+  const cta1Data = getBlockData('home_cta1_block');
+  const cta2Data = getBlockData('home_cta2_block');
+  const contactData = getBlockData('home_contact_block');
 
   return (
-    <main className="site-main flex flex-col gap-12 lg:gap-y-24 mb-12 lg:mb-24 relative">
-      {/* 
-        Render blocks dynamically based on WordPress order 
-        This allows you to reorder blocks in WP Admin and see changes reflected here.
-      */}
-      {homePanels.length > 0 ? (
-        homePanels.map((block, index) => <BlockRenderer key={index} block={block} index={index} />)
-      ) : (
-        <div className="container mx-auto py-20 text-center">
-          <p>
-            No blocks found. Add components to the &quot;Home Panels&quot; flexible content field in
-            WordPress.
-          </p>
-        </div>
-      )}
-    </main>
+    <>
+      {heroData ? <HeroBlock data={heroData} /> : <HeroBlock />}
+      {impactData ? <ImpactBlock data={impactData} /> : <ImpactBlock />}
+      {empoweringData ? <EmpoweringBlock data={empoweringData} /> : <EmpoweringBlock />}
+      {solutionsData ? <SolutionsBlock data={solutionsData} /> : <SolutionsBlock />}
+      {portfolioData ? <PortfolioBlock data={portfolioData} /> : <PortfolioBlock />}
+      {testimonialsData ? <TestimonialsBlock data={testimonialsData} /> : <TestimonialsBlock />}
+      {faqData ? <FAQBlock data={faqData} /> : <FAQBlock />}
+      {cta1Data ? <CTA1Block data={cta1Data} /> : <CTA1Block />}
+      {cta2Data ? <CTA2Block data={cta2Data} /> : <CTA2Block />}
+      {contactData ? <ContactBlock data={contactData} /> : <ContactBlock />}
+    </>
   );
 }
 
 // Revalidate every 30 seconds (homepage changes frequently)
 export const revalidate = 30;
+
