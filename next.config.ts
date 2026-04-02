@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  basePath: '/myApp',
+  basePath: '/nextjs-wordpress-headless',
 
   images: {
     remotePatterns: [
