@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fetchNewsPosts } from '../../../../lib/wordpress/news';
+import { fetchNewsPosts } from '../../../lib/wordpress/news';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
