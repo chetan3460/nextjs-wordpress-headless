@@ -1,33 +1,28 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-const { createServer } = require('http');
-const { parse } = require('url');
-const next = require('next');
+// This is the root server.js entry point for GoDaddy/cPanel Phusion Passenger.
+// Its only job is to load the Next.js standalone server with almost zero resource usage.
+const path = require('path');
 
-const dev = false; // Always false for GoDaddy production
-const app = next({ dev, hostname: 'localhost', port: process.env.PORT || 3000 });
-const handle = app.getRequestHandler();
+process.env.NODE_ENV = 'production';
+process.chdir(__dirname);
 
-const port = process.env.PORT || 3000;
+// The standalone server is automatically created by 'next build'
+// if 'output: standalone' is set in next.config.ts
+const serverPath = path.join(__dirname, '.next', 'standalone', 'server.js');
 
-// prepare() is mandatory for custom servers to load build manifests
-app
-  .prepare()
-  .then(() => {
-    createServer(async (req, res) => {
-      try {
-        const parsedUrl = parse(req.url, true);
-        await handle(req, res, parsedUrl);
-      } catch (err) {
-        console.error('Error occurred handling', req.url, err);
-        res.statusCode = 500;
-        res.end(`Internal Server Error: ${err.message}\nStack: ${err.stack}`);
-      }
-    }).listen(port, err => {
-      if (err) throw err;
-      console.log(`> Ready on http://localhost:${port}`);
-    });
-  })
-  .catch(err => {
-    console.error('Failed to prepare Next.js app', err);
-    process.exit(1);
-  });
+try {
+  console.log('> Starting Next.js Standalone Bridge...');
+  require(serverPath);
+} catch (err) {
+  console.error('> Error: Standalone server missing! Please run "npm run build" first.');
+  console.error(err);
+
+  // Minimal fallback to prevent Passenger from crashing completely
+  const { createServer } = require('http');
+  createServer((req, res) => {
+    res.statusCode = 500;
+    res.end(
+      'Server is building or standalone folder is missing. Please run "npm run build" in the terminal.'
+    );
+  }).listen(process.env.PORT || 3000);
+}
