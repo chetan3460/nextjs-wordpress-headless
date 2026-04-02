@@ -18,7 +18,7 @@
     "fetch-acf": "node scripts/fetch-acf-from-db.js && npm run sync-acf-blocks",
     "import-acf": "node scripts/import-acf-export.js && npm run sync-acf-blocks",
     "acf-sync": "npm run import-acf",
-    "prepare": "husky"
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ] && [ -f ./.git/config ]; then husky; fi"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
