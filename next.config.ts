@@ -41,6 +41,12 @@ const nextConfig = {
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
+  // Limit workers for shared hosting (GoDaddy process limits)
+  experimental: {
+    cpus: 1,
+    workerThreads: false,
+  },
+
   // Update rewrites for production
   async rewrites() {
     const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://localhost/nextjs-wp';
