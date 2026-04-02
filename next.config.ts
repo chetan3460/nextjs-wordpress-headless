@@ -41,15 +41,6 @@ const nextConfig = {
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
-  // Remove Turbopack root for Vercel deployment
-  ...(process.env.VERCEL
-    ? {}
-    : {
-        turbopack: {
-          root: '/Users/chetandhargalkar/Desktop/github/nextjs-wordpress-headless',
-        },
-      }),
-
   // Update rewrites for production
   async rewrites() {
     const wpUrl = process.env.NEXT_PUBLIC_WORDPRESS_URL || 'http://localhost/nextjs-wp';
