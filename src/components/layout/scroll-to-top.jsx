@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,39 +8,37 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const scrollHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progress = (scrollTop / scrollHeight) * 100;
 
       setScrollProgress(progress);
       setIsVisible(scrollTop > 300);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   return (
     <div
       className={`scrollToTop scrollToTop-3 active-progress ${
-        isVisible ? "opacity-100 visible" : "opacity-0 invisible"
+        isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}
       onClick={scrollToTop}
       role="button"
       tabIndex={0}
       aria-label="Scroll to top"
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           scrollToTop();
         }
@@ -56,10 +54,7 @@ export default function ScrollToTop() {
           <path d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z" />
         </svg>
       </div>
-      <div
-        className="water"
-        style={{ transform: `translate(0px, ${100 - scrollProgress}%)` }}
-      >
+      <div className="water" style={{ transform: `translate(0px, ${100 - scrollProgress}%)` }}>
         <svg viewBox="0 0 560 20" className="water_wave water_wave_back">
           <use xlinkHref="#wave"></use>
         </svg>
@@ -71,7 +66,7 @@ export default function ScrollToTop() {
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
           viewBox="0 0 560 20"
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
         >
           <symbol id="wave">
             <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"></path>

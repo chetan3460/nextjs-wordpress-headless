@@ -5,8 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ChevronDown } from 'lucide-react';
-import { MegaMenuCompany, MegaMenuPlatform, MegaMenuResources } from './MegaMenus';
-import MobileMenu from './MobileMenu';
+import { MegaMenuCompany, MegaMenuPlatform, MegaMenuResources } from './megamenus';
+import MobileMenu from './mobilemenu';
 
 export default function NexsasHeader({ menuItems = [], siteLogo }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
