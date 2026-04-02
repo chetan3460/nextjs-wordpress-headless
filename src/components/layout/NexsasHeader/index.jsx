@@ -13,9 +13,16 @@ export default function NexsasHeader({ menuItems = [], siteLogo }) {
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
   const headerRef = useRef(null);
 
-  // Logo fallback
-  const siteLogoUrl = typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || siteLogo?.source_url;
-  const logoSrc = siteLogoUrl || '/images/logo/logo-white-small.svg';
+  // Logo fallback - ensure we don't use localhost URLs from the DB and handle subfolder pathing
+  const siteLogoUrl =
+    typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || siteLogo?.source_url;
+
+  const resolvedLogo =
+    siteLogoUrl && !siteLogoUrl.includes('localhost') && !siteLogoUrl.includes('127.0.0.1')
+      ? siteLogoUrl
+      : '/images/logo/logo-white-small.svg';
+
+  const logoSrc = resolvedLogo;
 
   // Build tree from flat WP menu
   const buildMenuTree = items => {
