@@ -25,8 +25,13 @@ export default function Header({ menuItems = [], siteLogo }) {
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
 
   // Normalize siteLogo to always be a string URL
-  const logoSrc =
+  const siteLogoUrl =
     typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || '/images/logo-light.png';
+
+  const logoSrc =
+    siteLogoUrl && !siteLogoUrl.includes('localhost') && !siteLogoUrl.includes('127.0.0.1')
+      ? siteLogoUrl
+      : '/images/logo-light.png';
 
   // Transform flat menu items into tree structure
   const buildMenuTree = items => {

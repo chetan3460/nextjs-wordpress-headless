@@ -11,7 +11,12 @@ export default function Footer({ footerData, siteLogo }) {
 
   const siteLogoUrl = typeof siteLogo === 'string' ? siteLogo : siteLogo?.url;
 
-  const logoSrc = customLogoUrl || siteLogoUrl || '/images/logo/logo-white.svg';
+  const resolvedLogo =
+    siteLogoUrl && !siteLogoUrl.includes('localhost') && !siteLogoUrl.includes('127.0.0.1')
+      ? siteLogoUrl
+      : '/images/logo/logo-white.svg';
+
+  const logoSrc = customLogoUrl || resolvedLogo;
 
   const year = new Date().getFullYear();
 

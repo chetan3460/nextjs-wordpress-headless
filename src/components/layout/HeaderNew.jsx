@@ -14,8 +14,13 @@ export default function HeaderNew({ menuItems = [], siteLogo }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Normalize logo
-  const logoSrc =
+  const siteLogoUrl =
     typeof siteLogo === 'string' ? siteLogo : siteLogo?.url || '/images/logo-light.png';
+
+  const logoSrc =
+    siteLogoUrl && !siteLogoUrl.includes('localhost') && !siteLogoUrl.includes('127.0.0.1')
+      ? siteLogoUrl
+      : '/images/logo-light.png';
 
   // Build menu tree
   const buildMenuTree = items => {

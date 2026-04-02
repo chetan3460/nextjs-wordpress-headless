@@ -1,4 +1,4 @@
-import Header from '@/components/layout/NexsasHeader';
+import Header from '@/components/layout/nexsas-header';
 import Footer from '@/components/layout/Footer';
 import Analytics from '@/components/common/Analytics';
 import '@/app/css/style.css';
