@@ -17,7 +17,7 @@ createServer(async (req, res) => {
   } catch (err) {
     console.error('Error occurred handling', req.url, err);
     res.statusCode = 500;
-    res.end('Internal Server Error');
+    res.end(`Internal Server Error: ${err.message}\nStack: ${err.stack}`);
   }
 }).listen(port, err => {
   if (err) throw err;
