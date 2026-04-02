@@ -37,8 +37,8 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Disable optimization in development only
-    unoptimized: process.env.NODE_ENV === 'development',
+    // Disable optimization to prevent 500 errors on shared hosting
+    unoptimized: true,
   },
 
   // Limit workers for shared hosting (GoDaddy process limits)
