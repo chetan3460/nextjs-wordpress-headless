@@ -1,9 +1,9 @@
-import Header from '@/components/layout/nexsas-header';
-import Footer from '@/components/layout/footer';
-import Analytics from '@/components/common/Analytics';
+import Header from '../components/layout/nexsas-header';
+import Footer from '../components/layout/footer';
+import Analytics from '../components/common/Analytics';
 import '@/app/css/style.css';
-import { fetchHeaderData, fetchFooterData } from '@/lib/wordpress/client';
-import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/utils/structured-data';
+import { fetchHeaderData, fetchFooterData } from '../lib/wordpress/client';
+import { generateOrganizationSchema, generateWebSiteSchema } from '../lib/utils/structured-data';
 
 export const metadata = {
   title: 'Resplast - Leading Plastic Manufacturer',
