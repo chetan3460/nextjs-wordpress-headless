@@ -3,20 +3,23 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 
-// Passenger automatically sets the environment to production when configured, but we fallback just in case
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const dev = false; // Always false for GoDaddy production
+const app = next({ dev, hostname: 'localhost', port: process.env.PORT || 3000 });
 const handle = app.getRequestHandler();
 
-// Passenger provides the PORT environment variable dynamically
 const port = process.env.PORT || 3000;
 
-app.prepare().then(() => {
-  createServer((req, res) => {
+// Skip app.prepare() to save critical resources on shared hosting
+createServer(async (req, res) => {
+  try {
     const parsedUrl = parse(req.url, true);
-    handle(req, res, parsedUrl);
-  }).listen(port, err => {
-    if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
-  });
+    await handle(req, res, parsedUrl);
+  } catch (err) {
+    console.error('Error occurred handling', req.url, err);
+    res.statusCode = 500;
+    res.end('Internal Server Error');
+  }
+}).listen(port, err => {
+  if (err) throw err;
+  console.log(`> Ready on http://localhost:${port}`);
 });
