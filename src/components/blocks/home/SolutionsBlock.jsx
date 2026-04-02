@@ -14,7 +14,6 @@ export default function SolutionsBlock() {
                 itemProp="name"
               >
                 Scalable Headless
-
                 <span className="text-background-13/50">
                   solutions for <br className="hidden md:block" />
                   modern businesses
@@ -81,14 +80,10 @@ export default function SolutionsBlock() {
 
                   {/*  Text Content  */}
                   <div className="space-y-0">
-                    <h3
-                      className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
-                    >
+                    <h3 className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]">
                       Enterprise E-commerce
                     </h3>
-                    <p
-                      className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
-                    >
+                    <p className="font-inter-tight text-tagline-3 text-background-6/50 font-normal">
                       Scalable stores with lightning-fast checkout.
                     </p>
                   </div>
@@ -130,14 +125,10 @@ export default function SolutionsBlock() {
 
                   {/*  Text Content  */}
                   <div className="space-y-0">
-                    <h3
-                      className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
-                    >
+                    <h3 className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]">
                       SaaS Marketing
                     </h3>
-                    <p
-                      className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
-                    >
+                    <p className="font-inter-tight text-tagline-3 text-background-6/50 font-normal">
                       High-converting landing pages for growth teams.
                     </p>
                   </div>
@@ -179,14 +170,10 @@ export default function SolutionsBlock() {
 
                   {/*  Text Content  */}
                   <div className="space-y-0">
-                    <h3
-                      className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
-                    >
+                    <h3 className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]">
                       Enterprise Publishers
                     </h3>
-                    <p
-                      className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
-                    >
+                    <p className="font-inter-tight text-tagline-3 text-background-6/50 font-normal">
                       Unmatched performance for global news sites.
                     </p>
                   </div>
@@ -194,9 +181,7 @@ export default function SolutionsBlock() {
               </div>
 
               {/*  Creative Portfolios Card  */}
-              <div
-                className="col-span-12 md:col-span-6 lg:col-span-4 lg:col-start-5"
-              >
+              <div className="col-span-12 md:col-span-6 lg:col-span-4 lg:col-start-5">
                 <div
                   data-opai-animate
                   data-delay="0.1"
@@ -230,14 +215,10 @@ export default function SolutionsBlock() {
 
                   {/*  Text Content  */}
                   <div className="space-y-0">
-                    <h3
-                      className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]"
-                    >
+                    <h3 className="font-sora text-sora-heading-5 text-background-6/80 font-normal tracking-[-0.72px]">
                       Creative Agencies
                     </h3>
-                    <p
-                      className="font-inter-tight text-tagline-3 text-background-6/50 font-normal"
-                    >
+                    <p className="font-inter-tight text-tagline-3 text-background-6/50 font-normal">
                       Immersive, designer-led experiences that win.
                     </p>
                   </div>
@@ -251,37 +232,27 @@ export default function SolutionsBlock() {
             data-opai-animate
             data-delay="0.2"
           >
-            <div
-              className="max-md:w-[85%] max-md:mx-auto button-split-text-wrapper inline-block"
-            >
+            <div className="max-md:w-[85%] max-md:mx-auto button-split-text-wrapper inline-block">
               <a
-                href="about.html"
+                href="#"
                 className="group bg-background-6 hover:bg-background-4 border-stroke-3/18 {=$class} relative flex max-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full border px-6 py-[13px] transition-all duration-300 ease-in-out"
               >
                 <div className="relative overflow-hidden">
                   <div className="h-5.5">
-                    <div
-                      className="font-ibm-plex-mono text-tagline-2 button-split-upper-text block cursor-pointer leading-[1.4] font-medium text-nowrap text-white/90"
-                    >
+                    <div className="font-ibm-plex-mono text-tagline-2 button-split-upper-text block cursor-pointer leading-[1.4] font-medium text-nowrap text-white/90">
                       Learn more about industries
                     </div>
                   </div>
                   <div className="absolute h-5.5">
-                    <div
-                      className="font-ibm-plex-mono text-tagline-2 button-split-lower-text block cursor-pointer leading-[1.4] font-medium text-nowrap text-white/90"
-                    >
+                    <div className="font-ibm-plex-mono text-tagline-2 button-split-lower-text block cursor-pointer leading-[1.4] font-medium text-nowrap text-white/90">
                       Learn more about industries
                     </div>
                   </div>
                 </div>
 
-                <div
-                  className="relative mt-[2px] flex size-6 items-center justify-center overflow-hidden"
-                >
+                <div className="relative mt-[2px] flex size-6 items-center justify-center overflow-hidden">
                   {/*  arrow   */}
-                  <span
-                    className="ease-custom-ease-1 absolute size-[18px] translate-x-0 stroke-white/90 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-6"
-                  >
+                  <span className="ease-custom-ease-1 absolute size-[18px] translate-x-0 stroke-white/90 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-6">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -298,9 +269,7 @@ export default function SolutionsBlock() {
                   </span>
 
                   {/*  arrow    */}
-                  <span
-                    className="ease-custom-ease-1 absolute size-[18px] -translate-x-6 stroke-white/90 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-0"
-                  >
+                  <span className="ease-custom-ease-1 absolute size-[18px] -translate-x-6 stroke-white/90 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"

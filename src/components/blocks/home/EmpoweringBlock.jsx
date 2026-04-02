@@ -33,8 +33,7 @@ export default function EmpoweringBlock() {
                 aria-label="Description of AI business solutions"
                 itemProp="description"
               >
-                Our tailored solutions address your challenges, delivering
-                innovation at scale.
+                Our tailored solutions address your challenges, delivering innovation at scale.
               </p>
             </div>
 
@@ -47,9 +46,7 @@ export default function EmpoweringBlock() {
                 aria-label="AI business solutions showcase"
               >
                 {/*  row one   */}
-                <div
-                  className="flex w-full flex-col items-center justify-center gap-x-4 gap-y-8 md:flex-row md:gap-y-0"
-                >
+                <div className="flex w-full flex-col items-center justify-center gap-x-4 gap-y-8 md:flex-row md:gap-y-0">
                   {/*  left   */}
                   <div
                     className="glowing-card-v2 border-stroke-1/11 bg-background-6 relative z-10 flex h-[719px] w-full flex-col items-center justify-center gap-y-2 overflow-hidden rounded-[8px] border px-[29px] pt-[26px] pb-10.5 md:max-w-[380px] lg:h-[710px] xl:h-[719px]"
@@ -57,15 +54,9 @@ export default function EmpoweringBlock() {
                   >
                     {/*  glowing gradient    */}
 
-                    <div
-                      className="pointer-events-none absolute top-[-23%] left-[-39%] select-none"
-                    >
-                      <div
-                        className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none"
-                      >
-                        <div
-                          className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"
-                        ></div>
+                    <div className="pointer-events-none absolute top-[-23%] left-[-39%] select-none">
+                      <div className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none">
+                        <div className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"></div>
                       </div>
                     </div>
 
@@ -75,9 +66,7 @@ export default function EmpoweringBlock() {
                       data-opai-animate
                       data-delay="0.1"
                     >
-                      <div
-                        className="bg-opai-blue/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1"
-                      >
+                      <div className="bg-opai-blue/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1">
                         <span className="flex size-5 items-center justify-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -104,27 +93,18 @@ export default function EmpoweringBlock() {
                             />
                           </svg>
                         </span>
-                        <span
-                          className="text-opai-blue/60 font-inter-tight text-tagline-4 font-normal"
-                        >
+                        <span className="text-opai-blue/60 font-inter-tight text-tagline-4 font-normal">
                           Launch
                         </span>
                       </div>
 
-                      <p
-                        className="bg-background-5 font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]"
-                      >
+                      <p className="bg-background-5 font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]">
                         New application is approved
                       </p>
                     </div>
 
                     {/*  down arrow   */}
-                    <div
-                      className="z-10"
-                      data-opai-animate
-                      data-delay="0.2"
-                      data-offset="2"
-                    >
+                    <div className="z-10" data-opai-animate data-delay="0.2" data-offset="2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="7"
@@ -133,9 +113,7 @@ export default function EmpoweringBlock() {
                         fill="none"
                         className="fill-stroke-3/18"
                       >
-                        <path
-                          d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z"
-                        />
+                        <path d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z" />
                       </svg>
                     </div>
 
@@ -145,9 +123,7 @@ export default function EmpoweringBlock() {
                       data-opai-animate
                       data-delay="0.1"
                     >
-                      <div
-                        className="bg-opai-lemon/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1"
-                      >
+                      <div className="bg-opai-lemon/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1">
                         <span className="flex size-5 items-center justify-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -164,31 +140,20 @@ export default function EmpoweringBlock() {
                             />
                           </svg>
                         </span>
-                        <span
-                          className="text-opai-lemon/60 font-inter-tight text-tagline-4 font-normal"
-                        >
+                        <span className="text-opai-lemon/60 font-inter-tight text-tagline-4 font-normal">
                           Initiate
                         </span>
                       </div>
-                      <div
-                        className="bg-background-5 space-y-1 rounded-[3px] px-6 py-3 text-center backdrop-blur-[17px]"
-                      >
+                      <div className="bg-background-5 space-y-1 rounded-[3px] px-6 py-3 text-center backdrop-blur-[17px]">
                         <p className="text-white/60">Send welcome email</p>
-                        <p
-                          className="font-inter-tight text-tagline-3 font-normal text-white/20"
-                        >
+                        <p className="font-inter-tight text-tagline-3 font-normal text-white/20">
                           Include links to employee handbook initial documents
                         </p>
                       </div>
                     </div>
 
                     {/*  down arrow   */}
-                    <div
-                      className="z-10"
-                      data-opai-animate
-                      data-delay="0.2"
-                      data-offset="2"
-                    >
+                    <div className="z-10" data-opai-animate data-delay="0.2" data-offset="2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="7"
@@ -197,9 +162,7 @@ export default function EmpoweringBlock() {
                         fill="none"
                         className="fill-stroke-3/18"
                       >
-                        <path
-                          d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z"
-                        />
+                        <path d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z" />
                       </svg>
                     </div>
 
@@ -209,9 +172,7 @@ export default function EmpoweringBlock() {
                       data-opai-animate
                       data-delay="0.1"
                     >
-                      <div
-                        className="bg-opai-purple/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1"
-                      >
+                      <div className="bg-opai-purple/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1">
                         <span className="flex size-5 items-center justify-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -228,27 +189,18 @@ export default function EmpoweringBlock() {
                             />
                           </svg>
                         </span>
-                        <span
-                          className="text-opai-purple/60 font-inter-tight text-tagline-4 shrink-0 font-normal"
-                        >
+                        <span className="text-opai-purple/60 font-inter-tight text-tagline-4 shrink-0 font-normal">
                           Check if/else
                         </span>
                       </div>
 
-                      <p
-                        className="bg-background-5 font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]"
-                      >
+                      <p className="bg-background-5 font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]">
                         New application is approved
                       </p>
                     </div>
 
                     {/*  down arrow   */}
-                    <div
-                      className="z-10"
-                      data-opai-animate
-                      data-delay="0.2"
-                      data-offset="2"
-                    >
+                    <div className="z-10" data-opai-animate data-delay="0.2" data-offset="2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="7"
@@ -257,9 +209,7 @@ export default function EmpoweringBlock() {
                         fill="none"
                         className="fill-stroke-3/18"
                       >
-                        <path
-                          d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z"
-                        />
+                        <path d="M0.665365 3C0.665365 4.47276 1.85927 5.66667 3.33203 5.66667C4.80479 5.66667 5.9987 4.47276 5.9987 3C5.9987 1.52724 4.80479 0.333333 3.33203 0.333333C1.85927 0.333333 0.665365 1.52724 0.665365 3ZM3.33203 43L6.21878 38L0.445278 38L3.33203 43ZM3.33203 3L2.83203 3L2.83203 38.5L3.33203 38.5L3.83203 38.5L3.83203 3L3.33203 3Z" />
                       </svg>
                     </div>
 
@@ -269,9 +219,7 @@ export default function EmpoweringBlock() {
                       data-opai-animate
                       data-delay="0.1"
                     >
-                      <div
-                        className="bg-opai-green/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1"
-                      >
+                      <div className="bg-opai-green/10 flex max-w-[117px] items-center justify-center gap-x-2 rounded-[4px] px-2 py-1">
                         <span className="flex size-5 items-center justify-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -288,25 +236,18 @@ export default function EmpoweringBlock() {
                             />
                           </svg>
                         </span>
-                        <span
-                          className="text-opai-green/60 font-inter-tight text-tagline-4 shrink-0 font-normal"
-                        >
+                        <span className="text-opai-green/60 font-inter-tight text-tagline-4 shrink-0 font-normal">
                           Lunch
                         </span>
                       </div>
 
-                      <p
-                        className="font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]"
-                      >
-                        Send welcome email Include links to employee handbook
-                        initial documents
+                      <p className="font-inter-tight text-tagline-3 rounded-[3px] px-6 py-3 text-center font-normal text-white/20 backdrop-blur-[17px]">
+                        Send welcome email Include links to employee handbook initial documents
                       </p>
                     </div>
 
                     {/*  overlay   */}
-                    <div
-                      className="pointer-events-none absolute -bottom-px left-1/2 z-20 h-[426px] w-[378px] -translate-x-1/2 bg-linear-to-t from-[#0D1017] from-30% to-[#11141D00] to-100% select-none"
-                    ></div>
+                    <div className="pointer-events-none absolute -bottom-px left-1/2 z-20 h-[426px] w-[378px] -translate-x-1/2 bg-linear-to-t from-[#0D1017] from-30% to-[#11141D00] to-100% select-none"></div>
                     {/*  text content   */}
                     <div
                       className="absolute bottom-[42px] z-30 max-w-[296px]"
@@ -329,24 +270,16 @@ export default function EmpoweringBlock() {
                     </div>
                   </div>
                   {/*  right   */}
-                  <div
-                    className="flex w-full max-w-[894px] flex-col items-start justify-center gap-y-8 overflow-hidden md:gap-y-5 xl:gap-y-8"
-                  >
+                  <div className="flex w-full max-w-[894px] flex-col items-start justify-center gap-y-8 overflow-hidden md:gap-y-5 xl:gap-y-8">
                     {/*  right upper   */}
                     <div
                       className="glowing-card-v2 border-stroke-1/18 bg-background-6 relative h-[344px] w-full overflow-hidden rounded-lg border p-10.5"
                       aria-labelledby="predictive-analytics-heading"
                     >
                       {/*  glowing gradient    */}
-                      <div
-                        className="pointer-events-none absolute top-[-51%] left-[-18%] select-none"
-                      >
-                        <div
-                          className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none"
-                        >
-                          <div
-                            className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"
-                          ></div>
+                      <div className="pointer-events-none absolute top-[-51%] left-[-18%] select-none">
+                        <div className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none">
+                          <div className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"></div>
                         </div>
                       </div>
 
@@ -366,20 +299,13 @@ export default function EmpoweringBlock() {
                           className="font-inter-tight text-tagline-2 w-full text-left font-normal text-white/50 md:max-w-[269px]"
                           itemProp="description"
                         >
-                          Forecast trends and outcomes to stay ahead of the
-                          competition.
+                          Forecast trends and outcomes to stay ahead of the competition.
                         </p>
                       </div>
 
-                      <div
-                        className="absolute top-[160px] -left-[88px] h-[177px] w-[382px] sm:left-[100px] md:-left-[100px] lg:top-[120px] lg:left-[120px] xl:top-[105px] xl:left-[233px]"
-                      >
-                        <div
-                          className="flow-line-curve-svg-container relative size-full"
-                        >
-                          <div
-                            className="flow-line-curve-circle absolute right-0 z-10 size-[33px] rounded-full bg-white"
-                          >
+                      <div className="absolute top-[160px] -left-[88px] h-[177px] w-[382px] sm:left-[100px] md:-left-[100px] lg:top-[120px] lg:left-[120px] xl:top-[105px] xl:left-[233px]">
+                        <div className="flow-line-curve-svg-container relative size-full">
+                          <div className="flow-line-curve-circle absolute right-0 z-10 size-[33px] rounded-full bg-white">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="27"
@@ -389,12 +315,7 @@ export default function EmpoweringBlock() {
                               className="absolute top-[6px] left-[3.5px]"
                             >
                               <g filter="url(#filter0_d_5781_22995)">
-                                <circle
-                                  cx="13.2625"
-                                  cy="10.3289"
-                                  r="9.4539"
-                                  fill="#8D59FF"
-                                />
+                                <circle cx="13.2625" cy="10.3289" r="9.4539" fill="#8D59FF" />
                               </g>
                               <defs>
                                 <filter
@@ -406,10 +327,7 @@ export default function EmpoweringBlock() {
                                   filterUnits="userSpaceOnUse"
                                   color-interpolation-filters="sRGB"
                                 >
-                                  <feFlood
-                                    flood-opacity="0"
-                                    result="BackgroundImageFix"
-                                  />
+                                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
                                   <feColorMatrix
                                     in="SourceAlpha"
                                     type="matrix"
@@ -463,11 +381,7 @@ export default function EmpoweringBlock() {
                                 y2="6.21115"
                                 gradientUnits="userSpaceOnUse"
                               >
-                                <stop
-                                  offset="0.19382"
-                                  stopColor="#227EFF"
-                                  stopOpacity="0"
-                                />
+                                <stop offset="0.19382" stopColor="#227EFF" stopOpacity="0" />
                                 <stop offset="1" stopColor="#8D59FF" />
                               </linearGradient>
                             </defs>
@@ -501,10 +415,7 @@ export default function EmpoweringBlock() {
                                 filterUnits="userSpaceOnUse"
                                 color-interpolation-filters="sRGB"
                               >
-                                <feFlood
-                                  flood-opacity="0"
-                                  result="BackgroundImageFix"
-                                />
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
                                 <feBlend
                                   mode="normal"
                                   in="SourceGraphic"
@@ -539,23 +450,13 @@ export default function EmpoweringBlock() {
                       aria-labelledby="ai-chatbot-heading"
                     >
                       {/*  glowing gradient    */}
-                      <div
-                        className="pointer-events-none absolute top-[-52%] left-[-17%] select-none"
-                      >
-                        <div
-                          className="pointer-events-none relative z-2 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none"
-                        >
-                          <div
-                            className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-1 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"
-                          ></div>
+                      <div className="pointer-events-none absolute top-[-52%] left-[-17%] select-none">
+                        <div className="pointer-events-none relative z-2 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none">
+                          <div className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-1 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"></div>
                         </div>
                       </div>
 
-                      <div
-                        className="w-full space-y-1"
-                        data-opai-animate
-                        data-delay="0.1"
-                      >
+                      <div className="w-full space-y-1" data-opai-animate data-delay="0.1">
                         <h3
                           id="ai-chatbot-heading"
                           className="font-sora text-sora-heading-5 max-w-[200px] font-normal text-white/80 sm:mx-auto md:mx-0"
@@ -567,8 +468,7 @@ export default function EmpoweringBlock() {
                           className="font-inter-tight text-tagline-2 w-full max-w-[269px] text-left font-normal text-white/50 sm:mx-auto sm:text-center md:mx-0 md:text-left"
                           itemProp="description"
                         >
-                          Enhance customer engagement with natural, seamless
-                          interactions.
+                          Enhance customer engagement with natural, seamless interactions.
                         </p>
                       </div>
 
@@ -592,32 +492,20 @@ export default function EmpoweringBlock() {
                 </div>
 
                 {/*  row two   */}
-                <div
-                  className="flex w-full flex-col items-center justify-center gap-y-8 md:flex-row md:gap-x-4"
-                >
+                <div className="flex w-full flex-col items-center justify-center gap-y-8 md:flex-row md:gap-x-4">
                   {/*  left   */}
                   <div
                     className="glowing-card-v2 border-stroke-1/18 bg-background-6 relative flex h-[391px] w-full max-w-[714px] flex-col items-start justify-between overflow-hidden rounded-lg border p-6 max-md:items-center max-md:gap-y-10 md:h-[331px] md:gap-y-2 md:p-10.5 lg:flex-row"
                     aria-labelledby="data-analytics-heading"
                   >
                     {/*  glowing gradient    */}
-                    <div
-                      className="pointer-events-none absolute top-[-52%] left-[-22%] select-none"
-                    >
-                      <div
-                        className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none"
-                      >
-                        <div
-                          className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"
-                        ></div>
+                    <div className="pointer-events-none absolute top-[-52%] left-[-22%] select-none">
+                      <div className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none">
+                        <div className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"></div>
                       </div>
                     </div>
 
-                    <div
-                      className="z-10 space-y-1"
-                      data-opai-animate
-                      data-delay="0.1"
-                    >
+                    <div className="z-10 space-y-1" data-opai-animate data-delay="0.1">
                       <h3
                         id="data-analytics-heading"
                         className="font-sora text-sora-heading-5 max-w-[200px] font-normal text-white/80"
@@ -639,31 +527,21 @@ export default function EmpoweringBlock() {
                       data-opai-animate
                       data-delay="0.1"
                     >
-                      <div
-                        className="flex w-full items-center justify-between gap-x-2"
-                      >
-                        <h4
-                          className="font-manrope text-manrope-heading-6 font-medium text-white/30"
-                        >
+                      <div className="flex w-full items-center justify-between gap-x-2">
+                        <h4 className="font-manrope text-manrope-heading-6 font-medium text-white/30">
                           Analytics
                         </h4>
-                        <div
-                          className="border-stroke-1/18 w-full max-w-[97px] cursor-pointer rounded-sm border py-[3px] pr-1 pl-2"
-                        >
+                        <div className="border-stroke-1/18 w-full max-w-[97px] cursor-pointer rounded-sm border py-[3px] pr-1 pl-2">
                           <button
                             className="flex w-full cursor-pointer items-center justify-center gap-x-2"
                             aria-label="Select time period for analytics"
                             aria-expanded="false"
                             aria-haspopup="listbox"
                           >
-                            <span
-                              className="font-inter-tight text-tagline-4 font-normal text-nowrap text-white/30"
-                            >
+                            <span className="font-inter-tight text-tagline-4 font-normal text-nowrap text-white/30">
                               Last week
                             </span>
-                            <span
-                              className="flex size-6 items-center justify-center"
-                            >
+                            <span className="flex size-6 items-center justify-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -684,43 +562,25 @@ export default function EmpoweringBlock() {
                       </div>
 
                       {/*  line bars   */}
-                      <div
-                        className="space-y-4"
-                        aria-label="Analytics data visualization"
-                      >
+                      <div className="space-y-4" aria-label="Analytics data visualization">
                         <div className="space-y-4">
                           <div className="flex items-center justify-start gap-x-11">
-                            <h5
-                              className="text-tagline-4 font-inter-tight font-normal text-white/20"
-                            >
+                            <h5 className="text-tagline-4 font-inter-tight font-normal text-white/20">
                               Airtable
                             </h5>
-                            <span
-                              className="empowering-business-progress-bar h-1.5 w-14 rounded-r-full bg-linear-to-r from-[#8D59FF00] to-[#8D59FF]"
-                            >
-                            </span>
+                            <span className="empowering-business-progress-bar h-1.5 w-14 rounded-r-full bg-linear-to-r from-[#8D59FF00] to-[#8D59FF]"></span>
                           </div>
                           <div className="flex items-center justify-start gap-x-5">
-                            <h5
-                              className="text-tagline-4 font-inter-tight font-normal text-white/20"
-                            >
+                            <h5 className="text-tagline-4 font-inter-tight font-normal text-white/20">
                               Google drive
                             </h5>
-                            <span
-                              className="empowering-business-progress-bar h-1.5 w-[94px] rounded-r-full bg-linear-to-r from-[#227EFF00] to-[#227EFF]"
-                            >
-                            </span>
+                            <span className="empowering-business-progress-bar h-1.5 w-[94px] rounded-r-full bg-linear-to-r from-[#227EFF00] to-[#227EFF]"></span>
                           </div>
                           <div className="flex items-center justify-start gap-x-14">
-                            <h5
-                              className="text-tagline-4 font-inter-tight font-normal text-white/20"
-                            >
+                            <h5 className="text-tagline-4 font-inter-tight font-normal text-white/20">
                               Mega
                             </h5>
-                            <span
-                              className="empowering-business-progress-bar h-1.5 w-[129px] rounded-r-full bg-linear-to-r from-[#5DDCF600] to-[#5DDCF6]"
-                            >
-                            </span>
+                            <span className="empowering-business-progress-bar h-1.5 w-[129px] rounded-r-full bg-linear-to-r from-[#5DDCF600] to-[#5DDCF6]"></span>
                           </div>
                         </div>
 
@@ -743,50 +603,34 @@ export default function EmpoweringBlock() {
                     aria-label="Call to action section"
                   >
                     {/*  glowing gradient    */}
-                    <div
-                      className="pointer-events-none absolute top-[-57%] left-[-25%] select-none"
-                    >
-                      <div
-                        className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none"
-                      >
-                        <div
-                          className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"
-                        ></div>
+                    <div className="pointer-events-none absolute top-[-57%] left-[-25%] select-none">
+                      <div className="pointer-events-none relative z-20 h-[276px] w-[188px] rotate-[-10.86deg] rounded-[50%] bg-white/40 blur-[25.5px] select-none">
+                        <div className="bg-opai-purple/90 absolute right-0 bottom-[-4px] left-[102px] z-10 h-[194px] w-[133px] rotate-[12deg] rounded-[50%] mix-blend-plus-lighter blur-[82px]"></div>
                       </div>
                     </div>
 
                     <div className="z-10" data-opai-animate data-delay="0.1">
-                      <div
-                        className="{=$display-class} button-split-text-wrapper inline-block"
-                      >
+                      <div className="{=$display-class} button-split-text-wrapper inline-block">
                         <a
-                          href="services.html"
+                          href="#"
                           className="group bg-background-7 hover:border-stroke-3 w-full relative flex max-h-12 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full border border-transparent px-6 py-[13px] transition-all duration-300 ease-in-out"
                         >
                           <div className="relative overflow-hidden">
                             <div className="h-5.5">
-                              <div
-                                className="text-background-5 font-ibm-plex-mono button-split-upper-text text-tagline-2 block leading-[1.4] font-medium text-nowrap"
-                              >
+                              <div className="text-background-5 font-ibm-plex-mono button-split-upper-text text-tagline-2 block leading-[1.4] font-medium text-nowrap">
                                 Explore all services
                               </div>
                             </div>
                             <div className="absolute h-5.5">
-                              <div
-                                className="text-background-5 font-ibm-plex-mono button-split-lower-text text-tagline-2 block leading-[1.4] font-medium text-nowrap"
-                              >
+                              <div className="text-background-5 font-ibm-plex-mono button-split-lower-text text-tagline-2 block leading-[1.4] font-medium text-nowrap">
                                 Explore all services
                               </div>
                             </div>
                           </div>
 
-                          <div
-                            className="relative mt-[2px] flex size-6 items-center justify-center overflow-hidden"
-                          >
+                          <div className="relative mt-[2px] flex size-6 items-center justify-center overflow-hidden">
                             {/*  circle   */}
-                            <span
-                              className="stroke-background-6 ease-custom-ease-1 absolute size-[18px] translate-x-0 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-6"
-                            >
+                            <span className="stroke-background-6 ease-custom-ease-1 absolute size-[18px] translate-x-0 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-6">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="18"
@@ -803,9 +647,7 @@ export default function EmpoweringBlock() {
                             </span>
 
                             {/*  arrow    */}
-                            <span
-                              className="stroke-background-6 ease-custom-ease-1 absolute size-[18px] -translate-x-6 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-0"
-                            >
+                            <span className="stroke-background-6 ease-custom-ease-1 absolute size-[18px] -translate-x-6 stroke-[1.5px] transition-all duration-500 group-hover:translate-x-0">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="18"
@@ -832,9 +674,7 @@ export default function EmpoweringBlock() {
         </div>
 
         {/*  top gradient background   */}
-        <div
-          className="absolute -top-10 left-0 z-4 h-[796px] w-full md:top-0 md:h-[760px] lg:-top-2 2xl:-top-12"
-        >
+        <div className="absolute -top-10 left-0 z-4 h-[796px] w-full md:top-0 md:h-[760px] lg:-top-2 2xl:-top-12">
           <img
             src="images/gradient/opai-1.png"
             alt="Top blend mode"
@@ -843,9 +683,7 @@ export default function EmpoweringBlock() {
         </div>
 
         {/*  Bottom Gradient Background  */}
-        <div
-          className="absolute -bottom-137 left-0 z-4 h-[696px] w-full min-[550px]:-bottom-119 min-[1930px]:!bottom-84 md:-bottom-97 lg:-bottom-72 xl:-bottom-47 2xl:bottom-18"
-        >
+        <div className="absolute -bottom-137 left-0 z-4 h-[696px] w-full min-[550px]:-bottom-119 min-[1930px]:!bottom-84 md:-bottom-97 lg:-bottom-72 xl:-bottom-47 2xl:bottom-18">
           <img src="images/gradient/opai-2.png" alt="Bottom blend mode" />
         </div>
       </section>

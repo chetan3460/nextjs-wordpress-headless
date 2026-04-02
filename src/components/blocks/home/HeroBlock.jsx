@@ -99,7 +99,7 @@ export default function HeroBlock({ data }) {
             >
               <div data-opai-animate data-delay="0.9" data-duration="0.7">
                 <Link
-                  href={cta?.url ? convertToNextPath(cta.url) : 'pricing.html'}
+                  href={cta?.url ? convertToNextPath(cta.url) : '#'}
                   className="button-split-text-wrapper group inline-block"
                   target={cta?.target || undefined}
                 >
