@@ -24,16 +24,22 @@ export const fetchREST = cache(async endpoint => {
   // Longer cache in development for better performance
   const cacheTime = process.env.NODE_ENV === 'development' ? 3600 : 60;
 
-  const response = await fetch(url, {
-    next: { revalidate: cacheTime },
-    keepalive: true, // Reuse TCP connections
-  });
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: cacheTime },
+      keepalive: true, // Reuse TCP connections
+    });
 
-  if (!response.ok) {
-    throw new Error(`REST API error: ${response.statusText} at ${url}`);
+    if (!response.ok) {
+      console.error(`[fetchREST] API error: ${response.status} ${response.statusText} at ${url}`);
+      return null;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(`[fetchREST] Network error at ${url}:`, error.message);
+    return null;
   }
-
-  return response.json();
 });
 
 /**
