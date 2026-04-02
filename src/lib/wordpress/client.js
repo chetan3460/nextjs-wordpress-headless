@@ -172,6 +172,8 @@ async function processACFImages(acf) {
 const fetchMediaById = cache(async mediaId => {
   try {
     const media = await fetchREST(`/wp/v2/media/${mediaId}`);
+    if (!media) return null;
+
     return {
       id: media.id,
       url: media.source_url,
@@ -181,7 +183,7 @@ const fetchMediaById = cache(async mediaId => {
       sizes: media.media_details?.sizes || {},
     };
   } catch (error) {
-    console.error(`Error fetching media ${mediaId}:`, error);
+    console.error(`[fetchMediaById] Error fetching media ${mediaId}:`, error.message);
     return null;
   }
 });
@@ -194,17 +196,16 @@ const fetchMediaById = cache(async mediaId => {
 const fetchPostById = cache(async postId => {
   try {
     // Try fetching from posts endpoint first with _embed to get featured image
-    let post;
-    try {
-      post = await fetchREST(`/wp/v2/posts/${postId}?_embed`);
-    } catch {
-      // If posts fails, try news custom post type
-      try {
-        post = await fetchREST(`/wp/v2/news/${postId}?_embed`);
-      } catch (newsError) {
-        console.error(`Error fetching post ${postId} from both posts and news:`, newsError);
-        return null;
-      }
+    let post = await fetchREST(`/wp/v2/posts/${postId}?_embed`);
+
+    // If posts fails, try news custom post type
+    if (!post) {
+      post = await fetchREST(`/wp/v2/news/${postId}?_embed`);
+    }
+
+    if (!post) {
+      console.warn(`[fetchPostById] Post ${postId} not found in posts or news.`);
+      return null;
     }
 
     // Fetch categories if they exist
@@ -386,27 +387,28 @@ export const fetchPostBySlug = cache(async (slug, postType = 'posts') => {
       let acfData = null;
       try {
         acfData = await fetchREST(`${endpoint}/${post.id}?acf_format=standard`);
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`[fetchPostBySlug] ACF data fetched:`, !!acfData?.acf);
-        }
-
-        // Process ACF images (convert IDs to full image objects)
         if (acfData?.acf) {
-          acfData.acf = await processACFImages(acfData.acf);
-          if (process.env.NODE_ENV === 'development') {
-            console.log(`[fetchPostBySlug] ACF images processed`);
-          }
+          console.log(`[fetchPostBySlug] ACF data fetched:`, !!acfData?.acf);
         }
       } catch (acfError) {
         console.warn(`[fetchPostBySlug] Failed to fetch ACF data:`, acfError.message);
       }
 
+      // Process ACF images (convert IDs to full image objects)
+      try {
+        if (acfData?.acf) {
+          acfData.acf = await processACFImages(acfData.acf);
+        }
+      } catch (acfError) {
+        console.warn(`[fetchPostBySlug] Failed to process ACF images:`, acfError.message);
+      }
+
       // Normalize data
       return {
         id: post.id,
-        title: post.title.rendered,
-        content: post.content.rendered,
-        excerpt: post.excerpt?.rendered,
+        title: post.title?.rendered || 'Untitled',
+        content: post.content?.rendered || '',
+        excerpt: post.excerpt?.rendered || '',
         date: post.date,
         slug: post.slug,
         featuredImage: post._embedded?.['wp:featuredmedia']?.[0]
@@ -437,9 +439,6 @@ export const fetchPostBySlug = cache(async (slug, postType = 'posts') => {
       };
     }
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[fetchPostBySlug] No post found for slug: ${slug}`);
-    }
     return null;
   } catch (error) {
     console.error(`Error fetching post by slug ${slug}:`, error);
