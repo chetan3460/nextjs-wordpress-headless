@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 
 /**
  * Home Product Listing Block - AI Agency Feature Section

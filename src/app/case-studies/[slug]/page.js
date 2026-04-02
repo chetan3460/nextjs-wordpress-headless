@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { fetchPostBySlug } from '@/lib/wordpress/client';
-import SafeHTML from '@/components/common/SafeHTML';
+import { fetchPostBySlug } from '../../../lib/wordpress/client';
+import SafeHTML from '../../../components/common/SafeHTML';
 import Image from 'next/image';
 
 /**

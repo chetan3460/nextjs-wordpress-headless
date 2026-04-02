@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SafeHTML from '@/components/common/SafeHTML';
-import { fetchCaseStudies } from '@/lib/wordpress/client';
+import SafeHTML from '../../common/SafeHTML';
+import { fetchCaseStudies } from '../../../lib/wordpress/client';
 
 /**
  * Case Studies Block

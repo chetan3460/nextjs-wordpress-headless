@@ -1,6 +1,6 @@
 'use client';
 
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 import Link from 'next/link';
 
 /**

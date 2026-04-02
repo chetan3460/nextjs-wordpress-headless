@@ -1,9 +1,9 @@
 'use client';
 
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 import Link from 'next/link';
 import Image from 'next/image';
-import { convertToNextPath } from '@/lib/utils/urls';
+import { convertToNextPath } from '../../../lib/utils/urls';
 
 export default function HeroBlock({ data }) {
   const banner_slider = data?.banner_slider || [];

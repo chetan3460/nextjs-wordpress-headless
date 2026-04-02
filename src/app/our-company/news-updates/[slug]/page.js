@@ -1,13 +1,16 @@
-import { fetchPostBySlug } from '@/lib/wordpress/client';
-import { fetchNewsPosts } from '@/lib/wordpress/news';
+import { fetchPostBySlug } from '../../../../lib/wordpress/client';
+import { fetchNewsPosts } from '../../../../lib/wordpress/news';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import Breadcrumbs from '@/components/common/Breadcrumbs';
-import BlockRenderer from '@/components/common/BlockRenderer';
-import RelatedNewsBlock from '@/components/blocks/news/RelatedNewsBlock';
-import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
-import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
-import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/utils/structured-data';
+import Breadcrumbs from '../../../../components/common/Breadcrumbs';
+import BlockRenderer from '../../../../components/common/BlockRenderer';
+import RelatedNewsBlock from '../../../../components/blocks/news/RelatedNewsBlock';
+import { generateBreadcrumbs } from '../../../../lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '../../../../lib/utils/yoast-seo';
+import {
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+} from '../../../../lib/utils/structured-data';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

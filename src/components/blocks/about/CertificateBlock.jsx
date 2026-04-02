@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 import { ChevronLeft, ChevronRight, Eye, X } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';

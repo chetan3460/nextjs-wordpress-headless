@@ -1,7 +1,7 @@
 import Header from '../components/layout/nexsas-header';
 import Footer from '../components/layout/footer';
 import Analytics from '../components/common/Analytics';
-import '@/app/css/style.css';
+import './css/style.css';
 import { fetchHeaderData, fetchFooterData } from '../lib/wordpress/client';
 import { generateOrganizationSchema, generateWebSiteSchema } from '../lib/utils/structured-data';
 

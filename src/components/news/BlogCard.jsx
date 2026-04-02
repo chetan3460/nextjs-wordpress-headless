@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatDate } from '@/lib/wordpress/news';
-import { getNewsLink } from '@/lib/utils/urls';
+import { formatDate } from '../../lib/wordpress/news';
+import { getNewsLink } from '../../lib/utils/urls';
 
 export default function BlogCard({ post }) {
   const link = getNewsLink(post);

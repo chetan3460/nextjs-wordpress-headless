@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import SafeHTML from "@/components/common/SafeHTML";
+import Image from 'next/image';
+import SafeHTML from '../../common/SafeHTML';
 
 /**
  * Leadership Block Component
@@ -22,18 +22,11 @@ export default function LeadershipBlock({ data }) {
 
   // Render logic follows the PHP template structure
   return (
-    <section
-      className="leadership_block overflow-hidden"
-      data-component="LeadershipBlock"
-    >
+    <section className="leadership_block overflow-hidden" data-component="LeadershipBlock">
       <div className="container-fluid mx-auto">
         {/* Section Heading */}
         <div className="section-heading text-center lg:pb-10">
-          {title && (
-            <h2 className="fade-text text-3xl md:text-5xl font-bold mb-4">
-              {title}
-            </h2>
-          )}
+          {title && <h2 className="fade-text text-3xl md:text-5xl font-bold mb-4">{title}</h2>}
 
           {description && (
             <div className="description-content prose max-w-none anim-uni-in-up mx-auto">
@@ -63,7 +56,7 @@ export default function LeadershipBlock({ data }) {
                   {leaders_image?.url && (
                     <Image
                       src={leaders_image.url}
-                      alt={leaders_image.alt || leader_title || "Leader"}
+                      alt={leaders_image.alt || leader_title || 'Leader'}
                       fill
                       className="leaders_image-image object-contain object-bottom"
                       sizes="(max-width: 768px) 212px, 364px"

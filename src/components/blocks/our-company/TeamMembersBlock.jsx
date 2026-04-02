@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { fetchTeamCategories, fetchTeamMembersByCategory } from '@/lib/wordpress/client';
+import { fetchTeamCategories, fetchTeamMembersByCategory } from '../../../lib/wordpress/client';
 import TeamCard from './TeamCard';
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 
 // Swiper styles are imported in globals.css/style.css
 

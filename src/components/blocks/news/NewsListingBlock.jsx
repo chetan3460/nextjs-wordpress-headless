@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useCallback, useEffect, useRef } from "react";
-import BlogCard from "@/components/news/BlogCard";
-import BlogCardSkeleton from "@/components/news/BlogCardSkeleton";
-import FilterDropdown from "@/components/news/FilterDropdown";
+import { useState, useCallback, useEffect, useRef } from 'react';
+import BlogCard from '../../news/BlogCard';
+import BlogCardSkeleton from '../../news/BlogCardSkeleton';
+import FilterDropdown from '../../news/FilterDropdown';
 
 /**
  * News Listing Block
@@ -18,7 +18,7 @@ export default function NewsListingBlock({
 }) {
   const {
     hide_block,
-    section_title = data?.section_title || "All News",
+    section_title = data?.section_title || 'All News',
     posts_per_page = data?.posts_per_page || 6,
     show_filters = data?.show_filters !== undefined ? data.show_filters : true,
     show_search = data?.show_search !== undefined ? data.show_search : true,
@@ -26,9 +26,9 @@ export default function NewsListingBlock({
 
   const [posts, setPosts] = useState(initialPosts);
   const [categories, setCategories] = useState(initialCategories);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortOrder, setSortOrder] = useState("newest");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortOrder, setSortOrder] = useState('newest');
+  const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [loading, setLoading] = useState(false);
@@ -41,11 +41,11 @@ export default function NewsListingBlock({
     if (categories.length === 0) {
       const fetchCats = async () => {
         try {
-          const res = await fetch("/api/news/categories");
+          const res = await fetch('/api/news/categories');
           const data = await res.json();
           setCategories(data || []);
         } catch (e) {
-          console.error("Failed to fetch categories:", e);
+          console.error('Failed to fetch categories:', e);
         }
       };
       fetchCats();
@@ -54,8 +54,8 @@ export default function NewsListingBlock({
 
   // Category options for dropdown
   const categoryOptions = [
-    { value: "all", label: "All Categories" },
-    ...categories.map((cat) => ({
+    { value: 'all', label: 'All Categories' },
+    ...categories.map(cat => ({
       value: cat.id.toString(),
       label: cat.name,
       count: cat.count,
@@ -64,8 +64,8 @@ export default function NewsListingBlock({
 
   // Sort options
   const sortOptions = [
-    { value: "newest", label: "Newest" },
-    { value: "oldest", label: "Oldest" },
+    { value: 'newest', label: 'Newest' },
+    { value: 'oldest', label: 'Oldest' },
   ];
 
   // Fetch posts function
@@ -81,19 +81,19 @@ export default function NewsListingBlock({
         const params = new URLSearchParams({
           page: pageNum.toString(),
           category: category,
-          order: order === "newest" ? "desc" : "asc",
+          order: order === 'newest' ? 'desc' : 'asc',
           per_page: posts_per_page.toString(),
         });
 
         if (search) {
-          params.append("search", search);
+          params.append('search', search);
         }
 
         const response = await fetch(`/api/news?${params.toString()}`);
         const data = await response.json();
 
         if (append) {
-          setPosts((prev) => [...prev, ...data.posts]);
+          setPosts(prev => [...prev, ...data.posts]);
         } else {
           setPosts(data.posts || []);
         }
@@ -101,7 +101,7 @@ export default function NewsListingBlock({
         setHasMore(data.hasMore);
         setTotalResults(data.totalPosts || 0);
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.error('Error fetching posts:', error);
       } finally {
         setLoading(false);
         setLoadingMore(false);
@@ -115,18 +115,11 @@ export default function NewsListingBlock({
     if (posts.length === 0 && !hide_block) {
       fetchPosts(1, selectedCategory, sortOrder, searchQuery, false);
     }
-  }, [
-    posts.length,
-    hide_block,
-    fetchPosts,
-    selectedCategory,
-    sortOrder,
-    searchQuery,
-  ]);
+  }, [posts.length, hide_block, fetchPosts, selectedCategory, sortOrder, searchQuery]);
 
   // Debounced search effect (only run if search is active or filters changed after initial load)
   useEffect(() => {
-    if (searchQuery || selectedCategory !== "all" || sortOrder !== "newest") {
+    if (searchQuery || selectedCategory !== 'all' || sortOrder !== 'newest') {
       if (searchTimeoutRef.current) {
         clearTimeout(searchTimeoutRef.current);
       }
@@ -151,11 +144,7 @@ export default function NewsListingBlock({
       <div className="container-fluid relative overflow-hidden">
         {/* Section Heading */}
         <div className="section-heading text-center mb-8">
-          {section_title && (
-            <h2 className="mb-1 fade-text text-3xl font-bold">
-              {section_title}
-            </h2>
-          )}
+          {section_title && <h2 className="mb-1 fade-text text-3xl font-bold">{section_title}</h2>}
         </div>
 
         {/* Search Bar */}
@@ -166,7 +155,7 @@ export default function NewsListingBlock({
                 type="text"
                 placeholder="Search news..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-3 pl-11 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               />
               <svg
@@ -190,24 +179,18 @@ export default function NewsListingBlock({
         {show_filters && (
           <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
             <span className="text-sm text-black font-semibold">
-              Found {totalResults} result{totalResults !== 1 ? "s" : ""}
+              Found {totalResults} result{totalResults !== 1 ? 's' : ''}
             </span>
 
             <div className="flex items-center gap-3 flex-wrap">
               <FilterDropdown
-                label={
-                  categoryOptions.find((o) => o.value === selectedCategory)
-                    ?.label || "Category"
-                }
+                label={categoryOptions.find(o => o.value === selectedCategory)?.label || 'Category'}
                 value={selectedCategory}
                 options={categoryOptions}
                 onChange={setSelectedCategory}
               />
               <FilterDropdown
-                label={
-                  sortOptions.find((o) => o.value === sortOrder)?.label ||
-                  "Sort"
-                }
+                label={sortOptions.find(o => o.value === sortOrder)?.label || 'Sort'}
                 value={sortOrder}
                 options={sortOptions}
                 onChange={setSortOrder}
@@ -229,11 +212,9 @@ export default function NewsListingBlock({
         {!loading && (
           <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {posts.length > 0 ? (
-              posts.map((post) => <BlogCard key={post.id} post={post} />)
+              posts.map(post => <BlogCard key={post.id} post={post} />)
             ) : (
-              <div className="col-span-full text-center text-gray-500 py-10">
-                No news found.
-              </div>
+              <div className="col-span-full text-center text-gray-500 py-10">No news found.</div>
             )}
           </div>
         )}
@@ -245,18 +226,12 @@ export default function NewsListingBlock({
               onClick={() => {
                 const nextPage = page + 1;
                 setPage(nextPage);
-                fetchPosts(
-                  nextPage,
-                  selectedCategory,
-                  sortOrder,
-                  searchQuery,
-                  true
-                );
+                fetchPosts(nextPage, selectedCategory, sortOrder, searchQuery, true);
               }}
               disabled={loadingMore}
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary text-red-600 px-6 py-2 text-sm font-medium hover:bg-red-600 hover:text-white transition"
             >
-              {loadingMore ? "Loading..." : "View More"}
+              {loadingMore ? 'Loading...' : 'View More'}
             </button>
           </div>
         )}

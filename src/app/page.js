@@ -1,16 +1,16 @@
-import { fetchPageWithACF } from '@/lib/wordpress/client';
-import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
+import { fetchPageWithACF } from '../lib/wordpress/client';
+import { generateMetadataFromYoast } from '../lib/utils/yoast-seo';
 
-import HeroBlock from '@/components/blocks/home/HeroBlock';
-import ImpactBlock from '@/components/blocks/home/ImpactBlock';
-import EmpoweringBlock from '@/components/blocks/home/EmpoweringBlock';
-import SolutionsBlock from '@/components/blocks/home/SolutionsBlock';
-import PortfolioBlock from '@/components/blocks/home/PortfolioBlock';
-import TestimonialsBlock from '@/components/blocks/home/TestimonialsBlock';
-import FAQBlock from '@/components/blocks/home/FAQBlock';
-import CTA1Block from '@/components/blocks/home/CTA1Block';
-import CTA2Block from '@/components/blocks/home/CTA2Block';
-import ContactBlock from '@/components/blocks/home/ContactBlock';
+import HeroBlock from '../components/blocks/home/HeroBlock';
+import ImpactBlock from '../components/blocks/home/ImpactBlock';
+import EmpoweringBlock from '../components/blocks/home/EmpoweringBlock';
+import SolutionsBlock from '../components/blocks/home/SolutionsBlock';
+import PortfolioBlock from '../components/blocks/home/PortfolioBlock';
+import TestimonialsBlock from '../components/blocks/home/TestimonialsBlock';
+import FAQBlock from '../components/blocks/home/FAQBlock';
+import CTA1Block from '../components/blocks/home/CTA1Block';
+import CTA2Block from '../components/blocks/home/CTA2Block';
+import ContactBlock from '../components/blocks/home/ContactBlock';
 
 export async function generateMetadata() {
   const pageData = await fetchPageWithACF('home');
@@ -29,7 +29,7 @@ export default async function HomePage() {
   const panels = pageData?.acf?.home_panels || [];
 
   // Helper macro to find a block by its ACF layout name
-  const getBlockData = (layoutName) => blocks.find(b => b.acf_fc_layout === layoutName) || null;
+  const getBlockData = layoutName => blocks.find(b => b.acf_fc_layout === layoutName) || null;
 
   const heroData = getBlockData('home_hero_block');
   const impactData = getBlockData('home_impact_block');
@@ -60,4 +60,3 @@ export default async function HomePage() {
 
 // Revalidate every 30 seconds (homepage changes frequently)
 export const revalidate = 30;
-

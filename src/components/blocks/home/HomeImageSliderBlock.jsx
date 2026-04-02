@@ -7,9 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Link from 'next/link';
 import Image from 'next/image';
-import SafeHTML from '@/components/common/SafeHTML';
+import SafeHTML from '../../common/SafeHTML';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { convertToNextPath } from '@/lib/utils/urls';
+import { convertToNextPath } from '../../../lib/utils/urls';
 
 import { useState } from 'react';
 

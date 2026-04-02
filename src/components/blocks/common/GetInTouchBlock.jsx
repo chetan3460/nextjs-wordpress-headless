@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
-import "@/app/css/plugins/phone-input.css";
-import Image from "next/image";
-import SafeHTML from "@/components/common/SafeHTML";
-import { fetchGravityForm, submitGravityForm } from "@/lib/wordpress/client";
+import { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+import '../../../app/css/plugins/phone-input.css';
+import Image from 'next/image';
+import SafeHTML from '../../common/SafeHTML';
+import { fetchGravityForm, submitGravityForm } from '../../../lib/wordpress/client';
 
 export default function GetInTouchBlock({ data }) {
   const [formFields, setFormFields] = useState(null);
@@ -39,11 +39,11 @@ export default function GetInTouchBlock({ data }) {
         if (formData.success && formData.fields) {
           setFormFields(formData.fields);
         } else {
-          setFormError("Form not found");
+          setFormError('Form not found');
         }
       } catch (error) {
-        console.error("Error loading form:", error);
-        setFormError("Failed to load form");
+        console.error('Error loading form:', error);
+        setFormError('Failed to load form');
       } finally {
         setFormLoading(false);
       }
@@ -53,7 +53,7 @@ export default function GetInTouchBlock({ data }) {
   }, [form_id]);
 
   // Handle form submission
-  const onSubmit = async (formData) => {
+  const onSubmit = async formData => {
     setSubmitting(true);
     setSuccessMessage(null);
 
@@ -61,15 +61,13 @@ export default function GetInTouchBlock({ data }) {
       const response = await submitGravityForm(form_id, formData);
 
       if (response.success) {
-        setSuccessMessage("<h3>Thank you!</h3><p>" + response.message + "</p>");
+        setSuccessMessage('<h3>Thank you!</h3><p>' + response.message + '</p>');
         reset();
       } else {
-        setSuccessMessage(
-          '<p class="text-red-600">There was an error submitting the form.</p>'
-        );
+        setSuccessMessage('<p class="text-red-600">There was an error submitting the form.</p>');
       }
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error('Form submission error:', error);
       setSuccessMessage(
         '<p class="text-red-600">There was an error submitting the form. Please try again.</p>'
       );
@@ -79,33 +77,26 @@ export default function GetInTouchBlock({ data }) {
   };
 
   // Render form field based on type
-  const renderField = (field) => {
+  const renderField = field => {
     const fieldId = `input_${field.id}`;
     // Force all fields to be required except textarea (message)
-    const isRequired = field.type !== "textarea" ? true : field.isRequired;
+    const isRequired = field.type !== 'textarea' ? true : field.isRequired;
 
     switch (field.type) {
-      case "name":
+      case 'name':
         // Name field - render as single input if only one visible input
-        const visibleInputs =
-          field.inputs?.filter((input) => !input.isHidden) || [];
+        const visibleInputs = field.inputs?.filter(input => !input.isHidden) || [];
 
         if (visibleInputs.length <= 1) {
           // Single input - use the actual input ID (e.g., input_4.3)
-          const inputId = visibleInputs[0]?.id
-            ? `input_${visibleInputs[0].id}`
-            : fieldId;
-          const showLabel = field.labelPlacement !== "hidden_label";
+          const inputId = visibleInputs[0]?.id ? `input_${visibleInputs[0].id}` : fieldId;
+          const showLabel = field.labelPlacement !== 'hidden_label';
 
           return (
             <div key={field.id}>
               {showLabel && (
-                <label
-                  htmlFor={inputId}
-                  className="block mb-2 font-medium text-sm"
-                >
-                  {field.label}{" "}
-                  {isRequired && <span className="text-red-600">*</span>}
+                <label htmlFor={inputId} className="block mb-2 font-medium text-sm">
+                  {field.label} {isRequired && <span className="text-red-600">*</span>}
                 </label>
               )}
               <input
@@ -113,16 +104,12 @@ export default function GetInTouchBlock({ data }) {
                 type="text"
                 {...register(inputId, { required: isRequired })}
                 className="w-full h-12 px-4 bg-white rounded-lg  text-sm"
-                placeholder={
-                  field.placeholder ||
-                  visibleInputs[0]?.label ||
-                  "Enter your name"
-                }
+                placeholder={field.placeholder || visibleInputs[0]?.label || 'Enter your name'}
                 aria-label={!showLabel ? field.label : undefined}
               />
               {errors[inputId] && (
                 <span className="text-red-600 text-sm">
-                  {field.errorMessage || "This field is required"}
+                  {field.errorMessage || 'This field is required'}
                 </span>
               )}
             </div>
@@ -133,40 +120,35 @@ export default function GetInTouchBlock({ data }) {
         return (
           <div key={field.id}>
             <label className="block mb-2 font-medium">
-              {field.label}{" "}
-              {isRequired && <span className="text-red-600">*</span>}
+              {field.label} {isRequired && <span className="text-red-600">*</span>}
             </label>
             <div className="grid grid-cols-2 gap-4">
-              {visibleInputs.map((input) => (
+              {visibleInputs.map(input => (
                 <div key={input.id}>
                   <input
                     type="text"
                     {...register(`input_${input.id}`, { required: isRequired })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg "
-                    placeholder={input.label || input.placeholder || ""}
+                    placeholder={input.label || input.placeholder || ''}
                   />
                 </div>
               ))}
             </div>
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                {field.errorMessage || "This field is required"}
+                {field.errorMessage || 'This field is required'}
               </span>
             )}
           </div>
         );
 
-      case "select":
-        const showSelectLabel = field.labelPlacement !== "hidden_label";
+      case 'select':
+        const showSelectLabel = field.labelPlacement !== 'hidden_label';
         return (
           <div key={field.id}>
             {showSelectLabel && (
-              <label
-                htmlFor={fieldId}
-                className="block mb-2 font-medium text-sm"
-              >
-                {field.label}{" "}
-                {isRequired && <span className="text-red-600">*</span>}
+              <label htmlFor={fieldId} className="block mb-2 font-medium text-sm">
+                {field.label} {isRequired && <span className="text-red-600">*</span>}
               </label>
             )}
             <select
@@ -175,9 +157,9 @@ export default function GetInTouchBlock({ data }) {
               className="w-full h-12 px-4 pr-10 bg-white rounded-lg  text-sm appearance-none cursor-pointer"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "right 1rem center",
-                backgroundSize: "1.25rem",
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 1rem center',
+                backgroundSize: '1.25rem',
               }}
               aria-label={!showSelectLabel ? field.label : undefined}
             >
@@ -191,23 +173,19 @@ export default function GetInTouchBlock({ data }) {
             </select>
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                {field.errorMessage || "This field is required"}
+                {field.errorMessage || 'This field is required'}
               </span>
             )}
           </div>
         );
 
-      case "phone":
-        const showPhoneLabel = field.labelPlacement !== "hidden_label";
+      case 'phone':
+        const showPhoneLabel = field.labelPlacement !== 'hidden_label';
         return (
           <div key={field.id}>
             {showPhoneLabel && (
-              <label
-                htmlFor={fieldId}
-                className="block mb-2 font-medium text-sm"
-              >
-                {field.label}{" "}
-                {isRequired && <span className="text-red-600">*</span>}
+              <label htmlFor={fieldId} className="block mb-2 font-medium text-sm">
+                {field.label} {isRequired && <span className="text-red-600">*</span>}
               </label>
             )}
             <Controller
@@ -222,48 +200,40 @@ export default function GetInTouchBlock({ data }) {
                   className="phone-input-custom"
                   inputClassName="!w-full !h-12 !pl-0 !bg-white !rounded-r-lg !text-sm !outline-none focus:!ring-0"
                   countrySelectorStyleProps={{
-                    buttonClassName:
-                      "!h-12 !bg-white !rounded-l-lg !px-3 hover:!bg-gray-50",
-                    buttonContentWrapperClassName:
-                      "!h-full !flex !items-center",
+                    buttonClassName: '!h-12 !bg-white !rounded-l-lg !px-3 hover:!bg-gray-50',
+                    buttonContentWrapperClassName: '!h-full !flex !items-center',
                   }}
                 />
               )}
             />
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                {field.errorMessage || "This field is required"}
+                {field.errorMessage || 'This field is required'}
               </span>
             )}
           </div>
         );
 
-      case "text":
-      case "email":
+      case 'text':
+      case 'email':
         const validationRules = {
-          required: isRequired
-            ? field.errorMessage || "This field is required"
-            : false,
+          required: isRequired ? field.errorMessage || 'This field is required' : false,
         };
 
         // Add email validation pattern
-        if (field.type === "email") {
+        if (field.type === 'email') {
           validationRules.pattern = {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: field.errorMessage || "Invalid email address",
+            message: field.errorMessage || 'Invalid email address',
           };
         }
 
-        const showTextLabel = field.labelPlacement !== "hidden_label";
+        const showTextLabel = field.labelPlacement !== 'hidden_label';
         return (
           <div key={field.id}>
             {showTextLabel && (
-              <label
-                htmlFor={fieldId}
-                className="block mb-2 font-medium text-sm"
-              >
-                {field.label}{" "}
-                {isRequired && <span className="text-red-600">*</span>}
+              <label htmlFor={fieldId} className="block mb-2 font-medium text-sm">
+                {field.label} {isRequired && <span className="text-red-600">*</span>}
               </label>
             )}
             <input
@@ -271,28 +241,24 @@ export default function GetInTouchBlock({ data }) {
               type={field.type}
               {...register(fieldId, validationRules)}
               className="w-full h-12 px-4 bg-white rounded-lg  text-sm"
-              placeholder={field.placeholder || ""}
+              placeholder={field.placeholder || ''}
               aria-label={!showTextLabel ? field.label : undefined}
             />
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                {errors[fieldId].message || "This field is required"}
+                {errors[fieldId].message || 'This field is required'}
               </span>
             )}
           </div>
         );
 
-      case "textarea":
-        const showTextareaLabel = field.labelPlacement !== "hidden_label";
+      case 'textarea':
+        const showTextareaLabel = field.labelPlacement !== 'hidden_label';
         return (
           <div key={field.id}>
             {showTextareaLabel && (
-              <label
-                htmlFor={fieldId}
-                className="block mb-2 font-medium text-sm"
-              >
-                {field.label}{" "}
-                {isRequired && <span className="text-red-600">*</span>}
+              <label htmlFor={fieldId} className="block mb-2 font-medium text-sm">
+                {field.label} {isRequired && <span className="text-red-600">*</span>}
               </label>
             )}
             <textarea
@@ -300,12 +266,12 @@ export default function GetInTouchBlock({ data }) {
               {...register(fieldId, { required: isRequired })}
               rows={field.rows || 4}
               className="w-full px-4 py-3 bg-white rounded-lg  text-sm resize-none"
-              placeholder={field.placeholder || ""}
+              placeholder={field.placeholder || ''}
               aria-label={!showTextareaLabel ? field.label : undefined}
             />
             {errors[fieldId] && (
               <span className="text-red-600 text-sm">
-                {field.errorMessage || "This field is required"}
+                {field.errorMessage || 'This field is required'}
               </span>
             )}
           </div>
@@ -317,15 +283,7 @@ export default function GetInTouchBlock({ data }) {
   };
 
   // Don't render if no content
-  if (
-    !title &&
-    !description &&
-    !phone &&
-    !email &&
-    !form_id &&
-    !address &&
-    !country
-  ) {
+  if (!title && !description && !phone && !email && !form_id && !address && !country) {
     return null;
   }
 
@@ -361,7 +319,7 @@ export default function GetInTouchBlock({ data }) {
                     <div>
                       <a
                         className="text-grey-1 font-normal hover:text-primary transition-colors"
-                        href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
+                        href={`tel:${phone.replace(/[^0-9+]/g, '')}`}
                       >
                         {phone}
                       </a>
@@ -415,21 +373,9 @@ export default function GetInTouchBlock({ data }) {
                           stroke="currentColor"
                           strokeWidth="1.5"
                         />
-                        <path
-                          d="M2.25 12H21.75"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        />
-                        <path
-                          d="M4.5 8.25H19.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        />
-                        <path
-                          d="M4.5 15.75H19.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        />
+                        <path d="M2.25 12H21.75" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M4.5 8.25H19.5" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M4.5 15.75H19.5" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
                     <div>
@@ -485,9 +431,9 @@ export default function GetInTouchBlock({ data }) {
                 {formFields && !formLoading && !formError && (
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-0">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {formFields.map((field) => {
+                      {formFields.map(field => {
                         // Textarea (message) should span full width
-                        if (field.type === "textarea") {
+                        if (field.type === 'textarea') {
                           return (
                             <div key={field.id} className="md:col-span-2">
                               {renderField(field)}
@@ -499,12 +445,8 @@ export default function GetInTouchBlock({ data }) {
                     </div>
 
                     <div className="flex  mt-2">
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="btn"
-                      >
-                        {submitting ? "Sending..." : "Send Message"}
+                      <button type="submit" disabled={submitting} className="btn">
+                        {submitting ? 'Sending...' : 'Send Message'}
                       </button>
                     </div>
                   </form>

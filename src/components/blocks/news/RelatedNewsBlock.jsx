@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getNewsLink } from '@/lib/utils/urls';
+import { getNewsLink } from '../../../lib/utils/urls';
 
 /**
  * Related News Block

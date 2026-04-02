@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { enhanceAccessibility } from '@/lib/utils/accessibility';
+import { enhanceAccessibility } from '../../lib/utils/accessibility';
 
 /**
  * Accessibility Provider Component

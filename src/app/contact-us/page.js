@@ -1,8 +1,8 @@
-import { fetchPageWithACF } from '@/lib/wordpress/client';
-import Breadcrumbs from '@/components/common/Breadcrumbs';
-import BlockRenderer from '@/components/common/BlockRenderer';
-import { generateBreadcrumbs } from '@/lib/utils/breadcrumbs';
-import { generateMetadataFromYoast } from '@/lib/utils/yoast-seo';
+import { fetchPageWithACF } from '../../lib/wordpress/client';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
+import BlockRenderer from '../../components/common/BlockRenderer';
+import { generateBreadcrumbs } from '../../lib/utils/breadcrumbs';
+import { generateMetadataFromYoast } from '../../lib/utils/yoast-seo';
 
 // Revalidate every hour (static content)
 export const revalidate = 3600;
